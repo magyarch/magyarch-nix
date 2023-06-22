@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Get available sink names and indices
+sink_info=$(pactl list sinks)
+sink_names=$(echo "$sink_info" | awk -F': ' '/Description:/{print $2}')
+sink_indices=$(echo "$sink_info" | awk '/^Sink #[0-9]/{print $2}' | tr -d '#')
+
+# Create an array of sink names with corresponding indices
+declare -a sink_list
+while IFS= read -r -d '' sink_index; IFS= read -r -d '' sink_name; do
+    sink_list+=("$sink_index: $sink_name")
+done < <(paste -d '\0' <(echo "$sink_indices") <(echo "$sink_names"))
+
+# Prompt the user to select an audio output using rofi
+chosen_sink=$(printf '%s\n' "${sink_list[@]}" | rofi -dmenu -i -p "Select an audio output:")
+
+# Extract the index from the chosen sink
+index=$(echo "$chosen_sink" | awk -F': ' '{print $1}')
+
+# Switch to the chosen sink
+if [[ -n "$index" ]]; then
+    pactl set-default-sink "$index"
+    pactl list short sink-inputs | awk '{print $1}' | while read -r input; do
+        pactl move-sink-input "$input" "$index"
+    done
+    notify-send "Audio Output" "Switched to: $chosen_sink"
+else
+    chosen_sink=$(echo "$chosen_sink" | awk -F': ' '{print $2}')
+    notify-send "Audio Output" "Invalid selection: $chosen_sink"
+fi
