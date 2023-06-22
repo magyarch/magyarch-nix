@@ -6,7 +6,7 @@
 
 
 {
-  
+
   nixpkgs.config.permittedInsecurePackages = [
                 "openssl-1.1.1u"
 		"python-2.7.18.6"
@@ -18,7 +18,7 @@
   nix.settings = {
     substituters = ["https://nix-gaming.cachix.org"];
     trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
- 
+
 };
   imports =
     [ # Include the results of the hardware scan.
@@ -62,10 +62,10 @@
 
   # Enable the Pantheon Desktop Environment.
   services.xserver.displayManager.lightdm.enable = true;
-  
+
   # services.xserver.desktopManager.pantheon.enable = true;
   services.xserver.windowManager.i3.enable = true;
-                         
+
   # Configure keymap in X11
   services.xserver = {
     layout = "hu";
@@ -78,6 +78,8 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
    services.picom.enable = true;
+  services.flatpak.enable = true;
+  services.dbus.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -104,7 +106,7 @@
     isNormalUser = true;
     description = "xeoncpu";
     extraGroups = [ "networkmanager" "wheel" "input" "disk" ];
-   # packages = with pkgs; [   
+   # packages = with pkgs; [
     #  thunderbird
     #];
   };
@@ -118,15 +120,15 @@
 	  enable = true;
 	  remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
 	  dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-	}; 
- 
+	};
+
   users.defaultUserShell = pkgs.zsh;
   programs.zsh = {
     enable = true;
     syntaxHighlighting.enable = true;
     autosuggestions.enable = true;
   };
-   
+
   fonts.fonts = with pkgs; [
     noto-fonts-emoji
     dejavu_fonts
@@ -149,16 +151,7 @@
   # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
   hardware.nvidia.modesetting.enable = true;
 
-  services.dbus.enable = true;
-  xdg.portal = {
-    enable = true;
-    # wlr.enable = true;
-    # gtk portal needed to make gtk apps happy
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  };
-      
-  
- };
+
 
   environment.variables.EDITOR = "nvim";
 
@@ -172,7 +165,6 @@
      gnugrep
      gnumake
      polkit_gnome
-     xdg-desktop-portal-gtk
      alacritty
      mpv
      ueberzug
@@ -222,9 +214,8 @@
     samba
     cifs-utils
     wsdd
-    steam
-    steam-run
-    
+    flatpak
+
   ];
 
  security.polkit.enable = true;
@@ -245,53 +236,14 @@
    extraConfig = ''
      DefaultTimeoutStopSec=10s
    '';
-}; 
-
-	
-# services.samba = { enable = true; # make shares visible for windows 10 clients
-networking.firewall.allowedTCPPorts = [
-  445 139 # wsdd
-];
-networking.firewall.allowedUDPPorts = [
-  137 138 # wsdd
-];
-
-
-services.samba = { 
-  enable = true;
-  securityType = "user";
-  extraConfig = ''
-    workgroup = WORKGROUP
-    server string = smbnix
-    netbios name = smbnix
-    security = user 
-    #use sendfile = yes
-    #max protocol = smb2
-    # note: localhost is the ipv6 localhost ::1
-    hosts allow = 192.168.0. 127.0.0.1 localhost
-    hosts deny = 0.0.0.0/0
-    guest account = nobody
-    map to guest = bad user
-  '';
-  shares = {
-      public = {
-      path = "/mnt/Movies/";
-      browseable = "yes";
-      "read only" = "no";
-      "guest ok" = "yes";
-      "create mask" = "0777";
-      "directory mask" = "0777";
-      "force user" = "username";
-      "force group" = "groupname";
-    };
-  };
 };
 
+
  # system.copySystemConfiguration = true;
- # system.autoUpgrade.enable = true;  
- # system.autoUpgrade.allowReboot = true; 
+ # system.autoUpgrade.enable = true;
+ # system.autoUpgrade.allowReboot = true;
  # system.autoUpgrade.channel = "https://channels.nixos.org/nixos-23.05";
-  
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
