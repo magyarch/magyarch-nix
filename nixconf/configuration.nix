@@ -4,7 +4,22 @@
 
 { config, pkgs, ... }:
 
+
 {
+
+  nixpkgs.config.permittedInsecurePackages = [
+                "openssl-1.1.1u"
+		"python-2.7.18.6"
+              ];
+
+  #hardware.opengl.driSupport32Bit = true;
+  #hardware.pulseaudio.support32Bit = true;
+  nixpkgs.config.allowUnfreePredicate = (pkg: builtins.elem (builtins.parseDrvName pkg.name).name [ "steam" "steam-original" "steam-run" ]);
+  nix.settings = {
+    substituters = ["https://nix-gaming.cachix.org"];
+    trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
+
+};
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -47,9 +62,10 @@
 
   # Enable the Pantheon Desktop Environment.
   services.xserver.displayManager.lightdm.enable = true;
- # services.xserver.desktopManager.pantheon.enable = true;
+
+  # services.xserver.desktopManager.pantheon.enable = true;
   services.xserver.windowManager.i3.enable = true;
-                         
+
   # Configure keymap in X11
   services.xserver = {
     layout = "hu";
@@ -61,6 +77,7 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+   services.picom.enable = true;
   services.flatpak.enable = true;
   services.dbus.enable = true;
 
@@ -88,32 +105,30 @@
   users.users.xeoncpu = {
     isNormalUser = true;
     description = "xeoncpu";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      firefox    
+    extraGroups = [ "networkmanager" "wheel" "input" "disk" ];
+   # packages = with pkgs; [
     #  thunderbird
-    ];
+    #];
   };
 
   # Enable automatic login for the user.
   services.xserver.displayManager.autoLogin.enable = true;
   services.xserver.displayManager.autoLogin.user = "xeoncpu";
 
- programs.dconf.enable = true;
- xdg.portal = {
-  enable = true;
-  extraPortals = with pkgs; [
-    xdg-desktop-portal-gtk
-  ];
-};
-# Enable zsh as default shell 
+ ## Gaming
+	programs.steam = {
+	  enable = true;
+	  remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+	  dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+	};
+
   users.defaultUserShell = pkgs.zsh;
   programs.zsh = {
     enable = true;
     syntaxHighlighting.enable = true;
     autosuggestions.enable = true;
   };
-   
+
   fonts.fonts = with pkgs; [
     noto-fonts-emoji
     dejavu_fonts
@@ -126,26 +141,40 @@
   nixpkgs.config = {
     allowUnfree = true;
     joypixels.acceptLicense = true;
-  };
 
-environment.variables.EDITOR = "nvim";
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.opengl.enable = true;
+
+  # Optionally, you may need to select the appropriate driver version for your specific GPU.
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+  # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
+  hardware.nvidia.modesetting.enable = true;
+
+
+
+  environment.variables.EDITOR = "nvim";
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-#  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
      vim
+     feh
+     gnugrep
+     gnumake
+     polkit_gnome
      alacritty
      mpv
      ueberzug
      exa
+     i3blocks
      zsh
      htop
      vifm
      git
      discord
-     dmenu
      unzip
      unrar
      xclip
@@ -153,8 +182,15 @@ environment.variables.EDITOR = "nvim";
      neofetch
      maim
      picom
+    urlscan
+    socat
+    ntfs3g
+    openssl
+    protonup-ng
+    microsoft-edge
+    heroic
+    sublime3
     killall
-    i3blocks
     mpd
     ncmpcpp
     feh
@@ -166,19 +202,47 @@ environment.variables.EDITOR = "nvim";
     lxappearance
     pavucontrol
     pcmanfm
-    pamixer
-    pulsemixer
     bc
     lm_sensors
-    opera
     bat
     acpi
     xcape
     xdo
     xdotool
-    glib
     dunst
+    wmctrl
+    samba
+    cifs-utils
+    wsdd
+    flatpak
+
   ];
+
+ security.polkit.enable = true;
+ systemd = {
+  user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+  };
+   extraConfig = ''
+     DefaultTimeoutStopSec=10s
+   '';
+};
+
+
+ # system.copySystemConfiguration = true;
+ # system.autoUpgrade.enable = true;
+ # system.autoUpgrade.allowReboot = true;
+ # system.autoUpgrade.channel = "https://channels.nixos.org/nixos-23.05";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
