@@ -49,7 +49,7 @@
   services.xserver.displayManager.lightdm.enable = true;
  # services.xserver.desktopManager.pantheon.enable = true;
   services.xserver.windowManager.i3.enable = true;
-                         
+
   # Configure keymap in X11
   services.xserver = {
     layout = "hu";
@@ -90,7 +90,7 @@
     description = "xeoncpu";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      firefox    
+      firefox
     #  thunderbird
     ];
   };
@@ -106,14 +106,14 @@
     xdg-desktop-portal-gtk
   ];
 };
-# Enable zsh as default shell 
+# Enable zsh as default shell
   users.defaultUserShell = pkgs.zsh;
   programs.zsh = {
     enable = true;
     syntaxHighlighting.enable = true;
     autosuggestions.enable = true;
   };
-   
+
   fonts.fonts = with pkgs; [
     noto-fonts-emoji
     dejavu_fonts
@@ -127,6 +127,15 @@
     allowUnfree = true;
     joypixels.acceptLicense = true;
   };
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.opengl.enable = true;
+
+  # Optionally, you may need to select the appropriate driver version for your specific GPU.
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+  # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
+  #hardware.nvidia.modesetting.enable = true;
 
 environment.variables.EDITOR = "nvim";
 
