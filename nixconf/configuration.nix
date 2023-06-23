@@ -1,8 +1,7 @@
-# Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, modulesPath, ... }:
+{ config, pkgs, ... }:
 
 {
   imports =
@@ -136,6 +135,10 @@
 
   # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
   #hardware.nvidia.modesetting.enable = true;
+  services.udev.extraRules = ''
+      # DualShock 4 Slim over USB hidraw
+      KERNEL=="hidraw*", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="09cc", MODE="0660", TAG+="uaccess"
+  '';
 
 environment.variables.EDITOR = "nvim";
 
@@ -182,11 +185,14 @@ environment.variables.EDITOR = "nvim";
     opera
     bat
     acpi
+    samba
     xcape
     xdo
     xdotool
     glib
     dunst
+    rofi
+    qbittorrent
     pamixer
     pulsemixer
     xorg.xinit
@@ -212,6 +218,39 @@ environment.variables.EDITOR = "nvim";
      DefaultTimeoutStopSec=10s
    '';
 };
+
+  services.samba-wsdd.enable = true;
+  services.samba = { 
+         enable = true; 
+	 securityType = "user";
+	 extraConfig = '' 
+	 workgroup = WORKGROUP 
+	 server string = smbnix
+         netbios name = smbnix
+         security = user 
+	 hosts allow = 192.168.0. 127.0.0.1 localhost
+         hosts deny = 0.0.0.0/0
+         guest account = xeoncpu
+	 map to guest = Bad User 
+	 ''; 
+	shares = {
+	 public = { 
+	 path = "/mnt/Movies"; 
+	 browseable = "yes";  
+	 "writable" = "yes"; 
+	 "guest ok" = "yes"; 
+	 "public" = "yes"; 
+	 "create mask" = "0777";
+      "directory mask" = "0777";
+	 }; 
+	 }; 
+};
+  # Curiously, `services.samba` does not automatically open
+  # the needed ports in the firewall.
+  networking.firewall.allowedTCPPorts = [ 445 139 ];
+  networking.firewall.allowedUDPPorts = [ 137 138 ];
+  
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
