@@ -105,6 +105,13 @@
     xdg-desktop-portal-gtk
   ];
 };
+
+ programs.steam = {
+     enable = true;
+     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+   };
+
 # Enable zsh as default shell
   users.defaultUserShell = pkgs.zsh;
   programs.zsh = {
@@ -136,8 +143,8 @@
   # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
   #hardware.nvidia.modesetting.enable = true;
   services.udev.extraRules = ''
-      # DualShock 4 Slim over USB hidraw
-      KERNEL=="hidraw*", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="09cc", MODE="0660", TAG+="uaccess"
+      # DualShock 4 over bluetooth hidraw
+      KERNEL=="hidraw*", KERNELS=="*054C:05C4*", MODE="0660", TAG+="uaccess"
   '';
 
 environment.variables.EDITOR = "nvim";
@@ -195,6 +202,8 @@ environment.variables.EDITOR = "nvim";
     qbittorrent
     pamixer
     pulsemixer
+    microsoft-edge
+    xdg-user-dirs
     xorg.xinit
     xorg.xinput
   ];
