@@ -227,7 +227,7 @@ bar {
      status_command i3blocks
      strip_workspace_numbers yes
      #status_command ~/.local/bin/bumblebee-status/bumblebee-status -m spacer sensors disk nvidiagpu memory date time pasink -p sensors.show_freq  sensors.match_number=0  interval=0.5 spacer.left-click="wal" disk.left-click="gnome-disks"  date.left-click="eww open --toggle calendar" pasink.left-click="pavucontrol" \
-     #-t firefox-dark-powerline 
+     #-t firefox-dark-powerline
      position top
 
 

@@ -16,7 +16,7 @@ xresources
 xprofile
 quit")
 
-choice=$(echo -e "${options[@]}" | dmenu -p 'Edit files: ')
+choice=$(echo -e "${options[@]}" | dmenu -i -nb '#282a36' -nf '#c3cdc8' -sb '#6272a4' -fn 'JetBrains Mono Nerd Font-12' -p 'Edit files: ')
 
 case "$choice" in
 	quit)

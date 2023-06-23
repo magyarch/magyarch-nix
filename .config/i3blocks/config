@@ -82,9 +82,9 @@ border_bottom=1
 border_left=0
 
 
-[nmve2_stats]
-command=sensors | awk 'FNR == 20 {print $2}'
-label=<span color="#d36135"><b>NVME2: </b></span>
+[cpufreq_stats]
+command=cpu_freq.sh
+label=<span color="#d36135"><b>|+ </b></span>
 interval=2
 border=#d36135"
 border_top=0

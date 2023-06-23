@@ -1,6 +1,3 @@
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
@@ -89,7 +86,7 @@
     description = "xeoncpu";
     extraGroups = [ "networkmanager" "wheel" "input" "disk" "kvm" ];
     packages = with pkgs; [
-      firefox
+    #  firefox
     #  thunderbird
     ];
   };
@@ -142,10 +139,10 @@
 
   # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
   #hardware.nvidia.modesetting.enable = true;
-  services.udev.extraRules = ''
+#  services.udev.extraRules = ''
       # DualShock 4 over bluetooth hidraw
-      KERNEL=="hidraw*", KERNELS=="*054C:05C4*", MODE="0660", TAG+="uaccess"
-  '';
+ #     KERNEL=="hidraw*", KERNELS=="*054C:05C4*", MODE="0660", TAG+="uaccess"
+  #'';
 
 environment.variables.EDITOR = "nvim";
 
@@ -154,7 +151,7 @@ environment.variables.EDITOR = "nvim";
   environment.systemPackages = with pkgs; [
 #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
-     vim
+  #   vim
      alacritty
      mpv
      ueberzug
@@ -184,13 +181,20 @@ environment.variables.EDITOR = "nvim";
     ffmpeg
     lxappearance
     pavucontrol
-    pcmanfm
+   # pcmanfm
     pamixer
     pulsemixer
     bc
     lm_sensors
-    opera
     bat
+    curl
+    binutils
+    s-tui
+    nox
+    ntfs3g
+    atool
+    zip
+    p7zip
     acpi
     samba
     xcape
@@ -200,8 +204,8 @@ environment.variables.EDITOR = "nvim";
     dunst
     rofi
     qbittorrent
-    pamixer
-    pulsemixer
+   # pamixer
+   # pulsemixer
     microsoft-edge
     xdg-user-dirs
     xorg.xinit
