@@ -1,3 +1,4 @@
+# My config
 { config, pkgs, ... }:
 
 {
@@ -56,9 +57,12 @@
   console.keyMap = "hu101";
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
-  services.flatpak.enable = true;
-  services.dbus.enable = true;
+  services = {
+           printing.enable = true;
+           flatpak.enable = true;
+           dbus.enable = true;
+           picom.enable = true;
+	  }; 
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -79,7 +83,7 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
+#    services.unclutter.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.xeoncpu = {
     isNormalUser = true;
@@ -94,8 +98,24 @@
   # Enable automatic login for the user.
   services.xserver.displayManager.autoLogin.enable = true;
   services.xserver.displayManager.autoLogin.user = "xeoncpu";
+ 
+ # Enable dconf (System Management Tool
+  programs.dconf.enable = true;
+ 
+ # Manage the virtualisation services
+#  virtualisation = {
+#    libvirtd = {
+#      enable = true;
+#      qemu = {
+#        swtpm.enable = true;
+#        ovmf.enable = true;
+#        ovmf.packages = [ pkgs.OVMFFull.fd ];
+#      };
+#    };
+#    spiceUSBRedirection.enable = true;
+#  };
+#  services.spice-vdagentd.enable = true;
 
- programs.dconf.enable = true;
  xdg.portal = {
   enable = true;
   extraPortals = with pkgs; [
@@ -136,6 +156,7 @@
 
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  hardware.nvidia.forceFullCompositionPipeline = true;
 
   # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
   #hardware.nvidia.modesetting.enable = true;
@@ -168,9 +189,9 @@ environment.variables.EDITOR = "nvim";
      neovim
      neofetch
      maim
-     picom
     killall
     i3blocks
+   # unclutter
     mpd
     ncmpcpp
     feh
@@ -204,13 +225,16 @@ environment.variables.EDITOR = "nvim";
     dunst
     rofi
     qbittorrent
-   # pamixer
-   # pulsemixer
+    heroic
+    brave
     microsoft-edge
     xdg-user-dirs
-    xorg.xinit
-    xorg.xinput
+    libnotify
   ];
+
+   services.unclutter = {
+        enable = true;
+      };
 
    security.polkit.enable = true;
  systemd = {
