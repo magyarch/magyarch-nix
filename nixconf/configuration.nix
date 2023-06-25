@@ -79,7 +79,7 @@
            printing.enable = true;
            dbus.enable = true;
 	   picom.enable = true;
-	   unclutter.enable = true;
+	   unclutter-xfixes.enable = true;
 	  }; 
 
   # Enable sound with pipewire.
