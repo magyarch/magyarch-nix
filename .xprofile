@@ -2,7 +2,7 @@
 
 # This file runs when a DM logs you into a graphical session.
 
-#xrandr --dpi 192
+xrandr --dpi 192
 
 #export GDK_SCALE=2
 
@@ -24,11 +24,11 @@ picom --config ~/.config/picom.conf &
 
 dunst &                                # notification daemon
 
-unclutter &       # hide mouse pointer when idle
+#unclutter &       # hide mouse pointer when idle
 
-nm-applet &        # networkmanager applet/wifi,ethernet settings
+#nm-applet &        # networkmanager applet/wifi,ethernet settings
 
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+#/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 #zathura ~/.local/share/Magyarch-i3.pdf &
 #sleep 8s && notify-send 'Nyomja meg a Super+F1-et a használati utasításért.' -t 10000 &

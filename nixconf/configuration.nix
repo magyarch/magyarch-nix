@@ -11,6 +11,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  nixpkgs.config.allowUnfree = true;
+
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -40,18 +42,34 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the Pantheon Desktop Environment.
-  services.xserver.displayManager.lightdm.enable = true;
- # services.xserver.desktopManager.pantheon.enable = true;
-  services.xserver.windowManager.i3.enable = true;
+#  services.xserver.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "hu";
-    xkbVariant = "";
-  };
+	enable = true;
+	layout = "hu";
+	xkbVariant = "";
+	windowManager.i3.enable = true;
+	displayManager = {
+		defaultSession = "none+i3";
+		lightdm.enable = true;
+		autoLogin = {
+			enable = true;
+			user = "xeoncpu";
+		};
+             };
+	};
+
+  # Enable the Pantheon Desktop Environment.
+#  services.xserver.displayManager.lightdm.enable = true;
+#  services.xserver.windowManager.spectrwm.enable = true;
+#  services.xserver.windowManager.i3.enable = true;
+
+  # Configure keymap in X11
+ # services.xserver = {
+    #layout = "hu";
+   # xkbVariant = "";
+  #};
 
   # Configure console keymap
   console.keyMap = "hu101";
@@ -59,9 +77,9 @@
   # Enable CUPS to print documents.
   services = {
            printing.enable = true;
-           flatpak.enable = true;
            dbus.enable = true;
-           picom.enable = true;
+	   picom.enable = true;
+	   unclutter.enable = true;
 	  }; 
 
   # Enable sound with pipewire.
@@ -96,8 +114,8 @@
   };
 
   # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "xeoncpu";
+#  services.xserver.displayManager.autoLogin.enable = true;
+ # services.xserver.displayManager.autoLogin.user = "xeoncpu";
  
  # Enable dconf (System Management Tool
   programs.dconf.enable = true;
@@ -145,12 +163,6 @@
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
-  # Allow unfree packages
-  nixpkgs.config = {
-    allowUnfree = true;
-    joypixels.acceptLicense = true;
-  };
-
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.enable = true;
 
@@ -177,7 +189,6 @@ environment.variables.EDITOR = "nvim";
      mpv
      ueberzug
      exa
-     zsh
      htop
      vifm
      git
@@ -217,7 +228,6 @@ environment.variables.EDITOR = "nvim";
     zip
     p7zip
     acpi
-    samba
     xcape
     xdo
     xdotool
@@ -232,9 +242,6 @@ environment.variables.EDITOR = "nvim";
     libnotify
   ];
 
-   services.unclutter = {
-        enable = true;
-      };
 
    security.polkit.enable = true;
  systemd = {
