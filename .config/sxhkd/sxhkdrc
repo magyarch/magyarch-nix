@@ -35,12 +35,15 @@ super + {KP_Home,KP_End}
 
 # Kill recording and stream
 super + shift + x
-    killall ffmpeg
+    switch_audio.sh
 
 # On/off transparency, pavucontrol
 alt + {a,b}
    {pavucontrol,spotify --force-device-scale-factor=2}
 
+
+alt + Tab
+   rofi -show window
 
 # Function keys #
 ########################################

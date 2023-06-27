@@ -84,7 +84,7 @@ border_left=0
 
 [cpufreq_stats]
 command=cpu_freq.sh
-label=<span color="#d36135"><b>|+ </b></span>
+label=<span color="#d36135"><b></b></span>
 interval=2
 border=#d36135"
 border_top=0
@@ -97,7 +97,7 @@ border_left=0
 #command=free --giga | awk 'FNR==2{ printf "%i<span color=\"#ff79c6\">GiB</span>\n", $7 }'
 command=memory
 interval=2
-label=<span color="#ff79c6"> </span>
+label=<span color="#ff79c6">MEM: </span>
 border=#ff79c6
 border_top=0
 border_right=0

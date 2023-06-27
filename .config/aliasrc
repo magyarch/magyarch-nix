@@ -17,6 +17,15 @@ alias sr="sudo reboot"
 alias diff="diff --color=auto"
 alias q="exit"
 
+# NIXSOS alias
+alias nrs="sudo nixos-rebuild switch"
+alias ncu="sudo nix-channel --update nixos"
+alias addunstable="sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos"
+alias nixupgrade="sudo nixos-rebuild switch --upgrade"
+alias rmoldgen="sudo nix-collect-garbage -d"
+alias rebuildboot="sudo /run/current-system/bin/switch-to-configuration boot"
+
+
 #chmod +x
 alias ch="sudo chmod +x "
 

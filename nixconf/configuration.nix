@@ -106,7 +106,7 @@
   users.users.xeoncpu = {
     isNormalUser = true;
     description = "xeoncpu";
-    extraGroups = [ "networkmanager" "wheel" "input" "disk" "kvm" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "disk" "kvm" "libvirtd" ];
     packages = with pkgs; [
     #  firefox
     #  thunderbird
@@ -121,18 +121,18 @@
   programs.dconf.enable = true;
  
  # Manage the virtualisation services
-#  virtualisation = {
-#    libvirtd = {
-#      enable = true;
-#      qemu = {
-#        swtpm.enable = true;
-#        ovmf.enable = true;
-#        ovmf.packages = [ pkgs.OVMFFull.fd ];
-#      };
-#    };
-#    spiceUSBRedirection.enable = true;
-#  };
-#  services.spice-vdagentd.enable = true;
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu = {
+        swtpm.enable = true;
+        ovmf.enable = true;
+        ovmf.packages = [ pkgs.OVMFFull.fd ];
+      };
+    };
+    spiceUSBRedirection.enable = true;
+  };
+  services.spice-vdagentd.enable = true;
 
  xdg.portal = {
   enable = true;
@@ -213,7 +213,7 @@ environment.variables.EDITOR = "nvim";
     ffmpeg
     lxappearance
     pavucontrol
-   # pcmanfm
+    pulseaudio
     pamixer
     pulsemixer
     bc
@@ -222,7 +222,6 @@ environment.variables.EDITOR = "nvim";
     curl
     binutils
     s-tui
-    nox
     ntfs3g
     atool
     zip
@@ -240,6 +239,12 @@ environment.variables.EDITOR = "nvim";
     microsoft-edge
     xdg-user-dirs
     libnotify
+    virt-manager
+    virt-viewer
+    spice spice-gtk
+    spice-protocol
+    win-virtio
+    win-spice
   ];
 
 
