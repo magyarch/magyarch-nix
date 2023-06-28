@@ -119,7 +119,36 @@
  
  # Enable dconf (System Management Tool
   programs.dconf.enable = true;
- 
+
+  programs.tmux = {
+  enable = true;
+  extraConfig = ''
+      # Set the base index for windows to 1 instead of 0
+        set -g base-index 1
+
+      # set the status line's colors
+        set -g status-style fg=white,bg=blue
+
+      # Change prefix from 'Ctrl+B' to 'Ctrl+A'
+        unbind C-b
+        set-option -g prefix C-space
+        bind-key C-space send-prefix
+
+       # Enable mouse mode
+         set -g mouse on
+
+       # Use xclip to copy and paste with the system clipboard
+         bind C-c run "tmux save-buffer - | xclip -i -sel clip"
+         bind C-v run "tmux set-buffer $(xclip -o -sel clip); tmux paste-buffer"
+
+       # more intuitive splits
+       # splitting panes with | and -
+        bind + split-window -h
+        bind - split-window -v
+        bind r source-file /etc/tmux.conf \; display "Reloaded!"
+  '';
+};
+
  # Manage the virtualisation services
   virtualisation = {
     libvirtd = {
@@ -216,6 +245,8 @@ environment.variables.EDITOR = "nvim";
     pulseaudio
     pamixer
     pulsemixer
+    playerctl
+    cpu-x
     bc
     lm_sensors
     bat

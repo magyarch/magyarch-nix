@@ -23,7 +23,7 @@ super + shift + e
 
 # Show keybind in rofi,htop system monitor
 super + {_,shift + } n
-    {scratch Music, scratch News}
+    {scratch Music, wmctrl -x -a "alacritty" || alacritty -e tmux}
 
 # Reload sxhkd + i3
 super + {_,shift + } Escape
