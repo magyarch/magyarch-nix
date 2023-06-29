@@ -77,6 +77,10 @@
   # Enable CUPS to print documents.
   services = {
            printing.enable = true;
+           printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
+	   avahi.enable = true;
+	   avahi.nssmdns = true;
+	   avahi.openFirewall = true;
            dbus.enable = true;
 	   picom.enable = true;
 	   unclutter-xfixes.enable = true;
@@ -116,7 +120,8 @@
   # Enable automatic login for the user.
 #  services.xserver.displayManager.autoLogin.enable = true;
  # services.xserver.displayManager.autoLogin.user = "xeoncpu";
- 
+
+
  # Enable dconf (System Management Tool
   programs.dconf.enable = true;
 
@@ -146,6 +151,17 @@
         bind + split-window -h
         bind - split-window -v
         bind r source-file /etc/tmux.conf \; display "Reloaded!"
+
+	bind-key -r S-Left swap-window -d -t -1
+        bind-key -r S-Right swap-window -d -t +1
+        bind M-j swap-pane -D
+	bind M-k swap-pane -U
+
+       # kill K k 
+        unbind k
+        bind k confirm-before "kill-window"
+        unbind K
+        bind K confirm-before "kill-server"
   '';
 };
 
