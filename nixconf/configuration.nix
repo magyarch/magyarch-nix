@@ -209,11 +209,18 @@
   ];
 
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.opengl.enable = true;
+  hardware.opengl = {
+           enable = true;
+	   driSupport = true;
+           driSupport32Bit = true;
+	  }; 
 
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-  hardware.nvidia.forceFullCompositionPipeline = true;
+  hardware.nvidia = {
+           forceFullCompositionPipeline = true;
+	   nvidiaSettings = true;
+	   package = config.boot.kernelPackages.nvidiaPackages.stable;
+	  }; 
 
   # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
   #hardware.nvidia.modesetting.enable = true;
@@ -292,6 +299,7 @@ environment.variables.EDITOR = "nvim";
     spice-protocol
     win-virtio
     win-spice
+    system-config-printer
   ];
 
 
