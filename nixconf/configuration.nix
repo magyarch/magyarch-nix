@@ -13,14 +13,9 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  # Enable networking
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
   networking.networkmanager.enable = true;
 
   # Set your time zone.
@@ -42,13 +37,12 @@
   };
 
   # Enable the X11 windowing system.
-#  services.xserver.enable = true;
-
   # Configure keymap in X11
   services.xserver = {
 	enable = true;
 	layout = "hu";
 	xkbVariant = "";
+	dpi = 192;
 	windowManager.i3.enable = true;
 	displayManager = {
 		defaultSession = "none+i3";
@@ -60,16 +54,12 @@
              };
 	};
 
-  # Enable the Pantheon Desktop Environment.
-#  services.xserver.displayManager.lightdm.enable = true;
-#  services.xserver.windowManager.spectrwm.enable = true;
-#  services.xserver.windowManager.i3.enable = true;
-
-  # Configure keymap in X11
- # services.xserver = {
-    #layout = "hu";
-   # xkbVariant = "";
-  #};
+    environment.variables = {
+    EDITOR = "nvim";
+    GDK_SCALE = "2";
+    GDK_DPI_SCALE = "0.5";
+    #_JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+  };
 
   # Configure console keymap
   console.keyMap = "hu101";
@@ -95,17 +85,11 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-#    services.unclutter.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.xeoncpu = {
     isNormalUser = true;
@@ -179,25 +163,25 @@
   };
   services.spice-vdagentd.enable = true;
 
- xdg.portal = {
-  enable = true;
-  extraPortals = with pkgs; [
-    xdg-desktop-portal-gtk
-  ];
-};
+  xdg.portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
+  };
 
- programs.steam = {
-     enable = true;
-     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+   programs.steam = {
+      enable = true;
+      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
    };
 
-# Enable zsh as default shell
-  users.defaultUserShell = pkgs.zsh;
-  programs.zsh = {
-    enable = true;
-    syntaxHighlighting.enable = true;
-    autosuggestions.enable = true;
+  # Enable zsh as default shell
+   users.defaultUserShell = pkgs.zsh;
+   programs.zsh = {
+      enable = true;
+      syntaxHighlighting.enable = true;
+      autosuggestions.enable = true;
   };
 
   fonts.fonts = with pkgs; [
@@ -208,28 +192,19 @@
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
+
+  # Nvidia configuration
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl = {
            enable = true;
 	   driSupport = true;
            driSupport32Bit = true;
-	  }; 
-
-  # Optionally, you may need to select the appropriate driver version for your specific GPU.
+	   };
   hardware.nvidia = {
            forceFullCompositionPipeline = true;
 	   nvidiaSettings = true;
 	   package = config.boot.kernelPackages.nvidiaPackages.stable;
-	  }; 
-
-  # nvidia-drm.modeset=1 is required for some wayland compositors, e.g. sway
-  #hardware.nvidia.modesetting.enable = true;
-#  services.udev.extraRules = ''
-      # DualShock 4 over bluetooth hidraw
- #     KERNEL=="hidraw*", KERNELS=="*054C:05C4*", MODE="0660", TAG+="uaccess"
-  #'';
-
-environment.variables.EDITOR = "nvim";
+	  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -304,8 +279,8 @@ environment.variables.EDITOR = "nvim";
 
 
    security.polkit.enable = true;
- systemd = {
-  user.services.polkit-gnome-authentication-agent-1 = {
+    systemd = {
+   user.services.polkit-gnome-authentication-agent-1 = {
     description = "polkit-gnome-authentication-agent-1";
     wantedBy = [ "graphical-session.target" ];
     wants = [ "graphical-session.target" ];
@@ -321,7 +296,7 @@ environment.variables.EDITOR = "nvim";
    extraConfig = ''
      DefaultTimeoutStopSec=10s
    '';
-};
+ };
 
   services.samba-wsdd.enable = true;
   services.samba = { 
@@ -349,7 +324,8 @@ environment.variables.EDITOR = "nvim";
 	 }; 
 	 }; 
 };
-  # Curiously, `services.samba` does not automatically open
+ 
+ # Curiously, `services.samba` does not automatically open
   # the needed ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 445 139 ];
   networking.firewall.allowedUDPPorts = [ 137 138 ];
@@ -369,9 +345,6 @@ environment.variables.EDITOR = "nvim";
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
