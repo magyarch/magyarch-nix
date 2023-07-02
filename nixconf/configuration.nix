@@ -5,18 +5,24 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./packages.nix
     ];
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # Use the systemd-boot EFI boot loader.
+    boot.loader = {
+        systemd-boot.enable = true;
+        efi.canTouchEfiVariables = true;
+    };
 
   nixpkgs.config.allowUnfree = true;
 
   # Enable networking
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;
+  networking = {
+        networkmanager.enable = true;
+#	wireless.enable = true;
+        hostName="nixos";
+    };
+
 
   # Set your time zone.
   time.timeZone = "Europe/Budapest";
@@ -54,17 +60,11 @@
              };
 	};
 
-    environment.variables = {
-    EDITOR = "nvim";
-    GDK_SCALE = "2";
-    GDK_DPI_SCALE = "0.5";
-    #_JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-  };
 
   # Configure console keymap
   console.keyMap = "hu101";
 
-  # Enable CUPS to print documents.
+  # Enable printing and more
   services = {
            printing.enable = true;
            printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
@@ -74,6 +74,7 @@
            dbus.enable = true;
 	   picom.enable = true;
 	   unclutter-xfixes.enable = true;
+	   openssh.enable = true;
 	  }; 
 
   # Enable sound with pipewire.
@@ -100,11 +101,6 @@
     #  thunderbird
     ];
   };
-
-  # Enable automatic login for the user.
-#  services.xserver.displayManager.autoLogin.enable = true;
- # services.xserver.displayManager.autoLogin.user = "xeoncpu";
-
 
  # Enable dconf (System Management Tool
   programs.dconf.enable = true;
@@ -205,77 +201,6 @@
 	   nvidiaSettings = true;
 	   package = config.boot.kernelPackages.nvidiaPackages.stable;
 	  };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-#  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-  #   vim
-     alacritty
-     mpv
-     ueberzug
-     exa
-     htop
-     vifm
-     git
-     discord
-     dmenu
-     unzip
-     unrar
-     xclip
-     neovim
-     neofetch
-     maim
-    killall
-    i3blocks
-   # unclutter
-    mpd
-    ncmpcpp
-    feh
-    xwallpaper
-    sxiv
-    fzf
-    sxhkd
-    ffmpeg
-    lxappearance
-    pavucontrol
-    pulseaudio
-    pamixer
-    pulsemixer
-    playerctl
-    cpu-x
-    bc
-    lm_sensors
-    bat
-    curl
-    binutils
-    s-tui
-    ntfs3g
-    atool
-    zip
-    p7zip
-    acpi
-    xcape
-    xdo
-    xdotool
-    glib
-    dunst
-    rofi
-    qbittorrent
-    heroic
-    brave
-    microsoft-edge
-    xdg-user-dirs
-    libnotify
-    virt-manager
-    virt-viewer
-    spice spice-gtk
-    spice-protocol
-    win-virtio
-    win-spice
-    system-config-printer
-  ];
 
 
    security.polkit.enable = true;
