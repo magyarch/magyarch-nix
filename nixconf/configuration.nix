@@ -6,6 +6,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./packages.nix
+      ./services.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -42,52 +43,15 @@
     LC_TIME = "hu_HU.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  # Configure keymap in X11
-  services.xserver = {
-	enable = true;
-	layout = "hu";
-	xkbVariant = "";
-	dpi = 192;
-	windowManager.i3.enable = true;
-	displayManager = {
-		defaultSession = "none+i3";
-		lightdm.enable = true;
-		autoLogin = {
-			enable = true;
-			user = "xeoncpu";
-		};
-             };
-	};
-
 
   # Configure console keymap
   console.keyMap = "hu101";
-
-  # Enable printing and more
-  services = {
-           printing.enable = true;
-           printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
-	   avahi.enable = true;
-	   avahi.nssmdns = true;
-	   avahi.openFirewall = true;
-           dbus.enable = true;
-	   picom.enable = true;
-	   unclutter-xfixes.enable = true;
-	   openssh.enable = true;
-	  }; 
 
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
+  
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -144,20 +108,6 @@
         bind K confirm-before "kill-server"
   '';
 };
-
- # Manage the virtualisation services
-  virtualisation = {
-    libvirtd = {
-      enable = true;
-      qemu = {
-        swtpm.enable = true;
-        ovmf.enable = true;
-        ovmf.packages = [ pkgs.OVMFFull.fd ];
-      };
-    };
-    spiceUSBRedirection.enable = true;
-  };
-  services.spice-vdagentd.enable = true;
 
   xdg.portal = {
       enable = true;
@@ -222,33 +172,6 @@
      DefaultTimeoutStopSec=10s
    '';
  };
-
-  services.samba-wsdd.enable = true;
-  services.samba = { 
-         enable = true; 
-	 securityType = "user";
-	 extraConfig = '' 
-	 workgroup = WORKGROUP 
-	 server string = smbnix
-         netbios name = smbnix
-         security = user 
-	 hosts allow = 192.168.0. 127.0.0.1 localhost
-         hosts deny = 0.0.0.0/0
-         guest account = xeoncpu
-	 map to guest = Bad User 
-	 ''; 
-	shares = {
-	 public = { 
-	 path = "/mnt/Movies"; 
-	 browseable = "yes";  
-	 "writable" = "yes"; 
-	 "guest ok" = "yes"; 
-	 "public" = "yes"; 
-	 "create mask" = "0777";
-      "directory mask" = "0777";
-	 }; 
-	 }; 
-};
  
  # Curiously, `services.samba` does not automatically open
   # the needed ports in the firewall.
