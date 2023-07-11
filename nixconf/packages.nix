@@ -1,17 +1,19 @@
 { pkgs , ... }:
+
 {
-    # List packages installed in system profile
+# List packages installed in system profile
     environment = {
         systemPackages = with pkgs; [
      alacritty
      mpv
      ueberzug
      exa
+     eww
+     dmenu
      htop
      vifm
      git
      discord
-     dmenu
      unzip
      unrar
      xclip
@@ -19,10 +21,10 @@
      neofetch
      maim
     killall
-    i3blocks
-   # unclutter
     mpd
     ncmpcpp
+    exfat
+    exfatprogs
     feh
     xwallpaper
     sxiv
@@ -33,9 +35,8 @@
     pavucontrol
     pulseaudio
     pamixer
+    polybar
     pulsemixer
-    playerctl
-    cpu-x
     bc
     lm_sensors
     bat
@@ -50,6 +51,7 @@
     xcape
     xdo
     xdotool
+    wmctrl
     glib
     dunst
     rofi
@@ -66,12 +68,16 @@
     win-virtio
     win-spice
     system-config-printer
+    (slstatus.overrideAttrs (_: { src = /home/xeoncpu/.config/suckless/slstatus; }))
         ];
-        variables = { EDITOR = "vim";
-	              GDK_SCALE = "2";
-		      GDK_DPI_SCALE = "0.5";
-    };
-
-};
+        
+	variables = {
+                GDK_SCALE = "2";
+                GDK_DPI_SCALE = "0.5";
+#		XCURSOR_SIZE = "64";
+#		QT_AUTO_SCREEN_SCALE_FACTOR = "auto";
+               #_JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+             };
+          };
 
 }

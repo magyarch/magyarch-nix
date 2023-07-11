@@ -1,7 +1,10 @@
 # My config
 { config, pkgs, ... }:
 
+
 {
+
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -15,14 +18,23 @@
         efi.canTouchEfiVariables = true;
     };
 
-  nixpkgs.config.allowUnfree = true;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+
+  nixpkgs.config = {
+    allowUnfree = true;
+  #  oraclejdk.accept_license = true;
+    joypixels.acceptLicense = true;
+  };
 
   # Enable networking
   networking = {
         networkmanager.enable = true;
 #	wireless.enable = true;
-        hostName="nixos";
+        hostName="nixos";	
     };
+
+    programs.nm-applet.enable = true;
 
 
   # Set your time zone.
@@ -122,7 +134,12 @@
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
    };
 
-  # Enable zsh as default shell
+   programs.thunar = {
+           enable = true;
+	   plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman thunar-media-tags-plugin ];
+         };
+
+# Enable zsh as default shell
    users.defaultUserShell = pkgs.zsh;
    programs.zsh = {
       enable = true;
@@ -132,11 +149,22 @@
 
   fonts.fonts = with pkgs; [
     noto-fonts-emoji
+    font-awesome_4
+    joypixels
     dejavu_fonts
     liberation_ttf
-    source-code-pro
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
+
+  # Suckless Tools
+  nixpkgs.overlays = [
+    (final: prev: {
+      dwm = prev.dwm.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dwm ;});
+      dmenu = prev.dmenu.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dmenu ;});
+#      slstatus = prev.slstatus.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/slstatus ;});
+    })
+  ];
+
 
 
   # Nvidia configuration
@@ -151,7 +179,8 @@
 	   nvidiaSettings = true;
 	   package = config.boot.kernelPackages.nvidiaPackages.stable;
 	  };
-
+  
+#   hardware.video.hidpi.enable = true;
 
    security.polkit.enable = true;
     systemd = {
@@ -172,7 +201,8 @@
      DefaultTimeoutStopSec=10s
    '';
  };
- 
+
+
  # Curiously, `services.samba` does not automatically open
   # the needed ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 445 139 ];

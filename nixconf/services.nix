@@ -6,17 +6,19 @@
 	layout = "hu";
 	xkbVariant = "";
 	dpi = 192;
-	windowManager.i3.enable = true;
+	windowManager.dwm.enable = true;
+#	windowManager.herbstluftwm.enable = true;
 	displayManager = {
-		defaultSession = "none+i3";
+#	        pantheon.enable = true;
+		defaultSession = "none+dwm";
 		lightdm.enable = true;
 		autoLogin = {
 			enable = true;
 			user = "xeoncpu";
 		};
              };
-	};
-
+          };
+         
 
     services = {
            printing.enable = true;
@@ -28,6 +30,8 @@
 	   picom.enable = true;
 	   unclutter-xfixes.enable = true;
 	   openssh.enable = true;
+	   gvfs.enable = true;
+	   tumbler.enable = true;
 	   spice-vdagentd.enable = true;
      pipewire = {
            enable = true;
@@ -76,5 +80,9 @@
 	 };
 	 };
 };
+
+   # ZRAM
+  zramSwap.enable = true;
+  zramSwap.memoryPercent = 50;
 
 }
