@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+herbstclient chain \
+    . remove \
+    . remove \
+    . remove \
+    . remove \
+    . remove \
+    . remove 

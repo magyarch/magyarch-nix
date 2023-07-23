@@ -11,7 +11,7 @@ set $altmod Mod1
 # Basic definition #######################################################################
 
 for_window [class="^.*"] border pixel 3
-for_window [class="^"] split toggle
+#for_window [class="^"] split toggle
 
 
 
@@ -179,18 +179,18 @@ for_window [class="sent"] border pixel 0px
 for_window [title="GIMP Startup"] move workspace $ws5
 for_window [class="Gimp"] move workspace $ws5
 for_window [title="^QEMU$"] floating enable
-for_window [window_role="GtkFileChooserDialog"] resize set 1880 1020
+for_window [window_role="GtkFileChooserDialog"] resize set 1880 1220
 for_window [window_role="GtkFileChooserDialog"] move position center
 for_window [title="Default - Wine desktop"] floating enable
 for_window [class="(?i)Pavucontrol|mupdf|sxiv|feh"] floating enable, resize set 1880 1020, move position center, focus
 for_window [class="(?i)mpv"] floating enable, resize set 1880 1020, move position center, focus
 for_window [title="Music"] floating enable, resize set 1880 1020, move position center, focus
-for_window [title="scratchpad"] floating enable, resize set 1880 1020, move position center, focus
-for_window [class="Lxappearance"] floating enable, resize set 1880 1020, move position center, focus
+for_window [title="scratchpad"] floating enable, resize set 1880 1220, move position center, focus
+for_window [class="Lxappearance|system-config-printer|System-config-printer.py"] floating enable, resize set 1880 1220, move position center, focus
 
 
-for_window [title="float"] floating enable, resize set 1880 1020, move position center, focus
-for_window [title="floating"] floating enable, resize set 1880 1020, move position center, focus
+for_window [title="float"] floating enable, resize set 1880 1220, move position center, focus
+for_window [title="floating"] floating enable, resize set 1880 1220, move position center, focus
 
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable

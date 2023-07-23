@@ -1,9 +1,7 @@
 # My config
 { config, pkgs, ... }:
 
-
 {
-
 
   imports =
     [ # Include the results of the hardware scan.
@@ -16,6 +14,7 @@
     boot.loader = {
         systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;
+	timeout = 1;
     };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -78,7 +77,7 @@
     ];
   };
 
- # Enable dconf (System Management Tool
+# Enable dconf (System Management Tool
   programs.dconf.enable = true;
 
   programs.tmux = {
@@ -121,12 +120,12 @@
   '';
 };
 
-  xdg.portal = {
-      enable = true;
-      extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-    ];
-  };
+#  xdg.portal = {
+#      enable = true;
+#      extraPortals = with pkgs; [
+#      xdg-desktop-portal-gtk
+#    ];
+#  };
 
    programs.steam = {
       enable = true;
@@ -168,19 +167,14 @@
 
 
   # Nvidia configuration
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = [ "amdgpu" ];
   hardware.opengl = {
            enable = true;
 	   driSupport = true;
            driSupport32Bit = true;
+	   extraPackages = with pkgs; [ vaapiVdpau libvdpau-va-gl libva-utils ];
 	   };
-  hardware.nvidia = {
-           forceFullCompositionPipeline = true;
-	   nvidiaSettings = true;
-	   package = config.boot.kernelPackages.nvidiaPackages.stable;
-	  };
   
-#   hardware.video.hidpi.enable = true;
 
    security.polkit.enable = true;
     systemd = {

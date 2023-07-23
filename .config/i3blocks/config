@@ -60,17 +60,6 @@ border_bottom=1
 border_left=0
 
 
-[mediaplayer]
-command=playerctl metadata --format "{{ artist }} <span color=\"#bd93f9\">-</span> {{ title }}"
-interval=2
-label=<span color="#bd93f9"> </span>
-border=#bd93f9
-border_top=0
-border_right=0
-border_bottom=1
-border_left=0
-
-
 [nmve_stats]
 command=sensors | sed -rn 's/.*Composite:\s+([^ ]+).*/\1/p'
 label=<span color="#c3cdc8"><b>NVME1: </b></span>

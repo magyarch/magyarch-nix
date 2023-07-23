@@ -6,6 +6,7 @@
 	layout = "hu";
 	xkbVariant = "";
 	dpi = 192;
+	screenSection = ''Option "TearFree" "true"'';
 	windowManager.dwm.enable = true;
 #	windowManager.herbstluftwm.enable = true;
 	displayManager = {
@@ -27,7 +28,10 @@
 	   avahi.nssmdns = true;
 	   avahi.openFirewall = true;
            dbus.enable = true;
-	   picom.enable = true;
+	   picom = {
+	   enable = true;
+	   vSync = true;
+	   };
 	   unclutter-xfixes.enable = true;
 	   openssh.enable = true;
 	   gvfs.enable = true;

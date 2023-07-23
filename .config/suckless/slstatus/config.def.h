@@ -68,7 +68,7 @@ static const struct arg args[] = {
 	{ cpu_freq,     "🚀 %s | ", NULL },
     { cpu_perc,     "📢 %s% | ", NULL },
 	{ run_command,  "🔥 %s | ",	"sensors | awk  '/Tctl:/ {print $2}' " },
-	{ run_command,  "💸 %s | ",  "nvidia-smi -q --gpu=0 | awk '/GPU Current Temp/ {print $5 $6}'" },
+	{ run_command,  "💸 %s | ",  "sensors | awk '/edge:/ {print $2}'" },
 	{ datetime,	"📅 %s | ",  "%Y-%m-%d 🕛 %H:%M" },
 	{ run_command,  "%s	| ", "volume" },
 };

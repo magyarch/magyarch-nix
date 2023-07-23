@@ -8,7 +8,6 @@
      mpv
      ueberzug
      exa
-     eww
      dmenu
      htop
      vifm
@@ -30,15 +29,18 @@
     sxiv
     fzf
     sxhkd
-    ffmpeg
+    ffmpeg_6-full
+    x264
+    xorg.xdpyinfo
     lxappearance
     pavucontrol
     pulseaudio
     pamixer
-    polybar
+  #  polybar
     pulsemixer
     bc
     lm_sensors
+    jamesdsp
     bat
     curl
     binutils
@@ -74,8 +76,8 @@
 	variables = {
                 GDK_SCALE = "2";
                 GDK_DPI_SCALE = "0.5";
-#		XCURSOR_SIZE = "64";
-#		QT_AUTO_SCREEN_SCALE_FACTOR = "auto";
+	 	XCURSOR_SIZE = "32";
+		QT_SCALE_FACTOR = "1";
                #_JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
              };
           };
