@@ -17,8 +17,13 @@
 	timeout = 1;
     };
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [
+#      "initcall_blacklist=acpi_cpufreq_init"
+      "amd_pstate=active"
+    ];
+};
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -77,8 +82,6 @@
     ];
   };
 
-# Enable dconf (System Management Tool
-  programs.dconf.enable = true;
 
   programs.tmux = {
   enable = true;
@@ -120,12 +123,12 @@
   '';
 };
 
-#  xdg.portal = {
-#      enable = true;
-#      extraPortals = with pkgs; [
-#      xdg-desktop-portal-gtk
-#    ];
-#  };
+  xdg.portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
+  };
 
    programs.steam = {
       enable = true;
@@ -146,7 +149,7 @@
       autosuggestions.enable = true;
   };
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     noto-fonts-emoji
     font-awesome_4
     joypixels
@@ -172,7 +175,7 @@
            enable = true;
 	   driSupport = true;
            driSupport32Bit = true;
-	   extraPackages = with pkgs; [ vaapiVdpau libvdpau-va-gl libva-utils ];
+#	   extraPackages = with pkgs; [ vaapiVdpau libvdpau-va-gl libva-utils ];
 	   };
   
 

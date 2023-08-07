@@ -46,6 +46,7 @@
     binutils
     s-tui
     ntfs3g
+#    openrgb
     atool
     zip
     p7zip
@@ -76,8 +77,8 @@
 	variables = {
                 GDK_SCALE = "2";
                 GDK_DPI_SCALE = "0.5";
-	 	XCURSOR_SIZE = "32";
-		QT_SCALE_FACTOR = "1";
+	 	XCURSOR_SIZE = "24";
+#		QT_SCALE_FACTOR = "1";
                #_JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
              };
           };

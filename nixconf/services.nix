@@ -5,13 +5,10 @@
         enable = true;
 	layout = "hu";
 	xkbVariant = "";
-	dpi = 192;
+	dpi = 144;
 	screenSection = ''Option "TearFree" "true"'';
 	windowManager.dwm.enable = true;
-#	windowManager.herbstluftwm.enable = true;
 	displayManager = {
-#	        pantheon.enable = true;
-		defaultSession = "none+dwm";
 		lightdm.enable = true;
 		autoLogin = {
 			enable = true;
@@ -42,9 +39,13 @@
 	   alsa.enable = true;
            alsa.support32Bit = true;
            pulse.enable = true;
+	   };
+     hardware = {
+           openrgb.enable = true;
+	   openrgb.motherboard = "amd";
 	  };
       };
-
+  
     # Manage the virtualisation services
   virtualisation = {
     libvirtd = {
@@ -58,7 +59,7 @@
     spiceUSBRedirection.enable = true;
   };
 
-  services.samba-wsdd.enable = true;
+#  services.samba-wsdd.enable = true;
   services.samba = {
          enable = true;
 	 securityType = "user";
