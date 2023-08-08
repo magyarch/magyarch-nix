@@ -43,9 +43,13 @@
      hardware = {
            openrgb.enable = true;
 	   openrgb.motherboard = "amd";
-	  };
-      };
-  
+	   };
+	 };
+
+
+	  
+	      
+    
     # Manage the virtualisation services
   virtualisation = {
     libvirtd = {

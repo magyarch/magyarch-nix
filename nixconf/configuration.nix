@@ -18,12 +18,14 @@
     };
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_lqx;
     kernelParams = [
-#      "initcall_blacklist=acpi_cpufreq_init"
-      "amd_pstate=active"
-    ];
-};
+    "amd_pstate=active"
+    "nowatchdog"
+    "nmi_watchdog=0"
+   ];
+  
+  };
 
   nixpkgs.config = {
     allowUnfree = true;
