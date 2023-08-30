@@ -8,6 +8,7 @@
       ./hardware-configuration.nix
       ./packages.nix
       ./services.nix
+#      ./softwarecenter.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -17,21 +18,36 @@
 	timeout = 1;
     };
 
+  
   boot = {
-    kernelPackages = pkgs.linuxPackages_lqx;
+    initrd.kernelModules = [ "amdgpu" ];
+    kernelModules = [ "bfq" ];
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
     kernelParams = [
-    "amd_pstate=active"
+   # "amd_pstate=guided"
     "nowatchdog"
     "nmi_watchdog=0"
    ];
-  
+    tmp.cleanOnBoot = true;
+    plymouth.enable = true;
   };
 
-  nixpkgs.config = {
-    allowUnfree = true;
-  #  oraclejdk.accept_license = true;
-    joypixels.acceptLicense = true;
-  };
+  fileSystems."/media" =
+    { device = "/dev/disk/by-uuid/2cae586f-7f62-4ba0-a435-aa366ca6a839";
+      fsType = "auto";
+      options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
+    };
+
+
+  fileSystems."/mnt" =
+    { device = "/dev/disk/by-uuid/a7228798-548b-470e-a9d9-36da26cc5af2";
+      fsType = "auto";
+      options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
+    };
+
+  # ZRAM
+  zramSwap.enable = true;
+  zramSwap.memoryPercent = 50;  
 
   # Enable networking
   networking = {
@@ -40,11 +56,12 @@
         hostName="nixos";	
     };
 
-    programs.nm-applet.enable = true;
-
 
   # Set your time zone.
   time.timeZone = "Europe/Budapest";
+
+  # Configure console keymap
+  console.keyMap = "hu101";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "hu_HU.UTF-8";
@@ -62,12 +79,31 @@
   };
 
 
-  # Configure console keymap
-  console.keyMap = "hu101";
+  nixpkgs.config = {
+    allowUnfree = true;
+  #  oraclejdk.accept_license = true;
+    joypixels.acceptLicense = true;
+  };
 
+
+   # Videodriver configuration
+  services.xserver.videoDrivers = [ "amdgpu" ];
+  hardware.opengl = {
+           enable = true;
+     driSupport = true;
+     driSupport32Bit = true;
+     extraPackages = with pkgs; [ rocm-opencl-icd
+  rocm-opencl-runtime ];
+     };
+
+  
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
+  hardware.bluetooth = {
+  enable = true;
+  powerOnBoot = true;
+  };
   security.rtkit.enable = true;
   
   # Enable touchpad support (enabled default in most desktopManager).
@@ -85,9 +121,23 @@
   };
 
 
-  programs.tmux = {
-  enable = true;
-  extraConfig = ''
+  programs = {
+           corectrl.enable = true;
+	   gamemode.enable = true;
+	   nm-applet.enable = true;
+	   dconf.enable = true;
+           steam = {
+	   enable = true;
+           remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+           dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+	   };
+	   thunar = { 
+	   enable = true;
+	   plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman thunar-media-tags-plugin ];
+           };
+	   tmux = {
+           enable = true;
+           extraConfig = ''
       # Set the base index for windows to 1 instead of 0
         set -g base-index 1
 
@@ -125,6 +175,9 @@
   '';
 };
 
+  };  
+
+
   xdg.portal = {
       enable = true;
       extraPortals = with pkgs; [
@@ -132,18 +185,8 @@
     ];
   };
 
-   programs.steam = {
-      enable = true;
-      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-   };
 
-   programs.thunar = {
-           enable = true;
-	   plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman thunar-media-tags-plugin ];
-         };
-
-# Enable zsh as default shell
+ # Enable zsh as default shell
    users.defaultUserShell = pkgs.zsh;
    programs.zsh = {
       enable = true;
@@ -151,7 +194,7 @@
       autosuggestions.enable = true;
   };
 
-  fonts.packages = with pkgs; [
+  fonts.fonts = with pkgs; [
     noto-fonts-emoji
     font-awesome_4
     joypixels
@@ -160,28 +203,18 @@
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
+  
   # Suckless Tools
   nixpkgs.overlays = [
     (final: prev: {
-      dwm = prev.dwm.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dwm ;});
+#      dwm = prev.dwm.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dwm ;});
       dmenu = prev.dmenu.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dmenu ;});
 #      slstatus = prev.slstatus.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/slstatus ;});
     })
   ];
 
 
-
-  # Nvidia configuration
-  services.xserver.videoDrivers = [ "amdgpu" ];
-  hardware.opengl = {
-           enable = true;
-	   driSupport = true;
-           driSupport32Bit = true;
-#	   extraPackages = with pkgs; [ vaapiVdpau libvdpau-va-gl libva-utils ];
-	   };
-  
-
-   security.polkit.enable = true;
+  security.polkit.enable = true;
     systemd = {
    user.services.polkit-gnome-authentication-agent-1 = {
     description = "polkit-gnome-authentication-agent-1";
@@ -232,5 +265,12 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
+  
+  nix.gc = {
+  automatic = true;
+  dates = "weekly";
+  options = "--delete-older-than 10d";
+
+};
 
 }

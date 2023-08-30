@@ -4,74 +4,10 @@
 # List packages installed in system profile
     environment = {
         systemPackages = with pkgs; [
-     alacritty
-     mpv
-     ueberzug
-     exa
-     dmenu
-     htop
-     vifm
-     git
-     discord
-     unzip
-     unrar
-     xclip
-     neovim
-     neofetch
-     maim
-    killall
-    mpd
-    ncmpcpp
-    exfat
-    exfatprogs
-    feh
-    xwallpaper
-    sxiv
-    fzf
-    sxhkd
-    ffmpeg_6-full
-    x264
-    xorg.xdpyinfo
-    lxappearance
-    pavucontrol
-    pulseaudio
-    pamixer
-  #  polybar
-    pulsemixer
-    bc
-    lm_sensors
-    jamesdsp
-    bat
-    curl
-    binutils
-    s-tui
-    ntfs3g
-#    openrgb
-    atool
-    zip
-    p7zip
-    acpi
-    xcape
-    xdo
-    xdotool
-    wmctrl
-    glib
-    dunst
-    rofi
-    qbittorrent
-    heroic
-    brave
-    microsoft-edge
-    xdg-user-dirs
-    libnotify
-    virt-manager
-    virt-viewer
-    spice spice-gtk
-    spice-protocol
-    win-virtio
-    win-spice
-    system-config-printer
-    (slstatus.overrideAttrs (_: { src = /home/xeoncpu/.config/suckless/slstatus; }))
+     
+     alacritty appimage-run acpi atool bat bc binutils brave conky curl dunst discord dmenu exa exfat exfatprogs feh ffmpeg_6-full fzf glib git htop heroic jamesdsp killall libnotify lm_sensors lutris lxappearance mangohud microsoft-edge mpd ncmpcpp maim mpv neofetch neovim ntfs3g ueberzug unrar unzip p7zip pamixer pavucontrol polybar protonup-ng pulseaudio pulsemixer qbittorrent rofi s-tui spice spice-gtk spice-protocol sublime3 sxhkd sxiv system-config-printer virt-manager virt-viewer win-spice win-virtio wmctrl vifm xclip x264 xcape xdg-user-dirs xdo xdotool xorg.xdpyinfo xwallpaper zip 
+    
+  #  (slstatus.overrideAttrs (_: { src = /home/xeoncpu/.config/suckless/slstatus; }))
         ];
         
 	variables = {

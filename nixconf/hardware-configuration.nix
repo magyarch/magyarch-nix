@@ -8,33 +8,19 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" ];
-  boot.initrd.kernelModules = [ "amdgpu"];
-  boot.kernelModules = [ "kvm-amd" "bfq" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-
-
-  fileSystems."/" = { 
-      device = "/dev/disk/by-uuid/cb652285-7a41-4588-8cdb-2bb6653978bf";
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/e6253232-7f58-4926-a038-a28ddc1ac4f7";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/0789-36CD";
+    { device = "/dev/disk/by-uuid/E088-809A";
       fsType = "vfat";
-    };
-
-  fileSystems."/media" =
-    { device = "/dev/disk/by-uuid/2cae586f-7f62-4ba0-a435-aa366ca6a839";
-      fsType = "auto";
-      options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
-    };
-
-  fileSystems."/mnt" =
-    { device = "/dev/disk/by-uuid/a7228798-548b-470e-a9d9-36da26cc5af2";
-      fsType = "auto";
-      options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
     };
 
   swapDevices = [ ];

@@ -7,7 +7,7 @@
 	xkbVariant = "";
 	dpi = 144;
 	screenSection = ''Option "TearFree" "true"'';
-	windowManager.dwm.enable = true;
+	windowManager.herbstluftwm.enable = true;
 	displayManager = {
 		lightdm.enable = true;
 		autoLogin = {
@@ -24,6 +24,7 @@
 	   avahi.enable = true;
 	   avahi.nssmdns = true;
 	   avahi.openFirewall = true;
+	   blueman.enable = true;
            dbus.enable = true;
 	   picom = {
 	   enable = true;
@@ -63,7 +64,8 @@
     spiceUSBRedirection.enable = true;
   };
 
-#  services.samba-wsdd.enable = true;
+  services.samba-wsdd.enable = true;
+  services.samba.enableNmbd = true;
   services.samba = {
          enable = true;
 	 securityType = "user";
