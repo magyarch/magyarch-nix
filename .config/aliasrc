@@ -24,7 +24,7 @@ alias addunstable="sudo nix-channel --add https://nixos.org/channels/nixos-unsta
 alias nixupgrade="sudo nixos-rebuild switch --upgrade"
 alias rmoldgen="sudo nix-collect-garbage -d"
 alias rebuildboot="sudo /run/current-system/bin/switch-to-configuration boot"
-
+alias runheroic="~/Letöltések && appimage-run Heroic-2.9.1.AppImage"
 
 #chmod +x
 alias ch="sudo chmod +x "

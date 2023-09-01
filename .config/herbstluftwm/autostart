@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 
 # Herbstluftwm start
@@ -10,7 +10,8 @@ hc() {
 hc set tree_style '╾│ ├╰╼─╮'
 
 
-hc set_layout grid
+#hc set_layout grid
+hc set_layout horizontal
 
 hc emit_hook reload
 
@@ -149,7 +150,7 @@ hc attr theme.floating.reset 1
 
 # General Settings
 hc attr theme.tiling.outer_width 1
-hc set window_gap 20
+hc set window_gap 10
 hc set focus_follows_mouse 1
 
 #hc set smart_window_surroundings on
@@ -175,7 +176,7 @@ hc set always_show_frame 0
 ## Background settings
 hc attr theme.color "#282a36"
 hc attr theme.background_color "#282a36"
-hc attr theme.border_width 8
+hc attr theme.border_width 6
 
 ## Inner border normal settings
 hc attr theme.inner_color "#262138"
@@ -243,18 +244,19 @@ hc rule class~'(VirtualBox Manager|Vmplayer|qBittorrent)' tag='' switchtag=on
 hc rule class~'(Thunar|Pcmanfm|Nemo)' tag='' switchtag=on focus=on
 hc rule class~'(Shotcut|Gpick|gpick|Steam)' tag='' switchtag=on focus=on
 hc rule class~'(gimp|Gimp)' tag='' switchtag=on focus=on
-hc rule class~'(Zathura|zathura|Lxappearance|Pavucontrol|)' floating=on floatplacement=center floating_geometry=1800x1200
-
+hc rule class~'(Zathura|zathura|Lxappearance|Pavucontrol|upc.exe)' floating=on floatplacement=center floating_geometry=1400x800
+hc rule class='Steam' title~'.*Barátlista.*' floating=on focus=off
+hc rule class='Steam' title~'Steam.*' focus=off floating=on
 
 # SCRATCHPADS #
 #-------------#
-hc rule title~'scratchpad' floating=on floatplacement=center floating_geometry=1800x1000
-hc rule title~'FM' floating=on floatplacement=center floating_geometry=1800x1000
-hc rule title~'News' floating=on floatplacement=center floating_geometry=1800x1000
+hc rule title~'scratchpad' floating=on floatplacement=center floating_geometry=1400x800
+hc rule title~'FM' floating=on floatplacement=center floating_geometry=1400x800
+hc rule title~'News' floating=on floatplacement=center floating_geometry=1400x800
 hc rule class~'FfmpegGUI.py' floating=on floatplacement=center floating_geometry=1200x800
-hc rule title~'Music' floating=on floatplacement=center floating_geometry=1800x1000
+hc rule title~'Music' floating=on floatplacement=center floating_geometry=1400x800
 hc rule title~'Todo' floating=on floatplacement=center floating_geometry=1000x650
-
+#hc rule title~'.*Steam.*' focus=off floating=on
 
 
 # give focus to most common terminals
@@ -282,7 +284,7 @@ for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
 start it on each monitor
 "$panel" $monitor &
 #hc pad 0 "" "" 25
-hc pad 0 36 0 0
+hc pad 0 26 0 0
 #hc pad 0 "" 5
 #hc pad 0 "" "" "" 5
 done

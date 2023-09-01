@@ -7,8 +7,9 @@
 	xkbVariant = "";
 	dpi = 144;
 	screenSection = ''Option "TearFree" "true"'';
-	windowManager.herbstluftwm.enable = true;
+        windowManager.dwm.enable = true;
 	displayManager = {
+		defaultSession = "none+dwm";
 		lightdm.enable = true;
 		autoLogin = {
 			enable = true;
@@ -29,6 +30,10 @@
 	   picom = {
 	   enable = true;
 	   vSync = true;
+	   };
+	   fstrim = {
+	   enable = true;
+	   interval = "weekly";
 	   };
 	   unclutter-xfixes.enable = true;
 	   openssh.enable = true;

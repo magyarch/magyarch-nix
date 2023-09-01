@@ -40,7 +40,11 @@ static const Rule rules[] = {
 	{ "discord",        NULL,       NULL,       1 << 1,        0,          -1 },
 	{ "Thunar",         NULL,       NULL,       1 << 7,        0,          -1 },
 	{ "steam",          NULL,       NULL,       1 << 4,        0,          -1 },
-        { "Pavucontrol",    NULL,       NULL,       0,             1,          -1 },
+    { "Pavucontrol",    NULL,       NULL,       0,             1,          -1 },
+    { "upc.exe",        NULL,       NULL,       0,             1,          -1 },
+    { "Sublime_text",    NULL,       NULL,      1 << 3,        0,          -1 },
+    { "Lxappearance",        NULL,       NULL,       0,             1,          -1 },
+
 };
 
 /* layout(s) */
@@ -79,8 +83,8 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run -c -g 1 -l 10 ", "-m", dmenumon, "-fn", dmenufont, NULL };
 static const char scratchpadname[] = "scratchpad";
-static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "160x40", "-e", "ncmpcpp", NULL };
-static const char *termcmd[] = { "st", "-g", "160x40", NULL };
+static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "110x30", "-e", "ncmpcpp", NULL };
+static const char *termcmd[] = { "st", "-g", "110x30", NULL };
 
 #include "movestack.c"
 static Key keys[] = {

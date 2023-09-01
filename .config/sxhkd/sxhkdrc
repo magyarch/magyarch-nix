@@ -10,14 +10,13 @@ super + {_,shift + } Return
 super + {_,shift +} d
     {dmenu_run, rofi -show window}
 
-
 # Tui filemanager and same command with sudo
 super + {_,shift + } r
     {$TERMINAL -e $FILE, $TERMINAL -e sudo $FILE}
 
 # Show keys with rofi/default gui editor
 super + shift + e
-    rofi_run -r
+    sublime3
 
 # News, tui music player
 super + {_,shift + } n
@@ -25,34 +24,31 @@ super + {_,shift + } n
 
 # Htop,gtop system monitor
 super + {_,shift + } i
-    {$TERMINAL -e htop, dropterm}
+    {$TERMINAL -e htop, switch_audio.sh}
 
 # S,R,lock script,calendar app
 super + {_,shift + } c
-    {rofi_run -l, power}
+    {rofi_run -l, eww open powermenu}
 
 # Default web browser brave and firefox
 super + {_,shift + } w
-    {$BROWSER, microsoft-edge --inprivate}
+    {$BROWSER, microsoft-edge-stable --inprivate}
 
 # Chat client, gui filemanager
 super + {_,shift + } p
-    {discord, thunar}
+    {discord, pcmanfm}
 
 # Hide polybar/Reload polybar
 super + {_,shift + } b
-    {pavucontrol, lxappearance}
+    {polybar-msg cmd toggle, $HOME/.config/polybar/launch.sh}
 
 # Volume control
 alt + {Up,Down}
-     {pactl set-sink-volume @DEFAULT_SINK@ +5%, pactl set-sink-volume @DEFAULT_SINK@ -5%}
+     {pactl set-sink-volume @DEFAULT_SINK@ +10%, pactl set-sink-volume @DEFAULT_SINK@ -10%}
     #{$HOME/.local/bin/statusbar/volume_brightness.sh volume_up, volume_brightness.sh volume_down}
 # Screencast and Stream to twitch
 super + {_,shift + } KP_Home
     {dmenurecord, live.sh}
-
-super + shift + x
-    switch_audio.sh
 
 ############################################################
                     #Function binds#
@@ -60,8 +56,8 @@ super + shift + x
 
 # Help doc
 super + F1
-    zathura ~/.local/share/Magyarch-hlwm.pdf
-
+#    zathura ~/.local/share/Magyarch-hlwm.pdf
+ cd ~/Letöltések && appimage-run Heroic-2.9.1.AppImage
 # Edit important config files
 super + F2
     edconf.sh
@@ -72,7 +68,7 @@ super + F3
 
 # Take a picture
 super + {F4,F5}
-    {maim ~/Képek/Képernyőképek/`date +%Y-%m-%d_%H:%M:%S`.png,maimpick}
+    {maim -d 3 ~/Képek/Képernyőképek/`date +%Y-%m-%d_%H:%M:%S`.png,maimpick}
 
 # Change background
 super + F8
@@ -92,5 +88,38 @@ super + F12
 
 
 ###################################################################################
-                      # End #
+                      # Some extra function #
 ##################################################################################
+
+# Hide unhide windows
+#super + m
+   # herbstclient spawn hide_windows +1
+
+#super + shift + m
+  #  herbstclient spawn hide_windows -1
+
+#super + control + r
+ #   herbstclient spawn hide_window 0
+
+
+# # bind menu
+# alt + m
+#   sh ~/.config/herbstluftwm/hlwm-utils/hlwm-menu/hlwm-menu.sh
+
+
+# # layout bindings
+# alt + control + c
+#   sh ~/.config/herbstluftwm/hlwm-utils/layouts/centered-master
+
+# alt + control + d
+#   sh ~/.config/herbstluftwm/hlwm-utils/layouts/dwindle
+
+# alt + control + m
+#   sh ~/.config/herbstluftwm/hlwm-utils/layouts/master-stack
+
+# alt + control + v
+#   sh ~/.config/herbstluftwm/hlwm-utils/layouts/vertical
+
+# # Reset to default
+# alt + control + r
+#   sh ~/.config/herbstluftwm/hlwm-utils/layouts/reset
