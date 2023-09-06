@@ -24,13 +24,13 @@
     kernelModules = [ "bfq" ];
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
     kernelParams = [
- #   "amd_pstate=active"
+#    "amd_pstate=guided"
     "nowatchdog"
     "nmi_watchdog=0"
    ];
-    tmp.cleanOnBoot = true;
-#    plymouth.enable = true;
+#    tmp.cleanOnBoot = true;
   };
+  
 
   fileSystems."/media" =
     { device = "/dev/disk/by-uuid/2cae586f-7f62-4ba0-a435-aa366ca6a839";
@@ -194,7 +194,7 @@
       autosuggestions.enable = true;
   };
 
-  fonts.packages = with pkgs; [
+  fonts.fonts = with pkgs; [
     noto-fonts-emoji
     font-awesome_4
     joypixels
@@ -207,9 +207,9 @@
   # Suckless Tools
   nixpkgs.overlays = [
     (final: prev: {
-      dwm = prev.dwm.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dwm ;});
+#      dwm = prev.dwm.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dwm ;});
       dmenu = prev.dmenu.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dmenu ;});
-      st = prev.st.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/st ;});
+#      st = prev.st.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/st ;});
     })
   ];
 

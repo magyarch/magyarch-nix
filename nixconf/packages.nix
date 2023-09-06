@@ -5,9 +5,9 @@
     environment = {
         systemPackages = with pkgs; [
      
-     alacritty appimage-run acpi atool bat bc binutils brave conky curl dunst discord dmenu exa exfat exfatprogs feh ffmpeg_6-full fzf glib git htop heroic jamesdsp killall libnotify lm_sensors lutris lxappearance mangohud microsoft-edge mpd ncmpcpp maim mpv neofetch neovim ntfs3g ueberzug unrar unzip p7zip pamixer pavucontrol polybar protonup-ng pulseaudio pulsemixer qbittorrent rofi st s-tui spice spice-gtk spice-protocol sublime3 sxhkd sxiv system-config-printer virt-manager virt-viewer win-spice win-virtio wmctrl vifm xclip x264 xcape xdg-user-dirs xdo xdotool xorg.xdpyinfo xwallpaper zip 
+     alacritty appimage-run acpi atool bat bc binutils brave conky curl dunst discord dmenu exa exfat exfatprogs eww feh ffmpeg_6-full fzf glib git htop heroic jamesdsp killall libnotify lm_sensors lutris lxappearance mangohud microsoft-edge mpd ncmpcpp maim mpv neofetch neovim ntfs3g ueberzug unrar unzip p7zip pamixer pavucontrol polybar protonup-ng pulseaudio pulsemixer qbittorrent rofi st s-tui spice spice-gtk spice-protocol sublime3 sxhkd sxiv system-config-printer virt-manager virt-viewer win-spice win-virtio wmctrl vifm xclip x264 xcape xdg-user-dirs xdo xdotool xorg.xdpyinfo xwallpaper wineWowPackages.stagingFull yt-dlp zip 
     
-    (slstatus.overrideAttrs (_: { src = /home/xeoncpu/.config/suckless/slstatus; }))
+#    (slstatus.overrideAttrs (_: { src = /home/xeoncpu/.config/suckless/slstatus; }))
         ];
         
 	variables = {

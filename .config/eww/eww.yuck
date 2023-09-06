@@ -51,14 +51,14 @@
       (button :class "btn"
               :tooltip "Reboot"
               :onclick "eww close powermenu && reboot"
-              "勒")
+              "")
     )
     (box :class "exit-btn-box"
          :orientation "h"
       (button :class "btn"
               :tooltip "Logout"
               :onclick "i3-msg exit"
-              "")
+              "")
     )
   )
 )

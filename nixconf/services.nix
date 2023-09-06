@@ -7,9 +7,12 @@
 	xkbVariant = "";
 	dpi = 144;
 	screenSection = ''Option "TearFree" "true"'';
-        windowManager.dwm.enable = true;
+        windowManager.bspwm.enable = true;
+#	windowManager.herbstluftwm.package = pkgs.herbstluftwm.overrideAttrs ( o: {
+#    disabledTests = o.disabledTests ++ ["test_complete_keybind_offers_additional_mods_without_duplication"];
+#  });
 	displayManager = {
-		defaultSession = "none+dwm";
+		defaultSession = "none+bspwm";
 		lightdm.enable = true;
 		autoLogin = {
 			enable = true;
