@@ -1,9 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 wmctrl -l | awk '{print $1}' | while read APP; do
 wmctrl -i -c $APP || echo "$APP not killed"
 done
-#i3-msg exit
-#pkill spectrwm
-#herbstclient quit
-pkill dwm
+bspc quit

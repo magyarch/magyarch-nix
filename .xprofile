@@ -8,9 +8,9 @@
 
 sxhkd &     # Simple X hotkey daemon for setting up keybinds
 
-mpd &       # Music player daemon
+#mpd &       # Music player daemon
 
-#xsetroot -cursor_name left_ptr &   # Change cursor from default x shape
+xsetroot -cursor_name left_ptr &   # Change cursor from default x shape
 
 xset r rate 300 30 &	# Speed xrate up
 
@@ -34,9 +34,9 @@ dunst &                                # notification daemon
 #sleep 8s && notify-send 'Nyomja meg a Super+F1-et a használati utasításért.' -t 10000 &
 
 xset s off -dpms &
-
+#blueman-applet &
 #udiskie -a &
-#conky -c ~/.config/conky/magyarch.conkyrc &
+(sleep 2s && ~/.config/polybar/launch.sh) &
 
 #redshift -l 47.162495:19.503304 -t 6000:3600 -g 0.8 -m randr -v &
 #xrandr --output HDMI-0 --scale 2x2 --mode 1920x1080 --rotate left --output DP-0 --primary --mode 3840x2160 --pos 1080x0 --left-of HDMI-0 &
