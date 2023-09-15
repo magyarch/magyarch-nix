@@ -6,7 +6,7 @@
 
 #export GDK_SCALE=2
 
-sxhkd &     # Simple X hotkey daemon for setting up keybinds
+#sxhkd &     # Simple X hotkey daemon for setting up keybinds
 
 #mpd &       # Music player daemon
 
@@ -34,7 +34,7 @@ dunst &                                # notification daemon
 #sleep 8s && notify-send 'Nyomja meg a Super+F1-et a használati utasításért.' -t 10000 &
 
 xset s off -dpms &
-#blueman-applet &
+blueman-applet &
 #udiskie -a &
 (sleep 2s && ~/.config/polybar/launch.sh) &
 

@@ -25,10 +25,8 @@
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
     kernelParams = [
 #    "amd_pstate=guided"
-    "nowatchdog"
-    "nmi_watchdog=0"
    ];
-#    tmp.cleanOnBoot = true;
+    tmp.cleanOnBoot = true;
   };
   
 
@@ -87,7 +85,7 @@
 
 
    # Videodriver configuration
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver.videoDrivers = [ "modesetting" ];
   hardware.opengl = {
            enable = true;
      driSupport = true;
@@ -125,6 +123,7 @@
            corectrl.enable = true;
 	   gamemode.enable = true;
 	   nm-applet.enable = true;
+     file-roller.enable = true;
 	   dconf.enable = true;
            steam = {
 	   enable = true;
@@ -268,7 +267,7 @@
   nix.gc = {
   automatic = true;
   dates = "weekly";
-  options = "--delete-older-than 10d";
+  options = "--delete-older-than 5d";
 
 };
 

@@ -40,7 +40,7 @@ super + {_,shift + } w
 
 # Chat client, gui filemanager
 super + {_,shift + } p
-    {discord, pcmanfm}
+    {discord, thunar}
 
 # Hide polybar/Reload bspwm
 super + {_,shift + } b

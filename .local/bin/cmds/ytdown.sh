@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Prompt the user to enter the URL of the file
 read -p "Enter the URL of the file: " url

@@ -7,8 +7,8 @@
 
 declare options=("alias
 bash
-i3config
-i3blocks
+hlwm
+config
 profile
 sxhkd
 vifm
@@ -28,8 +28,8 @@ case "$choice" in
 	bash)
 		choice="$HOME/.bashrc"
 	;;
-	i3config)
-		choice="$HOME/.config/i3/config"
+	hlwm)
+		choice="$HOME/.config/herbstluftwm/autostart"
 	;;
 	profile)
 		choice="$HOME/.profile"
@@ -40,8 +40,8 @@ case "$choice" in
 	vifm)
 		choice="$HOME/.config/vifm/vifmrc"
 	;;
-	i3blocks)
-		choice="$HOME/.config/i3blocks/config"
+	config)
+		choice="/etc/nixos/configuration.nix"
 	;;
 	xresources)
 		choice="$HOME/.Xresources"
@@ -53,4 +53,4 @@ case "$choice" in
 		exit 1
 	;;
 esac
-geany  "$choice"
+sublime  "$choice"

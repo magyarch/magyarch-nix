@@ -8,6 +8,8 @@
 	dpi = 144;
 	screenSection = ''Option "TearFree" "true"'';
         windowManager.bspwm.enable = true;
+        windowManager.bspwm.configFile = "/home/xeoncpu/.config/bspwm/bspwmrc";
+        windowManager.bspwm.sxhkd.configFile = "/home/xeoncpu/.config/sxhkd/sxhkdrc";
 #	windowManager.herbstluftwm.package = pkgs.herbstluftwm.overrideAttrs ( o: {
 #    disabledTests = o.disabledTests ++ ["test_complete_keybind_offers_additional_mods_without_duplication"];
 #  });
@@ -30,10 +32,10 @@
 	   avahi.openFirewall = true;
 	   blueman.enable = true;
            dbus.enable = true;
-	   picom = {
-	   enable = true;
-	   vSync = true;
-	   };
+	 #  picom = {
+	 #  enable = true;
+	 #  vSync = true;
+	 #  };
 	   fstrim = {
 	   enable = true;
 	   interval = "weekly";
@@ -42,7 +44,9 @@
 	   openssh.enable = true;
 	   gvfs.enable = true;
 	   tumbler.enable = true;
-	   spice-vdagentd.enable = true;
+
+
+#	   spice-vdagentd.enable = true;
      pipewire = {
            enable = true;
 	   alsa.enable = true;
@@ -61,16 +65,8 @@
     
     # Manage the virtualisation services
   virtualisation = {
-    libvirtd = {
-      enable = true;
-      qemu = {
-        swtpm.enable = true;
-        ovmf.enable = true;
-        ovmf.packages = [ pkgs.OVMFFull.fd ];
+    libvirtd.enable = true;
       };
-    };
-    spiceUSBRedirection.enable = true;
-  };
 
   services.samba-wsdd.enable = true;
   services.samba.enableNmbd = true;

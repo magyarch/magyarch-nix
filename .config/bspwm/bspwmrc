@@ -124,7 +124,7 @@ bspc rule -a Brave-browser desktop='^1'
 bspc rule -a discord desktop='^2' follow=on
 bspc rule -a eadesktop.exe desktop='^6' state=pseudo_tiled follow=on
 bspc rule -a Sublime_text desktop='^3' follow=on
-bspc rule -a steam desktop='^4' state=fullscreen follow=on
+bspc rule -a steam desktop='^4' state=pseudo_tiled follow=on
 bspc rule -a Vlc desktop='^7' state=fullscreen follow=on
 bspc rule -a qBittorrent desktop='^7' follow=on
 bspc rule -a Thunar desktop='^8' follow=on
@@ -138,7 +138,7 @@ bspc rule -a Lutris desktop='^5' follow=on
 #bspc rule -a ncmpcpp sticky=on state=floating rectangle=1880x1000+940+500
 
 # Floating apps
-bspc rule -a Gpick state=floating rectangle=1480x800+540+300
+bspc rule -a heroic.exe desktop='^6' state=pseudo_tiled follow=on
 bspc rule -a Lxappearance state=floating rectangle=1480x800+540+300
 bspc rule -a Pavucontrol state=floating rectangle=1480x800+540+300
 bspc rule -a Pcmanfm:Dialog state=floating
@@ -149,7 +149,7 @@ bspc rule -a Alacritty:Alacritty:scratchpad state=floating rectangle=1480x800+54
 bspc rule -a upc.exe desktop='^6' private=on state=pseudo_tiled follow=on
 bspc rule -a Sxiv state=floating rectangle=1480x800+540+300
 bspc rule -a mpv state=floating rectangle=1480x800+540+300
-bspc rule -a epicgameslauncher.exe desktop='^6' state=floating rectangle=1480x800+540+300 follow=on
+bspc rule -a epicgameslauncher.exe desktop='^6' state=pseudo_tiled follow=on
 
 # Manage apps
 bspc rule -a polybar manage=off

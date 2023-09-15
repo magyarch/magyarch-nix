@@ -28,13 +28,13 @@ killrecording() {
 	}
 
 screencast() { \
-	ffmpeg -y \
+	ffmpeg  \
 	-f x11grab \
-	-s $(xdpyinfo | grep dimensions | awk '{print $2;}') \
+	-video_size 1920x1080 \
+	-r 30  \
 	-i $DISPLAY \
 	-f pulse -i default \
-	-r 30 \
- 	-c:v libx264 -crf 0 -preset ultrafast -c:a aac \
+ 	-c:v libx264 -crf 0 -preset ultrafast -c:a libvorbis \
 	"$HOME/Videók/screencast-$(date '+%y%m%d-%H%M-%S').mkv" &
 	echo $! > /tmp/recordingpid
 	#updateicon "⏺️🎙️"
@@ -42,8 +42,8 @@ screencast() { \
 
 video() { ffmpeg \
 	-f x11grab \
-	-s $(xdpyinfo | grep dimensions | awk '{print $2;}') \
-	-i $DISPLAY \
+#	-s $(xdpyinfo | grep dimensions | awk '{print $2;}') \
+	-i :0.0 \
  	-c:v libx264 -qp 0 -r 30 \
 	"$HOME/Videók/video-$(date '+%y%m%d-%H%M-%S').mkv" &
 	echo $! > /tmp/recordingpid
@@ -79,7 +79,7 @@ audio() { \
 	}
 
 askrecording() { \
-	choice=$(printf "screencast\\nvideo\\naudio\\nwebcam\\nwebcam (hi-def)" | dmenu -i -c -g 1 -l 15 -p "Select recording style:" -nb '#282a36' -nf '#c3cdc8' -sb '#bd93f9' -fn 'JetBrains Mono Nerd-13')
+	choice=$(printf "screencast\\nvideo\\naudio\\nwebcam\\nwebcam (hi-def)" | dmenu -i -c -g 1 -l 15 -p "Select recording style:" -nb '#282a36' -nf '#c3cdc8' -sb '#6272a4' -fn 'JetBrains Mono Nerd-13')
 	 case "$choice" in
 		screencast) screencast;;
 		audio) audio;;
@@ -90,7 +90,7 @@ askrecording() { \
 	}
 
 asktoend() { \
-	response=$(printf "No\\nYes" | dmenu -i -c -g 1 -l 15 -p "Recording still active. End recording?" -nb '#282a36' -nf '#c3cdc8' -sb '#bd93f9' -fn 'JetBrains Mono Nerd-13') &&
+	response=$(printf "No\\nYes" | dmenu -i -c -g 1 -l 15 -p "Recording still active. End recording?" -nb '#282a36' -nf '#c3cdc8' -sb '#6272a4' -fn 'JetBrains Mono Nerd-13') &&
 	[ "$response" = "Yes" ] &&  killrecording
 	}
 
