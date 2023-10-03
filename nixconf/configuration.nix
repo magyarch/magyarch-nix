@@ -1,14 +1,14 @@
-# My config
+ # My config
 { config, pkgs, ... }:
 
 {
+  
 
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./packages.nix
       ./services.nix
-#      ./softwarecenter.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -18,17 +18,18 @@
 	timeout = 1;
     };
 
-  
+
   boot = {
     initrd.kernelModules = [ "amdgpu" ];
-    kernelModules = [ "bfq" ];
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  #  kernelModules = [ "bfq" ];
+    kernelPackages = pkgs.linuxPackages_lqx;
     kernelParams = [
-#    "amd_pstate=guided"
+  #  "amd_pstate=active"
    ];
     tmp.cleanOnBoot = true;
+    swraid.enable = false;
   };
-  
+
 
   fileSystems."/media" =
     { device = "/dev/disk/by-uuid/2cae586f-7f62-4ba0-a435-aa366ca6a839";
@@ -45,13 +46,13 @@
 
   # ZRAM
   zramSwap.enable = true;
-  zramSwap.memoryPercent = 50;  
+  zramSwap.memoryPercent = 50;
 
   # Enable networking
   networking = {
         networkmanager.enable = true;
 #	wireless.enable = true;
-        hostName="nixos";	
+        hostName="nixos";
     };
 
 
@@ -90,20 +91,21 @@
            enable = true;
      driSupport = true;
      driSupport32Bit = true;
-     extraPackages = with pkgs; [ rocm-opencl-icd
-  rocm-opencl-runtime ];
+ #    extraPackages = with pkgs; [ rocm-opencl-icd
+ # rocm-opencl-runtime ];
      };
 
-  
+
   # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  hardware.bluetooth = {
-  enable = true;
-  powerOnBoot = true;
-  };
+  #sound.enable = true;
   security.rtkit.enable = true;
   
+  hardware.bluetooth = {
+           enable = true;
+           powerOnBoot = true;
+           };
+  
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -123,14 +125,15 @@
            corectrl.enable = true;
 	   gamemode.enable = true;
 	   nm-applet.enable = true;
-     file-roller.enable = true;
+           file-roller.enable = true;
+           direnv.enable = true;
 	   dconf.enable = true;
            steam = {
 	   enable = true;
            remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
            dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
 	   };
-	   thunar = { 
+	   thunar = {
 	   enable = true;
 	   plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman thunar-media-tags-plugin ];
            };
@@ -166,7 +169,7 @@
         bind M-j swap-pane -D
 	bind M-k swap-pane -U
 
-       # kill K k 
+       # kill K k
         unbind k
         bind k confirm-before "kill-window"
         unbind K
@@ -174,15 +177,15 @@
   '';
 };
 
-  };  
-
-
-  xdg.portal = {
-      enable = true;
-      extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-    ];
   };
+
+
+ xdg.portal = {
+     enable = true;
+     extraPortals = with pkgs; [
+     xdg-desktop-portal-gtk
+   ];
+ };
 
 
  # Enable zsh as default shell
@@ -191,9 +194,52 @@
       enable = true;
       syntaxHighlighting.enable = true;
       autosuggestions.enable = true;
+      shellAliases = {
+         nrs="sudo nixos-rebuild switch";
+         ncu="sudo nix-channel --update nixos";
+         addunstable="sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos";
+         nixupgrade="sudo nixos-rebuild switch --upgrade-all";
+         rmoldgen="sudo nix-collect-garbage -d";
+         rebuildboot="sudo /run/current-system/bin/switch-to-configuration boot";
+         runheroic="~/Letöltések && appimage-run Heroic-2.9.1.AppImage";
+         listgens="sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
+
+         # Shorts
+          ka="killall";
+          mkd="mkdir -pv";
+          cp="cp -iv";
+          mv="mv -iv";
+          rm="rm -vI";
+          SS="sudo systemctl";
+          f="$FILE";
+          e="$EDITOR";
+          v="vifmrun";
+          z="zathura";
+          x="sxiv -ft *";
+          sdn="sudo shutdown -h now";
+          sr="sudo reboot";
+          diff="diff --color=auto";
+          q="exit";
+          df="df -h";
+          jctl="journalctl -p 3 -xb";
+
+          #chmod +x
+           ch="sudo chmod +x ";
+
+        #Delete [Important - use carefully]
+          delete="sudo rm -rf ";
+         #free
+          free="free -mt";
+
+         #continue download
+          wget="wget -c";
+
+
+       };
+
   };
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     noto-fonts-emoji
     font-awesome_4
     joypixels
@@ -202,7 +248,7 @@
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
-  
+
   # Suckless Tools
   nixpkgs.overlays = [
     (final: prev: {
@@ -237,7 +283,7 @@
   # the needed ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 445 139 ];
   networking.firewall.allowedUDPPorts = [ 137 138 ];
-  
+
 
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -263,7 +309,13 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
-  
+
+#  nix.extraOptions = ''
+#      keep-outputs = true
+#      keep-derivations = true
+#      experimental-features = nix-command flakes
+#      '';
+
   nix.gc = {
   automatic = true;
   dates = "weekly";

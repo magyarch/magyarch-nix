@@ -61,7 +61,7 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 bindkey '^[[P' delete-char
 bindkey '^H' backward-kill-word
-bindkey "^p" up-line-or-beginning-search 
+bindkey "^p" up-line-or-beginning-search
 bindkey "^n" down-line-or-beginning-search
 bindkey "^k" up-line-or-beginning-search
 bindkey "^j" down-line-or-beginning-search
@@ -74,3 +74,4 @@ bindkey '^e' edit-command-line
 # Zsh related aliases
 alias d='dirs -v'
 for index ({1..9}) alias "$index"="cd +${index}"; unset index
+eval "$(direnv hook zsh)"

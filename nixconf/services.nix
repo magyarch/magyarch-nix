@@ -41,7 +41,7 @@
 	   interval = "weekly";
 	   };
 	   unclutter-xfixes.enable = true;
-	   openssh.enable = true;
+	   openssh.enable = true;       
 	   gvfs.enable = true;
 	   tumbler.enable = true;
 
@@ -53,17 +53,14 @@
            alsa.support32Bit = true;
            pulse.enable = true;
 	   };
-     hardware = {
-           openrgb.enable = true;
-	   openrgb.motherboard = "amd";
-	   };
-	 };
+	  hardware.openrgb = {
+           enable = true;
+           motherboard = "amd";
+       };
 
+ }; 
 
-	  
-	      
-    
-    # Manage the virtualisation services
+ # Manage the virtualisation services
   virtualisation = {
     libvirtd.enable = true;
       };
@@ -96,8 +93,5 @@
 	 };
 };
 
-   # ZRAM
-  zramSwap.enable = true;
-  zramSwap.memoryPercent = 50;
 
 }

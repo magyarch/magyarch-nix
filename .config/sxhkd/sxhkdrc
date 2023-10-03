@@ -16,7 +16,7 @@ super + {_,shift + } r
 
 # Show keys with rofi/default gui editor
 super + {_,shift + } e
-    {show_keys.sh, subl}
+    {wmctrl -a Code || code, wmctrl -a Sublime || subl}
 
 # Switch tile and monocle layout and simple flip layout
 super + {_,shift + } m
@@ -36,11 +36,11 @@ super + {_,shift + } c
 
 # Default web browser brave and firefox
 super + {_,shift + } w
-    {$BROWSER, $BROWSER2}
+    {wmctrl -a Brave || $BROWSER, $BROWSER2}
 
 # Chat client, gui filemanager
 super + {_,shift + } p
-    {discord, thunar}
+    {wmctrl -a Discord || discord, wmctrl -a Thunar || thunar}
 
 # Hide polybar/Reload bspwm
 super + {_,shift + } b
@@ -155,7 +155,7 @@ F12
 
 # Sratchpad
 F1
-  code
+  wmctrl -a Steam || steam
 ##########################################
          # BSPWM LAYOUT KEYS
 ###########################################
@@ -223,6 +223,10 @@ super + shift + {Left,Down,Up,Right}
     dir={west,south,north,east}; \
     bspc node -s "$dir.local" --follow \
         || bspc node -m "$dir" --follow
+
+super + ctrl + {m,s,p}
+    bspc node -g {marked,sticky,private}
+
 
 ##########################################################################################
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>END>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

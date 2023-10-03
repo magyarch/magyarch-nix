@@ -1,37 +1,5 @@
 #!/bin/sh
 
-alias ka="killall"
-alias mkd="mkdir -pv"
-alias cp="cp -iv"
-alias mv="mv -iv"
-alias rm="rm -vI"
-alias p="sudo pacman"
-alias SS="sudo systemctl"
-alias f="$FILE"
-alias e="$EDITOR"
-alias v="vifmrun"
-alias z="zathura"
-alias x="sxiv -ft *"
-alias sdn="sudo shutdown -h now"
-alias sr="sudo reboot"
-alias diff="diff --color=auto"
-alias q="exit"
-
-# NIXSOS alias
-alias nrs="sudo nixos-rebuild switch"
-alias ncu="sudo nix-channel --update nixos"
-alias addunstable="sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos"
-alias nixupgrade="sudo nixos-rebuild switch --upgrade-all"
-alias rmoldgen="sudo nix-collect-garbage -d"
-alias rebuildboot="sudo /run/current-system/bin/switch-to-configuration boot"
-alias runheroic="~/Letöltések && appimage-run Heroic-2.9.1.AppImage"
-
-#chmod +x
-alias ch="sudo chmod +x "
-
-#Delete [Important - use carefully]
-alias delete="sudo rm -rf "
-
 #list
 alias ls='ls --color=auto'
 alias la='ls -a'
@@ -49,36 +17,6 @@ alias upate='sudo pacman -Syyu'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
-
-#readable output
-alias df='df -h'
-
-#pacman unlock
-alias unlock="sudo rm /var/lib/pacman/db.lck"
-
-#free
-alias free="free -mt"
-
-#continue download
-alias wget="wget -c"
-
-#userlist
-alias userlist="cut -d: -f1 /etc/passwd"
-
-#merge new settings
-alias merge="xrdb -merge ~/.Xresources"
-
-# Aliases for software managment
-# pacman or pm
-alias pacman='sudo pacman --color auto'
-alias update='sudo pacman -Syyu'
-
-# paru as aur helper - updates everything
-alias upall="paru -Syu"
-
-#ps
-alias psa="ps auxf"
-alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
 
 #grub update
 alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
@@ -110,15 +48,15 @@ alias vbm="sudo mount -t vboxsf -o rw,uid=1000,gid=1000 Public /home/$USER/Publi
 
 #youtube-dl
 alias yta-aac="youtube-dl --extract-audio --audio-format aac "
-alias yta-best="youtube-dl --extract-audio --audio-format best "
-alias yta-flac="youtube-dl --extract-audio --audio-format flac "
+alias yta-best="yt-dlp --extract-audio --audio-format best "
+alias yta-flac="yt-dlp --extract-audio --audio-format flac "
 alias yta-m4a="youtube-dl --extract-audio --audio-format m4a "
 alias yta-mp3="youtube-dl --extract-audio --audio-format mp3 "
 alias yta-opus="youtube-dl --extract-audio --audio-format opus "
 alias yta-vorbis="youtube-dl --extract-audio --audio-format vorbis "
 alias yta-wav="youtube-dl --extract-audio --audio-format wav "
-alias ytflac='youtube-dl -x --audio-format flac --audio-quality 0 -o "~/Zenék/%(uploader)s/%(title)s.%(ext)s"'
-alias ytv-best="youtube-dl -f bestvideo+bestaudio "
+alias ytflac='yt-dlp -x --audio-format flac --audio-quality 0 -o "~/Zenék/%(uploader)s/%(title)s.%(ext)s"'
+alias ytv-best="yt-dlp -f bestvideo+bestaudio "
 
 #Recent Installed Packages
 alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
