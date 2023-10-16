@@ -7,9 +7,6 @@ hc() {
 }
 
 
-hc set tree_style '╾│ ├╰╼─╮'
-
-
 #hc set_layout grid
 hc set_layout horizontal
 
@@ -85,7 +82,8 @@ hc keybind $Mod-m spawn hide_windows +1 # hide client window
 hc keybind $Mod-Shift-m spawn hide_windows -1 # unhide client window
 hc keybind $Mod-Control-r spawn hide_window 0
 
-hc keybind $Mod-Escape  pkill -USR1 -x sxhkd # reload sxhkd
+
+#hc keybind $Mod-Escape  pkill -USR1 -x sxhkd # reload sxhkd
 hc keybind $Mod-Shift-Escape reload # reload herbstluftwm
 
 hc keybind $Mod-q close
@@ -237,16 +235,16 @@ hc rule floatplacement=center
 #assign applications to workspaces or tags
 hc rule class~'(brave|Brave-browser|Chromium|Microsoft-edge)' tag='' switchtag=on focus=on
 hc rule class='Spotify' tag='' switchtag=on focus=on
-hc rule class='subl' tag=''  switchtag=on focus=on
+hc rule class~'(subl|Code|code)' tag=''  switchtag=on focus=on
 hc rule class~'(discord|Discord)' tag='' switchtag=on focus=on
 #hc rule class~'(vlc|mpv|Mpv)' tag='' switchtag=on focus=on
 hc rule class~'(VirtualBox Manager|Vmplayer|qBittorrent)' tag='' switchtag=on focus=on
 hc rule class~'(Thunar|Pcmanfm|Nemo)' tag='' switchtag=on focus=on
-hc rule class~'(Shotcut|Gpick|gpick|Steam)' tag='' switchtag=on focus=on
+hc rule class~'(Shotcut|Gpick|steam|Steam)' tag='' switchtag=on pseudotile=on focus=on
 hc rule class~'(gimp|Gimp)' tag='' switchtag=on focus=on
-hc rule class~'(Zathura|zathura|Lxappearance|Pavucontrol|upc.exe)' floating=on floatplacement=center floating_geometry=1400x800
-hc rule class='Steam' title~'.*Barátlista.*' floating=on focus=off
-hc rule class='Steam' title~'Steam.*' focus=off floating=on
+hc rule class~'(Zathura|zathura|Lxappearance|Pavucontrol|upc.exe)' tag='' switchtag=on pseudotile=on focus=on
+#hc rule class='Steam' title~'.*Barátlista.*' floating=on focus=off
+#hc rule class='Steam' title~'Steam.*' focus=off floating=on
 
 # SCRATCHPADS #
 #-------------#
@@ -264,6 +262,11 @@ hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm|Konsole)' floating=on focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' floating=on
 #hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
+
+
+hc set tree_style '╾│ ├╰╼─╮'
+
+
 
 # unlock, just to be sure
 hc unlock

@@ -12,22 +12,25 @@
      bat 
      bc 
      binutils 
-     brave 
+  #   brave 
      curl 
+     cpu-x
      dunst 
      discord 
      dmenu 
-     eza 
+     exa 
      exfat 
      exfatprogs 
      eww 
+     faac
      feh 
      ffmpeg_6-full 
-     firefox
+  #   firefox
      fzf 
      git 
      htop 
-     jamesdsp 
+     jamesdsp
+     killall 
      libnotify 
      lm_sensors 
      lutris 
@@ -50,10 +53,12 @@
      picom-jonaburg 
      polybar 
      protonup-ng 
+     phoronix-test-suite
      pulseaudio 
      pulsemixer 
      qbittorrent 
      rofi 
+     smartmontools
      st 
      stress-ng
      spice 
@@ -67,6 +72,7 @@
      wineWowPackages.full 
      wmctrl 
      vifm 
+     xorg.xev
      xclip 
      x264 
      xcape 

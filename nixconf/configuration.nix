@@ -22,17 +22,17 @@
   boot = {
     initrd.kernelModules = [ "amdgpu" ];
   #  kernelModules = [ "bfq" ];
-    kernelPackages = pkgs.linuxPackages_lqx;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
-  #  "amd_pstate=active"
+    #  "amd_pstate=active"
    ];
     tmp.cleanOnBoot = true;
-    swraid.enable = false;
+   # swraid.enable = false;
   };
 
 
   fileSystems."/media" =
-    { device = "/dev/disk/by-uuid/2cae586f-7f62-4ba0-a435-aa366ca6a839";
+    { device = "/dev/disk/by-uuid/41e88a43-a279-4c8d-b76c-b4e9031ff39c";
       fsType = "auto";
       options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
     };
@@ -86,13 +86,13 @@
 
 
    # Videodriver configuration
-  services.xserver.videoDrivers = [ "modesetting" ];
+  services.xserver.videoDrivers = [ "amdgpu" ];
   hardware.opengl = {
            enable = true;
      driSupport = true;
      driSupport32Bit = true;
- #    extraPackages = with pkgs; [ rocm-opencl-icd
- # rocm-opencl-runtime ];
+     extraPackages = with pkgs; [ rocm-opencl-icd
+  rocm-opencl-runtime ];
      };
 
 
@@ -123,6 +123,7 @@
 
   programs = {
            corectrl.enable = true;
+           gnome-disks.enable = true;
 	   gamemode.enable = true;
 	   nm-applet.enable = true;
            file-roller.enable = true;
@@ -239,7 +240,7 @@
 
   };
 
-  fonts.packages = with pkgs; [
+  fonts.fonts = with pkgs; [
     noto-fonts-emoji
     font-awesome_4
     joypixels
@@ -315,6 +316,8 @@
 #      keep-derivations = true
 #      experimental-features = nix-command flakes
 #      '';
+  
+  nix.settings.auto-optimise-store = true;
 
   nix.gc = {
   automatic = true;
