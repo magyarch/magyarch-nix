@@ -14,20 +14,21 @@
      binutils 
   #   brave 
      curl 
-     cpu-x
+   #  cpu-x
      dunst 
      discord 
      dmenu 
-     exa 
+     eza 
      exfat 
      exfatprogs 
      eww 
-     faac
+#     faac
      feh 
      ffmpeg_6-full 
-  #   firefox
+     firefox
      fzf 
      git 
+   #  unstable.heroic
      htop 
      jamesdsp
      killall 
@@ -38,6 +39,7 @@
      mangohud 
      microsoft-edge 
      mpd 
+     mprime
      ncmpcpp 
      maim 
      mpv 
@@ -47,26 +49,25 @@
      ueberzug 
      unrar 
      unzip 
+    # picom-allusive
      p7zip 
      pamixer 
      pavucontrol 
-     picom-jonaburg 
+    # picom-jonaburg
+   #  picom-allusive 
      polybar 
      protonup-ng 
-     phoronix-test-suite
      pulseaudio 
      pulsemixer 
      qbittorrent 
      rofi 
-     smartmontools
-     st 
-     stress-ng
-     spice 
+    # spice 
      sublime3 
      sxhkd 
      sxiv 
      system-config-printer 
-     virt-manager 
+     stremio
+    # virt-manager 
      #vscode-with-extensions
      #vscode-extensions.bbenoist.nix
      wineWowPackages.full 
@@ -82,29 +83,30 @@
      xorg.xdpyinfo 
      xwallpaper 
      yt-dlp 
+     (picom.overrideAttrs (oldAttrs: rec {
+        pname = "picom-allusive";
+        version = "1.4.3";
+        src = pkgs.fetchFromGitHub {
+          owner = "allusive-dev";
+          repo = "picom-allusive";
+          rev = version;
+          hash = "sha256-nnm5xk1e8hot01zZwFmzUa/FeNCQdjlcO3xmRE56ydk=";
+        };
+      }))
     
 #    (slstatus.overrideAttrs (_: { src = /home/xeoncpu/.config/suckless/slstatus; }))
-     (vscode-with-extensions.override {
-    vscodeExtensions = with vscode-extensions; [
-      bbenoist.nix
-      ms-vscode-remote.remote-ssh
-    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-      {
-        name = "remote-ssh-edit";
-        publisher = "ms-vscode-remote";
-        version = "0.47.2";
-        sha256 = "1hp6gjh4xp2m1xlm1jsdzxw9d8frkiidhph6nvl24d0h8z34w49g";
-      }
-    ];
-  })
-];
 
-    #    ];
+    ];
+
+     extraInit = ''
+    xset s off -dpms
+  '';
         
 	variables = {
                 GDK_SCALE = "2";
                 GDK_DPI_SCALE = "0.5";
 	 	        XCURSOR_SIZE = "24";
+                  DISPLAY=":  0";
 #		QT_SCALE_FACTOR = "1";
                #_JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
              };

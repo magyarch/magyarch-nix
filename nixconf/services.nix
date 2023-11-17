@@ -6,15 +6,22 @@
 	layout = "hu";
 	xkbVariant = "";
 	dpi = 144;
-	screenSection = ''Option "TearFree" "true"'';
-        windowManager.herbstluftwm.enable = true;
-      #  windowManager.bspwm.configFile = "/home/xeoncpu/.config/bspwm/bspwmrc";
-#        windowManager.bspwm.sxhkd.configFile = "/home/xeoncpu/.config/sxhkd/sxhkdrc";
+#	screenSection = ''Option "TearFree" "true"'';
+        windowManager.bspwm.enable = true;
+        windowManager.bspwm.configFile = "/home/xeoncpu/.config/bspwm/bspwmrc";
+        windowManager.bspwm.sxhkd.configFile = "/home/xeoncpu/.config/sxhkd/sxhkdrc";
+	desktopManager = {
+	            xfce = {
+    enable = true;
+    noDesktop = true;
+    enableXfwm = false;
+  };
+};  
 #	windowManager.herbstluftwm.package = pkgs.herbstluftwm.overrideAttrs ( o: {
 #    disabledTests = o.disabledTests ++ ["test_complete_keybind_offers_additional_mods_without_duplication"];
 #  });
 	displayManager = {
-		defaultSession = "none+herbstluftwm";
+		defaultSession = "none+bspwm";
 		lightdm.enable = true;
 		autoLogin = {
 			enable = true;
@@ -32,10 +39,10 @@
 	   avahi.openFirewall = true;
 	   blueman.enable = true;
            dbus.enable = true;
-	 #  picom = {
-	 #  enable = true;
-	 #  vSync = true;
-	 #  };
+	   # picom = {
+	   # enable = true;
+	   # vSync = true;
+	   # };
 	   fstrim = {
 	   enable = true;
 	   interval = "weekly";
@@ -44,6 +51,9 @@
 	   openssh.enable = true;       
 	   gvfs.enable = true;
 	   tumbler.enable = true;
+	#   udev.extraRules = ''
+    # Your rule goes here
+  #'';
 
 
 #	   spice-vdagentd.enable = true;
@@ -53,17 +63,13 @@
            alsa.support32Bit = true;
            pulse.enable = true;
 	   };
-	  hardware.openrgb = {
-           enable = true;
-           motherboard = "amd";
-       };
 
  }; 
 
  # Manage the virtualisation services
-  virtualisation = {
-    libvirtd.enable = true;
-      };
+  # virtualisation = {
+  #   libvirtd.enable = true;
+  #     };
 
   services.samba-wsdd.enable = true;
   services.samba.enableNmbd = true;

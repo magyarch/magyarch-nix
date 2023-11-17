@@ -3,7 +3,6 @@
 
 {
   
-
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -22,12 +21,12 @@
   boot = {
     initrd.kernelModules = [ "amdgpu" ];
   #  kernelModules = [ "bfq" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_zen;
     kernelParams = [
     #  "amd_pstate=active"
    ];
     tmp.cleanOnBoot = true;
-   # swraid.enable = false;
+    plymouth.enable = true;
   };
 
 
@@ -99,13 +98,31 @@
   # Enable sound with pipewire.
   #sound.enable = true;
   security.rtkit.enable = true;
-  
+  #security.polkit.enable = true;
   hardware.bluetooth = {
            enable = true;
            powerOnBoot = true;
            };
-  
 
+  security.polkit.enable = true;
+    systemd = {
+   user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+  };
+   extraConfig = ''
+     DefaultTimeoutStopSec=10s
+   '';
+ };
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -113,7 +130,7 @@
   users.users.xeoncpu = {
     isNormalUser = true;
     description = "xeoncpu";
-    extraGroups = [ "networkmanager" "wheel" "input" "disk" "kvm" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "disk" "kvm" ];
     packages = with pkgs; [
     #  firefox
     #  thunderbird
@@ -122,12 +139,6 @@
 
 
   programs = {
-           corectrl.enable = true;
-           gnome-disks.enable = true;
-	   gamemode.enable = true;
-	   nm-applet.enable = true;
-           file-roller.enable = true;
-           direnv.enable = true;
 	   dconf.enable = true;
            steam = {
 	   enable = true;
@@ -240,7 +251,7 @@
 
   };
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     noto-fonts-emoji
     font-awesome_4
     joypixels
@@ -259,49 +270,11 @@
     })
   ];
 
-  security.polkit.enable = true;
-    systemd = {
-   user.services.polkit-gnome-authentication-agent-1 = {
-    description = "polkit-gnome-authentication-agent-1";
-    wantedBy = [ "graphical-session.target" ];
-    wants = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
-    serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-  };
-   extraConfig = ''
-     DefaultTimeoutStopSec=10s
-   '';
- };
-
-
  # Curiously, `services.samba` does not automatically open
   # the needed ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 445 139 ];
   networking.firewall.allowedUDPPorts = [ 137 138 ];
 
-
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -311,19 +284,7 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
 
-#  nix.extraOptions = ''
-#      keep-outputs = true
-#      keep-derivations = true
-#      experimental-features = nix-command flakes
-#      '';
-  
+
   nix.settings.auto-optimise-store = true;
-
-  nix.gc = {
-  automatic = true;
-  dates = "weekly";
-  options = "--delete-older-than 5d";
-
-};
 
 }
