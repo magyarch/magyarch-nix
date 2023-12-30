@@ -107,7 +107,7 @@
                 GDK_DPI_SCALE = "0.5";
 	 	        XCURSOR_SIZE = "24";
                   DISPLAY=":  0";
-#		QT_SCALE_FACTOR = "1";
+		QT_SCALE_FACTOR = "1.7";
                #_JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
              };
           };

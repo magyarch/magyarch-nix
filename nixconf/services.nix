@@ -37,7 +37,7 @@
 	   avahi.enable = true;
 	   avahi.nssmdns = true;
 	   avahi.openFirewall = true;
-	   blueman.enable = true;
+#	   blueman.enable = true;
            dbus.enable = true;
 	   # picom = {
 	   # enable = true;

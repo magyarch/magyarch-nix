@@ -21,24 +21,23 @@
   boot = {
     initrd.kernelModules = [ "amdgpu" ];
   #  kernelModules = [ "bfq" ];
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages;
     kernelParams = [
     #  "amd_pstate=active"
    ];
     tmp.cleanOnBoot = true;
-    plymouth.enable = true;
   };
 
 
   fileSystems."/media" =
-    { device = "/dev/disk/by-uuid/41e88a43-a279-4c8d-b76c-b4e9031ff39c";
+    { device = "/dev/disk/by-uuid/3569f60e-49fd-4d8b-913e-a2ab9b491934";
       fsType = "auto";
       options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
     };
 
 
   fileSystems."/mnt" =
-    { device = "/dev/disk/by-uuid/a7228798-548b-470e-a9d9-36da26cc5af2";
+    { device = "/dev/disk/by-uuid/c60239a9-e693-4773-8c6c-5c15441a479d";
       fsType = "auto";
       options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
     };
@@ -98,11 +97,6 @@
   # Enable sound with pipewire.
   #sound.enable = true;
   security.rtkit.enable = true;
-  #security.polkit.enable = true;
-  hardware.bluetooth = {
-           enable = true;
-           powerOnBoot = true;
-           };
 
   security.polkit.enable = true;
     systemd = {
