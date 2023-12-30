@@ -74,4 +74,4 @@ bindkey '^e' edit-command-line
 # Zsh related aliases
 alias d='dirs -v'
 for index ({1..9}) alias "$index"="cd +${index}"; unset index
-eval "$(direnv hook zsh)"
+#eval "$(direnv hook zsh)"
