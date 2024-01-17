@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
+
 {
     # List services that you want to enable:
     services.xserver = {
@@ -7,9 +8,8 @@
 	xkbVariant = "";
 	dpi = 144;
 #	screenSection = ''Option "TearFree" "true"'';
-        windowManager.bspwm.enable = true;
-        windowManager.bspwm.configFile = "/home/xeoncpu/.config/bspwm/bspwmrc";
-        windowManager.bspwm.sxhkd.configFile = "/home/xeoncpu/.config/sxhkd/sxhkdrc";
+       # windowManager.bspwm.configFile = "/home/xeoncpu/.config/bspwm/bspwmrc";
+      # windowManager.bspwm.sxhkd.configFile = "/home/xeoncpu/.config/sxhkd/sxhkdrc";
 	desktopManager = {
 	            xfce = {
     enable = true;
@@ -21,14 +21,13 @@
 #    disabledTests = o.disabledTests ++ ["test_complete_keybind_offers_additional_mods_without_duplication"];
 #  });
 	displayManager = {
-		defaultSession = "none+bspwm";
-		lightdm.enable = true;
-		autoLogin = {
-			enable = true;
-			user = "xeoncpu";
+	lightdm.enable = true;
+	autoLogin = {
+		enable = true;
+		user = "xeoncpu";
 		};
              };
-          };
+           };          
          
 
     services = {
@@ -65,6 +64,26 @@
 	   };
 
  }; 
+
+
+     services.mpd = {
+    enable = true;
+    user = "xeoncpu";
+    musicDirectory = "/mnt/Zenék";
+    extraConfig = ''
+      audio_output {
+        type "pipewire"
+        name "My PipeWire Output"
+      }
+    '';
+    startWhenNeeded =
+      true; # systemd feature: only start MPD service upon connection to its socket
+  };
+  systemd.services.mpd.environment = {
+    # https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/609
+    XDG_RUNTIME_DIR =
+      "/run/user/1000"; # User-id 1000 must match above user. MPD will look inside this directory for the PipeWire socket.
+  };
 
  # Manage the virtualisation services
   # virtualisation = {

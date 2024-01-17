@@ -15,20 +15,20 @@ separator_block_width=15
 markup=pango
 
 
-[cpu_stats]
-#command=sar -u 1 1 | awk 'FNR == 5 { printf "%04.1f<span color=\"#ff5555\">%</span>", (100 - $8) } ' && sensors | awk '{ if ($1 == "CPU" && $2 == "Temperature:") { gsub(/[+°C]/, "") ; printf " %i<span color=\"#ff5555\">°C</span>\n", $3 } }'
-command=cpu
-interval=2
-label=<span color="#6272a4"><b>CPU: </b></span>
-border=#6272a4
-border_top=0
-border_right=0
-border_bottom=1
-border_left=0
+# [cpu_stats]
+# #command=sar -u 1 1 | awk 'FNR == 5 { printf "%04.1f<span color=\"#ff5555\">%</span>", (100 - $8) } ' && sensors | awk '{ if ($1 == "CPU" && $2 == "Temperature:") { gsub(/[+°C]/, "") ; printf " %i<span color=\"#ff5555\">°C</span>\n", $3 } }'
+# command=cpu
+# interval=2
+# label=<span color="#6272a4"><b>CPU: </b></span>
+# border=#6272a4
+# border_top=0
+# border_right=0
+# border_bottom=1
+# border_left=0
 
 
 [gpu_stats]
-command=nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits | awk '{ printf "%02i<span color=\"#ffb86c\">%</span>", $0}' && nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits | awk '{ printf " %i<span color=\"#ffb86c\">°C</span>\n", $0}'
+command=sensors | awk  '/edge:/ {print $2}'
 label=<span color="#2e8b57"><b>GPU: </b></span>
 interval=2
 border=#2e8b57
@@ -48,12 +48,11 @@ border_bottom=1
 border_left=0
 
 
-[wifi]
-command=iwgetid -r | tr '\n' ' ' && grep $(iwgetid -m | awk '{ printf "%s", $1 }') /proc/net/wireless | awk '{ printf "%i%\n", int($3 * 100 / 70) }'
-instance=wlp11s0f3u1
-interval=5
-label=<span color="#ff79c6"> </span>
-border=#ff79c6
+[cpu_stats]
+command=sensors | awk  '/^Core 0:/ {print $3}'
+interval=2
+label=<span color="#6272a4">CPU:</span>
+border=#6272a4
 border_top=0
 border_right=0
 border_bottom=1
@@ -73,7 +72,8 @@ border_left=0
 
 [cpufreq_stats]
 command=cpu_freq.sh
-label=<span color="#d36135"><b></b></span>
+#command=cpu
+label=<span color="#d36135"><b>CPUFREQ:</b></span>
 interval=2
 border=#d36135"
 border_top=0

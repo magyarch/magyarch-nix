@@ -18,6 +18,9 @@ for_window [class="^.*"] border pixel 3
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# Only initiate a tiling drag when the modifier is held:
+tiling_drag modifier titlebar
+
 
 # Font for window titles. Will also be used by the bar unless a different font ##############
 # is used in the bar {} block below.
@@ -25,9 +28,13 @@ font pango:JetBrains Mono Nerd Font 9
 
 # Autostart  ######################################################
 # exec --no-startup-id xrandr --dpi 192
-# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+ exec_always --no-startup-id /nix/store/$(ls -la /nix/store | grep 'mate-polkit' | grep '4096' | awk '{print $9}' | sed -n '$p')/libexec/polkit-mate-authentication-agent-1 &
 # exec --no-startup-id picom -b --config $HOME/.config/picom.conf --experimental-backends
-# exec --no-startup-id sxhkd -c $HOME/.config/i3/sxhkdrc
+ exec --no-startup-id sxhkd -c $HOME/.config/i3/sxhkdrc
+ # Autotiling
+exec_always --no-startup-id autotiling
+exec_always --no-startup-id ~/.config/polybar/launch.sh &
+
 # exec --no-startup-id udiskie -a
 # exec --no-startup-id nm-applet
 # exec --no-startup-id dunst
@@ -166,7 +173,7 @@ bindsym $mod+z mode "resize"
 
 #for_window [instance="dropdown"] floating enable, resize set 1280 620, move scratchpad
 #bindsym $mod+n [instance="dropdown"] scratchpad show, move position center
-#exec --no-startup-id alacritty --class dropdown &
+#exec --no-startup-id autotiling &
 
 #for_window [instance="music"] floating enable, resize set 1280 620, move scratchpad
 #bindsym $mod+shift+n [instance="music"] scratchpad show, move position center
@@ -179,18 +186,18 @@ for_window [class="sent"] border pixel 0px
 for_window [title="GIMP Startup"] move workspace $ws5
 for_window [class="Gimp"] move workspace $ws5
 for_window [title="^QEMU$"] floating enable
-for_window [window_role="GtkFileChooserDialog"] resize set 1880 1220
+for_window [window_role="GtkFileChooserDialog"] resize set 1680 1020
 for_window [window_role="GtkFileChooserDialog"] move position center
 for_window [title="Default - Wine desktop"] floating enable
-for_window [class="(?i)Pavucontrol|mupdf|sxiv|feh"] floating enable, resize set 1880 1020, move position center, focus
-for_window [class="(?i)mpv"] floating enable, resize set 1880 1020, move position center, focus
-for_window [title="Music"] floating enable, resize set 1880 1020, move position center, focus
-for_window [title="scratchpad"] floating enable, resize set 1880 1220, move position center, focus
-for_window [class="Lxappearance|system-config-printer|System-config-printer.py"] floating enable, resize set 1880 1220, move position center, focus
+for_window [class="(?i)Pavucontrol|mupdf|sxiv|feh"] floating enable, resize set 1680 1020, move position center, focus
+for_window [class="(?i)mpv"] floating enable, resize set 1680 1020, move position center, focus
+for_window [title="Music"] floating enable, resize set 1680 1020, move position center, focus
+for_window [title="scratchpad"] floating enable, resize set 1680 1020, move position center, focus
+for_window [class="Lxappearance|system-config-printer|System-config-printer.py"] floating enable, resize set 1680 1020, move position center, focus
 
 
-for_window [title="float"] floating enable, resize set 1880 1220, move position center, focus
-for_window [title="floating"] floating enable, resize set 1880 1220, move position center, focus
+for_window [title="float"] floating enable, resize set 1680 1020, move position center, focus
+for_window [title="floating"] floating enable, resize set 1680 1020, move position center, focus
 
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
@@ -199,7 +206,7 @@ for_window [window_role="task_dialog"] floating enable
 
 # Assign application to workspace ####################################################
 
-for_window [class="$BROWSER|Brave-browser|Firefox|firefox"] move to workspace $ws1 focus
+for_window [class="$BROWSER|Brave-browser|Microsoft-edge|firefox"] move to workspace $ws1 focus
 for_window [class="urxvt|st|qBittorrent"] move to workspace $ws7 focus
 for_window [class="subl|Subl|Subl3|subl3"] move to workspace $ws3 focus
 for_window [class="discord|Discord"] move to workspace $ws2 focus
@@ -221,29 +228,29 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
 client.background       #282a36
 
-bar {
+#bar {
 #     output $monitor1
-     font pango: JetBrains Mono Nerd Font 9
-     status_command i3blocks
-     strip_workspace_numbers yes
+#     font pango: JetBrains Mono Nerd Font 9
+#     status_command i3blocks
+#     strip_workspace_numbers yes
      #status_command ~/.local/bin/bumblebee-status/bumblebee-status -m spacer sensors disk nvidiagpu memory date time pasink -p sensors.show_freq  sensors.match_number=0  interval=0.5 spacer.left-click="wal" disk.left-click="gnome-disks"  date.left-click="eww open --toggle calendar" pasink.left-click="pavucontrol" \
      #-t firefox-dark-powerline
-     position top
+#     position top
 
 
 
-  colors {
-    background #282a36
-    statusline #C3CDC8
-    separator  #C3CDC8
+#  colors {
+#    background #282a36
+#    statusline #C3CDC8
+#    separator  #C3CDC8
 
 
-    focused_workspace  #6272a4 #6272a4 #C3CDC8
-    active_workspace   #6272a4 #6272a4 #C3CDC8
-    inactive_workspace #333333 #222222 #888888
-    urgent_workspace   #2F343A #900000 #FFFFFF
-    binding_mode       #2F343A #900000 #FFFFFF
-  }
+#    focused_workspace  #6272a4 #6272a4 #C3CDC8
+#    active_workspace   #6272a4 #6272a4 #C3CDC8
+#    inactive_workspace #333333 #222222 #888888
+#    urgent_workspace   #2F343A #900000 #FFFFFF
+#    binding_mode       #2F343A #900000 #FFFFFF
+#  }
 
 
-}
+#}

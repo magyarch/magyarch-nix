@@ -1,4 +1,5 @@
-{ pkgs , ... }:
+{ config, pkgs, ... }:
+
 
 {
 # List packages installed in system profile
@@ -24,11 +25,12 @@
      eww 
 #     faac
      feh 
+     floorp
      ffmpeg_6-full 
-     firefox
      fzf 
-     git 
-   #  unstable.heroic
+     git
+     qsudo
+     heroic
      htop 
      jamesdsp
      killall 
@@ -36,7 +38,9 @@
      lm_sensors 
      lutris 
      lxappearance 
-     mangohud 
+    # lxqt.lxqt-policykit
+     mangohud
+     mate.mate-polkit
      microsoft-edge 
      mpd 
      mprime
@@ -53,10 +57,8 @@
      p7zip 
      pamixer 
      pavucontrol 
-    # picom-jonaburg
-   #  picom-allusive 
      polybar 
-     protonup-ng 
+     protonup-qt 
      pulseaudio 
      pulsemixer 
      qbittorrent 
@@ -77,7 +79,8 @@
      xclip 
      x264 
      xcape 
-     xdg-user-dirs 
+     xdg-user-dirs
+     xdg-utils 
      xdo 
      xdotool 
      xorg.xdpyinfo 
@@ -94,19 +97,17 @@
         };
       }))
     
-#    (slstatus.overrideAttrs (_: { src = /home/xeoncpu/.config/suckless/slstatus; }))
+#    (slstatus.overrideAttrs (_: { src = /home/xeoncpu/.config/suckless/slstatus; }
 
     ];
 
-     extraInit = ''
-    xset s off -dpms
-  '';
-        
+        pathsToLink = [ "/libexec" ];
+
 	variables = {
                 GDK_SCALE = "2";
                 GDK_DPI_SCALE = "0.5";
 	 	        XCURSOR_SIZE = "24";
-                  DISPLAY=":  0";
+    #              DISPLAY=":  0";
 		QT_SCALE_FACTOR = "1.7";
                #_JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
              };

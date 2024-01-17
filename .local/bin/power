@@ -3,7 +3,7 @@
 DIALOG_RESULT=$(echo -e 'Quit bspwm\nHibernate\nReboot\nPoweroff' | dmenu -i -p 'System')
 
 case $DIALOG_RESULT in
-        "Quit bspwm" ) bspc quit ;;
+        "Quit bspwm" ) i3-msg exit ;;
         "Hibernate") systemctl hibernate ;;
         "Reboot") systemctl reboot ;;
         "Poweroff") systemctl poweroff ;;

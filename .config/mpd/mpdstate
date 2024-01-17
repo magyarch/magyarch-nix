@@ -1,7 +1,8 @@
 sw_volume: 100
 audio_device_state:1:Pipewire Sound Server
 state: stop
-random: 0
+current: 0
+random: 1
 repeat: 0
 single: 0
 consume: 0
@@ -9,4 +10,6 @@ crossfade: 0
 mixrampdb: 0.000000
 mixrampdelay: -1.000000
 playlist_begin
+0:2012 - Roses/03. Fire & Soul.mp3
+1:Bob Seger & The Silver Bullet Band/Night Moves/01 Rock and Roll Never Forgets.m4a
 playlist_end

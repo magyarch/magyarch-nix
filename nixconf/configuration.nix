@@ -8,6 +8,8 @@
       ./hardware-configuration.nix
       ./packages.nix
       ./services.nix
+      ./i3.nix
+ #     ./bspwm.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -21,7 +23,7 @@
   boot = {
     initrd.kernelModules = [ "amdgpu" ];
   #  kernelModules = [ "bfq" ];
-    kernelPackages = pkgs.linuxPackages;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
     #  "amd_pstate=active"
    ];
@@ -89,34 +91,19 @@
            enable = true;
      driSupport = true;
      driSupport32Bit = true;
-     extraPackages = with pkgs; [ rocm-opencl-icd
-  rocm-opencl-runtime ];
      };
-
+   services.xserver.serverFlagsSection = 
+    ''
+    Option "StandbyTime" "0" 
+    Option "BlankTime" "0"
+    Option "SuspendTime" "0"
+    Option "OffTime" "0"
+    '';
 
   # Enable sound with pipewire.
   #sound.enable = true;
   security.rtkit.enable = true;
 
-  security.polkit.enable = true;
-    systemd = {
-   user.services.polkit-gnome-authentication-agent-1 = {
-    description = "polkit-gnome-authentication-agent-1";
-    wantedBy = [ "graphical-session.target" ];
-    wants = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
-    serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-  };
-   extraConfig = ''
-     DefaultTimeoutStopSec=10s
-   '';
- };
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -124,7 +111,7 @@
   users.users.xeoncpu = {
     isNormalUser = true;
     description = "xeoncpu";
-    extraGroups = [ "networkmanager" "wheel" "input" "disk" "kvm" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "disk" "power" "samba" ];
     packages = with pkgs; [
     #  firefox
     #  thunderbird
@@ -184,14 +171,6 @@
 };
 
   };
-
-
- xdg.portal = {
-     enable = true;
-     extraPortals = with pkgs; [
-     xdg-desktop-portal-gtk
-   ];
- };
 
 
  # Enable zsh as default shell
@@ -269,7 +248,22 @@
   networking.firewall.allowedTCPPorts = [ 445 139 ];
   networking.firewall.allowedUDPPorts = [ 137 138 ];
 
+   # Automatic Updates
+  system.autoUpgrade = {
+    enable = true;
+    channel = "https://nixos.org/channels/nixos-23.11";
+  };
 
+
+   # Nix Package Management
+  nix = {
+    settings.auto-optimise-store = true;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 5d";
+    };
+  };
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
@@ -278,7 +272,9 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
 
-
-  nix.settings.auto-optimise-store = true;
-
+  nixpkgs.config.permittedInsecurePackages = [
+                "openssl-1.1.1w"
+              ];
+  #nix.settings.auto-optimise-store = true;
+  
 }

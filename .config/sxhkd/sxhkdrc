@@ -1,74 +1,33 @@
-################## Magyarch bspwm keybinds #######################################
+# MagyArch Linux i3wm keybinds #
+#########################################
 
-
-# Main and float terminal
-super + {_,shift + } Return
-    {$TERMINAL, scratch scratchpad}
+# Terminal emulator
+super + {_,shift +} Return
+     {$TERMINAL, scratch scratchpad}
 
 # Dmenu2 and rofi(window switcher, application launcher)
 super + {_,shift +} d
-    {dmenu_run, xfce4-appfinder}
-
-
-# Tui filemanager and same command with sudo
-super + {_,shift + } r
-   {$TERMINAL -e $FILE, $TERMINAL -e sudo $FILE}
-
-# Show keys with rofi/default gui editor
-super + {_,shift + } e
-    {wmctrl -a Code || code, wmctrl -a Sublime || subl}
-
-# Switch tile and monocle layout and simple flip layout
-super + {_,shift + } m
-    {bspc desktop -l next, bspc node @/ -R 90}
-
-# News, tui music player
-super + {_,shift + } n
-    {scratch News, scratch Music}
-
-# Htop,gtop system monitor
-super + {_,shift + } i
-    {$TERMINAL -e htop, switch_audio.sh}
-
-# S,R,lock script,calendar app
-super + {_,shift + } c
-    {power, eww open --toggle powermenu}
-
-# Default web browser brave and firefox
-super + {_,shift + } w
-    {wmctrl -a Brave || $BROWSER, $BROWSER2}
+    {dmenu_run, rofi_run -r}
 
 # Chat client, gui filemanager
 super + {_,shift + } p
-    {wmctrl -a Discord || discord, wmctrl -a Thunar || thunar}
+    {discord, pcmanfm}
 
-# Hide polybar/Reload bspwm
-super + {_,shift + } b
-    {polybar-msg cmd toggle, $HOME/.config/bspwm/bspwmrc ;\notify-send "A konfigurációs fájl újratöltődik."}
+# Default web browser firfox,and brave
+super + {_,shift + } w
+    {$BROWSER, rofi_run -w}
 
-# Reload sxhkd
+# open gui text editor sublime
+super + shift + e
+    subl
+
+# Show keybind in rofi,htop system monitor
+super + {_,shift + } n
+    {scratch Music, scratch News}
+
+# Reload sxhkd + i3
 super + {_,shift + } Escape
-    {pkill -USR1 -x sxhkd ;\notify-send "Sxhkd újratölt.", $HOME/.config/polybar/launch.sh ;\notify-send "Polybar újraindult."}
-
-# Fullscreen
-super + f
-  bspc node -t \~fullscreen
-
-# Close and kill
-super + {_,shift + } q
-	bspc node -{c,k}
-
-# Aliasrc show/share files
-#super + {_,shift + } a
- #  {code, share.sh}
-
-# emojimenu "get a menu of emojis to copy"
-super + grave
-    dmenuunicode
-
-# Kill screenkey
-super + Scroll_Lock
-    killall screenkey || screenkey
+    {pkill -USR1 -x sxhkd, i3-msg reload}
 
 # Record and stream
 super + {KP_Home,KP_End}
@@ -78,167 +37,105 @@ super + {KP_Home,KP_End}
 super + shift + x
     killall ffmpeg
 
-#################################################
-           # ALT + KEYS#
-################################################
-
 # On/off transparency, pavucontrol
 alt + {a,b}
-   {pavucont0rol,toggleprogram "picom -b"}
+   {pavucontrol,spotify --force-device-scale-factor=2}
 
-# Tiled space resizing
-alt + h
-    shrinkx.sh
-alt + l
-    expandx.sh
-alt + k
-    shrinky.sh
-alt + j
-    expandy.sh
 
-# Dwm based layout
-alt + space
-    bspc config external_rules_command $HOME/.config/bspwm/external_rules.sh && masterlayout.sh
+# Function keys #
+########################################
 
-# To change layouts
-alt + {f,n,s}
-  ~/.config/bspwm/config_scheme.sh {first_child,longest_side,spiral}
-
-##############################################
-        # FUNCTION KEYS#
-#############################################
-# Open help doc
+# MagyArch help doc
 super + F1
-    zathura ~/.local/share/Magyarch-bspwm.pdf
+    zathura $HOME/.local/share/Magyarch-i3.pdf
 
-# Edit conf files,select display,search the net
-super + {F2,F3,F11}
-  {edconf.sh,displayselect,ducksearch}
+# Easy edit configuration files
+super + F2
+    edconf.sh
 
-# Decrease padding 0
-super + {_,shift + }a
-    {bspc config right_padding 0;\
-    bspc config left_padding 0 ;\
-    bspc config top_padding 0 ;\
-    bspc config window_gap 0 ;\
-    bspc config bottom_padding 0,bspc config right_padding 5;\
-    bspc config left_padding 5 ;\
-    bspc config top_padding 40 ;\
-    bspc config window_gap 25 ;\
-    bspc config bottom_padding 5}
+# Select display
+super + F3
+    displayselect
 
-# Change background
+# Take screenshot
+super + F4
+    maim ~/Képek/Képernyőképek/`date +%Y-%m-%d_%H:%M:%S`.png
+
+# Pick screenshot type
+super + F5
+    maimpick
+
+# Search with Duckduckgo
+super + F6
+    ducksearch
+
+# Mpv floating
+super + F7
+    mpv --geometry=40%+30+30 --title="mpvfloat" https://www.youtube.com/watch?v=8UU-FYBWgPg&list=PLIxoUSHenBEWmlvIhmItUdHmCnsmNlO2P
+
+# Wallpaper chenger
 super + F8
     wal
-
-# Take and pick screenshot
-super + {F4,F5}
-     {maim -d 2 ~/Képek/Képernyőképek/$(date +%Y-%m-%d_%H:%M:%S).png,maimpick}
 
 # Mount and umount a USB drive or Android device
 super + {F9,F10}
     {dmenumount,dmenuumount}
 
-
-###########################################
-        # Volume Control
-###########################################
-
-# Decrease volume -5
+# Decrease/increase volume +-5
 alt + {Up,Down}
-    {pamixer --allow-boost -i 5,pamixer --allow-boost -d 5}
+    {pamixer --allow-boost -i 5 && pkill -RTMIN+10 i3blocks, pamixer --allow-boost -d 5 && pkill -RTMIN+10 i3blocks}
 
 # Mute volume
 F12
-   pamixer --toggle-mute
+   layout_manager.sh
 
+#################################################################################
+######################### i3 Bindings ##########################################
 
-# Sratchpad
-F1
-  wmctrl -a Steam || steam
-##########################################
-         # BSPWM LAYOUT KEYS
-###########################################
+# Close windows
+super + q
+    i3-msg kill
 
-
-# focus or send to the given desktop
-super + {_,shift + }{1-9,0}
-  bspc {desktop -f,node -d} '^{1-9,10}' --follow;
-
-#Focus selected desktop
-alt + Tab
-	bspc desktop -f '^{1-9,10}'
-
-# Focus/swap windows by direction
-super + {_,shift + }{h,j,k,l}
-	bspc node --{focus,swap} {west,south,north,east}
-
-# Focus history with tab
 super + Tab
-  bspc wm -h off; \
-  bspc node older.local --focus || ( \
-    bspc wm -h on; \
-    bspc node newest.local --focus; \
-  ); \
-  bspc wm -h on
+    i3-msg focus mode_toggle
 
-# Increase/decrease window gap on focused desktop
-super + alt + {Left,Right}
-	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 5 ))
+# Quit,reboot,shutdown menu/i3; reload config
+super + {_,shift + } c
+     {power, eww open --toggle powermenu}
 
-# Move a floating window
-super + {Left,Down,Up,Right}
-	bspc node -v {-20 0,0 20,0 -20,20 0}}
+# i3; restart i3 in-place (preserves layout/session)
+super + {_,shift + } r
+     {$TERMINAL -e $FILE, i3-msg restart}
 
-# Set the window state
-super + space
-	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+# Change focus between tiling and floating and toggle floating windows
+super + {_,shift + } space
+     {i3-msg layout toggle, i3-msg floating toggle}
 
-# Tabbed mode
-super + ctrl + t
-    wmctrl -x -a "tabbed" || tabbed alacritty --embed
+# Change container layout (stacked, tabbed, fullscreen toggle split)
+super + {s,t,e}
+     i3-msg layout {stacked, tabbed, toggle split}
 
-# Preselect the splitting area for next window on leaf/parent
-super + ctrl + {Left,Down,Up,Right}
-	bspc node --presel-dir \~{west,south,north,east}
+super + f
+     i3-msg fullscreen toggle
 
-# Cancel preselection
-super + ctrl + space
-	bspc node --presel-dir cancel
+# Split in horizontal/vertical orientation
+super + {h,v}
+    i3-msg split {h,v}
 
-# Make a windoww sticky/non-sticky
-super + o
-    bspc node -g locked={on,off}
+# Change focus / move focused window
+super + {_,shift +}{h,j,k,l}
+  i3-msg {focus,move} {left,down,up,right}
 
-# Hide window
-super + v
-  bspc node -g hidden
+super + {_,shift +}{Left,Down,Up,Right}
+  i3-msg {focus,move} {left,down,up,right}
 
-# Unhide window
-super + shift + v
-  bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden=off
+ # Gaps increase
+super + a
+  i3-msg gaps outer current plus 5
 
-# Swap windows
-super + shift + {Left,Down,Up,Right}
-    dir={west,south,north,east}; \
-    bspc node -s "$dir.local" --follow \
-        || bspc node -m "$dir" --follow
-
-super + ctrl + {m,s,p}
-    bspc node -g {marked,sticky,private}
-
-
-##########################################################################################
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>END>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-##########################################################################################
-
-
-
-
-
-
-
-
+# Gaps decrease
+super + shift + a
+  i3-msg gaps outer current minus 5
 
 
 
