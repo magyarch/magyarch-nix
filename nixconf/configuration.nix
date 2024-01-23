@@ -8,8 +8,11 @@
       ./hardware-configuration.nix
       ./packages.nix
       ./services.nix
-      ./i3.nix
+ #     ./i3.nix
+ #     ./dwm.nix
+      ./spectrwm.nix
  #     ./bspwm.nix
+ #     ./herbst.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -23,7 +26,7 @@
   boot = {
     initrd.kernelModules = [ "amdgpu" ];
   #  kernelModules = [ "bfq" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages;
     kernelParams = [
     #  "amd_pstate=active"
    ];
@@ -31,11 +34,11 @@
   };
 
 
-  fileSystems."/media" =
-    { device = "/dev/disk/by-uuid/3569f60e-49fd-4d8b-913e-a2ab9b491934";
-      fsType = "auto";
-      options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
-    };
+ # fileSystems."/media" =
+ #   { device = "/dev/disk/by-uuid/3569f60e-49fd-4d8b-913e-a2ab9b491934";
+ #     fsType = "auto";
+ #     options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
+ #   };
 
 
   fileSystems."/mnt" =
@@ -222,6 +225,12 @@
 
        };
 
+  };
+
+  xdg.portal = {
+    enable = true;
+    config.common.default = "*";
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
 
   fonts.packages = with pkgs; [

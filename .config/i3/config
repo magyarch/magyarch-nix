@@ -19,7 +19,7 @@ for_window [class="^.*"] border pixel 3
 floating_modifier $mod
 
 # Only initiate a tiling drag when the modifier is held:
-tiling_drag modifier titlebar
+#tiling_drag modifier titlebar
 
 
 # Font for window titles. Will also be used by the bar unless a different font ##############
@@ -214,7 +214,7 @@ for_window [class="steam|Steam"] move to workspace $ws5 focus
 #for_window [class="transmission-gtk|Transmission-gtk"] move to workspace $ws5 focus
 for_window [class="mpv|Mpv"] move to workspace $ws6 focus
 for_window [class="virtualbox|VirtualBox"] move to workspace $ws9 focus
-for_window [class="thunar|pcmanfm"] move to workspace $ws8 focus
+for_window [class="thunar|Thunar|pcmanfm"] move to workspace $ws8 focus
 for_window [class="spotify|Spotify"] move to workspace $ws9 focus
 
 # Colors ############################################################################

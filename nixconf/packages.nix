@@ -63,7 +63,8 @@
      pulsemixer 
      qbittorrent 
      rofi 
-    # spice 
+     scrot
+     slstatus
      sublime3 
      sxhkd 
      sxiv 
@@ -87,20 +88,26 @@
      xwallpaper 
      yt-dlp 
      (picom.overrideAttrs (oldAttrs: rec {
-        pname = "picom-allusive";
-        version = "1.4.3";
+        pname = "compfy";
+        version = "1.7.2";
+        buildInputs = [
+          pcre2
+        ]
+        ++
+          oldAttrs.buildInputs;
         src = pkgs.fetchFromGitHub {
           owner = "allusive-dev";
-          repo = "picom-allusive";
+          repo = "compfy";
           rev = version;
-          hash = "sha256-nnm5xk1e8hot01zZwFmzUa/FeNCQdjlcO3xmRE56ydk=";
+          hash = "sha256-7hvzwLEG5OpJzsrYa2AaIW8X0CPyOnTLxz+rgWteNYY=";
         };
+        postInstall = '''';
       }))
     
 #    (slstatus.overrideAttrs (_: { src = /home/xeoncpu/.config/suckless/slstatus; }
 
-    ];
-
+    
+  ];
         pathsToLink = [ "/libexec" ];
 
 	variables = {

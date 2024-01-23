@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 installed_dir=$(dirname $(readlink -f $(basename `pwd`)))
 

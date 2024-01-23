@@ -10,13 +10,13 @@
 #	screenSection = ''Option "TearFree" "true"'';
        # windowManager.bspwm.configFile = "/home/xeoncpu/.config/bspwm/bspwmrc";
       # windowManager.bspwm.sxhkd.configFile = "/home/xeoncpu/.config/sxhkd/sxhkdrc";
-	desktopManager = {
-	            xfce = {
-    enable = true;
-    noDesktop = true;
-    enableXfwm = false;
-  };
-};  
+# 	desktopManager = {
+# 	            xfce = {
+#     enable = true;
+#     noDesktop = true;
+#     enableXfwm = false;
+#   };
+# };  
 #	windowManager.herbstluftwm.package = pkgs.herbstluftwm.overrideAttrs ( o: {
 #    disabledTests = o.disabledTests ++ ["test_complete_keybind_offers_additional_mods_without_duplication"];
 #  });

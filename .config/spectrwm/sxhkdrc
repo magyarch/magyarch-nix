@@ -1,0 +1,113 @@
+# MagyArch Linux spectrwm keybinds #
+#########################################
+
+# Floating terminal emulator
+super + {_,shift + } Return
+    {$TERMINAL, scratch scratchpad}
+
+# Dmenu and rofi(window switcher, application launcher)
+super + {_,shift +} d
+    {dmenu_run, rofi -show window}
+
+# Chat client, gui filemanager
+super + {_,shift + } p
+    {wmctrl -s 1 && discord,xdotool set_desktop 7 && thunar}
+
+# Default web browser brave,tui browser
+super + {_,shift + } w
+    {wmctrl -s 0 && $BROWSER, rofi_run -b}
+
+# open gui text editor sublime
+super + {_,shift + } e
+    {scratch launchkeys, wmctrl -s 2 && subl}
+
+# Record and stream
+super + {KP_Home,KP_End}
+    {screenrecord, live.sh}
+
+# Kill recording and stream
+super + shift + x
+    killall ffmpeg
+
+# On/off transparency, pavucontrol
+alt + {_,shift + }b
+   {polybar-msg cmd toggle && bar_toggle, toggleprogram "picom -b"}
+
+# Reload sxhkd
+super + Escape
+    pkill -USR1 -x sxhkd ;\notify-send "Sxhkd újratölt."
+
+# Quit,reboot,shutdown
+super + r
+     $TERMINAL -e vifm
+
+# MPD and ncmpcpp
+super + shift + {n,u}
+     {scratch Music, skeys.sh}
+
+#button2
+ #    polybar-msg cmd toggle
+
+# Alt + keys #
+########################################
+
+# Increase volume +5
+alt + Up
+    pamixer --allow-boost -i 5
+
+# Decrease volume -5
+alt + Down
+    pamixer --allow-boost -d 5
+
+# windows switcher
+alt + w
+    rofi_run -w
+
+# Function keys #
+########################################
+
+# MagyArch help doc
+super + F1
+    zathura $HOME/.local/share/Magyarch-spectrwm.pdf
+
+# Easy edit configuration files
+super + F2
+    edconf.sh
+
+# Display select
+super + F3
+    displayselect
+
+# Take screenshot
+super + F4
+    {maim ~/Képek/Képernyőképek/`date +%Y-%m-%d_%H:%M:%S`.png ;\notify-send "Képernyőkép készült."}
+
+# Pick screenshot type
+super + F5
+    maimpick
+
+# Search with Duckduckgo
+super + F6
+    ducksearch
+
+# Mpv floating
+super + F7
+    mpv --geometry=40%+30+30 --title="mpvfloat" https://www.youtube.com/watch?v=8UU-FYBWgPg&list=PLIxoUSHenBEWmlvIhmItUdHmCnsmNlO2P
+
+# Wallpaper chenger
+super + F8
+    wal
+
+# Mount and umount a USB drive or Android device
+super + {F9,F10}
+    {dmenumount,dmenuumount}
+
+
+# Mute volume
+F12
+   amixer set Master toggle
+
+
+
+
+

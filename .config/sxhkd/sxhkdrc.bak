@@ -11,7 +11,7 @@ super + {_,shift +} d
 
 # Chat client, gui filemanager
 super + {_,shift + } p
-    {discord, wmctrl -a Thunar || thunar}
+    {discord, Thunar}
 
 # Default web browser firfox,and brave
 super + {_,shift + } w
@@ -19,7 +19,7 @@ super + {_,shift + } w
 
 # open gui text editor sublime
 super + shift + e
-    wmctrl -a Sublime || subl
+    wmctrl -a Sublime || sublime3
 
 # Show keybind in rofi,htop system monitor
 super + {_,shift + } n
@@ -27,7 +27,7 @@ super + {_,shift + } n
 
 # Reload sxhkd + i3
 super + {_,shift + } Escape
-    {pkill -USR1 -x sxhkd, i3-msg restart}
+    {pkill -USR1 -x sxhkd, i3-msg reload}
 
 # Record and stream
 super + {KP_Home,KP_End}
@@ -47,7 +47,7 @@ alt + {a,b}
 
 # MagyArch help doc
 super + F1
-    wmctrl -a Steam || steam
+    Steam
 
 # Easy edit configuration files
 super + F2

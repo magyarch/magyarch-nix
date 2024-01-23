@@ -41,3 +41,4 @@ picom --config ~/.config/picom.conf  &
 #redshift -l 47.162495:19.503304 -t 6000:3600 -g 0.8 -m randr -v &
 #xrandr --output HDMI-0 --scale 2x2 --mode 1920x1080 --rotate left --output DP-0 --primary --mode 3840x2160 --pos 1080x0 --left-of HDMI-0 &
 #slstatus &
+/nix/store/$(ls -la /nix/store | grep 'mate-polkit' | grep '4096' | awk '{print $9}' | sed -n '$p')/libexec/polkit-mate-authentication-agent-1 &
