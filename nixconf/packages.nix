@@ -25,12 +25,10 @@
      eww 
 #     faac
      feh 
-     floorp
+     gnome.file-roller
      ffmpeg_6-full 
      fzf 
      git
-     qsudo
-     heroic
      htop 
      jamesdsp
      killall 
@@ -43,7 +41,6 @@
      mate.mate-polkit
      microsoft-edge 
      mpd 
-     mprime
      ncmpcpp 
      maim 
      mpv 
@@ -56,7 +53,8 @@
     # picom-allusive
      p7zip 
      pamixer 
-     pavucontrol 
+     pavucontrol
+     picom 
      polybar 
      protonup-qt 
      pulseaudio 
@@ -87,22 +85,22 @@
      xorg.xdpyinfo 
      xwallpaper 
      yt-dlp 
-     (picom.overrideAttrs (oldAttrs: rec {
-        pname = "compfy";
-        version = "1.7.2";
-        buildInputs = [
-          pcre2
-        ]
-        ++
-          oldAttrs.buildInputs;
-        src = pkgs.fetchFromGitHub {
-          owner = "allusive-dev";
-          repo = "compfy";
-          rev = version;
-          hash = "sha256-7hvzwLEG5OpJzsrYa2AaIW8X0CPyOnTLxz+rgWteNYY=";
-        };
-        postInstall = '''';
-      }))
+     # (picom.overrideAttrs (oldAttrs: rec {
+     #    pname = "compfy";
+     #    version = "1.7.2";
+     #    buildInputs = [
+     #      pcre2
+     #    ]
+     #    ++
+     #      oldAttrs.buildInputs;
+     #    src = pkgs.fetchFromGitHub {
+     #      owner = "allusive-dev";
+     #      repo = "compfy";
+     #      rev = version;
+     #      hash = "sha256-7hvzwLEG5OpJzsrYa2AaIW8X0CPyOnTLxz+rgWteNYY=";
+     #    };
+     #    postInstall = '''';
+     #  }))
     
 #    (slstatus.overrideAttrs (_: { src = /home/xeoncpu/.config/suckless/slstatus; }
 

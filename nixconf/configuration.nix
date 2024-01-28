@@ -8,11 +8,13 @@
       ./hardware-configuration.nix
       ./packages.nix
       ./services.nix
- #     ./i3.nix
+ #     ./awesomewm.nix
+     ./i3.nix
  #     ./dwm.nix
-      ./spectrwm.nix
+ #     ./spectrwm.nix
  #     ./bspwm.nix
  #     ./herbst.nix
+      ./wm.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -26,7 +28,7 @@
   boot = {
     initrd.kernelModules = [ "amdgpu" ];
   #  kernelModules = [ "bfq" ];
-    kernelPackages = pkgs.linuxPackages;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
     #  "amd_pstate=active"
    ];

@@ -38,10 +38,6 @@
 	   avahi.openFirewall = true;
 #	   blueman.enable = true;
            dbus.enable = true;
-	   # picom = {
-	   # enable = true;
-	   # vSync = true;
-	   # };
 	   fstrim = {
 	   enable = true;
 	   interval = "weekly";

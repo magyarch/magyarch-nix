@@ -17,7 +17,8 @@ cp -rf .config ~
 cp -rf .local ~
 cp -rf .themes ~
 cp -rf .icons ~
-cp .zshrc ~
+cp -rf .fonts ~
+cp .zshenv ~
 cp .profile ~
 cp .xprofile ~
 cp .Xresources ~
