@@ -9,19 +9,22 @@
      alacritty
      appimage-run
      acpi 
-     atool 
+     atool
+     amdvlk 
      bat 
      bc 
      binutils 
   #   brave 
      curl 
    #  cpu-x
-     dunst 
-     discord 
+     dunst
+     dxvk 
+#     discord 
      dmenu 
      eza 
      exfat 
      exfatprogs 
+     xfce.exo
      eww 
 #     faac
      feh 
@@ -85,6 +88,10 @@
      xorg.xdpyinfo 
      xwallpaper 
      yt-dlp 
+     (discord.override {
+       withOpenASAR = true;
+       withVencord = true;
+     })
      # (picom.overrideAttrs (oldAttrs: rec {
      #    pname = "compfy";
      #    version = "1.7.2";

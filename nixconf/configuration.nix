@@ -17,22 +17,38 @@
       ./wm.nix
     ];
 
-  # Use the systemd-boot EFI boot loader.
-    boot.loader = {
+ 
+  boot = {
+     bootspec.enable = true;
+#     initrd.kernelModules = [ "amdgpu" ];
+  #  kernelModules = [ "bfq" ];
+    loader = {
         systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;
 	timeout = 1;
     };
-
-
-  boot = {
-    initrd.kernelModules = [ "amdgpu" ];
-  #  kernelModules = [ "bfq" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_xanmod;
     kernelParams = [
     #  "amd_pstate=active"
+      "quiet"
+      "splash"
+      "vga=current"
+      "rd.systemd.show_status=false"
+      "rd.udev.log_level=3"
+      "udev.log_priority=3"
    ];
+    consoleLogLevel = 0;
+    initrd.verbose =false;
     tmp.cleanOnBoot = true;
+    kernelModules = ["tcp_bbr"];
+    kernel.sysctl = {
+      "net.ipv4.tcp_congestion_control" = "bbr";
+      "net.core.default_qdisc" = "fq";
+      "net.core.wmem_max" = 1073741824;
+      "net.core.rmem_max" = 1073741824;
+      "net.ipv4.tcp_rmem" = "4096 87380 1073741824";
+      "net.ipv4.tcp_wmem" = "4096 87380 1073741824";
+    };
   };
 
 
@@ -88,7 +104,7 @@
   #  oraclejdk.accept_license = true;
     joypixels.acceptLicense = true;
   };
-
+   
 
    # Videodriver configuration
   services.xserver.videoDrivers = [ "amdgpu" ];
@@ -126,6 +142,7 @@
 
   programs = {
 	   dconf.enable = true;
+           gamemode.enable = true;
            steam = {
 	   enable = true;
            remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
