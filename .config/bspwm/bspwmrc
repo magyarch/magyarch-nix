@@ -11,8 +11,8 @@ cleanfullscreen &
 #source "$HOME/.cache/wal/colors.sh"
 # xrandr --dpi 144
 
-# pkill sxhkd
-# pgrep -x sxhkd > /dev/null || sxhkd -c $HOME/.config/bspwm/sxhkdrc &
+ pkill sxhkd
+ pgrep -x sxhkd > /dev/null || sxhkd -c $HOME/.config/bspwm/sxhkdrc &
 
 
 # mpd >/dev/null 2>&1 &     # Music player daemon
@@ -58,7 +58,7 @@ cleanfullscreen &
 #	--output HDMI-0 --auto --scale 2x2 --rotate left &
 
 #pkill polybar
-#(sleep 2s && $HOME/.config/polybar/launch.sh) &
+(sleep 2s && $HOME/.config/polybar/launch.sh) &
 # ----------------------------------------------------------------------------------------------
 
 

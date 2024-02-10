@@ -3,11 +3,11 @@
 
 # Main and float terminal
 super + {_,shift + } Return
-    {$TERMINAL, scpad}
+    {$TERMINAL, scratch scratchpad}
 
 # Dmenu2 and rofi(window switcher, application launcher)
 super + {_,shift +} d
-    {dmenu_run -i -c -g 2 -l 20 -p 'Search' -nb '#1a1a1a' -sb '#9872bf' -fn 'JetBrains Mono Nerd Font:size=14', rofi_run -r}
+    {dmenu_run, xfce4-appfinder}
 
 
 # Tui filemanager and same command with sudo
@@ -16,7 +16,7 @@ super + {_,shift + } r
 
 # Show keys with rofi/default gui editor
 super + {_,shift + } e
-    {show_keys.sh, subl}
+    {wmctrl -a Code || code, wmctrl -a Sublime || subl}
 
 # Switch tile and monocle layout and simple flip layout
 super + {_,shift + } m
@@ -24,23 +24,23 @@ super + {_,shift + } m
 
 # News, tui music player
 super + {_,shift + } n
-    {bspwmfloat && $TERMINAL -e newsboat, scpad_ncmpcpp }
+    {scratch News, scratch Music}
 
 # Htop,gtop system monitor
 super + {_,shift + } i
-    {$TERMINAL -e htop, picsound}
+    {$TERMINAL -e htop, switch_audio.sh}
 
 # S,R,lock script,calendar app
 super + {_,shift + } c
-    {power, scpad}
+    {power, eww open --toggle powermenu}
 
 # Default web browser brave and firefox
 super + {_,shift + } w
-    {$BROWSER, rofi_run -b}
+    {wmctrl -a Brave || $BROWSER, $BROWSER2}
 
 # Chat client, gui filemanager
 super + {_,shift + } p
-    {discord, pcmanfm}
+    {wmctrl -a Discord || discord, wmctrl -a Thunar || thunar}
 
 # Hide polybar/Reload bspwm
 super + {_,shift + } b
@@ -59,8 +59,8 @@ super + {_,shift + } q
 	bspc node -{c,k}
 
 # Aliasrc show/share files
-super + {_,shift + } a
-   {alias.sh, share.sh}
+#super + {_,shift + } a
+ #  {code, share.sh}
 
 # emojimenu "get a menu of emojis to copy"
 super + grave
@@ -116,14 +116,16 @@ super + {F2,F3,F11}
   {edconf.sh,displayselect,ducksearch}
 
 # Decrease padding 0
-super + {F6,F7}
+super + {_,shift + }a
     {bspc config right_padding 0;\
     bspc config left_padding 0 ;\
-    bspc config top_padding 22 ;\
-    bspc config bottom_padding 1,bspc config right_padding 40;\
-    bspc config left_padding 40 ;\
+    bspc config top_padding 0 ;\
+    bspc config window_gap 0 ;\
+    bspc config bottom_padding 0,bspc config right_padding 5;\
+    bspc config left_padding 5 ;\
     bspc config top_padding 40 ;\
-    bspc config bottom_padding 40}
+    bspc config window_gap 25 ;\
+    bspc config bottom_padding 5}
 
 # Change background
 super + F8
@@ -153,8 +155,7 @@ F12
 
 # Sratchpad
 F1
-  tdrop -ma -w 50% -h 50% -y 25% -x 25%  alacritty --class=tdrop -t tdrop
-
+  wmctrl -a Steam || steam
 ##########################################
          # BSPWM LAYOUT KEYS
 ###########################################
@@ -162,7 +163,7 @@ F1
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
-  bspc {desktop -f,node -d} '^{1-9,10}' --follow; desktop=$(bspc query -D --names -d); notify-send $desktop --urgency=low -t 350;
+  bspc {desktop -f,node -d} '^{1-9,10}' --follow;
 
 #Focus selected desktop
 alt + Tab
@@ -193,12 +194,12 @@ super + {Left,Down,Up,Right}
 super + space
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
-# Focus parent/brother/first/second for preselection
+# Tabbed mode
 super + ctrl + t
     wmctrl -x -a "tabbed" || tabbed alacritty --embed
 
 # Preselect the splitting area for next window on leaf/parent
-super + ctrl + {u,i,o,p}
+super + ctrl + {Left,Down,Up,Right}
 	bspc node --presel-dir \~{west,south,north,east}
 
 # Cancel preselection
@@ -217,10 +218,15 @@ super + v
 super + shift + v
   bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden=off
 
+# Swap windows
 super + shift + {Left,Down,Up,Right}
     dir={west,south,north,east}; \
     bspc node -s "$dir.local" --follow \
         || bspc node -m "$dir" --follow
+
+super + ctrl + {m,s,p}
+    bspc node -g {marked,sticky,private}
+
 
 ##########################################################################################
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>END>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

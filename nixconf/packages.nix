@@ -21,6 +21,7 @@
      dxvk 
 #     discord 
      dmenu 
+     dzen2
      eza 
      exfat 
      exfatprogs 
@@ -52,7 +53,8 @@
      ntfs3g 
      ueberzug 
      unrar 
-     unzip 
+     unzip
+     openrgb-with-all-plugins 
     # picom-allusive
      p7zip 
      pamixer 
@@ -85,8 +87,10 @@
      xdg-utils 
      xdo 
      xdotool 
-     xorg.xdpyinfo 
-     xwallpaper 
+     xorg.xdpyinfo
+     xorg.xsetroot
+#     xorg.xinit 
+#     xwallpaper 
      yt-dlp 
      (discord.override {
        withOpenASAR = true;

@@ -9,10 +9,10 @@
       ./packages.nix
       ./services.nix
  #     ./awesomewm.nix
-     ./i3.nix
+#     ./i3.nix
  #     ./dwm.nix
  #     ./spectrwm.nix
- #     ./bspwm.nix
+      ./bspwm.nix
  #     ./herbst.nix
       ./wm.nix
     ];
@@ -105,7 +105,7 @@
     joypixels.acceptLicense = true;
   };
    
-
+  services.hardware.openrgb.enable = true;
    # Videodriver configuration
   services.xserver.videoDrivers = [ "amdgpu" ];
   hardware.opengl = {
