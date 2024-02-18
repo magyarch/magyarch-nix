@@ -1,3 +1,4 @@
+
  # My config
 { config, pkgs, ... }:
 
@@ -13,7 +14,7 @@
  #     ./dwm.nix
  #     ./spectrwm.nix
       ./bspwm.nix
- #     ./herbst.nix
+#      ./herbst.nix
       ./wm.nix
     ];
 
@@ -52,16 +53,16 @@
   };
 
 
- # fileSystems."/media" =
- #   { device = "/dev/disk/by-uuid/3569f60e-49fd-4d8b-913e-a2ab9b491934";
- #     fsType = "auto";
- #     options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
- #   };
+   fileSystems."/media" =
+    { device = "/dev/disk/by-uuid/a9b02f37-e434-4c16-a280-8ebfff37ae1c";
+      fsType = "ext4";
+      options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
+    };
 
 
   fileSystems."/mnt" =
     { device = "/dev/disk/by-uuid/c60239a9-e693-4773-8c6c-5c15441a479d";
-      fsType = "auto";
+      fsType = "ext4";
       options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
     };
 
@@ -289,7 +290,7 @@
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 5d";
+      options = "--delete-older-than 2d";
     };
   };
   # This value determines the NixOS release from which the default

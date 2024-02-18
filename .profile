@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Profile file. Runs on login.
 
 # Adds `~/.local/bin` and all subdirectories to $PATH
@@ -9,8 +9,9 @@ export BROWSER="microsoft-edge"
 export READER="zathura"
 export FILE="vifmrun"
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
-#export DISPLAY=":0"
+export DISPLAY=":0"
 export AMD_VULKAN_ICD="RADV"
+#export QT_AUTO_SCREEN_SCALE_FACTOR="1"
 
 # less/man colors
 export LESS=-R

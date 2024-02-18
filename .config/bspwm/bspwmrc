@@ -147,7 +147,7 @@ bspc rule -a Alacritty:Alacritty:News state=floating rectangle=1480x800+540+300
 bspc rule -a Alacritty:Alacritty:Music state=floating rectangle=1480x800+540+300
 bspc rule -a com.github.neithern.g4music state=floating rectangle=1480x800+540+300 border=off
 bspc rule -a Alacritty:Alacritty:scratchpad state=floating rectangle=1480x800+540+300
-bspc rule -a upc.exe desktop='^6' state=center_pseudo_tiled private=on follow=on
+bspc rule -a upc.exe desktop='^6' state=pseudo_tiled private=on follow=on
 bspc rule -a Sxiv state=floating rectangle=1480x800+540+300
 bspc rule -a mpv state=floating rectangle=800x400+1730+50
 bspc rule -a epicgameslauncher.exe desktop='^6' state=pseudo_tiled follow=on

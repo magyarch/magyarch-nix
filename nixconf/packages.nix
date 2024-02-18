@@ -40,7 +40,6 @@
      lm_sensors 
      lutris 
      lxappearance 
-    # lxqt.lxqt-policykit
      mangohud
      mate.mate-polkit
      microsoft-edge 
@@ -55,6 +54,7 @@
      unrar 
      unzip
      openrgb-with-all-plugins 
+     ocenaudio
     # picom-allusive
      p7zip 
      pamixer 
@@ -90,7 +90,7 @@
      xorg.xdpyinfo
      xorg.xsetroot
 #     xorg.xinit 
-#     xwallpaper 
+     xwallpaper 
      yt-dlp 
      (discord.override {
        withOpenASAR = true;
@@ -120,11 +120,11 @@
         pathsToLink = [ "/libexec" ];
 
 	variables = {
-                GDK_SCALE = "2";
-                GDK_DPI_SCALE = "0.5";
+#                GDK_SCALE = "2";
+    #            GDK_DPI_SCALE = "0.5";
 	 	        XCURSOR_SIZE = "24";
     #              DISPLAY=":  0";
-		QT_SCALE_FACTOR = "1.7";
+#		QT_SCALE_FACTOR = "1.6";
                #_JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
              };
           };
