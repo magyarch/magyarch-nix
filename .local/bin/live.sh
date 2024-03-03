@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 
 ffmpeg -f alsa -i default -f x11grab -framerate 30 -video_size 1920x1080 \

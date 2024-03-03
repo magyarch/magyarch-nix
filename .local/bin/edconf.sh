@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 
 
@@ -7,8 +7,8 @@
 
 declare options=("alias
 bash
-hlwm
-config
+bspwm
+nixconfig
 profile
 sxhkd
 vifm
@@ -16,7 +16,7 @@ xresources
 xprofile
 quit")
 
-choice=$(echo -e "${options[@]}" | dmenu -i -nb '#282a36' -nf '#c3cdc8' -sb '#6272a4' -fn 'JetBrains Mono Nerd Font-12' -p 'Edit files: ')
+choice=$(echo -e "${options[@]}" | dmenu -i -fn 'JetBrains Mono Nerd Font-12' -p 'Edit files: ')
 
 case "$choice" in
 	quit)
@@ -28,8 +28,8 @@ case "$choice" in
 	bash)
 		choice="$HOME/.bashrc"
 	;;
-	hlwm)
-		choice="$HOME/.config/herbstluftwm/autostart"
+	bspwm)
+		choice="$HOME/.config/bspwm/bspwmrc"
 	;;
 	profile)
 		choice="$HOME/.profile"
@@ -40,7 +40,7 @@ case "$choice" in
 	vifm)
 		choice="$HOME/.config/vifm/vifmrc"
 	;;
-	config)
+	nixconfig)
 		choice="/etc/nixos/configuration.nix"
 	;;
 	xresources)
@@ -53,4 +53,4 @@ case "$choice" in
 		exit 1
 	;;
 esac
-sublime  "$choice"
+subl  "$choice"

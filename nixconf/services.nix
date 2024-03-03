@@ -4,8 +4,8 @@
     # List services that you want to enable:
     services.xserver = {
         enable = true;
-	layout = "hu";
-	xkbVariant = "";
+	xkb.layout = "hu";
+	xkb.variant = "";
 	dpi = 144;
 #	screenSection = ''Option "TearFree" "true"'';
        # windowManager.bspwm.configFile = "/home/xeoncpu/.config/bspwm/bspwmrc";
@@ -34,7 +34,7 @@
            printing.enable = true;
            printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
 	   avahi.enable = true;
-	   avahi.nssmdns = true;
+	   avahi.nssmdns4 = true;
 	   avahi.openFirewall = true;
 #	   blueman.enable = true;
            dbus.enable = true;

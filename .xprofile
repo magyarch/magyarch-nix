@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # This file runs when a DM logs you into a graphical session.
 

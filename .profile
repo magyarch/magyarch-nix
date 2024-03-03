@@ -5,13 +5,13 @@
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 export EDITOR="nvim"
 export TERMINAL="alacritty"
-export BROWSER="microsoft-edge"
+export BROWSER="firefox"
 export READER="zathura"
 export FILE="vifmrun"
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
 export DISPLAY=":0"
 export AMD_VULKAN_ICD="RADV"
-#export QT_AUTO_SCREEN_SCALE_FACTOR="1"
+export VDPAU_DRIVER="radeonsi"
 
 # less/man colors
 export LESS=-R

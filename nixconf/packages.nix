@@ -10,7 +10,7 @@
      appimage-run
      acpi 
      atool
-     amdvlk 
+#     amdvlk 
      bat 
      bc 
      binutils 
@@ -18,7 +18,7 @@
      curl 
    #  cpu-x
      dunst
-     dxvk 
+#     dxvk 
 #     discord 
      dmenu 
      dzen2
@@ -28,7 +28,9 @@
      xfce.exo
      eww 
 #     faac
-     feh 
+     feh
+     firefox
+     graphviz
      gnome.file-roller
      ffmpeg_6-full 
      fzf 
@@ -42,18 +44,22 @@
      lxappearance 
      mangohud
      mate.mate-polkit
+     mesa
      microsoft-edge 
      mpd 
      ncmpcpp 
      maim 
      mpv 
+     mprime
      neofetch 
      neovim 
+     nix-du
      ntfs3g 
      ueberzug 
      unrar 
      unzip
-     openrgb-with-all-plugins 
+     openrgb-with-all-plugins
+     opera
      ocenaudio
     # picom-allusive
      p7zip 
@@ -68,11 +74,12 @@
      rofi 
      scrot
      slstatus
-     sublime3 
+     sublime3
      sxhkd 
      sxiv 
      system-config-printer 
      stremio
+     ventoy-full
     # virt-manager 
      #vscode-with-extensions
      #vscode-extensions.bbenoist.nix
@@ -96,6 +103,8 @@
        withOpenASAR = true;
        withVencord = true;
      })
+
+     
      # (picom.overrideAttrs (oldAttrs: rec {
      #    pname = "compfy";
      #    version = "1.7.2";
@@ -120,13 +129,14 @@
         pathsToLink = [ "/libexec" ];
 
 	variables = {
-#                GDK_SCALE = "2";
-    #            GDK_DPI_SCALE = "0.5";
+                GDK_SCALE = "2";
+                GDK_DPI_SCALE = "0.5";
 	 	        XCURSOR_SIZE = "24";
-    #              DISPLAY=":  0";
-#		QT_SCALE_FACTOR = "1.6";
+    #           DISPLAY=":  0";
+		        QT_SCALE_FACTOR = "1.6";
+                QT_AUTO_SCREEN_SCALE_FACTOR = "auto";
                #_JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
              };
-          };
+          }; 
 
 }

@@ -10,25 +10,27 @@
       ./packages.nix
       ./services.nix
  #     ./awesomewm.nix
+       ./appimage.nix   
 #     ./i3.nix
  #     ./dwm.nix
  #     ./spectrwm.nix
       ./bspwm.nix
 #      ./herbst.nix
       ./wm.nix
+ #     ./cozy.nix
     ];
 
  
   boot = {
      bootspec.enable = true;
-#     initrd.kernelModules = [ "amdgpu" ];
+     initrd.kernelModules = [ "amdgpu" ];
   #  kernelModules = [ "bfq" ];
     loader = {
         systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;
 	timeout = 1;
     };
-    kernelPackages = pkgs.linuxPackages_xanmod;
+    kernelPackages = pkgs.linuxPackages;
     kernelParams = [
     #  "amd_pstate=active"
       "quiet"
@@ -108,12 +110,18 @@
    
   services.hardware.openrgb.enable = true;
    # Videodriver configuration
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver.videoDrivers = [ "modesetting" ];
   hardware.opengl = {
            enable = true;
      driSupport = true;
      driSupport32Bit = true;
-     };
+     extraPackages = with pkgs; [
+   #   intel-media-driver # LIBVA_DRIVER_NAME=iHD
+   #   intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+ };
    services.xserver.serverFlagsSection = 
     ''
     Option "StandbyTime" "0" 
@@ -133,7 +141,7 @@
   users.users.xeoncpu = {
     isNormalUser = true;
     description = "xeoncpu";
-    extraGroups = [ "networkmanager" "wheel" "input" "disk" "power" "samba" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "disk" "power" "samba" "video" ];
     packages = with pkgs; [
     #  firefox
     #  thunderbird

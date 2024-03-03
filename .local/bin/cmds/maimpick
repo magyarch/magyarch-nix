@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 case "$(printf "a selected area\\ncurrent window\\nfull screen\\na selected area (copy)\\ncurrent window (copy)\\nfull screen (copy)" | dmenu -i -nb '#282a36' -nf '#c3cdc8' -sb '#6272a4' -fn 'JetBrains Mono Nerd Font-12' -p "Screenshot which area?")" in
 	"a selected area") maim -s pic-selected-"$(date '+%y%m%d-%H%M-%S').png" ;;
 	"current window") maim -i "$(xdotool getactivewindow)" pic-window-"$(date '+%y%m%d-%H%M-%S').png" ;;

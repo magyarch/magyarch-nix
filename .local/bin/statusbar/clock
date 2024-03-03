@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 date '+%Y %b %d (%a) %H:%M%p'
 
