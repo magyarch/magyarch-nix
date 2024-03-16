@@ -16,8 +16,8 @@
  #     ./spectrwm.nix
       ./bspwm.nix
 #      ./herbst.nix
-      ./wm.nix
- #     ./cozy.nix
+#      ./wm.nix
+      ./plex.nix
     ];
 
  
@@ -32,7 +32,7 @@
     };
     kernelPackages = pkgs.linuxPackages;
     kernelParams = [
-    #  "amd_pstate=active"
+#      "amd_pstate=active"
       "quiet"
       "splash"
       "vga=current"
@@ -110,7 +110,7 @@
    
   services.hardware.openrgb.enable = true;
    # Videodriver configuration
-  services.xserver.videoDrivers = [ "modesetting" ];
+  services.xserver.videoDrivers = [ "amdgpu" ];
   hardware.opengl = {
            enable = true;
      driSupport = true;
@@ -141,7 +141,7 @@
   users.users.xeoncpu = {
     isNormalUser = true;
     description = "xeoncpu";
-    extraGroups = [ "networkmanager" "wheel" "input" "disk" "power" "samba" "video" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "disk" "power" "samba" "video" "plex" ];
     packages = with pkgs; [
     #  firefox
     #  thunderbird
@@ -276,7 +276,7 @@
     (final: prev: {
 #      dwm = prev.dwm.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dwm ;});
       dmenu = prev.dmenu.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dmenu ;});
-#      st = prev.st.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/st ;});
+      st = prev.st.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/st ;});
     })
   ];
 
@@ -288,7 +288,7 @@
    # Automatic Updates
   system.autoUpgrade = {
     enable = true;
-    channel = "https://nixos.org/channels/nixos-23.11";
+    channel = "https://nixos.org/channels/nixos-24.05";
   };
 
 

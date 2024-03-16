@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "JetBrains Mono Nerd Font:size=11:antialias=true:autohint=true";
+static char *font = "JetBrains Mono Nerd Font:size=9:antialias=true:autohint=true";
 /* Spare fonts */
 static char *font2[] = { "JoyPixels:size=9:antialias=true:autohint=true" };
 
@@ -104,7 +104,7 @@ static const char *colorname[] = {
 	"#b02626", /* red     */
 	"#40a62f", /* green   */
 	"#f2e635", /* yellow  */
-	"#314ad0", /* blue    */
+	"#6272a4", /* blue    */
 	"#b30ad0", /* magenta */
 	"#32d0fc", /* cyan    */
 	"#acadb1", /* white   */
@@ -115,7 +115,7 @@ static const char *colorname[] = {
 	"#78a670", /* green   */
 	"#faf380", /* yellow  */
 	"#707fd0", /* blue    */
-	"#c583d0", /* magenta */
+	"#b30ad0", /* magenta */
 	"#8adaf1", /* cyan    */
 	"#e0e3e7", /* white   */
 

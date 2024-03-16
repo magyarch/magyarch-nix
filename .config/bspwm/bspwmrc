@@ -7,58 +7,9 @@ bspc rule -r "*"
 # LAUNCHERS
 killall cleanfullscreen
 cleanfullscreen &
-#wal -i "$HOME/.local/bin/wallpapers/Future"
-#source "$HOME/.cache/wal/colors.sh"
-# xrandr --dpi 144
-
  pkill sxhkd
  pgrep -x sxhkd > /dev/null || sxhkd -c $HOME/.config/bspwm/sxhkdrc &
 
-
-# mpd >/dev/null 2>&1 &     # Music player daemon
-
-# xsetroot -cursor_name left_ptr &   # Change cursor from default x shape
-
-# xset r rate 300 50 &	# Speed xrate up
-
-# #xrdb .Xresources &
-
-# #picom --experimental-backends --shadow-exclude-reg '1920+0-0' --opacity-rule "85:class_g ='urxvt'" --opacity-rule "80:class_g = 'rofi'" --opacity-rule "90:class_g = 'Alacritty'" --inactive-opacity 1.00 --blur-background-exclude "class_g = 'slop'" -CGfF -o 0.70 -O 0.028 -I 0.028 -t 0 -l 0 -r 3 -D2 -m 1.00 &
-
-# pkill setbg
-# setbg &
-
-# #pkill picom
-# #picom -b --config ~/.config/picom.conf --experimental-backends &
-
-# pkill dunst
-# dunst &                                # notification daemon
-
-# #pkill unclutter
-# #unclutter &       # hide mouse pointer when idle
-
-# pkill nm-applet
-# nm-applet &        # networkmanager applet/wifi,ethernet settings
-
-#pkill /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-#/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-
-#zathura ~/.local/share/Magyarch-i3.pdf &
-#pkill notify-send
-#sleep 8s && notify-send 'Nyomja meg a Super+F1-et a használati utasításért.' -t 10000 &
-
-#xset s off -dpms &
-
-#pkill udiskie
-#udiskie -a &
-#conky -c ~/.config/conky/magyarch.conkyrc &
-
-#redshift -l 47.162495:19.503304 -t 6000:3600 -g 0.8 -m randr -v &
-#xrandr --output DP-0 --primary --mode 3840x2160 --pos 2160x0 \
-#	--output HDMI-0 --auto --scale 2x2 --rotate left &
-
-#pkill polybar
-(sleep 2s && $HOME/.config/polybar/launch.sh) &
 # ----------------------------------------------------------------------------------------------
 
 
@@ -88,10 +39,11 @@ bspc config honor_size_hints 	 true
 
 
 # Moving foating windows
-bspc config pointer_modifier mod4
-bspc config pointer_action1 move
-bspc config pointer_action2 resize_side
-bspc config pointer_action3 resize_corner
+bspc config pointer_motion_interval   5
+bspc config pointer_modifier          mod4
+bspc config pointer_action1           move
+bspc config pointer_action2           resize_side
+bspc config pointer_action3           resize_corner
 
 
 # Border colors
@@ -120,7 +72,7 @@ bspc monitor -d ""  ""  ""  ""  ""  ""  ""  ""  ""  "
 
 
 # Open applications on specific workspaces
-bspc rule -a Microsoft-edge desktop='^1' follow=on
+bspc rule -a firefox desktop='^1' follow=on
 bspc rule -a discord desktop='^2' follow=on
 bspc rule -a eadesktop.exe desktop='^6' state=pseudo_tiled follow=on
 bspc rule -a Sublime_text desktop='^3' follow=on

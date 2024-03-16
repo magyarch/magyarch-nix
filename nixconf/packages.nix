@@ -35,6 +35,7 @@
      ffmpeg_6-full 
      fzf 
      git
+     handbrake
      htop 
      jamesdsp
      killall 
@@ -53,19 +54,19 @@
      mprime
      neofetch 
      neovim 
-     nix-du
+#     nix-du
      ntfs3g 
      ueberzug 
      unrar 
      unzip
      openrgb-with-all-plugins
-     opera
-     ocenaudio
+#     opera
+#     ocenaudio
     # picom-allusive
      p7zip 
      pamixer 
      pavucontrol
-     picom 
+#     picom 
      polybar 
      protonup-qt 
      pulseaudio 
@@ -75,11 +76,12 @@
      scrot
      slstatus
      sublime3
+     st
      sxhkd 
      sxiv 
      system-config-printer 
      stremio
-     ventoy-full
+#     ventoy-full
     # virt-manager 
      #vscode-with-extensions
      #vscode-extensions.bbenoist.nix
@@ -99,28 +101,29 @@
 #     xorg.xinit 
      xwallpaper 
      yt-dlp 
+     (opera.override { proprietaryCodecs = true; })
      (discord.override {
        withOpenASAR = true;
        withVencord = true;
      })
 
      
-     # (picom.overrideAttrs (oldAttrs: rec {
-     #    pname = "compfy";
-     #    version = "1.7.2";
-     #    buildInputs = [
-     #      pcre2
-     #    ]
-     #    ++
-     #      oldAttrs.buildInputs;
-     #    src = pkgs.fetchFromGitHub {
-     #      owner = "allusive-dev";
-     #      repo = "compfy";
-     #      rev = version;
-     #      hash = "sha256-7hvzwLEG5OpJzsrYa2AaIW8X0CPyOnTLxz+rgWteNYY=";
-     #    };
-     #    postInstall = '''';
-     #  }))
+      (picom.overrideAttrs (oldAttrs: rec {
+         pname = "compfy";
+         version = "1.7.2";
+         buildInputs = [
+           pcre2
+         ]
+         ++
+           oldAttrs.buildInputs;
+         src = pkgs.fetchFromGitHub {
+           owner = "allusive-dev";
+           repo = "compfy";
+           rev = version;
+           hash = "sha256-7hvzwLEG5OpJzsrYa2AaIW8X0CPyOnTLxz+rgWteNYY=";
+         };
+         postInstall = '''';
+       }))
     
 #    (slstatus.overrideAttrs (_: { src = /home/xeoncpu/.config/suckless/slstatus; }
 
@@ -136,6 +139,8 @@
 		        QT_SCALE_FACTOR = "1.6";
                 QT_AUTO_SCREEN_SCALE_FACTOR = "auto";
                #_JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+	        VDPAU_DRIVER = "radeonsi";
+                LIBVA_DRIVER_NAME = "radeonsi";
              };
           }; 
 
