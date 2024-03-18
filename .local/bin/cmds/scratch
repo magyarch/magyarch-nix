@@ -2,20 +2,20 @@
 
 case "$1" in
 
-	scratchpad) 		
-        entry="alacritty -t scratchpad" 		
+	scratchpad)
+        entry="kitty --class kitty -T scratchpad"
         ;;
-	FM) 		
-        entry="alacritty -t FM -e vifm"		
+	FM)
+        entry="kitty --class kitty -T FM -e vifm"
         ;;
     Mail)
-        entry="alacritty -t Mail -e neomutt"
+        entry="kitty --class kitty -T Mail -e neomutt"
         ;;
     Music)
-        entry="alacritty -t Music -e ncmpcpp"
+        entry="kitty --class kitty -T Music -e ncmpcpp"
         ;;
     Todo)
-        entry="alacritty -t Todo -e edconf.sh"
+        entry="kitty --class kitty -T Todo -e edconf.sh"
         ;;
     launchkeys)
         entry="alacritty -t launchkeys -e spectrwm-bindings.sh"

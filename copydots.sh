@@ -18,6 +18,7 @@ cp -rf .local ~
 cp -rf .themes ~
 cp -rf .icons ~
 cp -rf .fonts ~
+cp -rf .xmonad ~
 cp .zshenv ~
 cp .profile ~
 cp .xprofile ~

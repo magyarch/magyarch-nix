@@ -21,7 +21,7 @@
 #     dxvk 
 #     discord 
      dmenu 
-     dzen2
+#     dzen2
      eza 
      exfat 
      exfatprogs 
@@ -38,8 +38,10 @@
      handbrake
      htop 
      jamesdsp
-     killall 
-     libnotify 
+     killall
+     kitty
+     libnotify
+     libbsd
      lm_sensors 
      lutris 
      lxappearance 
@@ -51,7 +53,7 @@
      ncmpcpp 
      maim 
      mpv 
-     mprime
+#     mprime
      neofetch 
      neovim 
 #     nix-du
@@ -98,10 +100,11 @@
      xdotool 
      xorg.xdpyinfo
      xorg.xsetroot
+     xmonadctl
 #     xorg.xinit 
      xwallpaper 
      yt-dlp 
-     (opera.override { proprietaryCodecs = true; })
+#     (opera.override { proprietaryCodecs = true; })
      (discord.override {
        withOpenASAR = true;
        withVencord = true;

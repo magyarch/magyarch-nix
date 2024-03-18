@@ -14,10 +14,12 @@
 #     ./i3.nix
  #     ./dwm.nix
  #     ./spectrwm.nix
-      ./bspwm.nix
+#      ./bspwm.nix
 #      ./herbst.nix
 #      ./wm.nix
+       ./redshift.nix
       ./plex.nix
+      ./xmonad.nix
     ];
 
  
@@ -118,6 +120,7 @@
      extraPackages = with pkgs; [
    #   intel-media-driver # LIBVA_DRIVER_NAME=iHD
    #   intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      rocmPackages.clr.icd
       vaapiVdpau
       libvdpau-va-gl
     ];
