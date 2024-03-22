@@ -34,7 +34,7 @@
            printing.enable = true;
            printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
 	   avahi.enable = true;
-	   avahi.nssmdns = true;
+	   avahi.nssmdns4 = true;
 	   avahi.openFirewall = true;
 #	   blueman.enable = true;
            dbus.enable = true;

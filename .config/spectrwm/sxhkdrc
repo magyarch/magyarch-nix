@@ -21,6 +21,9 @@ super + {_,shift + } w
 super + {_,shift + } e
     {scratch launchkeys, wmctrl -s 2 && subl}
 
+alt + shift + i
+    switch_audio.sh
+
 # Record and stream
 super + {KP_Home,KP_End}
     {screenrecord, live.sh}

@@ -7,8 +7,9 @@ bspc rule -r "*"
 # LAUNCHERS
 killall cleanfullscreen
 cleanfullscreen &
- pkill sxhkd
- pgrep -x sxhkd > /dev/null || sxhkd -c $HOME/.config/bspwm/sxhkdrc &
+sxhkd -c $HOME/.config/bspwm/sxhkdrc &
+pidof -q polybar || sleep 2s && $HOME/.config/polybar/launch.sh &
+pidof -q compfy || { compfy --config "$HOME"/.config/compfy.conf & }
 
 # ----------------------------------------------------------------------------------------------
 
@@ -27,7 +28,7 @@ bspc config borderless_monocle    false  # no borders in monocle layout.
 bspc config gapless_monocle       false  # no gaps in monocle layout.
 bspc config single_monocle        true  # use monocle layout if there is only 1 window.
 bspc config automatic_scheme alternate
-bspc config center_pseudo_tiled   true
+#bspc config center_pseudo_tiled   true
 #bspc config initial_polarity second_child
 bspc config focus_follows_pointer true
 bspc config honor_size_hints 	 true
@@ -96,9 +97,10 @@ bspc rule -a Xfce4-appfinder state=floating rectangle=1480x800+540+300
 bspc rule -a Pavucontrol state=floating rectangle=1480x800+540+300
 bspc rule -a Pcmanfm:Dialog state=floating
 bspc rule -a Alacritty:Alacritty:News state=floating rectangle=1480x800+540+300
-bspc rule -a Alacritty:Alacritty:Music state=floating rectangle=1480x800+540+300
+bspc rule -a kitty:kitty:Music state=floating rectangle=1480x800+0+0 center=true
 bspc rule -a com.github.neithern.g4music state=floating rectangle=1480x800+540+300 border=off
 bspc rule -a Alacritty:Alacritty:scratchpad state=floating rectangle=1480x800+540+300
+bspc rule -a kitty:kitty:scratchpad state=floating rectangle=1480x800+0+0 center=true
 bspc rule -a upc.exe desktop='^6' state=pseudo_tiled private=on follow=on
 bspc rule -a Sxiv state=floating rectangle=1480x800+540+300
 bspc rule -a mpv state=floating rectangle=800x400+1730+50

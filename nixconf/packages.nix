@@ -7,6 +7,7 @@
         systemPackages = with pkgs; [
      
      alacritty
+     amdgpu_top
      appimage-run
      acpi 
      atool
@@ -36,10 +37,12 @@
      fzf 
      git
      handbrake
+#     haskellPackages.xmonad_0_18_0
      htop 
      jamesdsp
      killall
      kitty
+     linuxKernel.packages.linux_xanmod.amdgpu-pro
      libnotify
      libbsd
      lm_sensors 
@@ -77,6 +80,7 @@
      rofi 
      scrot
      slstatus
+    # spectrwm
      sublime3
      st
      sxhkd 

@@ -13,5 +13,9 @@
       ];
   };
 
-  services.xserver.windowManager.xmonad.config = builtins.readFile /home/xeoncpu/.xmonad/xmonad.hs;
+  services.xserver.windowManager.xmonad.config = builtins.readFile /home/xeoncpu/.config/xmonad/xmonad.hs;
+
+   environment.systemPackages = with pkgs; [
+               haskellPackages.xmonad_0_18_0
+  ];
 }

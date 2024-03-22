@@ -11,9 +11,10 @@
       ./services.nix
  #     ./awesomewm.nix
        ./appimage.nix   
+       ./bluetooth.nix
 #     ./i3.nix
  #     ./dwm.nix
- #     ./spectrwm.nix
+#      ./spectrwm.nix
 #      ./bspwm.nix
 #      ./herbst.nix
 #      ./wm.nix
@@ -25,14 +26,14 @@
  
   boot = {
      bootspec.enable = true;
-     initrd.kernelModules = [ "amdgpu" ];
+    # initrd.kernelModules = [ "amdgpu" ];
   #  kernelModules = [ "bfq" ];
     loader = {
         systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;
 	timeout = 1;
     };
-    kernelPackages = pkgs.linuxPackages;
+    kernelPackages = pkgs.linuxPackages_xanmod;
     kernelParams = [
 #      "amd_pstate=active"
       "quiet"
@@ -112,7 +113,7 @@
    
   services.hardware.openrgb.enable = true;
    # Videodriver configuration
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  #services.xserver.videoDrivers = [ "modesetting" ];
   hardware.opengl = {
            enable = true;
      driSupport = true;
