@@ -258,6 +258,15 @@ groups.append(
                 opacity=1
             ),
             DropDown(
+                'chat',
+                'chromium --app=https://chat.openai.com',
+                width=0.6,
+                height=0.5,
+                x=0.2,
+                y=0.1,
+                opacity=1
+            ),
+            DropDown(
                 'file',
                 'kitty -e vifm',
                 width=0.6,
@@ -275,6 +284,7 @@ keys.extend([
     Key([mod, "shift"], "n", lazy.group['scratchpad'].dropdown_toggle('music')),
     Key([mod, "shift"], "a", lazy.group['scratchpad'].dropdown_toggle('audio')),
     Key([mod, "shift"], "t", lazy.group['scratchpad'].dropdown_toggle('file')),
+    Key([mod, "shift"], "c", lazy.group['scratchpad'].dropdown_toggle('chat')),
 ])
 
 
@@ -511,7 +521,7 @@ screens = [
                     interface='eno1',
                     decorations=[
                         RectDecoration(
-                            colour="#8fbcbb",
+                            colour="#c3cdc8",
                             padding_y=3,
                             radius=2,
                             filled=True
@@ -571,7 +581,7 @@ screens = [
                     fontsize=18,
                     decorations=[
                         RectDecoration(
-                            colour="#a3be8c",
+                            colour="#28eb57",
                             padding_y=3,
                             radius=2,
                             filled=True
@@ -591,7 +601,7 @@ screens = [
                     format="%D %H:%M",
                     decorations=[
                         RectDecoration(
-                            colour="#81a1c1",
+                            colour="#d85a3b",
                             padding_y=3,
                             radius=2,
                             filled=True
@@ -603,19 +613,23 @@ screens = [
                     foreground="#4c566a",
                     background="#2e3440"
                 ),
-                # widget.UPowerWidget(
-                #     background = "#2e3440",
-                #     border_colour = '#d8dee9',
-                #     border_critical_colour = '#bf616a',
-                #     border_charge_colour = '#d8dee9',
-                #     fill_low = '#ebcb8b',
-                #     fill_charge = '#a3be8c',
-                #     fill_critical = '#bf616a',
-                #     fill_normal = '#d8dee9',
-                #     percentage_low = 0.4,
-                #     percentage_critical = 0.2,
-                #     font = "JetBrainsMono Nerd Font"
-                #     ),
+                widget.PulseVolume(
+                 foreground="#2e3440",
+                 background="#2e3440",
+                 font="JetBrainsMono Nerd Font Bold",
+                 fontsize=18,
+                 fmt = 'Vol: {}',
+                 update_interval=0.2,
+                 decorations=[
+                     RectDecoration(
+                        colour="#925da7",
+                            padding_y=3,
+                            radius=2,
+                            filled=True
+                     )
+                 ],
+                 ),
+
                 widget.StatusNotifier(
                     background="#2e3440",
                     icon_size=20,
@@ -679,7 +693,7 @@ dgroups_app_rules = []  # type: list
 
 main = None
 
-follow_mouse_focus = True
+follow_mouse_focus = False
 bring_front_click = False
 floats_kept_above = True
 cursor_warp = False

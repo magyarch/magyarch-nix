@@ -16,7 +16,8 @@
      bc 
      binutils 
   #   brave 
-     curl 
+     curl
+     chromium 
    #  cpu-x
      dunst
 #     dxvk 
@@ -33,10 +34,10 @@
      firefox
      graphviz
      gnome.file-roller
-#     ffmpeg_6-full 
+     ffmpeg
      fzf 
      git
-#     handbrake
+     handbrake
 #     haskellPackages.xmonad_0_18_0
      htop 
      jamesdsp
