@@ -7,7 +7,7 @@
         systemPackages = with pkgs; [
      
      alacritty
-     amdgpu_top
+#     amdgpu_top
      appimage-run
      acpi 
      atool
@@ -33,16 +33,16 @@
      firefox
      graphviz
      gnome.file-roller
-     ffmpeg_6-full 
+#     ffmpeg_6-full 
      fzf 
      git
-     handbrake
+#     handbrake
 #     haskellPackages.xmonad_0_18_0
      htop 
      jamesdsp
      killall
      kitty
-     linuxKernel.packages.linux_xanmod.amdgpu-pro
+#     linuxKernel.packages.linux_xanmod.amdgpu-pro
      libnotify
      libbsd
      lm_sensors 

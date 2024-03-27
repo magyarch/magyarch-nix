@@ -18,9 +18,11 @@
 #      ./bspwm.nix
 #      ./herbst.nix
 #      ./wm.nix
+       ./nvidia.nix
        ./redshift.nix
       ./plex.nix
-      ./xmonad.nix
+      ./qtile.nix
+#      ./xmonad.nix
     ];
 
  
@@ -33,7 +35,7 @@
         efi.canTouchEfiVariables = true;
 	timeout = 1;
     };
-    kernelPackages = pkgs.linuxPackages_xanmod;
+    kernelPackages = pkgs.linuxPackages;
     kernelParams = [
 #      "amd_pstate=active"
       "quiet"
@@ -112,20 +114,6 @@
   };
    
   services.hardware.openrgb.enable = true;
-   # Videodriver configuration
-  #services.xserver.videoDrivers = [ "modesetting" ];
-  hardware.opengl = {
-           enable = true;
-     driSupport = true;
-     driSupport32Bit = true;
-     extraPackages = with pkgs; [
-   #   intel-media-driver # LIBVA_DRIVER_NAME=iHD
-   #   intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-      rocmPackages.clr.icd
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
- };
    services.xserver.serverFlagsSection = 
     ''
     Option "StandbyTime" "0" 

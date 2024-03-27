@@ -74,7 +74,7 @@ bspc monitor -d ""  ""  ""  ""  ""  ""  ""  ""  ""  "
 
 # Open applications on specific workspaces
 bspc rule -a firefox desktop='^1' follow=on
-bspc rule -a discord desktop='^2' follow=on
+bspc rule -a discord desktop='^2' state=pseudo_tiled follow=on
 bspc rule -a eadesktop.exe desktop='^6' state=pseudo_tiled follow=on
 bspc rule -a Sublime_text desktop='^3' follow=on
 bspc rule -a steam desktop='^4' state=pseudo_tiled follow=on
