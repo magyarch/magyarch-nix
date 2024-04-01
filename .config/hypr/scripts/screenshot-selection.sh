@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+FILE_NAME="screenshot-$(date +%F-%T).png"
+FILE_PATH="${HOME}/Képek/screenshots/${FILE_NAME}"
+grim -t png -g "$(slurp)" "${FILE_PATH}"
+notify-send 'Screenshot' -i "${FILE_PATH}" "${FILE_NAME}"

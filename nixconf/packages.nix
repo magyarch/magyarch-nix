@@ -11,6 +11,7 @@
      appimage-run
      acpi 
      atool
+     apg
 #     amdvlk 
      bat 
      bc 
@@ -55,6 +56,7 @@
      microsoft-edge 
      mpd 
      ncmpcpp 
+     nwg-look
      maim 
      mpv 
 #     mprime
@@ -106,6 +108,7 @@
      xorg.xdpyinfo
      xorg.xsetroot
      xmonadctl
+     xsel
 #     xorg.xinit 
      xwallpaper 
      yt-dlp 
@@ -147,8 +150,8 @@
 		        QT_SCALE_FACTOR = "1.6";
                 QT_AUTO_SCREEN_SCALE_FACTOR = "auto";
                #_JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-	        VDPAU_DRIVER = "radeonsi";
-                LIBVA_DRIVER_NAME = "radeonsi";
+	  #      VDPAU_DRIVER = "radeonsi";
+       #         LIBVA_DRIVER_NAME = "radeonsi";
              };
           }; 
 

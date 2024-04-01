@@ -21,7 +21,9 @@
        ./nvidia.nix
        ./redshift.nix
       ./plex.nix
+#      ./jellyfin.nix
       ./qtile.nix
+#      ./hyprland.nix
 #      ./xmonad.nix
     ];
 
@@ -133,7 +135,7 @@
   users.users.xeoncpu = {
     isNormalUser = true;
     description = "xeoncpu";
-    extraGroups = [ "networkmanager" "wheel" "input" "disk" "power" "samba" "video" "plex" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "disk" "power" "samba" "video" "plex" "jellyfin" ];
     packages = with pkgs; [
     #  firefox
     #  thunderbird
@@ -143,9 +145,10 @@
 
   programs = {
 	   dconf.enable = true;
-           gamemode.enable = true;
-           steam = {
-	   enable = true;
+  #   corectrl.enable = true;
+     gamemode.enable = true;
+     steam = {
+	           enable = true;
            remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
            dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
 	   };
@@ -280,7 +283,7 @@
    # Automatic Updates
   system.autoUpgrade = {
     enable = true;
-    channel = "https://nixos.org/channels/nixos-24.05";
+    channel = "https://nixos.org/channels/nixos-23.11";
   };
 
 

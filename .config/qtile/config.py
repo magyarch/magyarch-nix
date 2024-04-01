@@ -53,16 +53,15 @@ keys = [
     # ESSENTIALS #
 
     # Important keys
-    Key([mod], "d", lazy.spawn("dmenu_run"), desc="Dmenu app"),
     Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "Space", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod], "m", lazy.window.toggle_fullscreen(),
+    Key([mod], "f", lazy.window.toggle_fullscreen(),
         desc="Toggle fullscreen on the focused window",),
     Key([mod, "shift"], "f", lazy.window.toggle_floating(),
         desc="Window floating on/off"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn prompt widget"),
+ #   Key([mod], "t", lazy.spawncmd(), desc="Spawn prompt widget"),
     Key([mod], "b", lazy.hide_show_bar(position='top'), desc="Hide/show top bar"),
     Key([mod], "c", lazy.spawn("power"), desc="Open logot script"),
 
@@ -84,6 +83,9 @@ keys = [
     Key([mod], "Return", lazy.spawn("kitty"), desc="Terminal"),
     Key([mod], "w", lazy.spawn("firefox"), desc="Web browser"),
     Key([mod], "p", lazy.spawn("discord"), desc="Discord app"),
+    Key([mod], "r", lazy.spawn("kitty -e vifmrun"), desc="Tui file manager"),
+    Key([mod], "d", lazy.spawn("dmenu_run"), desc="Dmenu app"),
+
 
     # Function Keys
     Key([mod], "F5", lazy.spawn("maimpick"), desc="Screenshot tool"),
@@ -131,58 +133,14 @@ keys = [
     Key([mod, "shift"], "Left", lazy.layout.swap_left()),
     Key([mod, "shift"], "Right", lazy.layout.swap_right()),
 
-     #=-/ Scratchpads /-=#
-    #Key([mod, "shift"], "Return", lazy.group['scratchpad'].dropdown_toggle('scratchpad')),
-   # Key([mod, "shift"], "d", lazy.group['menu'].dropdown_toggle('launch')),
-   # Key([mod, "shift"], "c", lazy.group['logout'].dropdown_toggle('exitMenu')),
-    #Key([mod, "shift"], "t", lazy.group['music'].dropdown_toggle('music')),
-   # Key([mod, "shift"], "F2", lazy.group['edit'].dropdown_toggle('editConf')),
-        ]
+] 
+  
+groups = []        
 
-
-# Fundamental elements
-#keys = init_keys()
-#mouse = init_mouse()
-#floating_layout = init_floating_layout()
-#groups = init_groups()
-#dgroups_app_rules = init_rules()
-#screens = init_screens()
-#widget_defaults = init_widget_defaults()
-    
-# Append some elements
-#keys += init_group_keybindings(groups)
-#groups += init_scratchpad()
-#keys += init_dropdown_keybindings()
-
-groups = [
-
-          # ScratchPad("music",[DropDown("music", "kitty -e ncmpcpp", x=0.05, y=0.02, width=0.90, height=0.6, on_focus_lost_hide=False)]),
-          # ScratchPad("menu",[DropDown("launch", "alacritty -e launch.sh", x=0.33, y=0.02, width=0.35, height=0.95, on_focus_lost_hide=False)]),
-          # ScratchPad("logout",[DropDown("exitMenu", "alacritty -e herbst-logout.sh", x=0.4, y=0.2, width=0.20, height=0.20, on_focus_lost_hide=False)]),
-          # ScratchPad("scratchpad",[DropDown("scratchpad", "kitty", x=0.12, y=0.02, width=0.75, height=0.6, on_focus_lost_hide=False)]),
-          # ScratchPad("edit",[DropDown("editConf", "kitty -e edconf.sh", x=0.795, y=0.01, width=0.20, height=0.98, on_focus_lost_hide=False)])
-         ]
-
-# groups = [Group(i) for i in "1234567890"]
-
-# for i in groups:
-#     keys.extend(
-#         [
-#             # Change workspaces
-#             Key([mod], i.name, lazy.group[i.name].toscreen()),
-#             Key([mod], "Tab", lazy.screen.next_group()),
-#             Key([mod, "shift" ], "Tab", lazy.screen.prev_group()),
-
-#             # Move focused window to workspace 1-10 / follow
-#             Key([mod, "shift"],i.name,lazy.window.togroup(i.name, switch_group=True), desc="Switch to & move focused window to group {}".format(i.name),),
-
-#             # Moved focused window to workspace 1-10 / stay
-#             Key([mod, "control"], i.name, lazy.window.togroup(i.name), desc="move focused window to group {}".format(i.name)),
 
 group_names = ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
 
-group_layouts = ("Bsp", "Tile", "Bsp", "Bsp", "bsp",
-                 "bsp", "bsp", "bsp", "floating", "bsp")
+group_layouts = ("MonadTall", "MonadTall", "MonadTall", "MonadTall", "MonadTall", "MonadTall", "MonadTall", "Bsp", "Floating", "Bsp")
 
 group_labels = (" ", " ", " ",  " ", " ",
                 " ", " ", " ", " ", " ")
@@ -279,6 +237,7 @@ groups.append(
     )
 )
 
+          
 keys.extend([
     Key([mod, "shift"], "Return", lazy.group['scratchpad'].dropdown_toggle('term')),
     Key([mod, "shift"], "n", lazy.group['scratchpad'].dropdown_toggle('music')),
@@ -288,69 +247,49 @@ keys.extend([
 ])
 
 
-def init_layout_theme():
-     return {"margin":10,
-             "border_width":4,
-             "border_focus": "#6272a4",
-             "border_normal": "#282a36"
-            }
+layout_theme = {
+    "margin": 15,
+    "border_focus": "6272a4",
+    "border_normal": "282a36",
+    "border_width": 4
+}
 
-layout_theme = init_layout_theme()
-
-layout_defaults = dict(
-    border_focus="#6272a4",
-    border_normal="#282a36",
-    border_width=4
-)
 
 layouts = [
-    #layout.MonadTall(**layout_theme, new_client_position='top'),
-    layout.Max(),
-    layout.Bsp(
-        margin=5,
-        fair=True,
-        grow_amount=5,
-        **layout_defaults,
-    ),
-
-    layout.Stack(**layout_theme, num_stacks=2
-    ),
-    # Try more layouts by unleashing below layouts.
-    # layout.Columns(),
-    layout.Matrix(),
-    # layout.MonadTall(),
-    layout.MonadWide(),
-    #layout.RatioTile(),
-    layout.Tile(
-        **layout_defaults,
-    ),
-
-    # layout.TreeTab(),
-    # layout.VerticalTile(),
-    #layout.Zoomy(),
-    layout.Floating(
-        **layout_defaults,
-    ),
-
+    layout.Max(**layout_theme),
+    layout.MonadTall(**layout_theme),
+    layout.MonadWide(**layout_theme),
+    layout.Bsp(**layout_theme),
+    layout.RatioTile(**layout_theme),
+    layout.Floating()
 ]
 
-# floating_layout = layout.Floating(
-#     float_rules=[
-#         *layout.Floating.default_float_rules,
-#         Match(wm_class='makebranch'),
-#         Match(wm_class='kitty'),
-#         Match(wm_class='maketag'),
-#         Match(wm_class='sxiv'),
-#         Match(wm_class='feh'),
-#         Match(title='branchdialog'),
-#         Match(wm_class='Lxappearance'),
-#         Match(wm_class='Pavucontrol'),
-#         Match(title='Music'),
-#         Match(wm_class='ssh-askpass')
 
-#     ],
-#     **layout_defaults,
-#     )
+floating_layout = layout.Floating(
+    float_rules=[
+        *layout.Floating.default_float_rules,
+                                      Match(wm_class="confirmreset"), 
+                                      Match(wm_class="pavucontrol"),  
+                                      Match(wm_class="dialog"),         # dialog boxes
+                                      Match(wm_class="download"),       # downloads
+                                      Match(wm_class="error"),          # error msgs
+                                      Match(wm_class="file_progress"),  # file progress boxes
+                                      Match(wm_class='kdenlive'),       # kdenlive
+                                      Match(wm_class="makebranch"),     # gitk
+                                      Match(wm_class="maketag"),        # gitk
+                                      Match(wm_class="notification"),   # notifications
+                                      Match(wm_class='pinentry-gtk-2'), # GPG key password entry
+                                      Match(wm_class="ssh-askpass"),    # ssh-askpass
+                                      Match(wm_class="toolbar"),        # toolbars
+                                      Match(wm_class="Yad"),            # yad boxes
+                                      Match(title="branchdialog"),      # gitk
+                                      Match(title='Confirmation'),      # tastyworks exit box
+                                      Match(title='Qalculate!'),        # qalculate-gtk
+                                      Match(title="pinentry"),          # GPG key password entry
+
+     ],
+     **layout_theme,
+     )
 
 
 app_rules = {
@@ -362,6 +301,7 @@ app_rules = {
     "Subl": "3",
     "discord": "2",
     "steam": "6",
+    "steam_app_0": "6",
     "mpv": "6",
     "Thunar": "8"
     #  "Music": "9"
@@ -415,29 +355,6 @@ def go_float(window, windows=app_float_pos):
             window.tweak_float(x=my_screen_w - win_w - 50, y=50)
             count += 1
 
-    # logger.warning(f'ez az count: {count}')
-    # if (dialog or transient) and count != 1:
-    #     window.floating = True
-    #     my_screen_w = Display(":0").screen().width_in_pixels
-    #     my_screen_h = Display(":0").screen().height_in_pixels
-    #     window.float_x = 0
-    #     window.float_y = 0
-    #     win_w = window.cmd_get_size()[0]
-    #     win_h = window.cmd_get_size()[1]
-    #     # logger.warning(my_screen_w)
-    #     # logger.warning(my_screen_h)
-    #     # logger.warning(win_w)
-    #     # logger.warning(win_h)
-    #     window.tweak_float(x=(my_screen_w // 2) - (win_w // 2), y=(my_screen_h // 2) - (win_h // 2))
-
-
-# @hook.subscribe.client_new
-# def floating_dialogs(window):
-#     dialog = window.window.get_wm_type() == 'dialog'
-#     transient = window.window.get_wm_transient_for()
-#     if dialog or transient:
-#         window.floating = True
-
 
 widget_defaults = dict(
     font="JetBrainsMono Nerd Font",
@@ -454,19 +371,19 @@ screens = [
                     linewidth=1,
                     padding=5,
                     foreground="#4c566a",
-                    background="#2e3440"
+                    background="#282a36"
                 ),
                 widget.CurrentLayoutIcon(
                     padding=4,
                     scale=0.7,
                     foreground="#d8dee9",
-                    background="#2e3440"
+                    background="#282a36"
                 ),
                 widget.Sep(
                     linewidth=1,
                     padding=5,
                     foreground="#4c566a",
-                    background="#2e3440"
+                    background="#282a36"
                 ),
                 widget.GroupBox(
                     font="JetBrainsMono Nerd Font Bold",
@@ -475,7 +392,6 @@ screens = [
                     margin_x=3,
                     padding_y=2,
                     padding_x=3,
-                    borderwidth=0,
                     urgent_alert_method="block",
                     urgent_border="#2e8b57",
                     urgent_text="#000000",
@@ -486,39 +402,39 @@ screens = [
                     highlight_method="text",
                     this_current_screen_border="#6272a4",
                     foreground="#6272a4",
-                    background="#2e3440"
+                    background="#282a36"
                 ),
                 widget.Sep(
                     linewidth=1,
                     padding=5,
                     foreground="#4c566a",
-                    background="#2e3440"
+                    background="#282a36"
                 ),
                 widget.Prompt(
                     font="JetBrainsMono Nerd Font",
                     fontsize=18,
-                    background="#2e3440",
+                    background="#282a36",
                     foreground="#d8dee9"
                 ),
                 widget.WindowName(
                     font="JetBrainsMono Nerd Font Bold",
                     fontsize=18,
                     foreground="#d8dee9",
-                    background="#2e3440"
+                    background="#282a36"
                 ),
                 widget.Sep(
                     foreground="#4c566a",
-                    background="#2e3440",
+                    background="#282a36",
                     padding=5,
                     linewidth=1
                 ),
-                widget.Net(
-                    foreground="#2e3440",
-                    background="#2e3440",
+                widget.NvidiaSensors(
+                    foreground="#282a36",
+                    background="#282a36",
                     font='JetBrainsMono Nerd Font Bold',
                     fontsize=18,
-                    format='{down} ↓↑ {up}',
-                    interface='eno1',
+                    format='GPU: {temp}°C, fan speed: {fan_speed}',
+                    #interface='eno1',
                     decorations=[
                         RectDecoration(
                             colour="#c3cdc8",
@@ -532,13 +448,27 @@ screens = [
                     linewidth=1,
                     padding=5,
                     foreground="#4c566a",
-                    background="#2e3440"
+                    background="#282a36"
                 ),
                 widget.CPU(
-                    background="#2e3440",
-                    foreground="#2e3440",
+                    background="#282a36",
+                    foreground="#282a36",
                     font="JetBrainsMono Nerd Font Bold",
                     fontsize=18,
+                    decorations=[
+                        RectDecoration(
+                            colour="#ebcb8b",
+                            padding_y=3,
+                            radius=2,
+                            filled=True
+                        ),
+                    ],),
+                widget.ThermalSensor(
+                    font="JetBrainsMono Nerd Font",
+                    fontsize=18,
+                    background="#282a36",
+                    foreground="#282a36",
+                    tag_sensor='Core 0',
                     decorations=[
                         RectDecoration(
                             colour="#ebcb8b",
@@ -551,14 +481,15 @@ screens = [
                     linewidth=1,
                     padding=5,
                     foreground="4c566a",
-                    background="#2e3440"
+                    background="#282a36"
                 ),
                 widget.Memory(
                     measure_mem='G',
-                    foreground="#2e3440",
-                    background="#2e3440",
+                    foreground="#282a36",
+                    background="#282a36",
                     font="JetBrainsMono Nerd Font Bold",
                     fontsize=18,
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('kitty -e htop')},
                     decorations=[
                         RectDecoration(
                             colour="#88c0d0",
@@ -571,12 +502,12 @@ screens = [
                     linewidth=1,
                     padding=5,
                     foreground="#4c566a",
-                    background="#2e3440"
+                    background="#282a36"
                 ),
                 widget.DF(
                     visible_on_warn=False,
-                    background="#2e3440",
-                    foreground="#2e3440",
+                    background="#282a36",
+                    foreground="#282a36",
                     font="JetBrainsMono Nerd Font Bold",
                     fontsize=18,
                     decorations=[
@@ -590,12 +521,12 @@ screens = [
                 widget.Sep(
                     linewidth=1,
                     padding=5,
-                    background="#2e3440",
+                    background="#282a36",
                     foreground="#4c566a"
                 ),
                 widget.Clock(
-                    foreground="#2e3440",
-                    background="#2e3440",
+                    foreground="#282a36",
+                    background="#282a36",
                     font="JetBrainsMono Nerd Font Bold",
                     fontsize=18,
                     format="%D %H:%M",
@@ -611,15 +542,16 @@ screens = [
                     linewidth=1,
                     padding=5,
                     foreground="#4c566a",
-                    background="#2e3440"
+                    background="#282a36"
                 ),
                 widget.PulseVolume(
-                 foreground="#2e3440",
-                 background="#2e3440",
+                 foreground="#282a36",
+                 background="#282a36",
                  font="JetBrainsMono Nerd Font Bold",
                  fontsize=18,
                  fmt = 'Vol: {}',
                  update_interval=0.2,
+                 mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('pavucontrol')},
                  decorations=[
                      RectDecoration(
                         colour="#925da7",
@@ -629,23 +561,34 @@ screens = [
                      )
                  ],
                  ),
-
-                widget.StatusNotifier(
-                    background="#2e3440",
-                    icon_size=20,
-                    padding=5
-                ),
-                # widget.Systray(
-                #    background = "#2e3440",
-                #    icon_size = 20,
-                #    padding = 5,
-                #    ),
                 widget.Sep(
                     linewidth=1,
                     padding=5,
                     foreground="#4c566a",
-                    background="#2e3440"
+                    background="#282a36"
                 ),
+                widget.StatusNotifier(
+                    background="#282a36",
+                    icon_size=20,           
+                    padding=8
+                ),
+                widget.Sep(
+                    linewidth=1,
+                    padding=5,
+                    foreground="#4c566a",
+                    background="#282a36"
+                ),
+                #  widget.Systray(
+                #     background = "#282a36",
+                #     icon_size = 20,
+                #     padding = 5,
+                # ),
+                # widget.Sep(
+                #     linewidth=1,
+                #     padding=5,
+                #     foreground="#4c566a",
+                #     background="#282a36"
+                # ),
                 widget.OpenWeather(
                     app_key="4cf3731a25d1d1f4e4a00207afd451a2",
                     cityid="3045190",
@@ -653,11 +596,11 @@ screens = [
                     metric=True,
                     font="JetBrainsMono Nerd Font Bold",
                     fontsize=18,
-                    background="#2e3440",
+                    background="#282a36",
                     foreground="#d8dee9",
                     decorations=[
                         RectDecoration(
-                            colour="#2e3440",
+                            colour="#282a36",
                             padding_y=3,
                             radius=2,
                             filled=True
@@ -666,12 +609,12 @@ screens = [
                 widget.Sep(
                     linewidth=1,
                     padding=5,
-                    background="#2e3440",
+                    background="#282a36",
                     foreground="#4c566a"
                 ),
             ],
             # Sets bar height
-            24,
+            26,
         ),
         # Set wallpaper
         #     wallpaper="/home/xeoncpu/wall.png",
@@ -697,18 +640,6 @@ follow_mouse_focus = False
 bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
-floating_layout = layout.Floating(border_width=2, border_focus="#5e81ac", border_normal="#2e3440",
-                                  float_rules=[
-                                      # Run the utility of `xprop` to see the wm class and name of an X client.
-                                      *layout.Floating.default_float_rules,
-                                      Match(wm_class="confirmreset"),  # gitk
-                                      Match(wm_class="makebranch"),  # gitk
-                                      Match(wm_class="maketag"),  # gitk
-                                      Match(title="scratchpad"),  # ssh-askpass
-                                      Match(title="branchdialog"),  # gitk
-                                      Match(title="music"),  # GPG key password entry
-                                  ]
-                                  )
 auto_fullscreen = True
 focus_on_window_activation = "focus"
 reconfigure_screens = False

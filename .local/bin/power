@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
-DIALOG_RESULT=$(echo -e 'Quit xmonad\nHibernate\nReboot\nPoweroff' | dmenu -i -p 'System')
+DIALOG_RESULT=$(echo -e 'Quit\nReboot\nPoweroff' | dmenu -i -p 'System')
 
 case $DIALOG_RESULT in
-        "Quit xmonad" ) pkill xmonad ;;
-        "Hibernate") systemctl hibernate ;;
+        "Quit") qtile cmd-obj -o cmd -f shutdown ;;
         "Reboot") systemctl reboot ;;
         "Poweroff") systemctl poweroff ;;
         *) exit 0
