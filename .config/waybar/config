@@ -1,6 +1,8 @@
 {
+
   "layer": "top",
     "position": "top",
+    "height": 24,
     "margin-bottom": 0,
     "modules-left": [
       "clock",
@@ -65,26 +67,24 @@
       "format": " {bandwidthDownBits}  {bandwidthUpBits}"
     },
     "temperature": {
-      "format": "{icon} {temperatureC}°C",
-      "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-      "critical-threshold": 80,
-      "format-icons": ["", "", ""],
+      "format": " {temperatureC}°C {icon}", 
+      "hwmon-path": "/sys/class/hwmon/hwmon4/temp2_input",
       "interval": 1,
     },
     "memory": {
-      "format": " {}%",
+      "format": "󰍛 {}%",
       "tooltip": "false",
       "on-click": "exec, kitty -e htop"
     },
     "cpu": {
-      "format": " {avg_frequency}GHz",
+      "format": "  {avg_frequency}GHz",
       "tooltip": "false",
       "interval": 1,
     },
     "custom/powermenu": {
       "format": "",
       "tooltip": false,
-      "on-click": "exec, power"
+      "on-click": "exec, wlogout"
     },
     "custom/updates": {
       "format": "<span color=\"#61afef\"></span> {}",

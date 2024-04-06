@@ -3,7 +3,7 @@
 { config, pkgs, ... }:
 
 {
-  
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -21,9 +21,11 @@
        ./nvidia.nix
        ./redshift.nix
       ./plex.nix
+#       ./sway.nix
 #      ./jellyfin.nix
-      ./qtile.nix
-#      ./hyprland.nix
+#      ./qtile.nix
+#       ./qtile-wayland.nix
+      ./hyprland.nix
 #      ./xmonad.nix
     ];
 

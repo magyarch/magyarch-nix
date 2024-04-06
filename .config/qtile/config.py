@@ -133,6 +133,13 @@ keys = [
     Key([mod, "shift"], "Left", lazy.layout.swap_left()),
     Key([mod, "shift"], "Right", lazy.layout.swap_right()),
 
+    # Key([mod, "shift"], "Tab",
+    #          lazy.layout.rotate(),
+    #         # lazy.layout.flip(),
+    #          desc='Switch which side main pane occupies (XmonadTall)'
+    #          ),
+
+
 ] 
   
 groups = []        
@@ -303,6 +310,7 @@ app_rules = {
     "steam": "6",
     "steam_app_0": "6",
     "mpv": "6",
+    "qBittorrent": "6",
     "Thunar": "8"
     #  "Music": "9"
 }
@@ -569,8 +577,8 @@ screens = [
                 ),
                 widget.StatusNotifier(
                     background="#282a36",
-                    icon_size=20,           
-                    padding=8
+                    icon_size=24,           
+                    padding=5,
                 ),
                 widget.Sep(
                     linewidth=1,
@@ -578,11 +586,11 @@ screens = [
                     foreground="#4c566a",
                     background="#282a36"
                 ),
-                #  widget.Systray(
-                #     background = "#282a36",
-                #     icon_size = 20,
-                #     padding = 5,
-                # ),
+                 widget.Systray(
+                    background = "#282a36",
+                    icon_size = 24,
+                    padding = 5,
+                ),
                 # widget.Sep(
                 #     linewidth=1,
                 #     padding=5,
@@ -645,9 +653,9 @@ focus_on_window_activation = "focus"
 reconfigure_screens = False
 
 # When using the Wayland backend, this can be used to configure input devices.
-# wl_input_rules = {
-#       "1160:4122:DELL0A20:00 0488:101A Touchpad": InputConfig(tap=True),
-#  }
+ #wl_input_rules = {
+  #     "1160:4122:DELL0A20:00 0488:101A Touchpad": InputConfig(tap=True),
+  #}
 
 # Something about java being dumb?
 wmname = "LG3D"

@@ -9,9 +9,13 @@ export BROWSER="firefox"
 export READER="zathura"
 export FILE="vifmrun"
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
-export DISPLAY=":0"
-export AMD_VULKAN_ICD="RADV"
-#export VDPAU_DRIVER="radeonsi"
+#export QT_SCALE_FACTOR=1.6
+#export ELM_SCALE=1.6
+#export GDK_SCALE=0.6
+#export XCURSOR_SIZE=24
+#export DISPLAY=":0"
+#export AMD_VULKAN_ICD="RADV"
+#export WLR_NO_HARDWARE_CURSOR=1
 
 # less/man colors
 export LESS=-R

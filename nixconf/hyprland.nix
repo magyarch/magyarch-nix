@@ -10,7 +10,7 @@ programs.hyprland = {
   };
 
 #env var
-  environment.sessionVariables = {
+  environment.variables = {
     WLR_NO_HARDWARE_CURSOR = "1";
     NIXOS_OZONE_WL = "1";
   };
@@ -18,17 +18,23 @@ programs.hyprland = {
 
 # List packages installed in system profile
     environment.systemPackages = with pkgs; [
-	                 meson
-			 grim
-       mako
-			 hyprpaper
+	                       meson
+			                   grim
+                         mako
+                         swaybg
+			                   swww
                          wayland-protocols
                          wayland-utils
+                         #xwayland
                          wl-clipboard
                          wlroots
-			 wofi
-			 waybar
-              #           xdg-desktop-portal-hyprland
+                         wlogout
+                         wlsunset
+			                   wofi
+			                   qt5ct
+                         qt6ct
+                         waybar
+                         xdg-desktop-portal-hyprland
 	 		 ];
 
     nixpkgs.overlays = [

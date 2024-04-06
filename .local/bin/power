@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DIALOG_RESULT=$(echo -e 'Quit\nReboot\nPoweroff' | dmenu -i -p 'System')
+DIALOG_RESULT=$(echo -e 'Quit\nReboot\nPoweroff' | wofi --dmenu 'System')
 
 case $DIALOG_RESULT in
         "Quit") qtile cmd-obj -o cmd -f shutdown ;;
