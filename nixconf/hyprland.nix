@@ -23,6 +23,8 @@ programs.hyprland = {
                          mako
                          swaybg
 			                   swww
+                         swappy
+                         slurp
                          wayland-protocols
                          wayland-utils
                          #xwayland

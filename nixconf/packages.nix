@@ -33,10 +33,11 @@
 #     faac
      feh
      firefox
+     #glib
      graphviz
      gnome.file-roller
-     gnome3.adwaita-icon-theme
-     gnome.gnome-themes-extra
+     #gnome.nixos-gsettings-overrides
+     #gsettings-desktop-schemas
      ffmpeg
      fzf 
      git
@@ -58,7 +59,6 @@
      microsoft-edge 
      mpd 
      ncmpcpp 
-     nwg-look
      maim 
      mpv 
 #     mprime
