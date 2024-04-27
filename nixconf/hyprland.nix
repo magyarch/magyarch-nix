@@ -1,12 +1,22 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:let
+ 
+  flake-compat = builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz";
+  hyprland = (import flake-compat {
+    src = builtins.fetchTarball "https://github.com/hyprwm/Hyprland/archive/master.tar.gz";
+  }).defaultNix;
+in {
+  imports = [
+    hyprland.nixosModules.default
+  ];
 
 
-{
+
+#{
 
 programs.hyprland = {
     enable = true;
     xwayland.enable = true;
-    enableNvidiaPatches = true;
+   # enableNvidiaPatches = true;
   };
 
 #env var
@@ -15,7 +25,7 @@ programs.hyprland = {
     NIXOS_OZONE_WL = "1";
   };
 
-
+  
 # List packages installed in system profile
     environment.systemPackages = with pkgs; [
 	                       meson
@@ -25,16 +35,16 @@ programs.hyprland = {
 			                   swww
                          swappy
                          slurp
-                         wayland-protocols
+                         hyprland-protocols
                          wayland-utils
                          #xwayland
                          wl-clipboard
                          wlroots
                          wlogout
                          wlsunset
+                         wlprop
 			                   wofi
-			                   qt5ct
-                         qt6ct
+                         gtk4
                          waybar
                          xdg-desktop-portal-hyprland
 	 		 ];
@@ -44,6 +54,8 @@ programs.hyprland = {
         waybar = super.waybar.overrideAttrs (oldAttrs: {
           mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true" "-Dmpd=enabled"];
         });
+      
+ #       hyprland = super.hyprland.overrideAttrs (old: { src = /home/xeoncpu/.config/hypr/.src/hyprland ;});
       })
      ];
     

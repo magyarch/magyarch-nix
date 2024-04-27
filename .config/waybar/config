@@ -67,8 +67,8 @@
       "format": " {bandwidthDownBits}  {bandwidthUpBits}"
     },
     "temperature": {
-      "format": " {temperatureC}°C {icon}", 
-      "hwmon-path": "/sys/class/hwmon/hwmon4/temp2_input",
+      "format": " {temperatureC}°C {icon}",
+      "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
       "interval": 1,
     },
     "memory": {

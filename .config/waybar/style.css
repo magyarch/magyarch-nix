@@ -8,13 +8,14 @@
 #waybar {
   background: #282a36;
   color: #eeeeef;
-  font-size: 16px;
+  font-size: 13px;
   font-family: "JetBrainsMono Nerd Fonts";
 }
 
 #workspaces button {
-  padding: 0 4px;
+  padding: 0 3px;
   color: #eeeeef;
+  font-size: 18px;
 }
 /* Fix: active workspace doesn't show up */
 /* #workspaces button.focused { */

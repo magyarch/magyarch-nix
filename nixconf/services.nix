@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
     # List services that you want to enable:
@@ -20,15 +20,25 @@
 #	windowManager.herbstluftwm.package = pkgs.herbstluftwm.overrideAttrs ( o: {
 #    disabledTests = o.disabledTests ++ ["test_complete_keybind_offers_additional_mods_without_duplication"];
 #  });
-	displayManager = {
-	lightdm.enable = true;
-	autoLogin = {
-		enable = true;
-		user = "xeoncpu";
-		};
-             };
-           };          
-         
+	# displayManager = {
+	# lightdm.enable = true;
+	# autoLogin = {
+	# 	enable = true;
+	# 	user = "xeoncpu";
+	# 	};
+ #             };
+ #           };  
+     
+     displayManager.sddm.enable = true;
+     #displayManager.sddm.theme = "where-is-my-sddm-theme";
+    displayManager.sddm.settings = {
+                                     Theme = {
+                                     Current = "catppuccin-mocha";
+                                     ThemeDir = "/sddmt";
+                                      };
+                   };
+     
+     };    
 
     services = {
            printing.enable = true;
@@ -36,8 +46,8 @@
 	   avahi.enable = true;
 	   avahi.nssmdns = true;
 	   avahi.openFirewall = true;
-#	   blueman.enable = true;
-           dbus.enable = true;
+	   picom.enable = true;
+     dbus.enable = true;
 	   fstrim = {
 	   enable = true;
 	   interval = "weekly";
@@ -113,6 +123,14 @@
 	 };
 	 };
 };
+      #= System76 Scheduler 
+      services.system76-scheduler = {
+                                enable = true;
+      #services.system76-scheduler.settings.processScheduler.foregroundBoost.foreground.nice = 6;
+                                useStockConfig = true;
+                              };
 
+      #= IRQBalance
+      services.irqbalance.enable = true;
 
 }

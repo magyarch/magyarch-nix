@@ -8,7 +8,7 @@ hc() {
 
 
 #hc set_layout grid
-hc set_layout horizontal
+hc set_layout vertical
 
 hc emit_hook reload
 
@@ -86,7 +86,7 @@ hc keybind $Mod-Control-r spawn hide_window 0
 #hc keybind $Mod-Escape  pkill -USR1 -x sxhkd # reload sxhkd
 hc keybind $Mod-Shift-Escape reload # reload herbstluftwm
 
-hc keybind $Mod-q close
+hc keybind $Mod-q close_and_remove
 
 # TAGS or WORKSPACES
 #names to display in menu
@@ -174,15 +174,15 @@ hc set always_show_frame 0
 ## Background settings
 hc attr theme.color "#282a36"
 hc attr theme.background_color "#282a36"
-hc attr theme.border_width 6
+hc attr theme.border_width 3
 
 ## Inner border normal settings
 hc attr theme.inner_color "#262138"
-hc attr theme.inner_width 1
+hc attr theme.inner_width 0
 
 ## Outer border normal settings
 hc attr theme.outer_color "#262138"
-hc attr theme.outer_width 1
+hc attr theme.outer_width 0
 
 # Title settings
 # hc attr theme.normal.tab_color "#282a36}"
@@ -201,8 +201,8 @@ hc attr theme.normal.title_color "#898989"
 
 ## Settings for focused clients
 hc attr theme.active.background_color "#282a36"
-hc attr theme.active.color "#947cc3"
-hc attr theme.active.tab_color "#947cc3"
+hc attr theme.active.color "#6272a4"
+hc attr theme.active.tab_color "#6272a4"
 hc attr theme.active.inner_color "#03a8f4"
 
 ## Settings for urgent clients
@@ -213,17 +213,17 @@ hc attr theme.urgent.inner_color "#9A65B0"
 ## Settings for floating
 hc attr theme.floating.border_width 5
 hc attr theme.floating.outer_width 4
-hc attr theme.floating.outer_color "#947cc3"
+hc attr theme.floating.outer_color "#6272a4"
 hc attr theme.floating.title_when always
 
 # ## Settings for minimal
-hc attr theme.minimal.title_height 30
+hc attr theme.minimal.title_height 24
 hc attr theme.minimal.title_color "#c3cdc8"
 hc attr theme.minimal.title_depth 3  # space below the title's baseline
 hc attr theme.minimal.title_align 'center'
-hc attr theme.minimal.title_font 'JetBrains Mono Nerd Font:pixelsize=28'  # example using Xft
+hc attr theme.minimal.title_font 'JetBrains Mono Nerd Font:size=10'  # example using Xft
 hc attr theme.minimal.tab_color "#1F1F1Fdd"
-hc attr theme.minimal.color "#947cc3"
+hc attr theme.minimal.color "#6272a4"
 
 
 # RULES
@@ -233,16 +233,16 @@ hc rule floatplacement=center
 #hc rule focus=off # normally do not focus new clients
 
 #assign applications to workspaces or tags
-hc rule class~'(brave|Brave-browser|Chromium|Microsoft-edge)' tag='' switchtag=on focus=on
+hc rule class~'(brave|Brave-browser|Chromium|Microsoft-edge|firefox)' tag='' switchtag=on focus=on
 hc rule class='Spotify' tag='' switchtag=on focus=on
 hc rule class~'(subl|Code|code)' tag=''  switchtag=on focus=on
 hc rule class~'(discord|Discord)' tag='' switchtag=on focus=on
-#hc rule class~'(vlc|mpv|Mpv)' tag='' switchtag=on focus=on
+hc rule class~'(qBittorrent|Lutris|lutris)' tag='' switchtag=on focus=on
 hc rule class~'(VirtualBox Manager|Vmplayer|qBittorrent)' tag='' switchtag=on focus=on
 hc rule class~'(Thunar|Pcmanfm|Nemo)' tag='' switchtag=on focus=on
 hc rule class~'(Shotcut|Gpick|steam|Steam)' tag='' switchtag=on pseudotile=on focus=on
 hc rule class~'(gimp|Gimp)' tag='' switchtag=on focus=on
-hc rule class~'(Zathura|zathura|Lxappearance|Pavucontrol|upc.exe)' tag='' switchtag=on pseudotile=on focus=on
+hc rule class~'(Zathura|zathura|upc.exe)' tag='' switchtag=on floating=on focus=on
 #hc rule class='Steam' title~'.*Barátlista.*' floating=on focus=off
 #hc rule class='Steam' title~'Steam.*' focus=off floating=on
 
@@ -251,18 +251,20 @@ hc rule class~'(Zathura|zathura|Lxappearance|Pavucontrol|upc.exe)' tag='' swi
 hc rule title~'scratchpad' floating=on floatplacement=center floating_geometry=1400x800
 hc rule title~'FM' floating=on floatplacement=center floating_geometry=1400x800
 hc rule title~'News' floating=on floatplacement=center floating_geometry=1400x800
-hc rule class~'FfmpegGUI.py' floating=on floatplacement=center floating_geometry=1200x800
+hc rule title~'Todo' floating=on floatplacement=center floating_geometry=1200x800
 hc rule title~'Music' floating=on floatplacement=center floating_geometry=1400x800
-hc rule title~'Todo' floating=on floatplacement=center floating_geometry=1000x650
-#hc rule title~'.*Steam.*' focus=off floating=on
-
+hc rule title~'launcher' floating=on floatplacement=center floating_geometry=650x450
+#hc rule title~'Fájl*' focus=off floating=on floatplacement=center floating_geometry=400x200
+hc rule title~'Open File...' floating=on floatplacement=center floating_geometry=1200x800
+hc rule class~'(Pavucontrol|Lxappearance)' floating=on floatplacement=center floating_geometry=1400x800
+hc rule title~'GtkFileChooserDialog' floating=on floatplacement=center floating_geometry=1200x800
 
 # give focus to most common terminals
 hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm|Konsole)' floating=on focus=on
-hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' floating=on
+hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' floating=on floatplacement=center floating_geometry=1050x550
 #hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
-hc rule fixedsize floating=on
+#hc rule fixedsize floating=on
 
 hc set tree_style '╾│ ├╰╼─╮'
 

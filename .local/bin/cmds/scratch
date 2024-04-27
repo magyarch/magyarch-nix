@@ -17,8 +17,8 @@ case "$1" in
     Todo)
         entry="kitty --class kitty -T Todo -e edconf.sh"
         ;;
-    launchkeys)
-        entry="alacritty -t launchkeys -e spectrwm-bindings.sh"
+    launcher)
+        entry="kitty --class kitty -T launcher -e fzf-launcher.sh"
 esac
 
 xdotool search --onlyvisible --name "$1" windowunmap \

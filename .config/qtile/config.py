@@ -140,9 +140,9 @@ keys = [
     #          ),
 
 
-] 
-  
-groups = []        
+]
+
+groups = []
 
 
 group_names = ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
@@ -244,7 +244,7 @@ groups.append(
     )
 )
 
-          
+
 keys.extend([
     Key([mod, "shift"], "Return", lazy.group['scratchpad'].dropdown_toggle('term')),
     Key([mod, "shift"], "n", lazy.group['scratchpad'].dropdown_toggle('music')),
@@ -265,8 +265,8 @@ layout_theme = {
 layouts = [
     layout.Max(**layout_theme),
     layout.MonadTall(**layout_theme),
-    layout.MonadWide(**layout_theme),
-    layout.Bsp(**layout_theme),
+    layout.MonadThreeCol(**layout_theme),
+    layout.TreeTab(**layout_theme),
     layout.RatioTile(**layout_theme),
     layout.Floating()
 ]
@@ -275,13 +275,13 @@ layouts = [
 floating_layout = layout.Floating(
     float_rules=[
         *layout.Floating.default_float_rules,
-                                      Match(wm_class="confirmreset"), 
-                                      Match(wm_class="pavucontrol"),  
+                                      Match(wm_class="confirmreset"),
+                                      Match(wm_class="pavucontrol"),
                                       Match(wm_class="dialog"),         # dialog boxes
                                       Match(wm_class="download"),       # downloads
                                       Match(wm_class="error"),          # error msgs
                                       Match(wm_class="file_progress"),  # file progress boxes
-                                      Match(wm_class='kdenlive'),       # kdenlive
+                                      Match(wm_class='Open File'),       # kdenlive
                                       Match(wm_class="makebranch"),     # gitk
                                       Match(wm_class="maketag"),        # gitk
                                       Match(wm_class="notification"),   # notifications
@@ -436,18 +436,18 @@ screens = [
                     padding=5,
                     linewidth=1
                 ),
-                widget.NvidiaSensors(
+                widget.ThermalSensor(
                     foreground="#282a36",
                     background="#282a36",
                     font='JetBrainsMono Nerd Font Bold',
                     fontsize=18,
-                    format='GPU: {temp}°C, fan speed: {fan_speed}',
-                    #interface='eno1',
+                    fmt='GPU: {}',
+                    tag_sensor='edge',
                     decorations=[
                         RectDecoration(
-                            colour="#c3cdc8",
+                            colour="#fff200",
                             padding_y=3,
-                            radius=2,
+                            radius=4,
                             filled=True
                         ),
                     ],
@@ -467,7 +467,7 @@ screens = [
                         RectDecoration(
                             colour="#ebcb8b",
                             padding_y=3,
-                            radius=2,
+                            radius=4,
                             filled=True
                         ),
                     ],),
@@ -476,12 +476,12 @@ screens = [
                     fontsize=18,
                     background="#282a36",
                     foreground="#282a36",
-                    tag_sensor='Core 0',
+                    tag_sensor='Tctl',
                     decorations=[
                         RectDecoration(
                             colour="#ebcb8b",
                             padding_y=3,
-                            radius=2,
+                            radius=4,
                             filled=True
                         ),
                     ],),
@@ -502,7 +502,7 @@ screens = [
                         RectDecoration(
                             colour="#88c0d0",
                             padding_y=3,
-                            radius=2,
+                            radius=4,
                             filled=True
                         ),
                     ],),
@@ -522,7 +522,7 @@ screens = [
                         RectDecoration(
                             colour="#28eb57",
                             padding_y=3,
-                            radius=2,
+                            radius=4,
                             filled=True
                         ),
                     ],),
@@ -542,7 +542,7 @@ screens = [
                         RectDecoration(
                             colour="#d85a3b",
                             padding_y=3,
-                            radius=2,
+                            radius=4,
                             filled=True
                         ),
                     ],),
@@ -564,7 +564,7 @@ screens = [
                      RectDecoration(
                         colour="#925da7",
                             padding_y=3,
-                            radius=2,
+                            radius=4,
                             filled=True
                      )
                  ],
@@ -577,7 +577,7 @@ screens = [
                 ),
                 widget.StatusNotifier(
                     background="#282a36",
-                    icon_size=24,           
+                    icon_size=24,
                     padding=5,
                 ),
                 widget.Sep(
@@ -586,11 +586,11 @@ screens = [
                     foreground="#4c566a",
                     background="#282a36"
                 ),
-                 widget.Systray(
-                    background = "#282a36",
-                    icon_size = 24,
-                    padding = 5,
-                ),
+                #  widget.Systray(
+                #     background = "#282a36",
+                #     icon_size = 24,
+                #     padding = 5,
+                # ),
                 # widget.Sep(
                 #     linewidth=1,
                 #     padding=5,
@@ -610,7 +610,7 @@ screens = [
                         RectDecoration(
                             colour="#282a36",
                             padding_y=3,
-                            radius=2,
+                            radius=4,
                             filled=True
                         ),
                     ],),
@@ -622,7 +622,7 @@ screens = [
                 ),
             ],
             # Sets bar height
-            26,
+            30,
         ),
         # Set wallpaper
         #     wallpaper="/home/xeoncpu/wall.png",

@@ -9,23 +9,24 @@
       ./hardware-configuration.nix
       ./packages.nix
       ./services.nix
+      ./amdgpu.nix
  #     ./awesomewm.nix
-       ./appimage.nix   
-       ./bluetooth.nix
+ #      ./appimage.nix   
+#       ./bluetooth.nix
 #     ./i3.nix
  #     ./dwm.nix
 #      ./spectrwm.nix
 #      ./bspwm.nix
-#      ./herbst.nix
+      ./herbst.nix
 #      ./wm.nix
-       ./nvidia.nix
+#       ./nvidia.nix
        ./redshift.nix
-      ./plex.nix
+ #     ./plex.nix
 #       ./sway.nix
 #      ./jellyfin.nix
-#      ./qtile.nix
+#       ./qtile.nix
 #       ./qtile-wayland.nix
-      ./hyprland.nix
+#      ./hyprland.nix
 #      ./xmonad.nix
     ];
 
@@ -39,10 +40,11 @@
         efi.canTouchEfiVariables = true;
 	timeout = 1;
     };
-    kernelPackages = pkgs.linuxPackages;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
 #      "amd_pstate=active"
-      "quiet"
+      "kernel.nmi_watchdog=0"
+#      "quiet"
       "splash"
       "vga=current"
       "rd.systemd.show_status=false"
@@ -56,6 +58,7 @@
     kernel.sysctl = {
       "net.ipv4.tcp_congestion_control" = "bbr";
       "net.core.default_qdisc" = "fq";
+      "net.ipv4.tcp_fastopen" = 3;
       "net.core.wmem_max" = 1073741824;
       "net.core.rmem_max" = 1073741824;
       "net.ipv4.tcp_rmem" = "4096 87380 1073741824";
@@ -65,7 +68,7 @@
 
 
    fileSystems."/media" =
-    { device = "/dev/disk/by-uuid/a9b02f37-e434-4c16-a280-8ebfff37ae1c";
+    { device = "/dev/disk/by-uuid/b8404b77-6a20-47aa-a53b-2ce9a94e9d32";
       fsType = "ext4";
       options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
     };
@@ -137,7 +140,7 @@
   users.users.xeoncpu = {
     isNormalUser = true;
     description = "xeoncpu";
-    extraGroups = [ "networkmanager" "wheel" "input" "disk" "power" "samba" "video" "plex" "jellyfin" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "disk" "power" "samba" ];
     packages = with pkgs; [
     #  firefox
     #  thunderbird
@@ -147,13 +150,18 @@
 
   programs = {
 	   dconf.enable = true;
-  #   corectrl.enable = true;
+     corectrl.enable = true;
      gamemode.enable = true;
      steam = {
 	           enable = true;
            remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
            dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+           package = pkgs.steam.override {
+           extraPkgs = pkgs: with pkgs; [
+                  gamescope
+        ];
 	   };
+    }; 
 	   thunar = {
 	   enable = true;
 	   plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman thunar-media-tags-plugin ];

@@ -74,7 +74,7 @@ else
 				case "$ANS" in
 					*Reboot) systemctl reboot ;;
 					*Shutdown) systemctl -i poweroff ;;
-					*Logout) fancy-quit ;;
+					*Logout) fancy-quit && pidof -q herbstluftwm;;
 				esac
 				;;
 			*)

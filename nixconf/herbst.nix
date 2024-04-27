@@ -6,13 +6,25 @@
 
 {
    
-  services.xserver.displayManager.defaultSession = "none+herbstluftwm";
+  #xservices.xserver.displayManager.defaultSession = "none+herbstluftwm";
   services.xserver.windowManager.herbstluftwm.enable = true;
 #  xsession.windowManager.herbstluftwm.enable = true;
-  services.xserver.windowManager.herbstluftwm.configFile = /home/xeoncpu/.config/herbstluftwm/autostart;
-#  services.xserver.windowManager.herbstluftwm.package = pkgs.herbstluftwm.overrideAttrs ( o: {
- #   disabledTests = o.disabledTests ++ ["test_complete_keybind_offers_additional_mods_without_duplication"];
- # });
+ # services.xserver.windowManager.herbstluftwm.configFile = /home/xeoncpu/.config/herbstluftwm/autostart;
+#  services.xserver.windowManager.herbstluftwm.package = /etc/nixos/pkgs.herbst.nix;
+
+services.xserver.displayManager = {
+  session = [
+    { manage = "desktop";
+      name = "herbstluftwm";
+      start = ''
+        #${pkgs.herbstluftwm}/bin/herbstluftwm --locked &
+        herbstluftwm --locked &
+        waitPID=$!
+      '';
+    }
+  ];
+  defaultSession = "herbstluftwm";
+};
                 
    
 }

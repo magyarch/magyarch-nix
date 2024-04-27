@@ -5,52 +5,52 @@
 # Dmenu script for editing some of my more frequently edited config files.
 
 
-declare options=("alias
-bash
-bspwm
+declare options=("aliasrc
+zshrc
+bspwmrc
 nixconfig
-profile
-sxhkd
-vifm
-xresources
-xprofile
+.profile
+sxhkdrc
+vifmrc
+Xresources
+.xprofile
 quit")
 
-choice=$(echo -e "${options[@]}" | dmenu -i -fn 'JetBrains Mono Nerd Font-12' -p 'Edit files: ')
+choice=$(echo -e "${options[@]}" | dmenu -p 'Edit files: ')
 
 case "$choice" in
 	quit)
 		echo "Program terminated." && exit 1
 	;;
-	alias)
+	aliasrc)
 		choice="$HOME/.config/aliasrc"
 	;;
-	bash)
-		choice="$HOME/.bashrc"
+	zshrc)
+		choice="$HOME/.config/zsh/.zshrc"
 	;;
-	bspwm)
+	bspwmrc)
 		choice="$HOME/.config/bspwm/bspwmrc"
 	;;
-	profile)
+	.profile)
 		choice="$HOME/.profile"
 	;;
-	sxhkd)
+	sxhkdrc)
 	        choice="$HOME/.config/sxhkd/sxhkdrc"
 	;;
-	vifm)
+	vifmrc)
 		choice="$HOME/.config/vifm/vifmrc"
 	;;
 	nixconfig)
 		choice="/etc/nixos/configuration.nix"
 	;;
-	xresources)
+	Xresources)
 		choice="$HOME/.Xresources"
 	;;
-        xprofile)
+    xprofile)
 		choice="$HOME/.xprofile"
 	;;
 	*)
 		exit 1
 	;;
 esac
-subl  "$choice"
+kitty -e nvim  "$choice"

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-DIALOG_RESULT=$(echo -e 'Quit\nReboot\nPoweroff' | wofi --dmenu 'System')
+DIALOG_RESULT=$(echo -e 'Quit\nReboot\nPoweroff' | dmenu -p 'System')
 
 case $DIALOG_RESULT in
-        "Quit") qtile cmd-obj -o cmd -f shutdown ;;
-        "Reboot") systemctl reboot ;;
-        "Poweroff") systemctl poweroff ;;
+        "Quit") fancy-quit && qtile cmd-obj -o cmd -f shutdown ;;
+        "Reboot") fancy-quit && systemctl reboot ;;
+        "Poweroff") fancy-quit && systemctl poweroff ;;
         *) exit 0
 esac
