@@ -194,7 +194,7 @@ white     = "#c3cdc8"
 
 ------------------------------------------------------------------------
 
-myEventHook = serverModeEventHook <+> serverModeEventHookCmd <+> serverModeEventHookF "XMONAD_PRINT" (io . putStrLn) <+> minimizeEventHook
+myEventHook = serverModeEventHook <+> serverModeEventHookCmd <+> serverModeEventHookF "XMONAD_PRINT" (io . putStrLn) <+> minimizeEventHook <+> docksEventHook <+> handleEventHook def <+> fullscreenEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -242,7 +242,7 @@ dbusOutput dbus str = do
 myStartupHook = do
      spawnOnce "(sleep 1s && ~/.config/polybar/launch.sh) &"
      spawnOnce "sxhkd -c ~/.config/xmonad/sxhkdrc &"
-     spawnOnce "pidof -q compfy || compfy --config $HOME/.config/compfy.conf &"
+     spawnOnce "compfy --config $HOME/.config/compfy.conf &"
 ------------------------------------------------------------------------
 -- Command to launch the bar.
 --myBar = "xmobar"

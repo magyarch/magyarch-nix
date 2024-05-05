@@ -7,8 +7,8 @@ hc() {
 }
 
 
-#hc set_layout grid
-hc set_layout vertical
+hc set_layout grid
+#hc set_layout vertical
 
 hc emit_hook reload
 

@@ -46,7 +46,7 @@
 	   avahi.enable = true;
 	   avahi.nssmdns = true;
 	   avahi.openFirewall = true;
-	   picom.enable = true;
+	  # picom.enable = true;
      dbus.enable = true;
 	   fstrim = {
 	   enable = true;

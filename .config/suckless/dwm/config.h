@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx       = 6;        /* border pixel of windows */
+static const unsigned int borderpx       = 3;        /* border pixel of windows */
 static const unsigned int gappx          = 20;        /* gaps between windows */
 static const unsigned int snap           = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -10,7 +10,7 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray             = 1;     /* 0 means no systray */
 static const int showbar                 = 1;        /* 0 means no bar */
 static const int topbar                  = 1;        /* 0 means bottom bar */
-static const char *fonts[]               = { "JetBrains Mono Nerd:size=10" , "JoyPixels:size=8" , "FontAwesome:size=11:antialias=true:autohint=true" };
+static const char *fonts[]               = { "JetBrains Mono Nerd:size=9" , "JoyPixels:size=8" , "FontAwesome:size=10:antialias=true:autohint=true" };
 static const char dmenufont[]            = "JetBrainsMono Nerd:size=11";
 static const char col_1[]                = "#282a36";  /* background color of bar and border color unfocused windows */
 static const char col_2[]                = "#f8f8f2";  /* foreground color of bar and tags */
@@ -48,7 +48,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.52; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 

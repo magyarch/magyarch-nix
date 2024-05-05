@@ -13,15 +13,15 @@
   nixpkgs.overlays = [
     (final: prev: {
       dwm = prev.dwm.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dwm ;});
-#      dmenu = prev.dmenu.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dmenu ;});
+ #     dmenu = prev.dmenu.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dmenu ;});
 #      st = prev.st.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/st ;});
       slstatus = prev.slstatus.overrideAttrs (_: { src = /home/xeoncpu/.config/suckless/slstatus; });
    })
   ];
 
    environment.variables = {
-                 GDK_SCALE = "2";
-                 GDK_DPI_SCALE = "0.5";
+                 #GDK_SCALE = "2";
+                 #GDK_DPI_SCALE = "0.5";
                  XCURSOR_SIZE = "24";
     # #           DISPLAY=":  0";
                  QT_SCALE_FACTOR = "1.5";

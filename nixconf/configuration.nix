@@ -14,10 +14,10 @@
  #      ./appimage.nix   
 #       ./bluetooth.nix
 #     ./i3.nix
- #     ./dwm.nix
+#      ./dwm.nix
 #      ./spectrwm.nix
 #      ./bspwm.nix
-      ./herbst.nix
+#      ./herbst.nix
 #      ./wm.nix
 #       ./nvidia.nix
        ./redshift.nix
@@ -27,7 +27,7 @@
 #       ./qtile.nix
 #       ./qtile-wayland.nix
 #      ./hyprland.nix
-#      ./xmonad.nix
+      ./xmonad.nix
     ];
 
  
