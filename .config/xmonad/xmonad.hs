@@ -87,7 +87,7 @@ myFocusedBorderColor = "#6272a4"
 ------------------------------------------------------------------------
 -- LAYOUTS
 
-myLayout = avoidStruts $ smartBorders $ spacingRaw True (Border 5 5 5 5) True (Border 5 5 5 5) True $ gaps [(U,10), (D,10), (R,10), (L,10)] $
+myLayout = avoidStruts $ smartBorders $ spacingRaw True (Border 0 0 0 0) True (Border 0 0 0 0) True $ gaps [(U,10), (D,10), (R,10), (L,10)] $
 
            mkToggle (NBFULL ?? NOBORDERS ?? EOT)
 
@@ -116,7 +116,7 @@ myTabConfig = def {
     fontName = "xft:JetBrains Mono Nerd Font:size=11",
     activeBorderColor = "#6272a4",
     activeTextColor = "#6272a4",
-    activeColor = "#2f2b26",
+    activeColor = "#282a36",
     inactiveBorderColor = "#282a36",
     inactiveTextColor = "#c3cdc8",
     inactiveColor = "#282a36"
@@ -147,6 +147,11 @@ myScratchPads = [
  ---   where doubleLts '<' = "<<"
     --      doubleLts x = [x]
 
+--myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
+--myWorkspaces = clickable . (map xmobarEscape) $ ["\61612","\61899","\61947","\61635","\61502","\61501","\61705","\61564","\62150","\61872"]
+  --   where
+    --           clickable l = [ "<action=xdotool key super+" ++ show (n) ++ ">" ++ ws ++ "</action>" | (i,ws) <- zip [1..9] l, let n = i ]    
+
 myWorkspaces    = clickable $ ["\61612","\61899","\61947","\61635","\61502","\61501","\61705","\61564","\62150","\61872"]
 
         where
@@ -166,13 +171,13 @@ myManageHook = composeAll . concat $
     , [resource =? "sxiv" --> doCenterFloat]
     , [className =? "Lxappearance" --> doCenterFloat]
     --, [className =? "Pavucontrol" --> doCenterFloat]
-    , [className =? "steam" --> doIgnore]
-     , [className =? "Steam" --> doIgnore]
+    --, [className =? "Steam" --> doCenterFloat]
+    --, [className =? "steam" --> doCenterFloat]
     , [className =? "Zathura" --> doCenterFloat]
     , [className =? "firefox" --> doShift (myWorkspaces !! 0) <+> viewShift (myWorkspaces !! 0)]
     , [className =? "discord" --> doShift (myWorkspaces !! 1) <+> viewShift (myWorkspaces !! 1)]
     , [className =? "Sublime_text"  --> doShift (myWorkspaces !! 2) <+> viewShift (myWorkspaces !! 2)]
-    , [className =? "Steam" --> doShift (myWorkspaces !! 3) <+> viewShift (myWorkspaces !! 3)]
+    , [className =? "steam" --> doShift (myWorkspaces !! 6) <+> viewShift (myWorkspaces !! 6)]
     , [className =? "Vlc" --> doShift (myWorkspaces !! 4) <+> viewShift (myWorkspaces !! 4)]
     , [className =? "mpv" --> doCenterFloat <+> doShift (myWorkspaces !! 5) <+> viewShift (myWorkspaces !! 5)]
     , [className =? "Virtualbox" --> doShift (myWorkspaces !! 6) <+> viewShift (myWorkspaces !! 6)]
@@ -196,8 +201,15 @@ white     = "#c3cdc8"
 
 myEventHook = serverModeEventHook <+> serverModeEventHookCmd <+> serverModeEventHookF "XMONAD_PRINT" (io . putStrLn) <+> minimizeEventHook <+> docksEventHook <+> handleEventHook def <+> fullscreenEventHook
 
+--docksEventHook <+> fullscreenEventHook
 ------------------------------------------------------------------------
 -- Status bars and logging
+
+-- Command to launch the bar.
+--myBar = "xmobar"
+
+-- Custom PP, configure it as you like. It determines what is being written to the bar.
+--myPP = xmobarPP { ppCurrent = xmobarColor "#2e8b57" "" . wrap "["  "]" }
 
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.

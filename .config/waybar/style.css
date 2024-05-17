@@ -24,8 +24,8 @@
 }
 
 #custom-powermenu,
-#cpu,
 #temperature,
+#cpu,
 #memory,
 #workspaces,
 #clock,
@@ -57,6 +57,14 @@
   margin-right: 8px;
 }
 
+#temperature {
+  color: #6272a4;
+  padding-right: 11px;
+  margin-right: 8px;
+  background-color: #303643;
+  border-radius: 30px;
+}
+
 #scratchpad {
   color: #cffafe;
   padding-right: 4px;
@@ -72,9 +80,6 @@
   color: #61afef;
 }
 
-#temperature {
-  color: #98c379;
-}
 
 #memory {
   color: #e5c07b;
