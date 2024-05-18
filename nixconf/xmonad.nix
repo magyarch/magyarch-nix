@@ -9,15 +9,14 @@
       haskellPackages.dbus
       haskellPackages.List
       haskellPackages.monad-logger
-      haskellPackages.xmobar
-  #    unstable.haskellPackages.xmonad_0_18_0
       ];
   };
 
   services.xserver.windowManager.xmonad.config = builtins.readFile /home/xeoncpu/.config/xmonad/xmonad.hs;
 
   environment.systemPackages = with pkgs; [
-               #    unstable.haskellPackages.xmonad_0_18_0
+                   #haskellPackages.xmonad_0_18_0
+               
   ];
 
   environment.variables = {
@@ -30,7 +29,7 @@
                 #WLR_NO_HARDWARE_CURSOR = "1";
                 #NIXOS_OZONE_WL = "1";
                #_JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-    #            VDPAU_DRIVER = "radeonsi";
-       #         LIBVA_DRIVER_NAME = "radeonsi";
+                VDPAU_DRIVER = "radeonsi";
+                LIBVA_DRIVER_NAME = "radeonsi";
              };
 }

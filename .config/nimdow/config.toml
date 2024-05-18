@@ -1,0 +1,202 @@
+
+# Start external programs
+[[startProcess]]
+command = "pkill nimdow"
+keys = [ "Delete" ]
+modifiers = [ "control", "alt" ]
+
+[[startProcess]]
+command = "$BROWSER"
+keys = [ "w" ]
+modifiers = [ "super" ]
+
+[[startProcess]]
+command = "dmenu_run"
+keys = [ "d" ]
+modifiers = [ "super" ]
+
+[[startProcess]]
+command = "kitty"
+keys = [ "Return" ]
+modifiers = [ "super" ]
+
+# Example: Start process when region is clicked, see github wiki for what constitutes a region
+# [[startProcess]]
+# command = "notify-send \"Id: %1, rx: %2, cx: %4, cy: %5, w: %6, b: %7\""
+# clickRegion = 0
+
+[autostart]
+exec = [
+  "xsetroot -cursor_name left_ptr",
+  "nimdowstatus" &,
+  "~/.config/spectrwm/baraction.sh" &,
+  #"firefox",
+  #"st",
+]
+
+[settings]
+  # Window settings
+  borderWidth = 1
+  borderColorUnfocused = "#282a36"
+  borderColorFocused = "#6272a4"
+  borderColorUrgent = "#ff5555"
+  # Bar settings
+  barHeight = 20
+  windowTitlePosition = "center"
+  barBackgroundColor = "#282a36"
+  barForegroundColor = "#f8f8f2"
+  barSelectionColor = "#6272a4"
+  barUrgentColor = "#ff5555"
+  barTransparency = 255 # 0 to 255
+  barFonts = [
+    "JetBrains Mono Nerd:size=10:antialias=true",
+    "NotoColorEmoji:size=10:antialias=true"
+  ]
+  # Layout settings
+  gapSize = 12
+  outerGap = 0
+  resizeStep = 10
+  # Scratchpad settings
+  scratchpadWidth = 500
+  scratchpadHeight = 300
+  # General settings
+  loggingEnabled = false
+  reverseTagScrolling = false
+  # The key used for moving and resizing windows.
+  # All options: "control", "shift", "alt", "super", "caps lock", "mod1", "mod2", "mod3", "mod4", "mod5"
+  # alt is an alias for Mod1Mask,
+  # super is an alias for Mod4Mask
+  # See keyutils.nim for details
+  modKey = "super"
+
+# Window manager controls
+[controls]
+  [controls.reloadConfig]
+  keys = [ "r" ]
+  modifiers = [ "super", "shift" ]
+
+  [controls.focusPrevious]
+  keys = [ "k" ]
+  modifiers = [ "super" ]
+
+  [controls.focusNext]
+  keys = [ "j" ]
+  modifiers = [ "super" ]
+
+  [controls.moveWindowPrevious]
+  keys = [ "k" ]
+  modifiers = [ "super", "shift" ]
+
+  [controls.moveWindowNext]
+  keys = [ "j" ]
+  modifiers = [ "super", "shift" ]
+
+  [controls.toggleFullscreen]
+  keys = [ "f" ]
+  modifiers = [ "super" ]
+
+  [controls.destroySelectedWindow]
+  keys = [ "q" ]
+  modifiers = [ "super" ]
+
+  [controls.goToPreviousTag]
+  keys = [ "w" ]
+  modifiers = [ "alt" ]
+
+  [controls.moveWindowToPreviousTag]
+  keys = [ "w" ]
+  modifiers = [ "super", "shift" ]
+
+  [controls.focusPreviousMonitor]
+  keys = [ "comma" ]
+  modifiers = [ "super" ]
+
+  [controls.focusNextMonitor]
+  keys = [ "period" ]
+  modifiers = [ "super" ]
+
+  [controls.moveWindowToPreviousMonitor]
+  keys = [ "comma" ]
+  modifiers = [ "super", "shift" ]
+
+  [controls.moveWindowToNextMonitor]
+  keys = [ "period" ]
+  modifiers = [ "super", "shift" ]
+
+  [controls.increaseMasterCount]
+  keys = [ "z" ]
+  modifiers = [ "super" ]
+
+  [controls.decreaseMasterCount]
+  keys = [ "x" ]
+  modifiers = [ "super" ]
+
+  [controls.toggleFloating]
+  keys = [ "space" ]
+  modifiers = [ "super" ]
+
+  [controls.jumpToUrgentWindow]
+  keys = [ "u" ]
+  modifiers = [ "super" ]
+
+  [controls.goToTag]
+  keys = [ "1", "2", "3", "4", "5", "6", "7", "8", "9" ]
+  modifiers = [ "super" ]
+
+  [controls.goToLeftTag]
+  keys = [ "Left" ]
+  modifiers = [ "super" ]
+
+  [controls.goToRightTag]
+  keys = [ "Right" ]
+  modifiers = [ "super" ]
+
+  [controls.moveWindowToTag]
+  keys = [ "1", "2", "3", "4", "5", "6", "7", "8", "9" ]
+  modifiers = [ "super", "shift" ]
+
+  [controls.moveWindowToLeftTag]
+  keys = [ "Left" ]
+  modifiers = [ "super", "shift" ]
+
+  [controls.moveWindowToRightTag]
+  keys = [ "Right" ]
+  modifiers = [ "super", "shift" ]
+
+  [controls.toggleTagView]
+  keys = [ "1", "2", "3", "4", "5", "6", "7", "8", "9" ]
+  modifiers = [ "super", "control" ]
+
+  [controls.toggleWindowTag]
+  keys = [ "1", "2", "3", "4", "5", "6", "7", "8", "9" ]
+  modifiers = [ "super", "shift", "control" ]
+
+	[controls.increaseMasterWidth]
+	keys = [ "l" ]
+	modifiers = [ "super" ]
+
+	[controls.decreaseMasterWidth]
+	keys = [ "h" ]
+	modifiers = [ "super" ]
+
+  [controls.moveWindowToScratchpad]
+  keys = [ "s" ]
+  modifiers = [ "super", "shift" ]
+
+  [controls.popScratchpad]
+  keys = [ "s" ]
+  modifiers = [ "super" ]
+
+  [controls.rotateClients]
+  keys = [ "r" ]
+  modifiers = [ "alt" ]
+
+  [controls.toggleStatusBar]
+  keys = [ "b" ]
+  modifiers = [ "super" ]
+
+# Example monitor settings:
+ [monitors]
+  [monitors.default.tags]
+  all.defaultMasterWidthPercentage = 50
+

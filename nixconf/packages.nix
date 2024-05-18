@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let
+  unstable = import <unstable> { };
+in  
 
 {
 # List packages installed in system profile
@@ -34,11 +37,11 @@
 #     faac
      feh
      firefox
-     #glib
+     glib
      graphviz
-     gnome.file-roller
-     #gnome.nixos-gsettings-overrides
-     #gsettings-desktop-schemas
+     qt6Packages.qtstyleplugin-kvantum
+     libsForQt5.qtstyleplugin-kvantum
+     nwg-look
      ffmpeg
      fzf 
      git
@@ -73,6 +76,7 @@
      unrar 
      unzip
      openrgb-with-all-plugins
+     unstable.spotube
 #     opera
 #     ocenaudio
     # picom-allusive
@@ -96,6 +100,7 @@
      sxhkd 
      sxiv 
      system-config-printer 
+     stalonetray
      stremio
      ventoy-full
     # virt-manager 
@@ -116,6 +121,7 @@
      xorg.xdpyinfo
      xorg.xsetroot
      xmonadctl
+     xmobar
      xsel
 #     xorg.xinit 
      xwallpaper 
@@ -143,6 +149,14 @@
          };
          postInstall = '''';
        }))
+
+      (retroarch.override {
+    cores = with libretro; [
+      genesis-plus-gx
+      snes9x
+      beetle-psx-hw
+    ];
+  })
     
 #    (slstatus.overrideAttrs (_: { src = /home/xeoncpu/.config/suckless/slstatus; }
     ];

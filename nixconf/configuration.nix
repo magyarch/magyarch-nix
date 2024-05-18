@@ -2,6 +2,7 @@
  # My config
 { config, pkgs, ... }:
 
+
 {
 
   imports =
@@ -11,13 +12,13 @@
       ./services.nix
       ./amdgpu.nix
  #     ./awesomewm.nix
- #      ./appimage.nix   
+      ./appimage.nix   
 #       ./bluetooth.nix
 #     ./i3.nix
 #      ./dwm.nix
 #      ./spectrwm.nix
 #      ./bspwm.nix
-#      ./herbst.nix
+      ./herbst.nix
 #      ./wm.nix
 #       ./nvidia.nix
        ./redshift.nix
@@ -27,7 +28,8 @@
 #       ./qtile.nix
 #       ./qtile-wayland.nix
 #      ./hyprland.nix
-      ./xmonad.nix
+#       ./nimdow.nix
+#      ./xmonad.nix
     ];
 
  
@@ -147,21 +149,31 @@
     ];
   };
 
+  security.sudo.extraRules = [{
+     users = [ "xeoncpu" ];
+     commands = [{command = "ALL";
+     options = ["NOPASSWD"];
+     }];
+  }];
 
   programs = {
 	   dconf.enable = true;
      corectrl.enable = true;
      gamemode.enable = true;
+     gamescope.enable = true;
      steam = {
 	           enable = true;
-           remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-           dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-           package = pkgs.steam.override {
-           extraPkgs = pkgs: with pkgs; [
-                  gamescope
-        ];
+             gamescopeSession.enable = true;
+             remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+             dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+#             package = pkgs.steam.override {
+#             extraPkgs = pkgs: with pkgs; [
+#                  gamescope
+#        ];
+
 	   };
-    }; 
+ #   }; 
+
 	   thunar = {
 	   enable = true;
 	   plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman thunar-media-tags-plugin ];

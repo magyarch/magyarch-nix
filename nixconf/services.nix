@@ -29,18 +29,23 @@
  #             };
  #           };  
      
-     displayManager.sddm.enable = true;
+     
+     
+     };  
+
+    services.xserver.displayManager = {
+      sddm.enable = true;
      #displayManager.sddm.theme = "where-is-my-sddm-theme";
-    displayManager.sddm.settings = {
+      sddm.settings = {
                                      Theme = {
-                                     Current = "catppuccin-mocha";
+                                     Current = "monochrome";
                                      ThemeDir = "/sddmt";
                                       };
-                   };
-     
-     };    
+                   };  
 
+                };
     services = {
+       
            printing.enable = true;
            printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
 	   avahi.enable = true;
