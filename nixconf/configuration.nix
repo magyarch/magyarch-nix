@@ -18,7 +18,7 @@
 #      ./dwm.nix
 #      ./spectrwm.nix
 #      ./bspwm.nix
-      ./herbst.nix
+#      ./herbst.nix
 #      ./wm.nix
 #       ./nvidia.nix
        ./redshift.nix
@@ -28,7 +28,7 @@
 #       ./qtile.nix
 #       ./qtile-wayland.nix
 #      ./hyprland.nix
-#       ./nimdow.nix
+       ./nimdow.nix
 #      ./xmonad.nix
     ];
 
@@ -293,7 +293,7 @@
     (final: prev: {
 #      dwm = prev.dwm.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dwm ;});
       dmenu = prev.dmenu.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dmenu ;});
-      st = prev.st.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/st ;});
+      slstatus = prev.slstatus.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/slstatus ;});
     })
   ];
 

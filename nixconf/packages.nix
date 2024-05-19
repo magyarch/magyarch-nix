@@ -158,7 +158,7 @@ in
     ];
   })
     
-#    (slstatus.overrideAttrs (_: { src = /home/xeoncpu/.config/suckless/slstatus; }
+
     ];
 
         pathsToLink = [ "/libexec" ];

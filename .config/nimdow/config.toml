@@ -1,86 +1,117 @@
+###########################################################
+###############   App Rules    ###########################
+##########################################################
+
+ [[appRule]]
+ class = "firefox"
+# instance = "st"
+ #title = "brave"
+ monitor = 1
+ tags = [ 1 ]
+ state = "normal" # normal, floating, and fullscreen are all valid.
+
+ #[[appRule]]
+ #class = "discord"
+ monitor = 1
+ tags = [ 2 ]
+ state = "normal"
+
+
+
+
+ [[appRule]]
+ class = "kitty"
+ instance = "kitty"
+ title = "scratchpad"
+ state = "floating"
+ x = 700
+ y = 300
+
+[[appRule]]
+ class = "kitty"
+ instance = "kitty"
+ title = "Music"
+ state = "floating"
+ x = 700
+ y = 300
+
 
 # Start external programs
 [[startProcess]]
 command = "pkill nimdow"
-keys = [ "Delete" ]
-modifiers = [ "control", "alt" ]
+keys = [ "q" ]
+modifiers = [ "super", "shift" ]
 
 [[startProcess]]
 command = "$BROWSER"
 keys = [ "w" ]
 modifiers = [ "super" ]
 
-[[startProcess]]
-command = "dmenu_run"
-keys = [ "d" ]
-modifiers = [ "super" ]
-
-[[startProcess]]
-command = "kitty"
-keys = [ "Return" ]
-modifiers = [ "super" ]
-
 # Example: Start process when region is clicked, see github wiki for what constitutes a region
 # [[startProcess]]
-# command = "notify-send \"Id: %1, rx: %2, cx: %4, cy: %5, w: %6, b: %7\""
+# command = "notify-send \"Id: %1, rx: %2, cx: %4, w: %6\""
 # clickRegion = 0
 
 [autostart]
 exec = [
+  "setbg",    # Set the background
   "xsetroot -cursor_name left_ptr",
-  "nimdowstatus" &,
-  "~/.config/spectrwm/baraction.sh" &,
-  #"firefox",
+  "xset r rate 400 30",  # Speed xrate up
+#  "unclutter",   # Remove mouse when idle
+#  "xset s off -dpms",
+  "pidof -q compfy || compfy --config $HOME/.config/compfy.conf",
+#  "dunst",                 # dunst for notifications
+  "nm-applet",
+  "/nix/store/$(ls -la /nix/store | grep 'mate-polkit' | grep '4096' | awk '{print $9}' | sed -n '$p')/libexec/polkit-mate-authentication-agent-1",
+  "sxhkd -c ~/.config/nimdow/sxhkdrc",
+  "slstatus",
   #"st",
 ]
 
 [settings]
   # Window settings
-  borderWidth = 1
-  borderColorUnfocused = "#282a36"
+  borderWidth = 3
+  borderColorUnfocused = "#000000"
   borderColorFocused = "#6272a4"
   borderColorUrgent = "#ff5555"
   # Bar settings
-  barHeight = 20
-  windowTitlePosition = "center"
+  barHeight = 28
+  windowTitlePosition = "left"
   barBackgroundColor = "#282a36"
-  barForegroundColor = "#f8f8f2"
+  barForegroundColor = "#c3cdc8"
   barSelectionColor = "#6272a4"
   barUrgentColor = "#ff5555"
-  barTransparency = 255 # 0 to 255
   barFonts = [
-    "JetBrains Mono Nerd:size=10:antialias=true",
-    "NotoColorEmoji:size=10:antialias=true"
+    "JetBrains Mono Nerd Font:size=10:antialias=true",
+    "JoyPixels:size=10:antialias=true:autohint=true",
   ]
-  # Layout settings
-  gapSize = 12
-  outerGap = 0
-  resizeStep = 10
+	# Layout settings
+  gapSize = 10
+  outerGap = 10
+	resizeStep = 5
+  
   # Scratchpad settings
-  scratchpadWidth = 500
-  scratchpadHeight = 300
+  scratchpadWidth = 1280
+  scratchpadHeight = 800
+
   # General settings
   loggingEnabled = false
-  reverseTagScrolling = false
-  # The key used for moving and resizing windows.
-  # All options: "control", "shift", "alt", "super", "caps lock", "mod1", "mod2", "mod3", "mod4", "mod5"
-  # alt is an alias for Mod1Mask,
-  # super is an alias for Mod4Mask
-  # See keyutils.nim for details
-  modKey = "super"
+  #reverseTagScrolling = false
 
-# Window manager controls
-[controls]
+
+#################################################
+###############  Window manager controls  #######
+#################################################
+   [controls.rotateClients]
+  keys = [ "t" ]
+  modifiers = [ "super" ]
+
   [controls.reloadConfig]
   keys = [ "r" ]
   modifiers = [ "super", "shift" ]
 
-  [controls.focusPrevious]
-  keys = [ "k" ]
-  modifiers = [ "super" ]
-
   [controls.focusNext]
-  keys = [ "j" ]
+  keys = [ "Tab" ]
   modifiers = [ "super" ]
 
   [controls.moveWindowPrevious]
@@ -97,15 +128,15 @@ exec = [
 
   [controls.destroySelectedWindow]
   keys = [ "q" ]
-  modifiers = [ "super" ]
+  modifiers = [ "super"]
 
   [controls.goToPreviousTag]
   keys = [ "w" ]
-  modifiers = [ "alt" ]
+  modifiers = [ "super", "alt" ]
 
   [controls.moveWindowToPreviousTag]
-  keys = [ "w" ]
-  modifiers = [ "super", "shift" ]
+  keys = [ "h" ]
+  modifiers = [ "super", "alt" ]
 
   [controls.focusPreviousMonitor]
   keys = [ "comma" ]
@@ -124,11 +155,11 @@ exec = [
   modifiers = [ "super", "shift" ]
 
   [controls.increaseMasterCount]
-  keys = [ "z" ]
+  keys = [ "l" ]
   modifiers = [ "super" ]
 
   [controls.decreaseMasterCount]
-  keys = [ "x" ]
+  keys = [ "h" ]
   modifiers = [ "super" ]
 
   [controls.toggleFloating]
@@ -187,16 +218,29 @@ exec = [
   keys = [ "s" ]
   modifiers = [ "super" ]
 
-  [controls.rotateClients]
-  keys = [ "r" ]
-  modifiers = [ "alt" ]
+#################################################
+############### Example monitor settings ########
+#################################################
 
-  [controls.toggleStatusBar]
-  keys = [ "b" ]
-  modifiers = [ "super" ]
-
-# Example monitor settings:
- [monitors]
+[monitors]
   [monitors.default.tags]
-  all.defaultMasterWidthPercentage = 50
+  1.displayString = " "
+  2.displayString = " "
+  3.displayString = " "
+  4.displayString = " "
+  5.displayString = " "
+  6.displayString = " "
+  7.displayString = " "
+  8.displayString = " "
+  9.displayString = " "
+
+  [monitors.1.tags]
+  # 2.displayString = "two"
+  # Set the number of master windows per-monitor.
+   all.numMasterWindows = 1
+  # Set the number of master windows per-tag.
+  # 2.numMasterWindows = 1
+
+  # [monitors.2.tags]
+  # 2.displayString = "too"
 
