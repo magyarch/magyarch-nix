@@ -13,16 +13,17 @@ in
      amdgpu_top
      appimage-run
      acpi
-     adw-gtk3
+#     adw-gtk3
      atool
      apg
 #     amdvlk 
      bat 
      bc 
      binutils 
+#     unstable.bumblebee-status
   #   brave 
      curl
-     chromium 
+#     chromium 
    #  cpu-x
      dunst
 #     dxvk 
@@ -37,11 +38,11 @@ in
 #     faac
      feh
      firefox
-     glib
-     graphviz
-     qt6Packages.qtstyleplugin-kvantum
-     libsForQt5.qtstyleplugin-kvantum
-     nwg-look
+#     glib
+ #    graphviz
+#     qt6Packages.qtstyleplugin-kvantum
+ #    libsForQt5.qtstyleplugin-kvantum
+ #    nwg-look
      ffmpeg
      fzf 
      git
@@ -53,8 +54,8 @@ in
      kitty
 #     linuxKernel.packages.linux_xanmod.amdgpu-pro
      libnotify
-     libbsd
-     lf
+#     libbsd
+#     lf
      lm_sensors 
      lutris 
      lxappearance
@@ -76,31 +77,31 @@ in
      unrar 
      unzip
      openrgb-with-all-plugins
-     unstable.spotube
+#     unstable.spotube
 #     opera
 #     ocenaudio
     # picom-allusive
      p7zip 
      pamixer 
      pavucontrol
-     papirus-icon-theme
+#     papirus-icon-theme
 #     picom 
      polybar 
      protonup-qt 
      pulseaudio 
      pulsemixer 
      qbittorrent 
-     qogir-icon-theme
+ #    qogir-icon-theme
      rofi 
      scrot
-     slstatus
+#     slstatus
     # spectrwm
      sublime3
-     st
+#     st
      sxhkd 
      sxiv 
      system-config-printer 
-     stalonetray
+#     stalonetray
      stremio
      ventoy-full
     # virt-manager 
@@ -148,16 +149,7 @@ in
            hash = "sha256-7hvzwLEG5OpJzsrYa2AaIW8X0CPyOnTLxz+rgWteNYY=";
          };
          postInstall = '''';
-       }))
-
-      (retroarch.override {
-    cores = with libretro; [
-      genesis-plus-gx
-      snes9x
-      beetle-psx-hw
-    ];
-  })
-    
+       }))   
 
     ];
 

@@ -10,15 +10,6 @@
  tags = [ 1 ]
  state = "normal" # normal, floating, and fullscreen are all valid.
 
- #[[appRule]]
- #class = "discord"
- monitor = 1
- tags = [ 2 ]
- state = "normal"
-
-
-
-
  [[appRule]]
  class = "kitty"
  instance = "kitty"
@@ -26,6 +17,8 @@
  state = "floating"
  x = 700
  y = 300
+ width = 1280
+ height = 800
 
 [[appRule]]
  class = "kitty"
@@ -34,7 +27,49 @@
  state = "floating"
  x = 700
  y = 300
+ width = 1280
+ height = 800
 
+[[appRule]]
+class = "steam"
+monitor = 1
+tags = [ 8 ]
+
+[[appRule]]
+instance = "Steam*"
+monitor = 1
+tags = [ 8 ]
+
+
+[[appRule]]
+class = "lutris"
+monitor = 1
+tags = [ 5 ]
+
+[[appRule]]
+instance = "Lutris*"
+monitor = 1
+tags = [ 5 ]
+
+[[appRule]]
+class = "mpv"
+state = "floating"
+
+[[appRule]]
+class = "Pavucontrol"
+state = "floating"
+ x = 700
+ y = 300
+ width = 1280
+ height = 800
+
+[[appRule]]
+class = "Lxappearance"
+state = "floating"
+x = 700
+ y = 300
+ width = 1280
+ height = 800
 
 # Start external programs
 [[startProcess]]
@@ -65,7 +100,6 @@ exec = [
   "/nix/store/$(ls -la /nix/store | grep 'mate-polkit' | grep '4096' | awk '{print $9}' | sed -n '$p')/libexec/polkit-mate-authentication-agent-1",
   "sxhkd -c ~/.config/nimdow/sxhkdrc",
   "slstatus",
-  #"st",
 ]
 
 [settings]
@@ -89,10 +123,10 @@ exec = [
   gapSize = 10
   outerGap = 10
 	resizeStep = 5
-  
+
   # Scratchpad settings
-  scratchpadWidth = 1280
-  scratchpadHeight = 800
+  scratchpadWidth = 800
+  scratchpadHeight = 600
 
   # General settings
   loggingEnabled = false
@@ -164,7 +198,7 @@ exec = [
 
   [controls.toggleFloating]
   keys = [ "space" ]
-  modifiers = [ "super" ]
+  modifiers = [ "super", "shift" ]
 
   [controls.jumpToUrgentWindow]
   keys = [ "u" ]

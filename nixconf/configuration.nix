@@ -12,10 +12,12 @@
       ./services.nix
       ./amdgpu.nix
  #     ./awesomewm.nix
-      ./appimage.nix   
+#      ./appimage.nix   
 #       ./bluetooth.nix
 #     ./i3.nix
 #      ./dwm.nix
+       ./dk.nix
+ #      ./flake.nix
 #      ./spectrwm.nix
 #      ./bspwm.nix
 #      ./herbst.nix
@@ -25,10 +27,10 @@
  #     ./plex.nix
 #       ./sway.nix
 #      ./jellyfin.nix
-#       ./qtile.nix
+ #      ./qtile.nix
 #       ./qtile-wayland.nix
 #      ./hyprland.nix
-       ./nimdow.nix
+#       ./nimdow.nix
 #      ./xmonad.nix
     ];
 
@@ -143,10 +145,10 @@
     isNormalUser = true;
     description = "xeoncpu";
     extraGroups = [ "networkmanager" "wheel" "input" "disk" "power" "samba" ];
-    packages = with pkgs; [
+   # packages = with pkgs; [
     #  firefox
     #  thunderbird
-    ];
+    #];
   };
 
   security.sudo.extraRules = [{
@@ -296,11 +298,62 @@
       slstatus = prev.slstatus.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/slstatus ;});
     })
   ];
+  
 
  # Curiously, `services.samba` does not automatically open
   # the needed ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 445 139 ];
   networking.firewall.allowedUDPPorts = [ 137 138 ];
+
+  #nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  #  stylix = {
+  #   image = /home/.local/bin/wallpapers/Future/xy.png;
+  #   autoEnable = true;
+  #   polarity = "dark";
+  #  base16Scheme = {
+  #   base00 = "282828";
+  #   base01 = "3c3836";
+  #   base02 = "504945";
+  #   base03 = "665c54";
+  #   base04 = "bdae93";
+  #   base05 = "d5c4a1";
+  #   base06 = "ebdbb2";
+  #   base07 = "fbf1c7";
+  #   base08 = "fb4934";
+  #   base09 = "fe8019";
+  #   base0A = "fabd2f";
+  #   base0B = "b8bb26";
+  #   base0C = "8ec07c";
+  #   base0D = "83a598";
+  #   base0E = "d3869b";
+  #   base0F = "d65d0e";
+  # };
+
+  # cursor.package = pkgs.bibata-cursors;
+  # cursor.name = "Bibata-Modern-Ice";
+  # fonts.sizes = {
+  #   applications = 12;
+  #   terminal = 14;
+  #   desktop = 12;
+  #   popups = 12;
+  # };
+
+  # fonts = {
+  #   monospace = {
+  #     package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
+  #     name = "JetBrainsMono Nerd Font Mono";
+  #   };
+  #   sansSerif = {
+  #     package = pkgs.dejavu_fonts;
+  #     name = "DejaVu Sans";
+  #   };
+  #   serif = {
+  #     package = pkgs.dejavu_fonts;
+  #     name = "DejaVu Serif";
+  #    };
+  #  };
+  # };
 
    # Automatic Updates
   system.autoUpgrade = {
@@ -312,19 +365,21 @@
    # Nix Package Management
   nix = {
     settings.auto-optimise-store = true;
+  #  settings.experimental-features = [ "nix-command" "flakes" ];
     gc = {
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 2d";
     };
   };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05"; # Did you read the comment?
+  system.stateVersion = "23.11"; # Did you read the comment?
 
   nixpkgs.config.permittedInsecurePackages = [
                 "openssl-1.1.1w"
