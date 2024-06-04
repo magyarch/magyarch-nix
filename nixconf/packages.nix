@@ -25,6 +25,7 @@ in
      curl
 #     chromium 
    #  cpu-x
+   davinci-resolve-studio
      dunst
 #     dxvk 
 #     discord 
@@ -73,6 +74,7 @@ in
      neovim 
 #     nix-du
      ntfs3g 
+     nwg-look
      ueberzug 
      unrar 
      unzip
@@ -86,13 +88,13 @@ in
      pavucontrol
 #     papirus-icon-theme
 #     picom 
-     polybar 
+     unstable.polybar 
      protonup-qt 
      pulseaudio 
      pulsemixer 
-     qbittorrent 
+     unstable.qbittorrent 
  #    qogir-icon-theme
-     rofi 
+     rofi
      scrot
 #     slstatus
     # spectrwm
@@ -156,7 +158,7 @@ in
         pathsToLink = [ "/libexec" ];
      
 	 variables = {
-                   #GDK_SCALE = "2";
+                 #  GDK_SCALE = "2";
                    #GDK_DPI_SCALE = "0.5";
 	  	         #XCURSOR_SIZE = "24";
  # #    # #           DISPLAY=":  0";

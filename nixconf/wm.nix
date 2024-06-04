@@ -26,9 +26,9 @@
       qemu = {
         swtpm.enable = true;
         ovmf.enable = true;
-        qemuRunAsRoot = true;
-        onBoot = "ignore";
-        onShutdown = "shutdown";
+      #  qemuRunAsRoot = true;
+      #  onBoot = "ignore";
+      #  onShutdown = "shutdown";
         ovmf.packages = [ pkgs.OVMFFull.fd ];
       };
     };

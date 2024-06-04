@@ -1,0 +1,138 @@
+# Nimdow keybinds
+
+# Main and float terminal
+super + {_,shift + } Return
+    {$TERMINAL, scratch scratchpad}
+
+super + c
+    $HOME/.config/dk/power
+
+#  Gui editors
+super + {_,shift + } p
+    {discord,thunar}
+
+# Dmenu2 and rofi(window switcher, application launcher)
+super + {_,shift +} d
+    {dmenu_run, rofi_run -r}
+
+super + w
+    firefox
+
+super + shift + e
+   subl
+
+# Tui filemanager
+super + r
+   $TERMINAL -e $FILE
+
+# News, tui music player
+super + {_,shift + } n
+    {scratch News, scratch Music}
+
+# Reload sxhkd and nimdow
+super + Escape
+   pkill -USR1 -x sxhkd
+
+# Record and stream
+super + {KP_Home,KP_End}
+    {dmenurecord, live.sh}
+
+# Open help doc
+super + F1
+    zathura ~/.local/share/Magyarch-bspwm.pdf
+
+# Edit conf files,select display,search the net
+super + {F2,F3,F11}
+  {edconf.sh,displayselect,ducksearch}
+
+# Change background
+super + F8
+    wal
+
+# Take and pick screenshot
+super + {F4,F5}
+     {maim -d 2 ~/Képek/Képernyőképek/$(date +%Y-%m-%d_%H:%M:%S).png,maimpick}
+
+# Mount and umount a USB drive or Android device
+super + {F9,F10}
+    {dmenumount,dmenuumount}
+
+
+###########################################
+        # Volume Control
+###########################################
+
+# Decrease volume -5
+alt + {Up,Down}
+    {pamixer --allow-boost -i 5,pamixer --allow-boost -d 5}
+
+alt + b 
+   polybar-msg cmd toggle    
+
+# Mute volume
+F12
+   amixer set Master toggle
+
+
+# quit dk
+super + shift + q
+  qbittorrent
+
+super + shift +l 
+  lutris 
+
+# reload dkrc
+super + shift + r
+  dkcmd reload
+
+# restart dk
+super + shift + Escape
+  dkcmd restart
+
+# focus next or previous window
+super + {j,Tab}
+  dkcmd win focus {next,prev}
+
+# focus next or previous window
+super + {Up,Down}
+  dkcmd win focus {next,prev}
+
+# close window, cycle tiled windows in place
+super + {q,k}
+  dkcmd win {kill,cycle}
+
+# toggle fullscreen
+super + {_,shift + } f
+  dkcmd win {full,float}
+
+super + space
+ dkcmd set layout {tile,rtile,mono,grid,spiral,dwindle,tstack,none}
+
+# move window, signed (+/-) for relative changes
+super + shift + {Left,Up,Down,Right}
+  dkcmd win resize {x=-20,y=+20,y=-20,x=+20}
+
+# resize window, signed (+/-) for relative changes
+super + ctrl + {h,j,k,l}
+  dkcmd win resize {w=-20,h=+20,h=-20,w=+20}
+
+# resize window, signed (+/-) for relative changes
+super + ctrl + {Left,Up,Down,Right}
+  dkcmd win resize {w=-20,h=+20,h=-20,w=+20}
+
+# view, send, or follow to a workspace (by number)
+super + {_,shift + ,ctrl + }{1-9,0}
+  dkcmd ws {view,send,follow} {1-9,10}
+
+# view a workspace (by string)
+ctrl + {Up,Down}
+  dkcmd ws view {prev,next}
+
+# change border widths
+super + ctrl + {_,shift + }{equal,minus}
+  dkcmd set border {width,outer_width} {+1,-1}
+
+# change gap width
+super + {equal,minus}
+  dkcmd set gap {+5,-5}
+

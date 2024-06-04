@@ -33,23 +33,24 @@
      
      };  
 
-    services.xserver.displayManager = {
+    services.displayManager = {
       sddm.enable = true;
-     #displayManager.sddm.theme = "where-is-my-sddm-theme";
-      sddm.settings = {
-                                     Theme = {
-                                     Current = "monochrome";
-                                     ThemeDir = "/sddmt";
-                                      };
-                   };  
+      sddm.theme = "/sddmt/monochrome";
+      # sddm.settings = {
+      #                                Theme = {
+      #                                Current = "monochrome";
+      #                                ThemeDir = "/sddmt";
+      #                                 };
+      #              };  
 
                 };
+                
     services = {
        
            printing.enable = true;
            printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
 	   avahi.enable = true;
-	   avahi.nssmdns = true;
+	   avahi.nssmdns4 = true;
 	   avahi.openFirewall = true;
 	  # picom.enable = true;
      dbus.enable = true;

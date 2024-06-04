@@ -16,20 +16,20 @@
 #       ./bluetooth.nix
 #     ./i3.nix
 #      ./dwm.nix
-       ./dk.nix
+ #      ./dk.nix
  #      ./flake.nix
 #      ./spectrwm.nix
 #      ./bspwm.nix
 #      ./herbst.nix
-#      ./wm.nix
+      ./wm.nix
 #       ./nvidia.nix
-       ./redshift.nix
+#       ./redshift.nix
  #     ./plex.nix
 #       ./sway.nix
 #      ./jellyfin.nix
  #      ./qtile.nix
 #       ./qtile-wayland.nix
-#      ./hyprland.nix
+      ./hyprland.nix
 #       ./nimdow.nix
 #      ./xmonad.nix
     ];
@@ -224,7 +224,7 @@
 
 
  # Enable zsh as default shell
-   users.defaultUserShell = pkgs.zsh;
+  # users.defaultUserShell = pkgs.zsh;
    programs.zsh = {
       enable = true;
       syntaxHighlighting.enable = true;
@@ -273,7 +273,7 @@
        };
 
   };
-
+  
   xdg.portal = {
     enable = true;
     config.common.default = "*";
@@ -283,6 +283,7 @@
   fonts.packages = with pkgs; [
     noto-fonts-emoji
     font-awesome_4
+    source-code-pro
     joypixels
     dejavu_fonts
     liberation_ttf
@@ -307,54 +308,6 @@
 
   #nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  #  stylix = {
-  #   image = /home/.local/bin/wallpapers/Future/xy.png;
-  #   autoEnable = true;
-  #   polarity = "dark";
-  #  base16Scheme = {
-  #   base00 = "282828";
-  #   base01 = "3c3836";
-  #   base02 = "504945";
-  #   base03 = "665c54";
-  #   base04 = "bdae93";
-  #   base05 = "d5c4a1";
-  #   base06 = "ebdbb2";
-  #   base07 = "fbf1c7";
-  #   base08 = "fb4934";
-  #   base09 = "fe8019";
-  #   base0A = "fabd2f";
-  #   base0B = "b8bb26";
-  #   base0C = "8ec07c";
-  #   base0D = "83a598";
-  #   base0E = "d3869b";
-  #   base0F = "d65d0e";
-  # };
-
-  # cursor.package = pkgs.bibata-cursors;
-  # cursor.name = "Bibata-Modern-Ice";
-  # fonts.sizes = {
-  #   applications = 12;
-  #   terminal = 14;
-  #   desktop = 12;
-  #   popups = 12;
-  # };
-
-  # fonts = {
-  #   monospace = {
-  #     package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
-  #     name = "JetBrainsMono Nerd Font Mono";
-  #   };
-  #   sansSerif = {
-  #     package = pkgs.dejavu_fonts;
-  #     name = "DejaVu Sans";
-  #   };
-  #   serif = {
-  #     package = pkgs.dejavu_fonts;
-  #     name = "DejaVu Serif";
-  #    };
-  #  };
-  # };
-
    # Automatic Updates
   system.autoUpgrade = {
     enable = true;
@@ -365,7 +318,7 @@
    # Nix Package Management
   nix = {
     settings.auto-optimise-store = true;
-  #  settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = [ "nix-command" "flakes" ];
     gc = {
       automatic = true;
       dates = "weekly";

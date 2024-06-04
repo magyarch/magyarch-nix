@@ -1,0 +1,84 @@
+#!/bin/sh
+
+############___AAUTOSTART___##############
+# determine where to place the log file
+logfile="$HOME/.dkrc.log"
+[ -d "$HOME/.local/share/xorg" ] && logfile="$HOME/.local/share/xorg/dkrc.log"
+: > "$logfile"
+
+# (re)load sxhkd for keybinds
+if hash sxhkd >/dev/null 2>&1; then
+    pkill sxhkd
+    sxhkd -c "$HOME/.config/dk/sxhkdrc" &
+fi
+
+{ # compound command to redirect all output
+
+
+
+
+
+############_____DK CONFIG______#################
+
+    dkcmd set numws=9
+
+    dkcmd set ws=_ apply layout=tile master=1 stack=3 pad left=8 right=8 top=8 bottom=8 gap=10 msplit=0.5 ssplit=0.5
+
+    if [ $mon_count -gt 1 ]; then
+        dkcmd set ws=_ apply layout=tile master=1 stack=1 pad left=8 right=8 top=8 bottom=8 gap=12 msplit=0.4 ssplit=0.5
+    fi
+    dkcmd set ws=4 layout=grid pad l=60 r=60 t=20 b=20 gap=15
+    dkcmd set ws=5 layout=dwindle pad l=10 r=10 t=10 b=10 gap=15 msplit=0.5 ssplit=0.5
+
+
+    dkcmd set \
+        ws=1  name="" \
+        ws=2  name="" \
+        ws=3  name="" \
+        ws=4  name="" \
+        ws=5  name="" \
+        ws=6  name="" \
+        ws=7  name="" \
+        ws=8  name="" \
+        ws=9  name=""
+
+    dkcmd set focus_open=true focus_urgent=true focus_mouse=true
+    dkcmd set tile_tohead=0 tile_hints=false
+    dkcmd set win_minwh=50 win_minxy=10
+    dkcmd set smart_gap=false smart_border=false
+    dkcmd set mouse mod=super move=button1 resize=button3
+
+    dkcmd rule class="^firefox$" ws=1 focus=true
+    dkcmd rule class="^discord$" ws=2 focus=true
+    dkcmd rule class="^subl$" ws=3 focus=true
+    dkcmd rule class="^lutris$" ws=4 focus=true
+    dkcmd rule class="^qBittorrent$" ws=5 focus=true
+    dkcmd rule class="^mpv$" ws=6 focus=true
+    dkcmd rule class="^steam$" ws=7 focus=true
+    dkcmd rule class="^thunar$" ws=8 focus=true
+
+    dkcmd rule class="^(nitrogen|lxappearance|pavucontrol)$" x=center y=center w=1280 h=720 float=true
+    dkcmd rule title="^(scratchpad|Music|open file)$" float=true x=center y=center w=1280 h=720
+    dkcmd rule apply '*'
+
+    dkcmd set border width=3 \
+    colour \
+    focus='#6272a4' \
+    unfocus='#282a36' \
+    urgent='#ed8274' \
+   # outer_focus='#171b24' \
+   # outer_unfocus='#171b24' \
+   # outer_urgent='#171b24'
+
+
+   } >> "$logfile" 2>&1 # append responses
+
+# inform of any errors in a notification
+if grep -q 'error:' "$logfile"; then
+    hash notify-send && notify-send -t 0 -u critical "dkrc has errors" \
+        "$(awk '/error:/ {sub(/^error: /, ""); gsub(/</, "\<"); print}' "$logfile")"
+    exit 1
+fi
+
+exit 0
+
