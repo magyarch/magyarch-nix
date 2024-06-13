@@ -6,8 +6,9 @@ hc() {
     herbstclient "$@"
 }
 
+sxhkd -c $HOME/.config/herbstluftwm/sxhkdrc &
 
-hc set_layout grid
+hc set_layout horizontal
 #hc set_layout vertical
 
 hc emit_hook reload
@@ -256,7 +257,7 @@ hc rule title~'Music' floating=on floatplacement=center floating_geometry=1400x8
 hc rule title~'launcher' floating=on floatplacement=center floating_geometry=650x450
 #hc rule title~'Fájl*' focus=off floating=on floatplacement=center floating_geometry=400x200
 hc rule title~'Open File...' floating=on floatplacement=center floating_geometry=1200x800
-hc rule class~'(Pavucontrol|Lxappearance)' floating=on floatplacement=center floating_geometry=1400x800
+hc rule class~'(Pavucontrol|Lxappearance|webamp-desktop)' floating=on floatplacement=center floating_geometry=1400x800
 hc rule title~'GtkFileChooserDialog' floating=on floatplacement=center floating_geometry=1200x800
 
 # give focus to most common terminals

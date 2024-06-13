@@ -17,7 +17,6 @@
 programs.hyprland = {
     enable = true;
     xwayland.enable = true;
-   # enableNvidiaPatches = true;
   };
 
 #env var
@@ -37,6 +36,7 @@ programs.hyprland = {
                          swappy
                          slurp
                          hyprland-protocols
+                         #hyprlandPlugins.hy3
                          wayland-utils
                          #xwayland
                          wl-clipboard

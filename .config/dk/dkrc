@@ -56,7 +56,8 @@ fi
     dkcmd rule class="^mpv$" ws=6 focus=true
     dkcmd rule class="^steam$" ws=7 focus=true
     dkcmd rule class="^thunar$" ws=8 focus=true
-
+    
+    dkcmd rule class="^(upc.exe|Sxiv)$" x=center y=center float=true
     dkcmd rule class="^(nitrogen|lxappearance|pavucontrol)$" x=center y=center w=1280 h=720 float=true
     dkcmd rule title="^(scratchpad|Music|open file)$" float=true x=center y=center w=1280 h=720
     dkcmd rule apply '*'

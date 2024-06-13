@@ -18,8 +18,9 @@
                               pyxdg
                               pywlroots
                               pygobject3
+                              qtile-extras
                              # xlib
-                              (qtile-extras.overridePythonAttrs(old: { disabledTestPaths = [ "test/widget/test_strava.py" ]; }))
+          #                    (qtile-extras.overridePythonAttrs(old: { disabledTestPaths = [ "test/widget/test_strava.py" ]; }))
     ];
 
     nixpkgs.overlays = [
@@ -43,7 +44,7 @@
   })
 ];
 
-services.xserver.displayManager.sessionPackages = [ pkgs.qtile-unwrapped ];
+services.displayManager.sessionPackages = [ pkgs.qtile-unwrapped ];
 #env var
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSOR = "1";

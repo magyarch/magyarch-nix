@@ -16,22 +16,23 @@
 #       ./bluetooth.nix
 #     ./i3.nix
 #      ./dwm.nix
- #      ./dk.nix
+       ./dk.nix
  #      ./flake.nix
 #      ./spectrwm.nix
 #      ./bspwm.nix
 #      ./herbst.nix
       ./wm.nix
 #       ./nvidia.nix
-#       ./redshift.nix
+       ./redshift.nix
  #     ./plex.nix
 #       ./sway.nix
 #      ./jellyfin.nix
- #      ./qtile.nix
+#       ./qtile.nix
 #       ./qtile-wayland.nix
-      ./hyprland.nix
+#      ./hyprland.nix
 #       ./nimdow.nix
 #      ./xmonad.nix
+#       ./xdg-default-apps.nix
     ];
 
  
@@ -39,6 +40,7 @@
      bootspec.enable = true;
     # initrd.kernelModules = [ "amdgpu" ];
   #  kernelModules = [ "bfq" ];
+    #plymouth.enable = true;
     loader = {
         systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;
@@ -88,6 +90,7 @@
   zramSwap.enable = true;
   zramSwap.memoryPercent = 50;
 
+  nixpkgs.config.allowUnsupportedSystem = true;
   # Enable networking
   networking = {
         networkmanager.enable = true;
@@ -224,7 +227,7 @@
 
 
  # Enable zsh as default shell
-  # users.defaultUserShell = pkgs.zsh;
+   users.defaultUserShell = pkgs.zsh;
    programs.zsh = {
       enable = true;
       syntaxHighlighting.enable = true;
@@ -238,6 +241,8 @@
          rebuildboot="sudo /run/current-system/bin/switch-to-configuration boot";
          runheroic="~/Letöltések && appimage-run Heroic-2.9.1.AppImage";
          listgens="sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
+         fixnonixsearchpath="sudo nixos-rebuild boot -I nixos-config=/etc/nixos/configuration.nix --upgrade";
+         listallinstalled="sudo nix-store --query --requisites /run/current-system | cut -d- -f2- | sort | uniq";
 
          # Shorts
           ka="killall";
@@ -296,7 +301,8 @@
     (final: prev: {
 #      dwm = prev.dwm.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dwm ;});
       dmenu = prev.dmenu.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dmenu ;});
-      slstatus = prev.slstatus.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/slstatus ;});
+      #slstatus = prev.slstatus.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/slstatus ;});
+      #myslstatus = final.slstatus.overrideAttrs (_: { src = /home/xeoncpu/.config/suckless/slstatus ;});
     })
   ];
   
@@ -305,8 +311,6 @@
   # the needed ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 445 139 ];
   networking.firewall.allowedUDPPorts = [ 137 138 ];
-
-  #nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
    # Automatic Updates
   system.autoUpgrade = {
@@ -318,7 +322,7 @@
    # Nix Package Management
   nix = {
     settings.auto-optimise-store = true;
-    settings.experimental-features = [ "nix-command" "flakes" ];
+   # settings.experimental-features = [ "nix-command" "flakes" ];
     gc = {
       automatic = true;
       dates = "weekly";

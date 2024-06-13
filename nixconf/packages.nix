@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  unstable = import <unstable> { };
+   unstable = import <unstable> { };
 in  
 
 {
@@ -9,13 +9,11 @@ in
     environment = {
         systemPackages = with pkgs; [
      
-     alacritty
      amdgpu_top
      appimage-run
      acpi
 #     adw-gtk3
      atool
-     apg
 #     amdvlk 
      bat 
      bc 
@@ -23,6 +21,7 @@ in
 #     unstable.bumblebee-status
   #   brave 
      curl
+   #  catppuccin-sddm
 #     chromium 
    #  cpu-x
    davinci-resolve-studio
@@ -38,7 +37,7 @@ in
      eww 
 #     faac
      feh
-     firefox
+     unstable.firefox
 #     glib
  #    graphviz
 #     qt6Packages.qtstyleplugin-kvantum
@@ -47,6 +46,7 @@ in
      ffmpeg
      fzf 
      git
+     gpt4all
      handbrake
 #     haskellPackages.xmonad_0_18_0
      htop 
@@ -79,24 +79,17 @@ in
      unrar 
      unzip
      openrgb-with-all-plugins
-#     unstable.spotube
-#     opera
-#     ocenaudio
-    # picom-allusive
      p7zip 
      pamixer 
-     pavucontrol
-#     papirus-icon-theme
-#     picom 
-     unstable.polybar 
-     protonup-qt 
+     pavucontrol 
+     polybar 
+     protonup
      pulseaudio 
      pulsemixer 
-     unstable.qbittorrent 
+     qbittorrent 
  #    qogir-icon-theme
      rofi
      scrot
-#     slstatus
     # spectrwm
      sublime3
 #     st
@@ -106,13 +99,14 @@ in
 #     stalonetray
      stremio
      ventoy-full
+     vieb
     # virt-manager 
      #vscode-with-extensions
      #vscode-extensions.bbenoist.nix
      wineWowPackages.full 
      wmctrl
-#     xwayland
-     vifm 
+     vifm
+     vlc 
      xorg.xev
      xclip 
      x264 
@@ -126,7 +120,7 @@ in
      xmonadctl
      xmobar
      xsel
-#     xorg.xinit 
+     xorg.xinit 
      xwallpaper 
      yt-dlp 
 #     (opera.override { proprietaryCodecs = true; })
@@ -152,24 +146,32 @@ in
          };
          postInstall = '''';
        }))   
-
+     # (slstatus.overrideAttrs (_: { src = /home/xeoncpu/.config/suckless/slstatus ; }))
+  #    (catppuccin-sddm.override {
+  #   flavor = "mocha";
+  #   font  = "Noto Sans";
+  #   fontSize = "9";
+  #   background = "/home/xeoncpu/.local/bin/wallpapers/Future/mocha.png";
+  #   loginBackground = true;
+  # })         
     ];
 
         pathsToLink = [ "/libexec" ];
      
 	 variables = {
-                 #  GDK_SCALE = "2";
-                   #GDK_DPI_SCALE = "0.5";
+                #   GDK_SCALE = "2";
+                #   GDK_DPI_SCALE = "0.5";
 	  	         #XCURSOR_SIZE = "24";
  # #    # #           DISPLAY=":  0";
-  	#         QT_SCALE_FACTOR = "1.5";
+  	              QT_SCALE_FACTOR = "1.6";
  #    #             QT_AUTO_SCREEN_SCALE_FACTOR = "auto";
+#                  QT_QPA_PLATFORM = "wayland";
  #                #WLR_NO_HARDWARE_CURSOR = "1";
  #                #NIXOS_OZONE_WL = "1";
                   ROC_ENABLE_PRE_VEGA = "1";
                   AMD_VULKAN_ICD="RADV";
-	              #VDPAU_DRIVER = "radeonsi";
-                  #LIBVA_DRIVER_NAME = "radeonsi";
+	              VDPAU_DRIVER = "radeonsi";
+                  LIBVA_DRIVER_NAME = "radeonsi";
               };
           }; 
 
