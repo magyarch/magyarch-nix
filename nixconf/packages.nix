@@ -163,7 +163,7 @@ in
                 #   GDK_DPI_SCALE = "0.5";
 	  	         #XCURSOR_SIZE = "24";
  # #    # #           DISPLAY=":  0";
-  	              QT_SCALE_FACTOR = "1.6";
+  	       #       QT_SCALE_FACTOR = "1.55";
  #    #             QT_AUTO_SCREEN_SCALE_FACTOR = "auto";
 #                  QT_QPA_PLATFORM = "wayland";
  #                #WLR_NO_HARDWARE_CURSOR = "1";

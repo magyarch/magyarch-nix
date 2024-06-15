@@ -16,20 +16,20 @@
 #       ./bluetooth.nix
 #     ./i3.nix
 #      ./dwm.nix
-       ./dk.nix
- #      ./flake.nix
+ #      ./dk.nix
+ #      ./river.nix
 #      ./spectrwm.nix
 #      ./bspwm.nix
 #      ./herbst.nix
       ./wm.nix
 #       ./nvidia.nix
-       ./redshift.nix
+#       ./redshift.nix
  #     ./plex.nix
 #       ./sway.nix
 #      ./jellyfin.nix
 #       ./qtile.nix
 #       ./qtile-wayland.nix
-#      ./hyprland.nix
+     ./hyprland.nix
 #       ./nimdow.nix
 #      ./xmonad.nix
 #       ./xdg-default-apps.nix
