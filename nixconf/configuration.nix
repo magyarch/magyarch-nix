@@ -15,13 +15,14 @@
 #      ./appimage.nix   
 #       ./bluetooth.nix
 #     ./i3.nix
+#       ./homem.nix
 #      ./dwm.nix
  #      ./dk.nix
  #      ./river.nix
 #      ./spectrwm.nix
 #      ./bspwm.nix
 #      ./herbst.nix
-      ./wm.nix
+        ./wm.nix
 #       ./nvidia.nix
 #       ./redshift.nix
  #     ./plex.nix
@@ -29,7 +30,8 @@
 #      ./jellyfin.nix
 #       ./qtile.nix
 #       ./qtile-wayland.nix
-     ./hyprland.nix
+        ./hyprland.nix
+#         ./wayfire.nix
 #       ./nimdow.nix
 #      ./xmonad.nix
 #       ./xdg-default-apps.nix
@@ -161,6 +163,7 @@
      }];
   }];
 
+  #programs = { steam.gamescopeSession.enable = true; };
   programs = {
 	   dconf.enable = true;
      corectrl.enable = true;
@@ -227,7 +230,7 @@
 
 
  # Enable zsh as default shell
-   users.defaultUserShell = pkgs.zsh;
+  users.defaultUserShell = pkgs.zsh;
    programs.zsh = {
       enable = true;
       syntaxHighlighting.enable = true;

@@ -34,10 +34,19 @@
 #      default_session = initial_session;
 #    };
 #  };
+    
+   services.displayManager.sddm = {
+      enable = true;
+#      autoNumlock = true;
+      wayland.enable = true;
+      theme = "catppuccin-mocha";
+      #package = pkgs.kdePackages.sddm;
+    };
 
-    services.displayManager.sddm = {
-    enable = true;   
-  };
+
+  #   services.displayManager.sddm = {
+  #   enable = true;   
+  # };
                       
                 
     services = {

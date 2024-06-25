@@ -12,18 +12,14 @@ in
      amdgpu_top
      appimage-run
      acpi
-#     adw-gtk3
-     atool
-#     amdvlk 
+     apg
+     atool 
      bat 
+     bemenu
      bc 
-     binutils 
-#     unstable.bumblebee-status
-  #   brave 
+     binutils  
      curl
-   #  catppuccin-sddm
-#     chromium 
-   #  cpu-x
+     catppuccin-sddm
    davinci-resolve-studio
      dunst
 #     dxvk 
@@ -38,17 +34,10 @@ in
 #     faac
      feh
      unstable.firefox
-#     glib
- #    graphviz
-#     qt6Packages.qtstyleplugin-kvantum
- #    libsForQt5.qtstyleplugin-kvantum
- #    nwg-look
      ffmpeg
      fzf 
      git
-     gpt4all
      handbrake
-#     haskellPackages.xmonad_0_18_0
      htop 
      jamesdsp
      killall
@@ -69,8 +58,7 @@ in
      ncmpcpp 
      maim 
      mpv 
-#     mprime
-     neofetch 
+     fastfetch
      neovim 
 #     nix-du
      ntfs3g 
@@ -82,7 +70,8 @@ in
      p7zip 
      pamixer 
      pavucontrol 
-     polybar 
+     polybar
+     unstable.pyprland 
      protonup
      pulseaudio 
      pulsemixer 
@@ -90,6 +79,7 @@ in
  #    qogir-icon-theme
      rofi
      scrot
+     smplayer
     # spectrwm
      sublime3
 #     st
@@ -104,9 +94,11 @@ in
      #vscode-with-extensions
      #vscode-extensions.bbenoist.nix
      wineWowPackages.full 
+     wineWowPackages.waylandFull
      wmctrl
+     walker
      vifm
-     vlc 
+     zellij 
      xorg.xev
      xclip 
      x264 
@@ -129,8 +121,15 @@ in
        withVencord = true;
      })
 
-     
-      (picom.overrideAttrs (oldAttrs: rec {
+     (catppuccin-sddm.override {
+    flavor = "mocha";
+    font  = "Noto Sans";
+    fontSize = "9";
+    background = "${./mocha.png}";
+    loginBackground = true;
+  })
+
+     (picom.overrideAttrs (oldAttrs: rec {
          pname = "compfy";
          version = "1.7.2";
          buildInputs = [

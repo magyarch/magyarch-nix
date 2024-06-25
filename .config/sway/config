@@ -1,8 +1,16 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
+# i3 config file (v4) by xeoncpu
+
+
+output DP-2 scale 1.33
+# Input configuration
+input * {
+    xkb_layout hu
+    xkb_variant nodeadkeys
+ #   xkb_options caps:swapescape
+}
+
+# Gaps ####################################################################################
+
 gaps outer 6
 gaps inner 8
 
@@ -11,116 +19,46 @@ set $altmod Mod1
 
 # Basic definition #######################################################################
 
-for_window [class="^.*"] border pixel 3
-#for_window [class="^"] split toggle
+for_window [app_id="^.*"] border pixel 3
+#for_window [app_id="^"] split toggle
 
-### Variables
 
-# Home row direction keys, like vim
-set $left h
-set $down j
-set $up k
-set $right l
-# Your preferred terminal emulator
-set $term kitty
-# Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
-set $menu dmenu_path | dmenu_run | xargs swaymsg exec --
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Only initiate a tiling drag when the modifier is held:
+#tiling_drag modifier titlebar
+
+
+# Font for window titles. Will also be used by the bar unless a different font ##############
+# is used in the bar {} block below.
 font pango:JetBrains Mono Nerd Font 9
 
-### Output configuration
-#
-# Default wallpaper (more resolutions are available in /run/current-system/sw/share/backgrounds/sway/)
-output * bg /run/current-system/sw/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
+# Autostart  ######################################################
+# exec --no-startup-id xrandr --dpi 192
+ exec_always --no-startup-id /nix/store/$(ls -la /nix/store | grep 'mate-polkit' | grep '4096' | awk '{print $9}' | sed -n '$p')/libexec/polkit-mate-authentication-agent-1 &
+ exec --no-startup-id systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+ exec --no-startup-id swww init && swww img ~/.local/bin/wallpapers/Future/xy.png
+exec --no-startup-id exec wlsunset -l 16.6 -L 47.6
+exec --no-startup-id dbus-update-activation-enviroment --systemd WAYLAND_DISPLAY SWAYSOCK
+ #exec --no-startup-id xset r rate 300 50
+ #exec --no-startup-id xsetroot -cursor_name left_ptr
+# exec --no-startup-id xrandr --output HDMI-0 --scale 2x2 --mode 1920x1080 --rotate left --output $monitor1 --primary --mode 3840x2160 --left-of HDMI-0
 
-### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
 
-### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+#default_orientation vertical
 
-### Key bindings
-#
-# Basics:
-#
-    # Start a terminal
-    bindsym $mod+Return exec $term
 
-    # Kill focused window
-    bindsym $mod+q kill
+# Workspaces ######################################################
 
-    # Start your launcher
-    bindsym $mod+d exec wofi --conf=$HOME/.config/wofi/config
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+# orientation for new workspaces
 
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-    floating_modifier $mod normal
 
-    # Reload the configuration file
-    bindsym $mod+Shift+Escape reload
 
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+x exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-     exec_always --no-startup-id /nix/store/$(ls -la /nix/store | grep 'mate-polkit' | grep '4096' | awk '{print $9}' | sed -n '$p')/libexec/polkit-mate-authentication-agent-1 &
-#
-# Moving around:
-#
-    # Move your focus around
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
-    # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
-
-    # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
-    # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
-#
-# Workspaces:
-#
-  set $ws1 "1: WWW.. ☢️"
+set $ws1 "1: WWW.. ☢️"
 set $ws2 "2: Chat 🤬"
 set $ws3 "3: Editor ⚒️"
 set $ws4 "4: Music 🍭"
@@ -170,119 +108,177 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+odiaeresis move container to workspace number $ws10
 
-# for my 4k resolution
-for_window [class="Pinentry"] sticky enable
-for_window [class="sent"] border pixel 0px
-for_window [title="GIMP Startup"] move workspace $ws5
-for_window [class="Gimp"] move workspace $ws5
-for_window [title="^QEMU$"] floating enable
-for_window [window_role="GtkFileChooserDialog"] resize set 1680 1020
-for_window [window_role="GtkFileChooserDialog"] move position center
-for_window [title="Default - Wine desktop"] floating enable
-for_window [class="(?i)Pavucontrol|mupdf|sxiv|feh"] floating enable, resize set 1680 1020, move position center, focus
-for_window [class="(?i)mpv"] floating enable, resize set 1680 1020, move position center, focus
-for_window [title="Music"] floating enable, resize set 1680 1020, move position center, focus
-for_window [title="scratchpad"] floating enable, resize set 1680 1020, move position center, focus
-for_window [class="Lxappearance|system-config-printer|System-config-printer.py"] floating enable, resize set 1680 1020, move position center, focus
 
 
-for_window [title="float"] floating enable, resize set 1680 1020, move position center, focus
-for_window [title="floating"] floating enable, resize set 1680 1020, move position center, focus
+# Moving workspaces between screens
+bindsym $mod+Shift+m move workspace to output right
 
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="task_dialog"] floating enable
+# _move_ the focused window with the same, but add Shift
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Move your focus around
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
+# Swap focus between the tiling area and the floating area
+bindsym $mod+space focus mode_toggle
 
 
+# Focus between output
+bindsym $mod+Return exec kitty
+bindsym $mod+d exec fuzzel 
+bindsym $mod+e exec subl
+bindsym $mod+Shift+p exec thunar
+bindsym $mod+w exec firefox
+bindsym $mod+F5 exec grim -g "$(slurp)" - | swappy -f -
+bindsym $mod+q kill
+bindsym $mod+Shift+n exec kitty -e ncmpcpp
 
-# Assign application to workspace ####################################################
+bindsym $mod+Shift+Escape reload
+bindsym $mod+c exec power
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+t layout tabbed
 
-for_window [class="$BROWSER|Brave-browser|Microsoft-edge|firefox"] move to workspace $ws1 focus
-for_window [class="urxvt|st|qBittorrent"] move to workspace $ws7 focus
-for_window [class="subl|Subl|Subl3|subl3"] move to workspace $ws3 focus
-for_window [class="discord|Discord"] move to workspace $ws2 focus
-for_window [class="steam|Steam"] move to workspace $ws5 focus
-#for_window [class="transmission-gtk|Transmission-gtk"] move to workspace $ws5 focus
-for_window [class="mpv|Mpv"] move to workspace $ws6 focus
-for_window [class="virtualbox|VirtualBox"] move to workspace $ws9 focus
-for_window [class="thunar|Thunar|pcmanfm"] move to workspace $ws8 focus
-for_window [class="spotify|Spotify"] move to workspace $ws9 focus
-# Layout stuff:
-#
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
-    bindsym $mod+b splith
-    bindsym $mod+v splitv
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
 
-    # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym l resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym h resize grow width 10 px or 10 ppt
 
-    # Make the current focus fullscreen
-    bindsym $mod+f fullscreen
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
 
-    # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+        # back to normal: Enter or Escape or $mod+z
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+z mode "default"
+}
 
-    # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+bindsym $mod+z mode "resize"
 
-    # Move focus to the parent container
-    bindsym $mod+a focus parent
-#
+
+# Floating enable #####################################################################
+
+for_window [app_id="Pinentry"] sticky enable
+#for_window [app_id="ncmpcpp"] floating enable, resize set 1280 620, move position center, focus
+for_window [app_id="ncmpcpp"] floating enable, resize set 1276px 814px
+
 # Scratchpad:
 #
     # Sway has a "scratchpad", which is a bag of holding for windows.
     # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+    bindsym $mod+Shift+s move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
+    bindsym $mod+s scratchpad show
 #
-# Resizing containers:
-#
-mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
 
-    # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
 
-    # Return to default mode
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+r mode "resize"
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
+
+
+# # for my 4k resolution
+# for_window [app_id="Pinentry"] sticky enable
+# for_window [app_id="sent"] border pixel 0px
+# for_window [title="GIMP Startup"] move workspace $ws5
+# for_window [app_id="Gimp"] move workspace $ws5
+# for_window [title="^QEMU$"] floating enable
+# for_window [window_role="GtkFileChooserDialog"] resize set 1680 1020
+# for_window [window_role="GtkFileChooserDialog"] move position center
+# for_window [title="Default - Wine desktop"] floating enable
+# for_window [app_id="(?i)Pavucontrol|mupdf|sxiv|feh"] floating enable, resize set 1680 1020, move position center, focus
+# for_window [app_id="(?i)mpv"] floating enable, resize set 1680 1020, move position center, focus
+ for_window [app_id="ncmpcpp"] move scratchpad
+ for_window [app_id="ncmpcpp"] floating enable
+ for_window [app_id="ncmpcpp"] scratchpad show
+# for_window [app_id="Lxappearance|system-config-printer|System-config-printer.py"] floating enable, resize set 1680 1020, move position center, focus
+
+
+# for_window [title="float"] floating enable, resize set 1080 800, move position center, focus
+# for_window [title="floating"] floating enable, resize set 1680 1020, move position center, focus
+
+# for_window [window_role="pop-up"] floating enable
+# for_window [window_role="task_dialog"] floating enable
+
+
+
+# Assign application to workspace ####################################################
+assign [app_id="subl|Subl|Subl3|subl3"] $ws3
+for_window [app_id="subl|Subl|Subl3|subl3"] focus
+
+assign [app_id="$BROWSER|Brave-browser|Microsoft-edge|firefox"] $ws1
+for_window [app_id="$BROWSER|Brave-browser|Microsoft-edge|firefox"] focus 
+
+assign [app_id="qBittorrent"] $ws7
+for_window [app_id="qBittorrent"] focus 
+
+assign [app_id="discord|Discord"] $ws2 
+for_window [app_id="discord|Discord"] focus
+
+assign [app_id="steam|Steam"] $ws5 
+for_window [app_id="steam|Steam"] focus 
+
+assign [app_id="mpv|Mpv"] $ws6
+for_window [app_id="mpv|Mpv"] focus 
+
+assign [app_id="thunar|Thunar|pcmanfm"] $ws8 
+for_window [app_id="thunar|Thunar|pcmanfm"] focus 
+ 
+
+# Colors ############################################################################
+
+# app_id                 border  bground text    indicator child_border
+client.focused          #6272a4 #6272a4 #C3CDC8 #6272a4   #6272a4
+client.focused_inactive #333333 #5F676A #FFFFFF #484E50   #5F676A
+client.unfocused        #333333 #222222 #888888 #292D2E   #222222
+client.urgent           #2F343A #900000 #FFFFFF #900000   #900000
+client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
+
+client.background       #282a36
+
 bar {
-    position top
+#     output $monitor1
+     font pango: JetBrains Mono Nerd Font 9
+     status_command i3status-rs ~/.config/i3status-rust/config.toml
+     strip_workspace_numbers yes
+ #    status_command ~/.local/bin/bumblebee-status/bumblebee-status -m spacer sensors disk nvidiagpu memory date time pasink -p sensors.show_freq  sensors.match_number=0  interval=0.5 spacer.left-click="wal" disk.left-click="gnome-disks"  date.left-click="eww open --toggle calendar" pasink.left-click="pavucontrol" \
+     #-t firefox-dark-powerline
+     position top
 
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
 
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
+
+  colors {
+    background #282a36
+    statusline #C3CDC8
+    separator  #C3CDC8
+
+
+    focused_workspace  #6272a4 #6272a4 #C3CDC8
+    active_workspace   #6272a4 #6272a4 #C3CDC8
+    inactive_workspace #333333 #222222 #888888
+    urgent_workspace   #2F343A #900000 #FFFFFF
+    binding_mode       #2F343A #900000 #FFFFFF
+  }
+
+ #include /etc/sway/config.d/*
 }
-
-include /etc/sway/config.d/*

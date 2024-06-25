@@ -1,15 +1,4 @@
 { config, lib, pkgs, ... }:
-# let
- 
-#   flake-compat = builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz";
-#   hyprland = (import flake-compat {
-#     src = builtins.fetchTarball "https://github.com/hyprwm/Hyprland/archive/master.tar.gz";
-#   }).defaultNix;
-# in {
-#   imports = [
-#     hyprland.nixosModules.default
-#   ];
-
 
 
 {
@@ -28,11 +17,12 @@ programs.hyprland = {
   
 # List packages installed in system profile
     environment.systemPackages = with pkgs; [
-	                       meson
-			                   grim
+	                     meson
+			             grim
+                         clapper
                          mako
                          swaybg
-			                   swww
+			             swww
                          swappy
                          slurp
                          hyprland-protocols
@@ -44,9 +34,17 @@ programs.hyprland = {
                          wlogout
                          wlsunset
                          wlprop
-			                   wofi
+			             wofi
+                         wf-recorder
                          waybar
+                         wlrctl
+                         wtype
+                         dotool
                          xdg-desktop-portal-hyprland
+                          xdg-desktop-portal-wlr
+                         jq
+                         copyq
+                         cliphist
 	 		 ];
 
     nixpkgs.overlays = [

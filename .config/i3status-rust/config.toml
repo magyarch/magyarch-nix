@@ -1,0 +1,101 @@
+# .config/i3status-rust/config.toml
+icons_format = "{icon}"
+
+[theme]
+theme = "nord-dark"
+[theme.overrides]
+idle_bg = "#282a36"
+idle_fg = "#abcdef"
+
+# [icons]
+# icons = "none"
+# [icons.overrides]
+# bat = " | | "
+# bat_full = " |X| "
+# bat_charging = " |^| "
+# bat_discharging = " |v| "
+
+
+[[block]]
+block = "cpu"
+
+[[block]]
+block = "disk_space"
+path = "/media"
+info_type = "available"
+alert_unit = "GB"
+interval = 20
+warning = 20.0
+alert = 10.0
+format = " media: $available.eng(w:2) "
+
+[[block]]
+block = "disk_space"
+path = "/mnt"
+info_type = "available"
+alert_unit = "GB"
+interval = 20
+warning = 20.0
+alert = 10.0
+format = " mnt: $available.eng(w:2) "
+
+[[block]]
+block = "disk_space"
+path = "/"
+info_type = "available"
+alert_unit = "GB"
+interval = 20
+warning = 20.0
+alert = 10.0
+format = " root: $available.eng(w:2) "
+
+[[block]]
+block = "memory"
+format = " $icon $mem_total_used_percents.eng(w:2) "
+format_alt = " $icon_swap $swap_used_percents.eng(w:2) "
+
+# [[block]]
+# block = "net"
+# device = "wlp0s20f3"
+# format = "$icon {$signal_strength $ssid $frequency} via $device IPv4:$ip IPv6:$ipv6 DOWN:$speed_down UP:$speed_up"
+# inactive_format = "No Wireless"
+# interval = 1
+
+# [[block]]
+# block = "net"
+# device = "enp58s0u2u3c2"
+# format = "$icon $device IPv4:$ip IPv6:$ipv6 DOWN:$speed_down UP:$speed_up"
+# inactive_format = "No Ethernet"
+# interval = 1
+
+[[block]]
+block = "time"
+interval = 5
+format = " $timestamp.datetime(f:'%a %d/%m %R') "
+
+# [[block]]
+# block = "battery"
+# device = "BAT0"
+# driver = "sysfs"
+# format = "$icon $percentage" 
+ 
+[[block]]
+block = "sound"
+[[block.click]]
+button = "left"
+cmd = "pavucontrol"
+
+# [[block]]
+# block = "bluetooth"
+# mac = "80:C3:BA:4D:8F:87"
+# disconnected_format = "x"
+# format = " $icon MOMENTUM4"
+
+# [[block]]
+# block = "bluetooth"
+# mac = "80:C3:BA:2F:2A:C6"
+# disconnected_format = "x"
+# format = " $icon MOMENTUM TW3" 
+
+
+

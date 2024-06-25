@@ -1,0 +1,141 @@
+# MagyArch Linux i3wm keybinds #
+#########################################
+
+# Terminal emulator
+super + {_,shift +} Return
+     {$TERMINAL, scratch scratchpad}
+
+# Dmenu2 and rofi(window switcher, application launcher)
+super + {_,shift +} d
+    {dmenu_run, rofi_run -r}
+
+# Chat client, gui filemanager
+super + {_,shift + } p
+    {discord, wmctrl -a Thunar || thunar}
+
+# Default web browser firfox,and brave
+super + {_,shift + } w
+    {$BROWSER, rofi_run -w}
+
+# open gui text editor sublime
+super + shift + e
+    wmctrl -a Sublime || subl
+
+# Show keybind in rofi,htop system monitor
+super + {_,shift + } n
+    {scratch Music, scratch News}
+
+# Reload sxhkd + i3
+super + {_,shift + } Escape
+    {pkill -USR1 -x sxhkd, i3-msg restart}
+
+# Record and stream
+super + {KP_Home,KP_End}
+    {dmenurecord, live.sh}
+
+# Kill recording and stream
+super + shift + x
+    killall ffmpeg
+
+# On/off transparency, pavucontrol
+alt + {a,b}
+   {pavucontrol,spotify --force-device-scale-factor=2}
+
+
+# Function keys #
+########################################
+
+# MagyArch help doc
+super + F1
+    wmctrl -a Steam || steam
+
+# Easy edit configuration files
+super + F2
+    edconf.sh
+
+# Select display
+super + F3
+    displayselect
+
+# Take screenshot
+super + F4
+    maim ~/Képek/Képernyőképek/`date +%Y-%m-%d_%H:%M:%S`.png
+
+# Pick screenshot type
+super + F5
+    maimpick
+
+# Search with Duckduckgo
+super + F6
+    ducksearch
+
+# Mpv floating
+super + F7
+    mpv --geometry=40%+30+30 --title="mpvfloat" https://www.youtube.com/watch?v=8UU-FYBWgPg&list=PLIxoUSHenBEWmlvIhmItUdHmCnsmNlO2P
+
+# Wallpaper chenger
+super + F8
+    wal
+
+# Mount and umount a USB drive or Android device
+super + {F9,F10}
+    {dmenumount,dmenuumount}
+
+# Decrease/increase volume +-5
+alt + {Up,Down}
+    {pamixer --allow-boost -i 5 && pkill -RTMIN+10 i3blocks, pamixer --allow-boost -d 5 && pkill -RTMIN+10 i3blocks}
+
+# Mute volume
+F12
+   layout_manager.sh
+
+#################################################################################
+######################### i3 Bindings ##########################################
+
+# Close windows
+super + q
+    i3-msg kill
+
+super + Tab
+    i3-msg focus mode_toggle
+
+# Quit,reboot,shutdown menu/i3; reload config
+super + {_,shift + } c
+     {power, eww open --toggle powermenu}
+
+# i3; restart i3 in-place (preserves layout/session)
+super + {_,shift + } r
+     {$TERMINAL -e $FILE, i3-msg restart}
+
+# Change focus between tiling and floating and toggle floating windows
+super + {_,shift + } space
+     {i3-msg layout toggle, i3-msg floating toggle}
+
+# Change container layout (stacked, tabbed, fullscreen toggle split)
+super + {s,t,e}
+     i3-msg layout {stacked, tabbed, toggle split}
+
+super + f
+     i3-msg fullscreen toggle
+
+# Split in horizontal/vertical orientation
+super + {h,v}
+    i3-msg split {h,v}
+
+# Change focus / move focused window
+super + {_,shift +}{h,j,k,l}
+  i3-msg {focus,move} {left,down,up,right}
+
+super + {_,shift +}{Left,Down,Up,Right}
+  i3-msg {focus,move} {left,down,up,right}
+
+ # Gaps increase
+super + a
+  i3-msg gaps outer current plus 5
+
+# Gaps decrease
+super + shift + a
+  i3-msg gaps outer current minus 5
+
+
+
