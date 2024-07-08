@@ -12,6 +12,7 @@ in
      amdgpu_top
      appimage-run
      acpi
+     ags
      apg
      atool 
      bat 
@@ -20,7 +21,7 @@ in
      binutils  
      curl
      catppuccin-sddm
-   davinci-resolve-studio
+     davinci-resolve-studio
      dunst
 #     dxvk 
 #     discord 
@@ -42,14 +43,12 @@ in
      jamesdsp
      killall
      kitty
-#     linuxKernel.packages.linux_xanmod.amdgpu-pro
      libnotify
 #     libbsd
 #     lf
      lm_sensors 
      lutris 
      lxappearance
-#     iconTheme.package
      mangohud
      mate.mate-polkit
      mesa
@@ -73,10 +72,7 @@ in
      polybar
      unstable.pyprland 
      protonup
-     pulseaudio 
-     pulsemixer 
      qbittorrent 
- #    qogir-icon-theme
      rofi
      scrot
      smplayer
@@ -89,14 +85,12 @@ in
 #     stalonetray
      stremio
      ventoy-full
-     vieb
     # virt-manager 
      #vscode-with-extensions
      #vscode-extensions.bbenoist.nix
      wineWowPackages.full 
      wineWowPackages.waylandFull
      wmctrl
-     walker
      vifm
      zellij 
      xorg.xev
@@ -129,22 +123,22 @@ in
     loginBackground = true;
   })
 
-     (picom.overrideAttrs (oldAttrs: rec {
-         pname = "compfy";
-         version = "1.7.2";
-         buildInputs = [
-           pcre2
-         ]
-         ++
-           oldAttrs.buildInputs;
-         src = pkgs.fetchFromGitHub {
-           owner = "allusive-dev";
-           repo = "compfy";
-           rev = version;
-           hash = "sha256-7hvzwLEG5OpJzsrYa2AaIW8X0CPyOnTLxz+rgWteNYY=";
-         };
-         postInstall = '''';
-       }))   
+     # (picom.overrideAttrs (oldAttrs: rec {
+     #     pname = "compfy";
+     #     version = "1.7.2";
+     #     buildInputs = [
+     #       pcre2
+     #     ]
+     #     ++
+     #       oldAttrs.buildInputs;
+     #     src = pkgs.fetchFromGitHub {
+     #       owner = "allusive-dev";
+     #       repo = "compfy";
+     #       rev = version;
+     #       hash = "sha256-7hvzwLEG5OpJzsrYa2AaIW8X0CPyOnTLxz+rgWteNYY=";
+     #     };
+     #     postInstall = '''';
+     #   }))   
      # (slstatus.overrideAttrs (_: { src = /home/xeoncpu/.config/suckless/slstatus ; }))
   #    (catppuccin-sddm.override {
   #   flavor = "mocha";
@@ -157,21 +151,7 @@ in
 
         pathsToLink = [ "/libexec" ];
      
-	 variables = {
-                #   GDK_SCALE = "2";
-                #   GDK_DPI_SCALE = "0.5";
-	  	         #XCURSOR_SIZE = "24";
- # #    # #           DISPLAY=":  0";
-  	       #       QT_SCALE_FACTOR = "1.55";
- #    #             QT_AUTO_SCREEN_SCALE_FACTOR = "auto";
-#                  QT_QPA_PLATFORM = "wayland";
- #                #WLR_NO_HARDWARE_CURSOR = "1";
- #                #NIXOS_OZONE_WL = "1";
-                  ROC_ENABLE_PRE_VEGA = "1";
-                  AMD_VULKAN_ICD="RADV";
-	              VDPAU_DRIVER = "radeonsi";
-                  LIBVA_DRIVER_NAME = "radeonsi";
-              };
+	
           }; 
 
 }

@@ -13,7 +13,7 @@
       ./amdgpu.nix
  #     ./awesomewm.nix
 #      ./appimage.nix   
-#       ./bluetooth.nix
+        ./bluetooth.nix
 #     ./i3.nix
 #       ./homem.nix
 #      ./dwm.nix
@@ -167,6 +167,7 @@
   programs = {
 	   dconf.enable = true;
      corectrl.enable = true;
+     coolercontrol.enable = true;
      gamemode.enable = true;
      gamescope.enable = true;
      steam = {
@@ -282,11 +283,11 @@
 
   };
   
-  xdg.portal = {
-    enable = true;
-    config.common.default = "*";
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
-  };
+  # xdg.portal = {
+  #   enable = true;
+  #   config.common.default = "*";
+  #   extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  # };
 
   fonts.packages = with pkgs; [
     noto-fonts-emoji

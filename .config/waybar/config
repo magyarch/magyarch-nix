@@ -6,28 +6,27 @@
     "margin-bottom": 0,
     "modules-left": [
       "clock",
-      "hyprland/workspaces",
-      "custom/updates",
-      "tray",
+      "hyprland/window",
+      "network",
       ],
     "modules-center": [
-      "hyprland/window",
+      "hyprland/workspaces",
       ],
     "modules-right": [
-      "network",
       "temperature#cpu",
+      "cpu",
       "temperature#gpu",
       "memory",
-      "cpu",
       "pulseaudio",
+      "tray",
       "custom/powermenu",
     ],
     "tray": {
-      "icon-size": 22,
+      "icon-size": 16,
       "spacing": 10
     },
     "hyprland/window": {
-      "format": " {}",
+      "format": "{}",
       "rewrite": {
           "(\\d\\. )?(.*) - Chromium": "<span color=\"#4285F4\"></span>  $2 ",
           "nvim (.*)": "<span color=\"#57A143\"></span>  $1",
@@ -71,7 +70,8 @@
       "critical-threshold": 80,
       "format": "GPU: {temperatureC}°C ",
       "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
-      "tooltip": false
+      "tooltip": false,
+      "on-click": "exec coolercontrol",
     },
     "temperature#cpu": {
       "critical-threshold": 80,
@@ -80,9 +80,9 @@
       "tooltip": false
     },
     "memory": {
-      "format": "󰍛 {}%",
+      "format": "󰍛 {used:0.1f}GiB/{total:0.1f}GiB ({percentage}%)",
       "tooltip": "false",
-      "on-click": "exec, kitty -e htop"
+      "on-click": "exec kitty -e htop",
     },
     "cpu": {
       "format": "  {avg_frequency}GHz",
@@ -92,7 +92,7 @@
     "custom/powermenu": {
       "format": "",
       "tooltip": false,
-      "on-click": "exec, wlogout"
+      "on-click": "exec wlogout"
     },
     "custom/updates": {
       "format": "<span color=\"#61afef\"></span> {}",
@@ -118,10 +118,30 @@
     },
     "clock": {
       //"format": "<span color=\"#56b6c2\"></span> {:%H:%M}",
-      "format": "{:%H:%M}",
+      "format": "{:%Y-%m-%d %H:%M}",
       "interval": 60,
       "tooltip": true,
-      "tooltip-format": "{:%d %B %H:%M}"
-    }
+      "tooltip-format": "<tt><small>{calendar}</small></tt>",
+      "calendar": {
+                    "mode"          : "year",
+                    "mode-mon-col"  : 3,
+                    "weeks-pos"     : "right",
+                    "on-scroll"     : 1,
+                    "format": {
+                              "months":     "<span color='#ffead3'><b>{}</b></span>",
+                              "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                              "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                              "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                              "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+                              }
+                    },
+        "actions":  {
+                    "on-click-right": "mode",
+                    "on-click-forward": "tz_up",
+                    "on-click-backward": "tz_down",
+                    "on-scroll-up": "shift_up",
+                    "on-scroll-down": "shift_down"
+                    }
 }
 
+}

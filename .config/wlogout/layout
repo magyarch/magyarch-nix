@@ -6,13 +6,13 @@
 }
 {
     "label" : "shutdown",
-    "action" : "systemctl poweroff",
+    "action" : "fancy-quit && systemctl poweroff",
     "text" : "Shutdown",
     "keybind" : "s"
 }
 {
     "label" : "logout",
-    "action" : "hyprctl dispatch exit 0",
+    "action" : "fancy-quit && hyprctl dispatch exit 0",
     "text" : "Logout",
     "keybind" : "e"
 }

@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-DIALOG_RESULT=$(echo -e 'Quit\nReboot\nPoweroff' | dmenu -p 'System')
+DIALOG_RESULT=$(echo -e 'Quit\nReboot\nPoweroff' | wofi -d -p 'System')
 
 case $DIALOG_RESULT in
-        "Quit") fancy-quit && qtile cmd-obj -o cmd -f shutdown ;;
+      #  "Quit") fancy-quit && qtile cmd-obj -o cmd -f shutdown ;;
+        "Quit") fancy-quit && hyprctl dispatch exit ;;
         "Reboot") fancy-quit && systemctl reboot ;;
         "Poweroff") fancy-quit && systemctl poweroff ;;
         *) exit 0

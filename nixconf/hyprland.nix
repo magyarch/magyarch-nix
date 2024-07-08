@@ -1,12 +1,21 @@
-{ config, lib, pkgs, ... }:
-
+{ config, pkgs, ... }:
 
 {
+#let
+#   flake-compat = builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz";
+#   hyprland = (import flake-compat {
+#     src = builtins.fetchTarball "https://github.com/hyprwm/Hyprland/archive/master.tar.gz";
+#   }).defaultNix;
+# in {
+#   imports = [
+#     hyprland.nixosModules.default
+#   ];
 
-programs.hyprland = {
+  programs.hyprland = {
     enable = true;
-    xwayland.enable = true;
+    package = pkgs.hyprland;
   };
+
 
 #env var
   environment.variables = {
@@ -14,6 +23,18 @@ programs.hyprland = {
     NIXOS_OZONE_WL = "1";
   };
 
+    xdg = {
+    # For some reason, the nix module for Hyprland broke screensharing (with XDPH missing)
+    # Enablng the portal fixes it.
+    portal = {
+      enable = true; 
+      config.common.default = "*";
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+        xdg-desktop-portal-hyprland
+      ];
+    };
+  };
   
 # List packages installed in system profile
     environment.systemPackages = with pkgs; [
@@ -40,8 +61,6 @@ programs.hyprland = {
                          wlrctl
                          wtype
                          dotool
-                         xdg-desktop-portal-hyprland
-                          xdg-desktop-portal-wlr
                          jq
                          copyq
                          cliphist
