@@ -12,7 +12,7 @@
       ./services.nix
       ./amdgpu.nix
  #     ./awesomewm.nix
-#      ./appimage.nix   
+      ./appimage.nix   
         ./bluetooth.nix
 #     ./i3.nix
 #       ./homem.nix
@@ -23,7 +23,7 @@
 #      ./bspwm.nix
 #      ./herbst.nix
         ./wm.nix
-#       ./nvidia.nix
+#       ./makemkv.nix
 #       ./redshift.nix
  #     ./plex.nix
 #       ./sway.nix
@@ -46,6 +46,7 @@
     loader = {
         systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;
+        systemd-boot.memtest86.enable = true;
 	timeout = 1;
     };
     kernelPackages = pkgs.linuxPackages_latest;
@@ -76,7 +77,7 @@
 
 
    fileSystems."/media" =
-    { device = "/dev/disk/by-uuid/b8404b77-6a20-47aa-a53b-2ce9a94e9d32";
+    { device = "/dev/disk/by-uuid/d8868195-b945-4761-951a-c5554e850bfc";
       fsType = "ext4";
       options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
     };
@@ -125,9 +126,11 @@
 
   nixpkgs.config = {
     allowUnfree = true;
+  #  allowUnfreePredicate = pkgs.makemkv;
   #  oraclejdk.accept_license = true;
     joypixels.acceptLicense = true;
   };
+
    
   services.hardware.openrgb.enable = true;
    services.xserver.serverFlagsSection = 
@@ -319,7 +322,7 @@
    # Automatic Updates
   system.autoUpgrade = {
     enable = true;
-    channel = "https://nixos.org/channels/nixos-23.11";
+    channel = "https://nixos.org/channels/nixos-24.05";
   };
 
 

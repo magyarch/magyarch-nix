@@ -1,9 +1,5 @@
 { config, pkgs, ... }:
 
-let
-   unstable = import <unstable> { };
-in  
-
 {
 # List packages installed in system profile
     environment = {
@@ -16,12 +12,10 @@ in
      apg
      atool 
      bat 
-     bemenu
+     brave
      bc 
      binutils  
      curl
-     catppuccin-sddm
-     davinci-resolve-studio
      dunst
 #     dxvk 
 #     discord 
@@ -30,11 +24,12 @@ in
      eza 
      exfat 
      exfatprogs 
+     glib
      xfce.exo
      eww 
 #     faac
      feh
-     unstable.firefox
+#     unstable.firefox
      ffmpeg
      fzf 
      git
@@ -44,14 +39,19 @@ in
      killall
      kitty
      libnotify
+     librewolf
 #     libbsd
 #     lf
      lm_sensors 
      lutris 
      lxappearance
+     #libbluray
+     #libdvdcss
      mangohud
+     makemkv
      mate.mate-polkit
      mesa
+     mission-center
      microsoft-edge 
      mpd 
      ncmpcpp 
@@ -70,7 +70,7 @@ in
      pamixer 
      pavucontrol 
      polybar
-     unstable.pyprland 
+     pyprland 
      protonup
      qbittorrent 
      rofi
@@ -109,19 +109,12 @@ in
      xorg.xinit 
      xwallpaper 
      yt-dlp 
-#     (opera.override { proprietaryCodecs = true; })
+    (opera.override { proprietaryCodecs = true; })
      (discord.override {
        withOpenASAR = true;
        withVencord = true;
      })
 
-     (catppuccin-sddm.override {
-    flavor = "mocha";
-    font  = "Noto Sans";
-    fontSize = "9";
-    background = "${./mocha.png}";
-    loginBackground = true;
-  })
 
      # (picom.overrideAttrs (oldAttrs: rec {
      #     pname = "compfy";

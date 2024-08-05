@@ -39,7 +39,7 @@
       enable = true;
 #      autoNumlock = true;
       wayland.enable = true;
-      theme = "catppuccin-mocha";
+#      theme = "catppuccin-mocha";
       #package = pkgs.kdePackages.sddm;
     };
 
@@ -56,6 +56,7 @@
 	   avahi.enable = true;
 	   avahi.nssmdns4 = true;
 	   avahi.openFirewall = true;
+     flatpak.enable = true;
 	  # picom.enable = true;
      dbus.enable = true;
 	   fstrim = {
