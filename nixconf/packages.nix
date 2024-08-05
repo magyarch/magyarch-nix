@@ -8,7 +8,6 @@
      amdgpu_top
      appimage-run
      acpi
-     ags
      apg
      atool 
      bat 
@@ -45,11 +44,13 @@
      lm_sensors 
      lutris 
      lxappearance
+     lxqt.lxqt-policykit
+     lxqt.lxqt-openssh-askpass
      #libbluray
      #libdvdcss
      mangohud
      makemkv
-     mate.mate-polkit
+#     mate.mate-polkit
      mesa
      mission-center
      microsoft-edge 

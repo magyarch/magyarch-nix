@@ -159,13 +159,17 @@
     #];
   };
 
-  security.sudo.extraRules = [{
-     users = [ "xeoncpu" ];
-     commands = [{command = "ALL";
-     options = ["NOPASSWD"];
-     }];
-  }];
+  # security.sudo.extraRules = [{
+  #    users = [ "xeoncpu" ];
+  #    commands = [{command = "ALL";
+  #    options = ["NOPASSWD"];
+  #    }];
+  # }];
 
+  programs.ssh = {
+    enableAskPassword = true;
+    askPassword = "${pkgs.lxqt.lxqt-openssh-askpass}/bin/lxqt-openssh-askpass";
+  };
   #programs = { steam.gamescopeSession.enable = true; };
   programs = {
 	   dconf.enable = true;
