@@ -51,7 +51,7 @@
     };
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
-#      "amd_pstate=active"
+#      "amd_pstate=active" 
       "kernel.nmi_watchdog=0"
 #      "quiet"
       "splash"
@@ -63,17 +63,17 @@
     consoleLogLevel = 0;
     initrd.verbose =false;
     tmp.cleanOnBoot = true;
-    kernelModules = ["tcp_bbr"];
-    kernel.sysctl = {
-      "net.ipv4.tcp_congestion_control" = "bbr";
-      "net.core.default_qdisc" = "fq";
-      "net.ipv4.tcp_fastopen" = 3;
-      "net.core.wmem_max" = 1073741824;
-      "net.core.rmem_max" = 1073741824;
-      "net.ipv4.tcp_rmem" = "4096 87380 1073741824";
-      "net.ipv4.tcp_wmem" = "4096 87380 1073741824";
-    };
-  };
+  #   kernelModules = ["tcp_bbr"];
+  #   kernel.sysctl = {
+  #     "net.ipv4.tcp_congestion_control" = "bbr";
+  #     "net.core.default_qdisc" = "fq";
+  #     "net.ipv4.tcp_fastopen" = 3;
+  #     "net.core.wmem_max" = 1073741824;
+  #     "net.core.rmem_max" = 1073741824;
+  #     "net.ipv4.tcp_rmem" = "4096 87380 1073741824";
+  #     "net.ipv4.tcp_wmem" = "4096 87380 1073741824";
+  #   };
+   };
 
 
    fileSystems."/media" =
@@ -152,7 +152,7 @@
   users.users.xeoncpu = {
     isNormalUser = true;
     description = "xeoncpu";
-    extraGroups = [ "networkmanager" "wheel" "input" "disk" "power" "samba" ];
+    extraGroups = [ "users" "audio" "video" "kvm" "networkmanager" "wheel" "input" "disk" "power" "samba" ];
    # packages = with pkgs; [
     #  firefox
     #  thunderbird
@@ -165,30 +165,40 @@
   #    options = ["NOPASSWD"];
   #    }];
   # }];
-
-  programs.ssh = {
-    enableAskPassword = true;
-    askPassword = "${pkgs.lxqt.lxqt-openssh-askpass}/bin/lxqt-openssh-askpass";
-  };
+  #services.openssh.settings.PasswordAuthentication = true;
+  # programs.ssh = {
+  #   enableAskPassword = true;
+  #   askPassword = "${pkgs.lxqt.lxqt-openssh-askpass}/bin/lxqt-openssh-askpass";
+  # };
   #programs = { steam.gamescopeSession.enable = true; };
   programs = {
 	   dconf.enable = true;
      corectrl.enable = true;
      coolercontrol.enable = true;
      gamemode.enable = true;
-     gamescope.enable = true;
+   #  gamescope.enable = true;
      steam = {
 	           enable = true;
-             gamescopeSession.enable = true;
+             #gamescopeSession.enable = true;
              remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
              dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-#             package = pkgs.steam.override {
-#             extraPkgs = pkgs: with pkgs; [
-#                  gamescope
-#        ];
+    #          package = pkgs.steam.override {
+    #          extraPkgs = pkgs: with pkgs; [
+    #               gamescope
+    #               xorg.libXcursor
+    #     xorg.libXi
+    #     xorg.libXinerama
+    #     xorg.libXScrnSaver
+    #     libpng
+    #     libpulseaudio
+    #     libvorbis
+    #     stdenv.cc.cc.lib
+    #     libkrb5
+    #     keyutils
+    #     ];
 
-	   };
- #   }; 
+	   # };
+    }; 
 
 	   thunar = {
 	   enable = true;
@@ -333,7 +343,7 @@
    # Nix Package Management
   nix = {
     settings.auto-optimise-store = true;
-   # settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = [ "nix-command" "flakes" ];
     gc = {
       automatic = true;
       dates = "weekly";
@@ -347,7 +357,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 
   nixpkgs.config.permittedInsecurePackages = [
                 "openssl-1.1.1w"

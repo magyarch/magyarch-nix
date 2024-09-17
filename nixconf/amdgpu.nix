@@ -17,11 +17,9 @@
     vdpauinfo
     libvdpau
     libvdpau-va-gl
-    rocmPackages.clr.icd
-];
-   extraPackages32 = with pkgs; [
-  driversi686Linux.amdvlk
-];
+   
+   ];
+   
   };
 
    environment.variables = {

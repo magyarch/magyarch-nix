@@ -63,7 +63,7 @@
 	   enable = true;
 	   interval = "weekly";
 	   };
-	   unclutter-xfixes.enable = true;
+	   #unclutter-xfixes.enable = true;
 	   openssh.enable = true;       
 	   gvfs.enable = true;
 	   tumbler.enable = true;
@@ -134,30 +134,30 @@
 	 };
 	 };
 };
-      #= System76 Scheduler 
-      services.system76-scheduler = {
-                                enable = true;
-      #services.system76-scheduler.settings.processScheduler.foregroundBoost.foreground.nice = 6;
-                                useStockConfig = true;
-                              };
+      # System76 Scheduler 
+       services.system76-scheduler = {
+                                 enable = true;
+                                 settings.processScheduler.foregroundBoost.foreground.nice = 6;
+                                 useStockConfig = true;
+                               };
 
       #= IRQBalance
-      services.irqbalance.enable = true;
+    #  services.irqbalance.enable = true;
 
-  #     systemd = {
-  # user.services.polkit-gnome-authentication-agent-1 = {
-  #   description = "polkit-gnome-authentication-agent-1";
-  #   wantedBy = [ "graphical-session.target" ];
-  #   wants = [ "graphical-session.target" ];
-  #   after = [ "graphical-session.target" ];
-  #   serviceConfig = {
-  #       Type = "simple";
-  #       ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-  #       Restart = "on-failure";
-  #       RestartSec = 1;
-  #       TimeoutStopSec = 10;
-  #     };
-  # };
-#};
+#       systemd = {
+#   user.services.polkit-gnome-authentication-agent-1 = {
+#     description = "polkit-gnome-authentication-agent-1";
+#     wantedBy = [ "graphical-session.target" ];
+#     wants = [ "graphical-session.target" ];
+#     after = [ "graphical-session.target" ];
+#     serviceConfig = {
+#         Type = "simple";
+#         ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+#         Restart = "on-failure";
+#         RestartSec = 1;
+#         TimeoutStopSec = 10;
+#       };
+#   };
+# };
 
 }

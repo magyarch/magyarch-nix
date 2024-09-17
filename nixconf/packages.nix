@@ -1,11 +1,24 @@
 { config, pkgs, ... }:
 
+let
+  unstableTarball =
+    fetchTarball
+      https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
+in
 {
+  
+   nixpkgs.config = {
+    packageOverrides = pkgs: {
+      unstable = import unstableTarball {
+        config = config.nixpkgs.config;
+      };
+    };
+  };
+
 # List packages installed in system profile
     environment = {
         systemPackages = with pkgs; [
      
-     amdgpu_top
      appimage-run
      acpi
      apg
@@ -28,7 +41,7 @@
      eww 
 #     faac
      feh
-#     unstable.firefox
+     unstable.firefox
      ffmpeg
      fzf 
      git
@@ -38,7 +51,6 @@
      killall
      kitty
      libnotify
-     librewolf
 #     libbsd
 #     lf
      lm_sensors 
@@ -49,11 +61,9 @@
      #libbluray
      #libdvdcss
      mangohud
-     makemkv
-#     mate.mate-polkit
+ #    mate.mate-polkit
      mesa
-     mission-center
-     microsoft-edge 
+     unstable.microsoft-edge 
      mpd 
      ncmpcpp 
      maim 
@@ -66,6 +76,8 @@
      ueberzug 
      unrar 
      unzip
+     obs-studio
+     obs-studio-plugins.wlrobs
      openrgb-with-all-plugins
      p7zip 
      pamixer 
@@ -110,7 +122,10 @@
      xorg.xinit 
      xwallpaper 
      yt-dlp 
-    (opera.override { proprietaryCodecs = true; })
+    (vivaldi.override {
+    proprietaryCodecs = true;
+    enableWidevine = true;
+  })
      (discord.override {
        withOpenASAR = true;
        withVencord = true;

@@ -15,7 +15,7 @@
     "modules-right": [
       "temperature#cpu",
       "cpu",
-      "temperature#gpu",
+      "custom/gpu-usage",
       "memory",
       "pulseaudio",
       "tray",
@@ -66,12 +66,12 @@
       "interval": 2,
       "format": " {bandwidthDownBits}  {bandwidthUpBits}"
     },
-    "temperature#gpu": {
-      "critical-threshold": 80,
-      "format": "GPU: {temperatureC}°C ",
-      "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
-      "tooltip": false,
-      "on-click": "exec coolercontrol",
+    "custom/gpu-usage": {
+    "format": "GPU: {} {icon}",
+    "exec": "sensors | awk  '/edge:/ {print $2}'",
+    "format-icons": "󰾲",
+    "on-click": "kitty amdgpu_top",
+    "interval": 1,
     },
     "temperature#cpu": {
       "critical-threshold": 80,
