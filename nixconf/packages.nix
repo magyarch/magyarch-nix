@@ -21,12 +21,11 @@ in
      
      appimage-run
      acpi
-     apg
      atool 
      bat 
-     brave
      bc 
-     binutils  
+     binutils
+     celluloid  
      curl
      dunst
 #     dxvk 
@@ -41,7 +40,7 @@ in
      eww 
 #     faac
      feh
-     unstable.firefox
+     firefox
      ffmpeg
      fzf 
      git
@@ -63,7 +62,7 @@ in
      mangohud
  #    mate.mate-polkit
      mesa
-     unstable.microsoft-edge 
+     microsoft-edge 
      mpd 
      ncmpcpp 
      maim 
@@ -73,7 +72,7 @@ in
 #     nix-du
      ntfs3g 
      nwg-look
-     ueberzug 
+     unstable.ueberzugpp 
      unrar 
      unzip
      obs-studio
@@ -126,7 +125,7 @@ in
     proprietaryCodecs = true;
     enableWidevine = true;
   })
-     (discord.override {
+     (unstable.discord.override {
        withOpenASAR = true;
        withVencord = true;
      })

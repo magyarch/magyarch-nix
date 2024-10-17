@@ -14,10 +14,12 @@
  #     ./awesomewm.nix
       ./appimage.nix   
         ./bluetooth.nix
+#        ./cinnamon.nix
 #     ./i3.nix
 #       ./homem.nix
 #      ./dwm.nix
  #      ./dk.nix
+#       ./gnome.nix
  #      ./river.nix
 #      ./spectrwm.nix
 #      ./bspwm.nix
@@ -152,7 +154,7 @@
   users.users.xeoncpu = {
     isNormalUser = true;
     description = "xeoncpu";
-    extraGroups = [ "users" "audio" "video" "kvm" "networkmanager" "wheel" "input" "disk" "power" "samba" ];
+    extraGroups = [ "users" "audio" "video" "networkmanager" "wheel" "input" "disk" "power" "samba" "kwm" ];
    # packages = with pkgs; [
     #  firefox
     #  thunderbird
@@ -179,7 +181,7 @@
    #  gamescope.enable = true;
      steam = {
 	           enable = true;
-             #gamescopeSession.enable = true;
+             gamescopeSession.enable = true;
              remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
              dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     #          package = pkgs.steam.override {
@@ -317,15 +319,19 @@
   ];
 
 
-  # Suckless Tools
-  nixpkgs.overlays = [
-    (final: prev: {
-#      dwm = prev.dwm.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dwm ;});
-      dmenu = prev.dmenu.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dmenu ;});
-      #slstatus = prev.slstatus.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/slstatus ;});
-      #myslstatus = final.slstatus.overrideAttrs (_: { src = /home/xeoncpu/.config/suckless/slstatus ;});
-    })
-  ];
+  # nixpkgs.overlays = [
+  #   (self: super:
+  #   {
+  #     hyprland = super.hyprland.overrideAttrs (oldAttrs: rec {
+  #         src = super.fetchFromGitHub {
+  #            owner = "hyprland";
+  #            repo = "hyprland";
+  #            rev = "4520b30d498daca8079365bdb909a8dea38e8d55";
+  #            sha256 = "sha256-ELhpSUIFHnIE0Q2fLil831oQi9Eqm2qA8pfRXm/4MtQ=";
+  #       };
+  #     });
+  #   })
+  # ];
   
 
  # Curiously, `services.samba` does not automatically open

@@ -142,6 +142,8 @@
                     "on-scroll-up": "shift_up",
                     "on-scroll-down": "shift_down"
                     }
-}
+                   
+ },
+  
 
 }

@@ -1,15 +1,19 @@
 { config, pkgs, ... }:
 
-{
-#let
-#   flake-compat = builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz";
-#   hyprland = (import flake-compat {
-#     src = builtins.fetchTarball "https://github.com/hyprwm/Hyprland/archive/master.tar.gz";
-#   }).defaultNix;
-# in {
-#   imports = [
-#     hyprland.nixosModules.default
-#   ];
+
+
+
+    let
+  flake-compat = builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz";
+  hyprland = (import flake-compat {
+    src = builtins.fetchTarball "https://github.com/hyprwm/Hyprland/archive/master.tar.gz";
+  }).defaultNix;
+in {
+  imports = [
+    hyprland.nixosModules.default
+  ];
+
+  #nixpkgs.overlays = [ hyprland.overlays.default ];
 
   programs.hyprland = {
     enable = true;
@@ -31,7 +35,7 @@
       config.common.default = "*";
       extraPortals = with pkgs; [
         xdg-desktop-portal-gtk
-        xdg-desktop-portal-hyprland
+     #   xdg-desktop-portal-hyprland
       ];
     };
   };
@@ -55,6 +59,7 @@
                          wlogout
                          wlsunset
                          wlprop
+                         wlr-randr
 			             wofi
                          wf-recorder
                          waybar
@@ -73,6 +78,8 @@
         });
       
  #       hyprland = super.hyprland.overrideAttrs (old: { src = /home/xeoncpu/.config/hypr/.src/hyprland ;});
+
+        
       })
      ];
     

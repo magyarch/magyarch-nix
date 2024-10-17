@@ -40,7 +40,7 @@
 #      autoNumlock = true;
       wayland.enable = true;
 #      theme = "catppuccin-mocha";
-      #package = pkgs.kdePackages.sddm;
+      #package = pkgs.kdePackages.sddm;1
     };
 
 
@@ -101,11 +101,6 @@
     XDG_RUNTIME_DIR =
       "/run/user/1000"; # User-id 1000 must match above user. MPD will look inside this directory for the PipeWire socket.
   };
-
- # Manage the virtualisation services
-  # virtualisation = {
-  #   libvirtd.enable = true;
-  #     };
 
   services.samba-wsdd.enable = true;
   services.samba.enableNmbd = true;

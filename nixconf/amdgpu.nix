@@ -6,11 +6,16 @@
   services.xserver.videoDrivers = ["modesetting"];
   hardware.cpu.amd.sev.enable = true;
 
-  # Enable OpenGL
+  #Enable OpenGL
   hardware.opengl = {
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+   #  hardware.graphics = {
+   #  enable = true;
+   # #driSupport = true;
+   #  enable32Bit = true;
+  #};
     extraPackages = with pkgs; [
     libdrm
     vaapiVdpau
