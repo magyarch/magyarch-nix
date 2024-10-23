@@ -27,18 +27,18 @@ in {
     NIXOS_OZONE_WL = "1";
   };
 
-    xdg = {
-    # For some reason, the nix module for Hyprland broke screensharing (with XDPH missing)
-    # Enablng the portal fixes it.
-    portal = {
-      enable = true; 
-      config.common.default = "*";
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
-     #   xdg-desktop-portal-hyprland
-      ];
-    };
-  };
+  #   xdg = {
+  #   # For some reason, the nix module for Hyprland broke screensharing (with XDPH missing)
+  #   # Enablng the portal fixes it.
+  #   portal = {
+  #     enable = true; 
+  #     config.common.default = "*";
+  #     extraPortals = with pkgs; [
+  #       xdg-desktop-portal-gtk
+  #    #   xdg-desktop-portal-hyprland
+  #     ];
+  #   };
+  # };
   
 # List packages installed in system profile
     environment.systemPackages = with pkgs; [

@@ -24,6 +24,7 @@ in
      atool 
      bat 
      bc 
+     brave
      binutils
      celluloid  
      curl
@@ -56,7 +57,7 @@ in
      lutris 
      lxappearance
      lxqt.lxqt-policykit
-     lxqt.lxqt-openssh-askpass
+     unstable.lxqt.lxqt-openssh-askpass
      #libbluray
      #libdvdcss
      mangohud
@@ -72,6 +73,7 @@ in
 #     nix-du
      ntfs3g 
      nwg-look
+     nwg-dock-hyprland
      unstable.ueberzugpp 
      unrar 
      unzip

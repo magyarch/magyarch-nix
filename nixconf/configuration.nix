@@ -27,6 +27,7 @@
         ./wm.nix
 #       ./makemkv.nix
 #       ./redshift.nix
+        ./ssh.nix
  #     ./plex.nix
 #       ./sway.nix
 #      ./jellyfin.nix
@@ -150,24 +151,24 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+ # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.xeoncpu = {
     isNormalUser = true;
     description = "xeoncpu";
-    extraGroups = [ "users" "audio" "video" "networkmanager" "wheel" "input" "disk" "power" "samba" "kwm" ];
+   extraGroups = [ "users" "audio" "video" "networkmanager" "wheel" "input" "disk" "power" "samba" "kwm" ];
    # packages = with pkgs; [
     #  firefox
     #  thunderbird
-    #];
-  };
-
+    };
+  
   # security.sudo.extraRules = [{
   #    users = [ "xeoncpu" ];
   #    commands = [{command = "ALL";
   #    options = ["NOPASSWD"];
   #    }];
   # }];
-  #services.openssh.settings.PasswordAuthentication = true;
+  # networking.firewall.allowedTCPPorts = [22];
+  # services.openssh.settings.PasswordAuthentication = true;
   # programs.ssh = {
   #   enableAskPassword = true;
   #   askPassword = "${pkgs.lxqt.lxqt-openssh-askpass}/bin/lxqt-openssh-askpass";
@@ -184,22 +185,6 @@
              gamescopeSession.enable = true;
              remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
              dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    #          package = pkgs.steam.override {
-    #          extraPkgs = pkgs: with pkgs; [
-    #               gamescope
-    #               xorg.libXcursor
-    #     xorg.libXi
-    #     xorg.libXinerama
-    #     xorg.libXScrnSaver
-    #     libpng
-    #     libpulseaudio
-    #     libvorbis
-    #     stdenv.cc.cc.lib
-    #     libkrb5
-    #     keyutils
-    #     ];
-
-	   # };
     }; 
 
 	   thunar = {
@@ -302,12 +287,7 @@
 
   };
   
-  # xdg.portal = {
-  #   enable = true;
-  #   config.common.default = "*";
-  #   extraPortals = [pkgs.xdg-desktop-portal-gtk];
-  # };
-
+  
   fonts.packages = with pkgs; [
     noto-fonts-emoji
     font-awesome_4
@@ -319,23 +299,6 @@
   ];
 
 
-  # nixpkgs.overlays = [
-  #   (self: super:
-  #   {
-  #     hyprland = super.hyprland.overrideAttrs (oldAttrs: rec {
-  #         src = super.fetchFromGitHub {
-  #            owner = "hyprland";
-  #            repo = "hyprland";
-  #            rev = "4520b30d498daca8079365bdb909a8dea38e8d55";
-  #            sha256 = "sha256-ELhpSUIFHnIE0Q2fLil831oQi9Eqm2qA8pfRXm/4MtQ=";
-  #       };
-  #     });
-  #   })
-  # ];
-  
-
- # Curiously, `services.samba` does not automatically open
-  # the needed ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 445 139 ];
   networking.firewall.allowedUDPPorts = [ 137 138 ];
 
@@ -352,8 +315,8 @@
     settings.experimental-features = [ "nix-command" "flakes" ];
     gc = {
       automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 2d";
+      dates = "daily";
+    #  options = "--delete-older-than 2d";
     };
   };
 

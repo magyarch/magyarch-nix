@@ -3,7 +3,11 @@ plugins = [
   "scratchpads",
   "expose",
   "magnify",
+  "workspaces_follow_focus",
 ]
+
+[workspaces_follow_focus]
+max_workspaces = 9
 
 [scratchpads.term]
 animation = "fromTop"
