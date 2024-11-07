@@ -37,7 +37,7 @@ text = "CellForeground"
 TERM = "xterm-256color"
 
 [font]
-size = 14.0
+size = 12.0
 
 [font.bold]
 family = "Source Code Pro"
@@ -168,11 +168,11 @@ magenta		= '#967ADA'
 cyan		= '#35BB9B'
 white		= '#CBD0D8'
 
-[colors]
+#[colors]
 # indexed_colors = [
 #	{ index 16, color = "#FFFFFF" }
 # ]
-draw_bold_text_with_bright_colors = true
+#draw_bold_text_with_bright_colors = true
 
 [bell]
 animation	= "EaseOutExpo"
@@ -195,10 +195,6 @@ blink_timeout	= 0
 shape		= "Block"
 blinking	= "Always"
 
-[keyboard]
-bindings = [
-	{ key = 'V', mods = "Control|Shift", action = "Paste" },
-	{ key = 'C', mods = "Control|Shift", action = "Copy" }
-]
+
 
 

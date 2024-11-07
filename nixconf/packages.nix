@@ -18,20 +18,20 @@ in
 # List packages installed in system profile
     environment = {
         systemPackages = with pkgs; [
-     
+     alacritty
      appimage-run
-     acpi
-     atool 
+#     acpi
+#     atool 
      bat 
-     bc 
+#     bc 
      brave
      binutils
      celluloid  
      curl
-     dunst
+#     dunst
 #     dxvk 
 #     discord 
-     dmenu 
+#     dmenu 
 #     dzen2
      eza 
      exfat 
@@ -40,7 +40,7 @@ in
      xfce.exo
      eww 
 #     faac
-     feh
+#     feh
      firefox
      ffmpeg
      fzf 
@@ -55,7 +55,7 @@ in
 #     lf
      lm_sensors 
      lutris 
-     lxappearance
+#     lxappearance
      lxqt.lxqt-policykit
      unstable.lxqt.lxqt-openssh-askpass
      #libbluray
@@ -63,70 +63,72 @@ in
      mangohud
  #    mate.mate-polkit
      mesa
-     microsoft-edge 
+     #microsoft-edge 
      mpd 
      ncmpcpp 
-     maim 
+#     maim 
      mpv 
      fastfetch
      neovim 
 #     nix-du
      ntfs3g 
      nwg-look
-     nwg-dock-hyprland
-     unstable.ueberzugpp 
+#     nwg-dock-hyprland
+#     unstable.ueberzugpp 
      unrar 
      unzip
-     obs-studio
-     obs-studio-plugins.wlrobs
+#     obs-studio
+#     obs-studio-plugins.wlrobs
+     onlyoffice-bin_latest
      openrgb-with-all-plugins
-     p7zip 
+#     p7zip 
      pamixer 
      pavucontrol 
-     polybar
+#     polybar
      pyprland 
      protonup
      qbittorrent 
-     rofi
-     scrot
-     smplayer
+#     rofi
+#     scrot
+#     smplayer
     # spectrwm
      sublime3
 #     st
-     sxhkd 
+#     sxhkd 
      sxiv 
      system-config-printer 
 #     stalonetray
      stremio
      ventoy-full
+     vlc
     # virt-manager 
      #vscode-with-extensions
      #vscode-extensions.bbenoist.nix
      wineWowPackages.full 
      wineWowPackages.waylandFull
-     wmctrl
+#     wmctrl
      vifm
      zellij 
-     xorg.xev
-     xclip 
-     x264 
-     xcape 
+  #   xorg.xev
+  #   xclip 
+  #   x264 
+  #   xcape 
      xdg-user-dirs
      xdg-utils 
-     xdo 
-     xdotool 
-     xorg.xdpyinfo
-     xorg.xsetroot
-     xmonadctl
-     xmobar
-     xsel
-     xorg.xinit 
-     xwallpaper 
+ #    xdo 
+ #    xdotool 
+ #    xorg.xdpyinfo
+ #    xorg.xsetroot
+#     xmonadctl
+#     xmobar
+#     xsel
+#     xorg.xinit 
+#     xwallpaper 
      yt-dlp 
-    (vivaldi.override {
-    proprietaryCodecs = true;
-    enableWidevine = true;
-  })
+#    (vivaldi.override {
+ #   proprietaryCodecs = true;
+  #  enableWidevine = true;
+  #})
      (unstable.discord.override {
        withOpenASAR = true;
        withVencord = true;

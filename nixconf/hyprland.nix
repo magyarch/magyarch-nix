@@ -43,14 +43,15 @@ in {
 # List packages installed in system profile
     environment.systemPackages = with pkgs; [
 	                     meson
-			             grim
+			                 grim
                          clapper
                          mako
                          swaybg
-			             swww
+			                   swww
                          swappy
                          slurp
                          hyprland-protocols
+                         hyprshot
                          #hyprlandPlugins.hy3
                          wayland-utils
                          #xwayland
@@ -60,11 +61,9 @@ in {
                          wlsunset
                          wlprop
                          wlr-randr
-			             wofi
+			                   wofi
                          wf-recorder
                          waybar
-                         wlrctl
-                         wtype
                          dotool
                          jq
                          copyq

@@ -3,7 +3,7 @@
 {
 
 # Load AMD driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["modesetting"];
+ # services.xserver.videoDrivers = ["modesetting"];
   hardware.cpu.amd.sev.enable = true;
 
   #Enable OpenGL
@@ -42,5 +42,9 @@
                 VDPAU_DRIVER = "radeonsi";
                   LIBVA_DRIVER_NAME = "radeonsi";
               };
+
+    environment.systemPackages = with pkgs; [ lact ];
+systemd.packages = with pkgs; [ lact ];
+systemd.services.lactd.wantedBy = ["multi-user.target"];          
 
  }

@@ -13,7 +13,7 @@
       ./amdgpu.nix
  #     ./awesomewm.nix
       ./appimage.nix   
-        ./bluetooth.nix
+#        ./bluetooth.nix
 #        ./cinnamon.nix
 #     ./i3.nix
 #       ./homem.nix
@@ -52,7 +52,7 @@
         systemd-boot.memtest86.enable = true;
 	timeout = 1;
     };
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
     kernelParams = [
 #      "amd_pstate=active" 
       "kernel.nmi_watchdog=0"
@@ -176,8 +176,8 @@
   #programs = { steam.gamescopeSession.enable = true; };
   programs = {
 	   dconf.enable = true;
-     corectrl.enable = true;
-     coolercontrol.enable = true;
+  #   corectrl.enable = true;
+  #   coolercontrol.enable = true;
      gamemode.enable = true;
    #  gamescope.enable = true;
      steam = {
@@ -329,7 +329,7 @@
   system.stateVersion = "24.05"; # Did you read the comment?
 
   nixpkgs.config.permittedInsecurePackages = [
-                "openssl-1.1.1w"
+                "openssl-1.1.1w" "qbittorrent-4.6.4"
               ];
   #nix.settings.auto-optimise-store = true;
   
