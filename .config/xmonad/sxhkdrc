@@ -7,7 +7,7 @@ super + Return
 
 # Dmenu2 and rofi(window switcher, application launcher)
 super + {_,shift +} d
-    {dmenu_run, rofi -show run}
+    {rofi -show run, rofi -show run}
 
 # Tui filemanager and same command with sudo
 super + {_,shift + } r
@@ -23,7 +23,7 @@ super + shift + i
 
 # S,R,lock script,calendar app
 super + {_,shift + } c
-    {power, eww open --toggle powermenu}
+    {$HOME/.config/xmonad/rofi_power, eww open --toggle powermenu}
 
 # Default web browser brave and firefox
 super + {_,shift + } w

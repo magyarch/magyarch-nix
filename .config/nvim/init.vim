@@ -10,7 +10,8 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/goyo.vim'
-Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'christianchiarulli/nvcode-color-schemes.vim'
+Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'jreybert/vimagit'
 Plug 'LukeSmithxyz/vimling'
 Plug 'vimwiki/vimwiki'
@@ -20,11 +21,24 @@ Plug 'vifm/vifm.vim'
 Plug 'kovetskiy/sxhkd-vim'
 call plug#end()
 
-set bg=light
+set bg=dark
 set go=a
 set mouse=a
 set nohlsearch
 set clipboard=unnamedplus
+
+" configure nvcode-color-schemes
+let g:nvcode_termcolors=256
+
+syntax on
+colorscheme nvcode " Or whatever colorscheme you make
+
+
+" checks if your terminal has 24-bit color support
+if (has("termguicolors"))
+    set termguicolors
+    hi LineNr ctermbg=NONE guibg=NONE
+endif
 
 " Some basics:
 	nnoremap c "_c

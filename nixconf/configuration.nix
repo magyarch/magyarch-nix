@@ -10,7 +10,8 @@
       ./hardware-configuration.nix
       ./packages.nix
       ./services.nix
-      ./amdgpu.nix
+#      ./amdgpu.nix
+       ./nvidia.nix
  #     ./awesomewm.nix
       ./appimage.nix   
 #        ./bluetooth.nix
@@ -22,7 +23,7 @@
 #       ./gnome.nix
  #      ./river.nix
 #      ./spectrwm.nix
-#      ./bspwm.nix
+      ./bspwm.nix
 #      ./herbst.nix
         ./wm.nix
 #       ./makemkv.nix
@@ -33,7 +34,7 @@
 #      ./jellyfin.nix
 #       ./qtile.nix
 #       ./qtile-wayland.nix
-        ./hyprland.nix
+ #       ./hyprland.nix
 #         ./wayfire.nix
 #       ./nimdow.nix
 #      ./xmonad.nix
@@ -97,6 +98,7 @@
   zramSwap.memoryPercent = 50;
 
   nixpkgs.config.allowUnsupportedSystem = true;
+  
   # Enable networking
   networking = {
         networkmanager.enable = true;

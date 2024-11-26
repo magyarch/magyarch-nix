@@ -8,14 +8,14 @@ bspc rule -r "*"
 killall cleanfullscreen
 cleanfullscreen &
 sxhkd -c $HOME/.config/bspwm/sxhkdrc &
-pidof -q polybar || sleep 2s && $HOME/.config/polybar/launch.sh &
+pidof -q polybar || sleep 1s && $HOME/.config/polybar/launch.sh &
 pidof -q compfy || { compfy --config "$HOME"/.config/compfy.conf & }
 
 # ----------------------------------------------------------------------------------------------
 
 
 # Bspwm configs
-bspc config border_width         5
+bspc config border_width         3
 bspc config window_gap           10
 bspc config top_padding          35
 bspc config bottom_padding       10
@@ -94,7 +94,7 @@ bspc rule -a Lutris desktop='^5' follow=on
 bspc rule -a heroic.exe desktop='^6' state=pseudo_tiled follow=on
 bspc rule -a Lxappearance state=floating rectangle=1480x800+540+300
 bspc rule -a Xfce4-appfinder state=floating rectangle=1480x800+540+300
-bspc rule -a Pavucontrol state=floating rectangle=1480x800+540+300
+bspc rule -a pavucontrol state=floating rectangle=1480x800+540+300
 bspc rule -a Pcmanfm:Dialog state=floating
 bspc rule -a Alacritty:Alacritty:News state=floating rectangle=1480x800+540+300
 bspc rule -a kitty:kitty:Music state=floating rectangle=1480x800+0+0 center=true

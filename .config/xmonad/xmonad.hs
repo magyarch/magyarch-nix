@@ -133,7 +133,7 @@ myScratchPads = [
     NS "ncmpcpp" "kitty --class=kitty -T ncmpcpp -e ncmpcpp" (title =? "ncmpcpp")
         (customFloating $ W.RationalRect (1/4) (1/4) (2/4) (2/4)),
 
-    NS "pavucontrol" "pavucontrol" (className =? "Pavucontrol")
+    NS "pavucontrol" "pavucontrol" (className =? "pavucontrol")
         (customFloating $ W.RationalRect (1/4) (1/4) (2/4) (2/4))
   ]
 
@@ -170,7 +170,8 @@ myManageHook = composeAll . concat $
     , [resource =? "desktop_window" --> doIgnore]
     , [resource =? "sxiv" --> doCenterFloat]
     , [className =? "Lxappearance" --> doCenterFloat]
-    --, [className =? "Pavucontrol" --> doCenterFloat]
+    , [className =? "pavucontrol" --> doCenterFloat]
+    , [title =? "pavucontrol" --> doFloat]
     --, [className =? "Steam" --> doCenterFloat]
     --, [className =? "steam" --> doCenterFloat]
     , [className =? "Zathura" --> doCenterFloat]
@@ -199,7 +200,7 @@ white     = "#c3cdc8"
 
 ------------------------------------------------------------------------
 
-myEventHook = serverModeEventHook <+> serverModeEventHookCmd <+> serverModeEventHookF "XMONAD_PRINT" (io . putStrLn) <+> minimizeEventHook <+> docksEventHook <+> handleEventHook def <+> fullscreenEventHook
+myEventHook = serverModeEventHook <+> serverModeEventHookCmd <+> serverModeEventHookF "XMONAD_PRINT" (io . putStrLn) <+> minimizeEventHook <+> handleEventHook def 
 
 --docksEventHook <+> fullscreenEventHook
 ------------------------------------------------------------------------

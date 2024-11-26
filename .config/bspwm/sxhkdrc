@@ -7,7 +7,7 @@ super + {_,shift + } Return
 
 # Dmenu2 and rofi(window switcher, application launcher)
 super + {_,shift +} d
-    {dmenu_run, xfce4-appfinder}
+    {dmenu -i -p, xfce4-appfinder}
 
 
 # Tui filemanager and same command with sudo
@@ -32,11 +32,11 @@ super + {_,shift + } i
 
 # S,R,lock script,calendar app
 super + {_,shift + } c
-    {power, eww open --toggle powermenu}
+    {rofi_power, eww open --toggle powermenu}
 
 # Default web browser brave and firefox
 super + {_,shift + } w
-    {wmctrl -a Brave || $BROWSER, $BROWSER2}
+    {wmctrl -a Microsoft-edge || $BROWSER, $BROWSER2}
 
 # Chat client, gui filemanager
 super + {_,shift + } p

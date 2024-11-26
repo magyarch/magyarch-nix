@@ -249,16 +249,16 @@ hc rule class~'(Zathura|zathura|upc.exe)' tag='' switchtag=on floating=on foc
 
 # SCRATCHPADS #
 #-------------#
-hc rule title~'scratchpad' floating=on floatplacement=center floating_geometry=1400x800
-hc rule title~'FM' floating=on floatplacement=center floating_geometry=1400x800
+hc rule title~'scratchpad' floating=on floatplacement=center floating_geometry=1600x1200
+hc rule title~'FM' floating=on floatplacement=center floating_geometry=1600x1200
 hc rule title~'News' floating=on floatplacement=center floating_geometry=1400x800
-hc rule title~'Todo' floating=on floatplacement=center floating_geometry=1200x800
-hc rule title~'Music' floating=on floatplacement=center floating_geometry=1400x800
+hc rule title~'Todo' floating=on floatplacement=center floating_geometry=1600x1200
+hc rule title~'Music' floating=on floatplacement=center floating_geometry=1600x1200
 hc rule title~'launcher' floating=on floatplacement=center floating_geometry=650x450
 #hc rule title~'Fájl*' focus=off floating=on floatplacement=center floating_geometry=400x200
-hc rule title~'Open File...' floating=on floatplacement=center floating_geometry=1200x800
-hc rule class~'(Pavucontrol|Lxappearance|webamp-desktop)' floating=on floatplacement=center floating_geometry=1400x800
-hc rule title~'GtkFileChooserDialog' floating=on floatplacement=center floating_geometry=1200x800
+hc rule title~'Open File...' floating=on floatplacement=center floating_geometry=1600x1200
+hc rule class~'(Pavucontrol|Lxappearance|webamp-desktop)' floating=on floatplacement=center floating_geometry=1600x1200
+hc rule title~'GtkFileChooserDialog' floating=on floatplacement=center floating_geometry=1600x1200
 
 # give focus to most common terminals
 hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm|Konsole)' floating=on focus=on

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-DIALOG_RESULT=$(echo -e 'Quit\nReboot\nPoweroff' | wofi -d -p 'System')
+DIALOG_RESULT=$(echo -e 'Quit\nReboot\nPoweroff' | rofi | -dmenu -p "Select:" -no-sort "${DIALOG_RESULT[@]}" )
 
 case $DIALOG_RESULT in
       #  "Quit") fancy-quit && qtile cmd-obj -o cmd -f shutdown ;;
-        "Quit") fancy-quit && hyprctl dispatch exit ;;
+        "Quit") fancy-quit && bspc quit ;;
         "Reboot") fancy-quit && systemctl reboot ;;
         "Poweroff") fancy-quit && systemctl poweroff ;;
         *) exit 0
