@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-SRL="$(echo -e "Ex\nIn\nCancel" | dmenu -i -l 3 -nb '#282a36' -sb '#6272a4' -fn 'JetBrains Mono Nerd Font-12' -p  'Choose output:')"
+SRL="$(echo -e "Ex\nIn\nCancel" | dmenu -i -l 3 --nb '#282a36' --sb '#6272a4' --fn 'JetBrains Mono Nerd Font-12' -p  'Choose output:')"
 
 case $SRL in
     Ex)

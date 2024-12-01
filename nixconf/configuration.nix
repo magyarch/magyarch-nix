@@ -10,25 +10,28 @@
       ./hardware-configuration.nix
       ./packages.nix
       ./services.nix
-#      ./amdgpu.nix
-       ./nvidia.nix
+      ./amdgpu.nix
+#       ./nvidia.nix
  #     ./awesomewm.nix
-      ./appimage.nix   
+#      ./appimage.nix   
 #        ./bluetooth.nix
+#        ./bspwm.nix
 #        ./cinnamon.nix
 #     ./i3.nix
+       #  ./ld.nix
 #       ./homem.nix
 #      ./dwm.nix
  #      ./dk.nix
 #       ./gnome.nix
  #      ./river.nix
 #      ./spectrwm.nix
-      ./bspwm.nix
-#      ./herbst.nix
+     ./hyprland.nix
+#        ./herbst.nix
         ./wm.nix
 #       ./makemkv.nix
 #       ./redshift.nix
         ./ssh.nix
+        ./samba.nix
  #     ./plex.nix
 #       ./sway.nix
 #      ./jellyfin.nix
@@ -46,7 +49,10 @@
      bootspec.enable = true;
     # initrd.kernelModules = [ "amdgpu" ];
   #  kernelModules = [ "bfq" ];
-    #plymouth.enable = true;
+    plymouth = {
+  theme = "catppuccin-mocha";
+  themePackages = [ (pkgs.catppuccin-plymouth.override { variant = "mocha"; }) ];
+};
     loader = {
         systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;
@@ -81,7 +87,7 @@
 
 
    fileSystems."/media" =
-    { device = "/dev/disk/by-uuid/d8868195-b945-4761-951a-c5554e850bfc";
+    { device = "/dev/disk/by-uuid/7917adae-def7-413b-9d36-bcd4d913de2b";
       fsType = "ext4";
       options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
     };
@@ -98,7 +104,8 @@
   zramSwap.memoryPercent = 50;
 
   nixpkgs.config.allowUnsupportedSystem = true;
-  
+ # nixpkgs.config.allowUnfree = true;
+ # nixpkgs.config.nvidia.acceptLicense = true;  
   # Enable networking
   networking = {
         networkmanager.enable = true;
@@ -178,16 +185,21 @@
   #programs = { steam.gamescopeSession.enable = true; };
   programs = {
 	   dconf.enable = true;
-  #   corectrl.enable = true;
-  #   coolercontrol.enable = true;
+#     corectrl.enable = true;
+     coolercontrol.enable = true;
+     file-roller.enable = true;
      gamemode.enable = true;
    #  gamescope.enable = true;
      steam = {
 	           enable = true;
-             gamescopeSession.enable = true;
+ #            gamescopeSession.enable = true;
              remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
              dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     }; 
+     
+
+  
+
 
 	   thunar = {
 	   enable = true;
@@ -289,6 +301,14 @@
 
   };
   
+     # Suckless Tools
+#   nixpkgs.overlays = [
+#     (final: prev: {
+# #      dwm = prev.dwm.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dwm ;});
+#       dmenu = prev.dmenu.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dmenu ;});
+# #      st = prev.st.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/st ;});
+#     })
+#   ];
   
   fonts.packages = with pkgs; [
     noto-fonts-emoji
@@ -318,7 +338,7 @@
     gc = {
       automatic = true;
       dates = "daily";
-    #  options = "--delete-older-than 2d";
+      options = "--delete-older-than 1d";
     };
   };
 

@@ -7,23 +7,24 @@
   hardware.cpu.amd.sev.enable = true;
 
   #Enable OpenGL
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
+ #   driSupport = true;
+ #   driSupport32Bit = true;
    #  hardware.graphics = {
    #  enable = true;
    # #driSupport = true;
    #  enable32Bit = true;
   #};
-    extraPackages = with pkgs; [
-    libdrm
-    vaapiVdpau
-    vdpauinfo
-    libvdpau
-    libvdpau-va-gl
+   #  extraPackages = with pkgs; [
+   #  libdrm
+   #  vaapiVdpau
+   #  vdpauinfo
+   #  libvdpau
+   #  libvdpau-va-gl
    
-   ];
+   # ];
    
   };
 
@@ -39,8 +40,8 @@
  #                #NIXOS_OZONE_WL = "1";
                   ROC_ENABLE_PRE_VEGA = "1";
                  #AMD_VULKAN_ICD="RADV";
-                VDPAU_DRIVER = "radeonsi";
-                  LIBVA_DRIVER_NAME = "radeonsi";
+    #            VDPAU_DRIVER = "radeonsi";
+     #             LIBVA_DRIVER_NAME = "radeonsi";
               };
 
     environment.systemPackages = with pkgs; [ lact ];

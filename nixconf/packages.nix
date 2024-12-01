@@ -24,24 +24,26 @@ in
 #     atool 
      bat 
 #     bc 
-     brave
+#     brave
      binutils
      celluloid  
      curl
-#     dunst
+     dunst
 #     dxvk 
 #     discord 
-#     dmenu 
+#     dmenu-rs
+#     dmenu-rs-enable-plugins 
 #     dzen2
      eza 
      exfat 
      exfatprogs 
      glib
+     gtkmm4
      xfce.exo
      eww 
 #     faac
 #     feh
-     firefox
+     floorp
      ffmpeg
      fzf 
      git
@@ -51,22 +53,22 @@ in
      killall
      kitty
      libnotify
-#     libbsd
+     libbsd
 #     lf
      lm_sensors 
      lutris 
-#     lxappearance
+   #  lxappearance
      lxqt.lxqt-policykit
-     unstable.lxqt.lxqt-openssh-askpass
+     lxqt.lxqt-openssh-askpass
      #libbluray
      #libdvdcss
      mangohud
  #    mate.mate-polkit
      mesa
-     #microsoft-edge 
+     microsoft-edge 
      mpd 
      ncmpcpp 
-#     maim 
+    # maim 
      mpv 
      fastfetch
      neovim 
@@ -74,28 +76,29 @@ in
      ntfs3g 
      nwg-look
 #     nwg-dock-hyprland
-#     unstable.ueberzugpp 
+  #   ueberzug 
      unrar 
      unzip
 #     obs-studio
 #     obs-studio-plugins.wlrobs
      onlyoffice-bin_latest
      openrgb-with-all-plugins
-#     p7zip 
+     paper-icon-theme
+     catppuccin-cursors.mochaDark 
      pamixer 
      pavucontrol 
-#     polybar
+  #   polybar
      pyprland 
      protonup
      qbittorrent 
-#     rofi
-#     scrot
+   #  rofi
+  #   scrot
 #     smplayer
-    # spectrwm
+#     spectrwm
      sublime3
-#     st
-#     sxhkd 
-     sxiv 
+     st
+ #    sxhkd 
+  #   sxiv 
      system-config-printer 
 #     stalonetray
      stremio
@@ -109,21 +112,23 @@ in
 #     wmctrl
      vifm
      zellij 
-  #   xorg.xev
-  #   xclip 
-  #   x264 
-  #   xcape 
-     xdg-user-dirs
-     xdg-utils 
- #    xdo 
- #    xdotool 
- #    xorg.xdpyinfo
- #    xorg.xsetroot
-#     xmonadctl
-#     xmobar
-#     xsel
-#     xorg.xinit 
-#     xwallpaper 
+#     xorg.xev
+#      xclip 
+#    #  x264 
+#      xcape 
+#      xdg-user-dirs
+ #     xdg-utils 
+#      xdo 
+#      xdotool 
+#      xorg.xdpyinfo
+#      xorg.xsetroot
+#      xorg.libxcb
+#      xmonadctl
+# #     xmobar
+#      xsel
+#      xorg.xinit
+#      xorg.libX11 
+#      xwallpaper 
      yt-dlp 
 #    (vivaldi.override {
  #   proprietaryCodecs = true;
@@ -135,23 +140,23 @@ in
      })
 
 
-     # (picom.overrideAttrs (oldAttrs: rec {
-     #     pname = "compfy";
-     #     version = "1.7.2";
-     #     buildInputs = [
-     #       pcre2
-     #     ]
-     #     ++
-     #       oldAttrs.buildInputs;
-     #     src = pkgs.fetchFromGitHub {
-     #       owner = "allusive-dev";
-     #       repo = "compfy";
-     #       rev = version;
-     #       hash = "sha256-7hvzwLEG5OpJzsrYa2AaIW8X0CPyOnTLxz+rgWteNYY=";
-     #     };
-     #     postInstall = '''';
-     #   }))   
-     # (slstatus.overrideAttrs (_: { src = /home/xeoncpu/.config/suckless/slstatus ; }))
+  #     (picom.overrideAttrs (oldAttrs: rec {
+  #         pname = "compfy";
+  #         version = "1.7.2";
+  #         buildInputs = [
+  #           pcre2
+  #         ]
+  #         ++
+  #           oldAttrs.buildInputs;
+  #         src = pkgs.fetchFromGitHub {
+  #           owner = "allusive-dev";
+  #           repo = "compfy";
+  #           rev = version;
+  #           hash = "sha256-7hvzwLEG5OpJzsrYa2AaIW8X0CPyOnTLxz+rgWteNYY=";
+  #         };
+  #         postInstall = '''';
+  #       }))   
+  #    # (dmenu.overrideAttrs (_: { src = /home/xeoncpu/.config/suckless/dmenu ; }))
   #    (catppuccin-sddm.override {
   #   flavor = "mocha";
   #   font  = "Noto Sans";
@@ -159,7 +164,7 @@ in
   #   background = "/home/xeoncpu/.local/bin/wallpapers/Future/mocha.png";
   #   loginBackground = true;
   # })         
-    ];
+     ];
 
         pathsToLink = [ "/libexec" ];
      

@@ -31,7 +31,7 @@ environment.gnome.excludePackages = (with pkgs; [
 
 hardware.pulseaudio.enable = false;
 
-environment.systemPackages = with pkgs; [ gnomeExtensions.appindicator gnome.adwaita-icon-theme ];
+environment.systemPackages = with pkgs; [ gnomeExtensions.appindicator adwaita-icon-theme ];
 services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 programs.dconf.enable = true;
 

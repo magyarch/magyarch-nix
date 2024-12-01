@@ -1,7 +1,7 @@
 { config, pkgs, ...}:
 
 {
-  services.xserver.displayManager.defaultSession = "none+xmonad";
+  services.displayManager.defaultSession = "none+xmonad";
   services.xserver.windowManager.xmonad = {
     enable = true;
     enableContribAndExtras = true;
@@ -29,7 +29,7 @@
                 #WLR_NO_HARDWARE_CURSOR = "1";
                 #NIXOS_OZONE_WL = "1";
                #_JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-                VDPAU_DRIVER = "radeonsi";
-                LIBVA_DRIVER_NAME = "radeonsi";
+#                VDPAU_DRIVER = "radeonsi";
+#                LIBVA_DRIVER_NAME = "radeonsi";
              };
 }

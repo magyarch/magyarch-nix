@@ -1,9 +1,6 @@
 { config, pkgs, ... }:
 
-
-
-
-    let
+  let
   flake-compat = builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz";
   hyprland = (import flake-compat {
     src = builtins.fetchTarball "https://github.com/hyprwm/Hyprland/archive/master.tar.gz";
@@ -15,9 +12,14 @@ in {
 
   #nixpkgs.overlays = [ hyprland.overlays.default ];
 
+  # nix.settings = {
+  #   substituters = ["https://hyprland.cachix.org"];
+  #   trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  # };
+
   programs.hyprland = {
     enable = true;
-    package = pkgs.hyprland;
+#    package = pkgs.hyprland;
   };
 
 
@@ -52,6 +54,7 @@ in {
                          slurp
                          hyprland-protocols
                          hyprshot
+                         pyprland  
                          #hyprlandPlugins.hy3
                          wayland-utils
                          #xwayland

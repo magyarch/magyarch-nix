@@ -1,9 +1,9 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
     # List services that you want to enable:
     services.xserver = {
-        enable = true;
+#        enable = true;
 	xkb.layout = "hu";
 	xkb.variant = "";
 	dpi = 144;
@@ -23,30 +23,12 @@
 
 
 };
-
-#  services.greetd = {
-#    enable = true;
-#    settings = rec {
-#      initial_session = {
-#        command = "${pkgs.dk}/bin/dk";
-#        user = "xeoncpu";
-#      };
-#      default_session = initial_session;
-#    };
-#  };
     
-   services.displayManager.sddm = {
+
+      services.displayManager.sddm = {
       enable = true;
-#      autoNumlock = true;
-      wayland.enable = true;
-#      theme = "catppuccin-mocha";
-      #package = pkgs.kdePackages.sddm;1
+      wayland.enable = true;   
     };
-
-
-  #   services.displayManager.sddm = {
-  #   enable = true;   
-  # };
                       
                 
     services = {
@@ -56,7 +38,7 @@
 	   avahi.enable = true;
 	   avahi.nssmdns4 = true;
 	   avahi.openFirewall = true;
-     flatpak.enable = true;
+#     flatpak.enable = true;
 	  # picom.enable = true;
      dbus.enable = true;
 	   fstrim = {
@@ -102,33 +84,7 @@
       "/run/user/1000"; # User-id 1000 must match above user. MPD will look inside this directory for the PipeWire socket.
   };
 
-  services.samba-wsdd.enable = true;
-  services.samba.enableNmbd = true;
-  services.samba = {
-         enable = true;
-	 securityType = "user";
-	 extraConfig = ''
-	 workgroup = WORKGROUP
-	 server string = smbnix
-         netbios name = smbnix
-         security = user
-	 hosts allow = 192.168.0. 127.0.0.1 localhost
-         hosts deny = 0.0.0.0/0
-         guest account = xeoncpu
-	 map to guest = Bad User
-	 '';
-	shares = {
-	 public = {
-	 path = "/mnt/Movies";
-	 browseable = "yes";
-	 "writable" = "yes";
-	 "guest ok" = "yes";
-	 "public" = "yes";
-	 "create mask" = "0777";
-      "directory mask" = "0777";
-	 };
-	 };
-};
+  
       # System76 Scheduler 
        services.system76-scheduler = {
                                  enable = true;
@@ -139,20 +95,5 @@
       #= IRQBalance
     #  services.irqbalance.enable = true;
 
-#       systemd = {
-#   user.services.polkit-gnome-authentication-agent-1 = {
-#     description = "polkit-gnome-authentication-agent-1";
-#     wantedBy = [ "graphical-session.target" ];
-#     wants = [ "graphical-session.target" ];
-#     after = [ "graphical-session.target" ];
-#     serviceConfig = {
-#         Type = "simple";
-#         ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-#         Restart = "on-failure";
-#         RestartSec = 1;
-#         TimeoutStopSec = 10;
-#       };
-#   };
-# };
-
+      
 }

@@ -7,7 +7,8 @@ super + {_,shift + } Return
 
 # Dmenu2 and rofi(window switcher, application launcher)
 super + {_,shift +} d
-    {dmenu -i -p, xfce4-appfinder}
+    {dmenu_run -i --nb '#282a36' --nf '#c3cdc8' --sb '#6272a4' --font 'JetBrains Mono Nerd Font-11 
+    ' , xfce4-appfinder}
 
 
 # Tui filemanager and same command with sudo
