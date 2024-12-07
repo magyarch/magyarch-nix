@@ -38,7 +38,7 @@
 	   avahi.enable = true;
 	   avahi.nssmdns4 = true;
 	   avahi.openFirewall = true;
-#     flatpak.enable = true;
+          flatpak.enable = true;
 	  # picom.enable = true;
      dbus.enable = true;
 	   fstrim = {
@@ -95,5 +95,9 @@
       #= IRQBalance
     #  services.irqbalance.enable = true;
 
+   virtualisation.podman = {
+  enable = true;
+  dockerCompat = true;
+};
       
 }

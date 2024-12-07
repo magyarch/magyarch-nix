@@ -10,21 +10,6 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
- #   driSupport = true;
- #   driSupport32Bit = true;
-   #  hardware.graphics = {
-   #  enable = true;
-   # #driSupport = true;
-   #  enable32Bit = true;
-  #};
-   #  extraPackages = with pkgs; [
-   #  libdrm
-   #  vaapiVdpau
-   #  vdpauinfo
-   #  libvdpau
-   #  libvdpau-va-gl
-   
-   # ];
    
   };
 
@@ -38,14 +23,14 @@
 #                  QT_QPA_PLATFORM = "wayland";
  #                #WLR_NO_HARDWARE_CURSOR = "1";
  #                #NIXOS_OZONE_WL = "1";
-                  ROC_ENABLE_PRE_VEGA = "1";
+      #           ROC_ENABLE_PRE_VEGA = "1";
                  #AMD_VULKAN_ICD="RADV";
-    #            VDPAU_DRIVER = "radeonsi";
-     #             LIBVA_DRIVER_NAME = "radeonsi";
+                 VDPAU_DRIVER = "radeonsi";
+                  LIBVA_DRIVER_NAME = "radeonsi";
               };
 
-    environment.systemPackages = with pkgs; [ lact ];
-systemd.packages = with pkgs; [ lact ];
-systemd.services.lactd.wantedBy = ["multi-user.target"];          
+  environment.systemPackages = with pkgs; [ lact ];
+  systemd.packages = with pkgs; [ lact ];
+  systemd.services.lactd.wantedBy = ["multi-user.target"];          
 
  }

@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ./packages.nix
       ./services.nix
+#      ./sync.nix
       ./amdgpu.nix
 #       ./nvidia.nix
  #     ./awesomewm.nix
@@ -59,7 +60,7 @@
         systemd-boot.memtest86.enable = true;
 	timeout = 1;
     };
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
 #      "amd_pstate=active" 
       "kernel.nmi_watchdog=0"
@@ -256,7 +257,7 @@
       autosuggestions.enable = true;
       shellAliases = {
          nrs="sudo nixos-rebuild switch";
-         ncu="sudo nix-channel --update nixos";
+         ncu="sudo nix-channel --update";
          addunstable="sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos";
          nixupgrade="sudo nixos-rebuild switch --upgrade-all";
          rmoldgen="sudo nix-collect-garbage -d";

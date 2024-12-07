@@ -29,6 +29,7 @@ in
      celluloid  
      curl
      dunst
+     distrobox
 #     dxvk 
 #     discord 
 #     dmenu-rs
@@ -38,7 +39,6 @@ in
      exfat 
      exfatprogs 
      glib
-     gtkmm4
      xfce.exo
      eww 
 #     faac
@@ -83,8 +83,8 @@ in
 #     obs-studio-plugins.wlrobs
      onlyoffice-bin_latest
      openrgb-with-all-plugins
-     paper-icon-theme
-     catppuccin-cursors.mochaDark 
+     #paper-icon-theme
+     #catppuccin-cursors.mochaDark 
      pamixer 
      pavucontrol 
   #   polybar
@@ -102,6 +102,7 @@ in
      system-config-printer 
 #     stalonetray
      stremio
+#     syncthing
      ventoy-full
      vlc
     # virt-manager 
