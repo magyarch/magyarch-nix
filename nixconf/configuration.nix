@@ -60,7 +60,7 @@
         systemd-boot.memtest86.enable = true;
 	timeout = 1;
     };
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
     kernelParams = [
 #      "amd_pstate=active" 
       "kernel.nmi_watchdog=0"
@@ -139,7 +139,7 @@
 
   nixpkgs.config = {
     allowUnfree = true;
-  #  allowUnfreePredicate = pkgs.makemkv;
+  #allowBroken = true;
   #  oraclejdk.accept_license = true;
     joypixels.acceptLicense = true;
   };
@@ -186,11 +186,10 @@
   #programs = { steam.gamescopeSession.enable = true; };
   programs = {
 	   dconf.enable = true;
-#     corectrl.enable = true;
      coolercontrol.enable = true;
      file-roller.enable = true;
      gamemode.enable = true;
-   #  gamescope.enable = true;
+     gamescope.enable = true;
      steam = {
 	           enable = true;
  #            gamescopeSession.enable = true;
@@ -266,6 +265,8 @@
          listgens="sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
          fixnonixsearchpath="sudo nixos-rebuild boot -I nixos-config=/etc/nixos/configuration.nix --upgrade";
          listallinstalled="sudo nix-store --query --requisites /run/current-system | cut -d- -f2- | sort | uniq";
+         gscope="gamescope -w 1920 -h 1080 -W 2560 -H 1440 -f -F fsr -e  -- steam -tenfoot";
+
 
          # Shorts
           ka="killall";
@@ -285,9 +286,8 @@
           q="exit";
           df="df -h";
           jctl="journalctl -p 3 -xb";
-
-          #chmod +x
-           ch="sudo chmod +x ";
+          dea="distrobox enter archlinux";
+          ch="sudo chmod +x";
 
         #Delete [Important - use carefully]
           delete="sudo rm -rf ";
@@ -328,7 +328,7 @@
    # Automatic Updates
   system.autoUpgrade = {
     enable = true;
-    channel = "https://nixos.org/channels/nixos-24.05";
+    channel = "https://nixos.org/channels/nixos-24.11";
   };
 
 
@@ -349,7 +349,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 
   nixpkgs.config.permittedInsecurePackages = [
                 "openssl-1.1.1w" "qbittorrent-4.6.4"

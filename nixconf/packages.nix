@@ -20,6 +20,7 @@ in
         systemPackages = with pkgs; [
      alacritty
      appimage-run
+     aegisub
 #     acpi
 #     atool 
      bat 
@@ -56,7 +57,7 @@ in
      libbsd
 #     lf
      lm_sensors 
-     lutris 
+     lutris
    #  lxappearance
      lxqt.lxqt-policykit
      lxqt.lxqt-openssh-askpass

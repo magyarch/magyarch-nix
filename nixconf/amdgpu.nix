@@ -24,7 +24,7 @@
  #                #WLR_NO_HARDWARE_CURSOR = "1";
  #                #NIXOS_OZONE_WL = "1";
       #           ROC_ENABLE_PRE_VEGA = "1";
-                 #AMD_VULKAN_ICD="RADV";
+                 AMD_VULKAN_ICD="RADV";
                  VDPAU_DRIVER = "radeonsi";
                   LIBVA_DRIVER_NAME = "radeonsi";
               };
