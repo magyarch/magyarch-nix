@@ -13,13 +13,13 @@
       "hyprland/workspaces",
       ],
     "modules-right": [
-      "temperature#cpu",
+      "custom/cpu-usage",
       "cpu",
       "custom/gpu-usage",
       "memory",
       "pulseaudio",
-      "tray",
       "custom/powermenu",
+      "tray",
     ],
     "tray": {
       "icon-size": 16,
@@ -73,11 +73,12 @@
     "on-click": "kitty amdgpu_top",
     "interval": 1,
     },
-    "temperature#cpu": {
-      "critical-threshold": 80,
-      "format": "CPU: {temperatureC}°C ",
-      "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-      "tooltip": false
+    "custom/cpu-usage": {
+    "format": "CPU: {} {icon}",
+    "exec": "sensors | awk  '/Tctl:/ {print $2}'",
+    "format-icons": "󰾲",
+    "on-click": "kitty amdgpu_top",
+    "interval": 1,
     },
     "memory": {
       "format": "󰍛 {used:0.1f}GiB/{total:0.1f}GiB ({percentage}%)",
@@ -92,7 +93,7 @@
     "custom/powermenu": {
       "format": "",
       "tooltip": false,
-      "on-click": "exec wlogout"
+      "on-click": "exec wlogout --protocol layer-shell"
     },
     "custom/updates": {
       "format": "<span color=\"#61afef\"></span> {}",
@@ -142,8 +143,8 @@
                     "on-scroll-up": "shift_up",
                     "on-scroll-down": "shift_down"
                     }
-                   
+
  },
-  
+
 
 }

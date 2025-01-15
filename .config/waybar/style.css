@@ -35,7 +35,7 @@ button:hover {
 
 #custom-powermenu,
 #custom-gpu-usage,
-#temperature,
+#custom-cpu-usage,
 #cpu,
 #memory,
 #workspaces,
@@ -73,7 +73,7 @@ button:hover {
   margin-right: 8px;
 }
 
-#temperature {
+#custom-cpu-usage {
   color: #6272a4;
 }
 
