@@ -20,17 +20,16 @@ in
         systemPackages = with pkgs; [
      alacritty
      appimage-run
-     aegisub
 #     acpi
 #     atool 
      bat 
+     rofi-wayland
 #     bc 
-#     brave
+     brave
      binutils
      celluloid  
      curl
      dunst
-     distrobox
 #     dxvk 
 #     discord 
 #     dmenu-rs
@@ -42,9 +41,7 @@ in
      glib
      xfce.exo
      eww 
-#     faac
 #     feh
-     floorp
      ffmpeg
      fzf 
      git
@@ -66,7 +63,7 @@ in
      mangohud
  #    mate.mate-polkit
      mesa
-     microsoft-edge 
+     microsoft-edge
      mpd 
      ncmpcpp 
     # maim 
@@ -74,6 +71,7 @@ in
      fastfetch
      neovim 
 #     nix-du
+     nix-search-cli
      ntfs3g 
      nwg-look
 #     nwg-dock-hyprland
@@ -140,6 +138,12 @@ in
        withOpenASAR = true;
        withVencord = true;
      })
+
+     (heroic.override {
+  extraPkgs = pkgs: [
+    pkgs.gamescope
+  ];
+})
 
 
   #     (picom.overrideAttrs (oldAttrs: rec {

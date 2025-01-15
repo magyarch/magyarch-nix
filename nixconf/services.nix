@@ -49,23 +49,15 @@
 	   openssh.enable = true;       
 	   gvfs.enable = true;
 	   tumbler.enable = true;
-	#   udev.extraRules = ''
-    # Your rule goes here
-  #'';
-
-
-#	   spice-vdagentd.enable = true;
      pipewire = {
            enable = true;
-	   alsa.enable = true;
+	   #alsa.enable = true;
            alsa.support32Bit = true;
            pulse.enable = true;
-	   };
-
- }; 
+	   }; 
 
 
-     services.mpd = {
+    mpd = {
     enable = true;
     user = "xeoncpu";
     musicDirectory = "/mnt/Zenék";
@@ -78,6 +70,7 @@
     startWhenNeeded =
       true; # systemd feature: only start MPD service upon connection to its socket
   };
+};
   systemd.services.mpd.environment = {
     # https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/609
     XDG_RUNTIME_DIR =
@@ -86,18 +79,19 @@
 
   
       # System76 Scheduler 
-       services.system76-scheduler = {
-                                 enable = true;
-                                 settings.processScheduler.foregroundBoost.foreground.nice = 6;
-                                 useStockConfig = true;
-                               };
+                 # services.system76-scheduler = {
+                 #                 enable = true;
+                 #                 settings.processScheduler.foregroundBoost.foreground.nice = 6;
+                 #                 useStockConfig = true;
+                 #               };
 
       #= IRQBalance
     #  services.irqbalance.enable = true;
 
-   virtualisation.podman = {
-  enable = true;
-  dockerCompat = true;
-};
+ #   virtualisation.podman = {
+ #  enable = true;
+ #  dockerCompat = true;
+ # };
+
       
 }

@@ -15,14 +15,14 @@
 #       ./nvidia.nix
  #     ./awesomewm.nix
 #      ./appimage.nix   
-#        ./bluetooth.nix
+        ./bluetooth.nix
 #        ./bspwm.nix
 #        ./cinnamon.nix
 #     ./i3.nix
        #  ./ld.nix
 #       ./homem.nix
 #      ./dwm.nix
- #      ./dk.nix
+       ./plex.nix
 #       ./gnome.nix
  #      ./river.nix
 #      ./spectrwm.nix
@@ -50,17 +50,17 @@
      bootspec.enable = true;
     # initrd.kernelModules = [ "amdgpu" ];
   #  kernelModules = [ "bfq" ];
-    plymouth = {
-  theme = "catppuccin-mocha";
-  themePackages = [ (pkgs.catppuccin-plymouth.override { variant = "mocha"; }) ];
-};
+#    plymouth = {
+#  theme = "catppuccin-mocha";
+#  themePackages = [ (pkgs.catppuccin-plymouth.override { variant = "mocha"; }) ];
+#};
     loader = {
         systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;
         systemd-boot.memtest86.enable = true;
 	timeout = 1;
     };
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
 #      "amd_pstate=active" 
       "kernel.nmi_watchdog=0"
@@ -165,11 +165,13 @@
   users.users.xeoncpu = {
     isNormalUser = true;
     description = "xeoncpu";
-   extraGroups = [ "users" "audio" "video" "networkmanager" "wheel" "input" "disk" "power" "samba" "kwm" ];
+   extraGroups = [ "users" "audio" "video" "networkmanager" "wheel" "input" "disk" "samba" "kwm" ];
    # packages = with pkgs; [
     #  firefox
     #  thunderbird
     };
+
+    #virtualisation.docker.enable = true;
   
   # security.sudo.extraRules = [{
   #    users = [ "xeoncpu" ];
@@ -184,9 +186,15 @@
   #   askPassword = "${pkgs.lxqt.lxqt-openssh-askpass}/bin/lxqt-openssh-askpass";
   # };
   #programs = { steam.gamescopeSession.enable = true; };
+#  programs.nix-ld.enable = true;
+#  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged programs
+    # here, NOT in environment.systemPackages
+ # ];
+  
   programs = {
 	   dconf.enable = true;
-     coolercontrol.enable = true;
+    # coolercontrol.enable = true;
      file-roller.enable = true;
      gamemode.enable = true;
      gamescope.enable = true;
