@@ -23,13 +23,12 @@ in
 #     acpi
 #     atool 
      bat 
-     rofi-wayland
+ #    rofi-wayland
 #     bc 
      brave
-     binutils
-     celluloid  
+     binutils  
      curl
-     dunst
+#     dunst
 #     dxvk 
 #     discord 
 #     dmenu-rs
@@ -46,6 +45,7 @@ in
      fzf 
      git
      handbrake
+    # hyprshade
      htop 
      jamesdsp
      killall
@@ -54,7 +54,8 @@ in
      libbsd
 #     lf
      lm_sensors 
-     lutris
+     librewolf
+     unstable.lutris
    #  lxappearance
      lxqt.lxqt-policykit
      lxqt.lxqt-openssh-askpass
@@ -70,6 +71,7 @@ in
      mpv 
      fastfetch
      neovim 
+     networkmanagerapplet
 #     nix-du
      nix-search-cli
      ntfs3g 
@@ -80,8 +82,8 @@ in
      unzip
 #     obs-studio
 #     obs-studio-plugins.wlrobs
-     onlyoffice-bin_latest
-     openrgb-with-all-plugins
+    # onlyoffice-bin_latest
+    # openrgb-with-all-plugins
      #paper-icon-theme
      #catppuccin-cursors.mochaDark 
      pamixer 
@@ -95,7 +97,7 @@ in
 #     smplayer
 #     spectrwm
      sublime3
-     st
+     #st
  #    sxhkd 
   #   sxiv 
      system-config-printer 
@@ -103,7 +105,7 @@ in
      stremio
 #     syncthing
      ventoy-full
-     vlc
+    # vlc
     # virt-manager 
      #vscode-with-extensions
      #vscode-extensions.bbenoist.nix
@@ -112,6 +114,7 @@ in
 #     wmctrl
      vifm
      zellij 
+#     unstable.hyprland
 #     xorg.xev
 #      xclip 
 #    #  x264 
@@ -143,7 +146,7 @@ in
   extraPkgs = pkgs: [
     pkgs.gamescope
   ];
-})
+}) 
 
 
   #     (picom.overrideAttrs (oldAttrs: rec {

@@ -10,6 +10,11 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    extraPackages = with pkgs; [
+        libva-utils
+        libvdpau-va-gl
+        vaapiVdpau
+    ];
    
   };
 

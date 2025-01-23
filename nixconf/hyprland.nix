@@ -1,16 +1,12 @@
-{ config, pkgs, ... }:
+{ config, pkgs, ... }: 
 
-  {
 
-  #nixpkgs.overlays = [ hyprland.overlays.default ];
+ {
 
-  # nix.settings = {
-  #   substituters = ["https://hyprland.cachix.org"];
-  #   trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-  # };
 
   programs.hyprland = {
     enable = true;
+#    package = pkgs.unstable.hyprland;
            
   };
 
@@ -21,31 +17,18 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  #   xdg = {
-  #   # For some reason, the nix module for Hyprland broke screensharing (with XDPH missing)
-  #   # Enablng the portal fixes it.
-  #   portal = {
-  #     enable = true; 
-  #     config.common.default = "*";
-  #     extraPortals = with pkgs; [
-  #       xdg-desktop-portal-gtk
-  #    #   xdg-desktop-portal-hyprland
-  #     ];
-  #   };
-  # };
   
 # List packages installed in system profile
     environment.systemPackages = with pkgs; [
-	                     meson
-			                 grim
-                         clapper
+	                       meson
+			                   grim
                          mako
-                         swaybg
 			                   swww
                          swappy
                          slurp
                          hyprland-protocols
                          hyprshot
+                         hyprshade
                          pyprland  
                          #hyprlandPlugins.hy3
                          wayland-utils
@@ -71,8 +54,6 @@
         waybar = super.waybar.overrideAttrs (oldAttrs: {
           mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true" "-Dmpd=enabled"];
         });
-      
- #       hyprland = super.hyprland.overrideAttrs (old: { src = /home/xeoncpu/.config/hypr/.src/hyprland ;});
 
         
       })

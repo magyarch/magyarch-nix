@@ -269,11 +269,11 @@
          nixupgrade="sudo nixos-rebuild switch --upgrade-all";
          rmoldgen="sudo nix-collect-garbage -d";
          rebuildboot="sudo /run/current-system/bin/switch-to-configuration boot";
-         runheroic="~/Letöltések && appimage-run Heroic-2.9.1.AppImage";
+        # runheroic="~/Letöltések && appimage-run Heroic-2.9.1.AppImage";
          listgens="sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
          fixnonixsearchpath="sudo nixos-rebuild boot -I nixos-config=/etc/nixos/configuration.nix --upgrade";
          listallinstalled="sudo nix-store --query --requisites /run/current-system | cut -d- -f2- | sort | uniq";
-         gscope="gamescope -w 1920 -h 1080 -W 2560 -H 1440 -f -F fsr -e  -- steam -tenfoot";
+        # gscope="gamescope -w 1920 -h 1080 -W 2560 -H 1440 -f -F fsr -e  -- steam -tenfoot";
 
 
          # Shorts

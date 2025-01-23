@@ -25,9 +25,9 @@
 };
     
 
-      services.displayManager.sddm = {
+      services.displayManager.ly = {
       enable = true;
-      wayland.enable = true;   
+#      wayland.enable = true;   
     };
                       
                 
@@ -79,11 +79,11 @@
 
   
       # System76 Scheduler 
-                 # services.system76-scheduler = {
-                 #                 enable = true;
-                 #                 settings.processScheduler.foregroundBoost.foreground.nice = 6;
-                 #                 useStockConfig = true;
-                 #               };
+                 services.system76-scheduler = {
+                                 enable = true;
+                                 settings.processScheduler.foregroundBoost.foreground.nice = 6;
+                                 useStockConfig = true;
+                               };
 
       #= IRQBalance
     #  services.irqbalance.enable = true;
