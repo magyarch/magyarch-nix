@@ -87,11 +87,11 @@
    };
 
 
-   fileSystems."/media" =
-    { device = "/dev/disk/by-uuid/7917adae-def7-413b-9d36-bcd4d913de2b";
-      fsType = "ext4";
-      options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
-    };
+   # fileSystems."/media" =
+   #  { device = "/dev/disk/by-uuid/7917adae-def7-413b-9d36-bcd4d913de2b";
+   #    fsType = "ext4";
+   #    options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
+   #  };
 
 
   fileSystems."/mnt" =

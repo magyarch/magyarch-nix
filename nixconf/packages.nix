@@ -92,7 +92,7 @@ in
      pyprland 
      protonup
      qbittorrent 
-   #  rofi
+     rofi-wayland
   #   scrot
 #     smplayer
 #     spectrwm
