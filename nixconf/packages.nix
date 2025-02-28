@@ -42,6 +42,8 @@ in
      eww 
 #     feh
      ffmpeg
+     firefox-bin
+     filezilla
      fzf 
      git
      handbrake
@@ -54,11 +56,13 @@ in
      libbsd
 #     lf
      lm_sensors 
-     librewolf
+    # librewolf
      unstable.lutris
    #  lxappearance
-     lxqt.lxqt-policykit
-     lxqt.lxqt-openssh-askpass
+   #  lxqt.lxqt-policykit
+    # lxqt.lxqt-openssh-askpass
+#     kdePackages.polkit-kde-agent-1
+     hyprpolkitagent
      #libbluray
      #libdvdcss
      mangohud
@@ -92,7 +96,7 @@ in
      pyprland 
      protonup
      qbittorrent 
-     rofi-wayland
+    # rofi-wayland
   #   scrot
 #     smplayer
 #     spectrwm
@@ -105,11 +109,13 @@ in
      stremio
 #     syncthing
      ventoy-full
-    # vlc
+     #vlc
+     #onlyoffice-desktopeditors
+    # wine-staging
     # virt-manager 
      #vscode-with-extensions
      #vscode-extensions.bbenoist.nix
-     wineWowPackages.full 
+    wineWowPackages.full 
      wineWowPackages.waylandFull
 #     wmctrl
      vifm

@@ -1,13 +1,12 @@
-{ config, pkgs, ... }: 
-
-
+{ pkgs, ... }:  
+ 
  {
-
-
   programs.hyprland = {
     enable = true;
-#    package = pkgs.unstable.hyprland;
-           
+    # set the flake package
+ #   package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # make sure to also set the portal package, so that they are in sync
+  #  portalPackage = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
 
@@ -21,11 +20,10 @@
 # List packages installed in system profile
     environment.systemPackages = with pkgs; [
 	                       meson
-			                   grim
-                         mako
+			             mako
 			                   swww
-                         swappy
-                         slurp
+                         #swappy
+                         #slurp
                          hyprland-protocols
                          hyprshot
                          hyprshade
@@ -38,15 +36,15 @@
                          wlroots
                          wlogout
                          wlsunset
-                         wlprop
-                         wlr-randr
+                         #wlprop
+                         #wlr-randr
 			                   wofi
                          wf-recorder
                          waybar
                          dotool
                          jq
                          copyq
-                         cliphist
+                         #cliphist
 	 		 ];
 
     nixpkgs.overlays = [

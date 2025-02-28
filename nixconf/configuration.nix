@@ -14,7 +14,7 @@
       ./amdgpu.nix
 #       ./nvidia.nix
  #     ./awesomewm.nix
-#      ./appimage.nix   
+      ./appimage.nix   
         ./bluetooth.nix
 #        ./bspwm.nix
 #        ./cinnamon.nix
@@ -43,6 +43,7 @@
 #       ./nimdow.nix
 #      ./xmonad.nix
 #       ./xdg-default-apps.nix
+        #./inputs.hyprland.nixosModules.default
     ];
 
  
@@ -87,11 +88,11 @@
    };
 
 
-   # fileSystems."/media" =
-   #  { device = "/dev/disk/by-uuid/7917adae-def7-413b-9d36-bcd4d913de2b";
-   #    fsType = "ext4";
-   #    options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
-   #  };
+    fileSystems."/media" =
+     { device = "/dev/disk/by-uuid/11af2718-e665-4f1e-983e-e8b28def6e5f";
+       fsType = "ext4";
+       options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
+     };
 
 
   fileSystems."/mnt" =
@@ -145,14 +146,14 @@
   };
 
    
-  services.hardware.openrgb.enable = true;
-   services.xserver.serverFlagsSection = 
-    ''
-    Option "StandbyTime" "0" 
-    Option "BlankTime" "0"
-    Option "SuspendTime" "0"
-    Option "OffTime" "0"
-    '';
+  # services.hardware.openrgb.enable = true;
+  #  services.xserver.serverFlagsSection = 
+  #   ''
+  #   Option "StandbyTime" "0" 
+  #   Option "BlankTime" "0"
+  #   Option "SuspendTime" "0"
+  #   Option "OffTime" "0"
+  #   '';
 
   # Enable sound with pipewire.
   #sound.enable = true;
