@@ -43,7 +43,7 @@
                          waybar
                          dotool
                          jq
-                         copyq
+#                         copyq
                          #cliphist
 	 		 ];
 

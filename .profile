@@ -2,12 +2,12 @@
 # Profile file. Runs on login.
 
 # Adds `~/.local/bin` and all subdirectories to $PATH
-export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
-export EDITOR="nvim"
-export TERMINAL="alacritty"
-export BROWSER="microsoft-edge"
-export READER="zathura"
-export FILE="vifmrun"
+#export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
+#export EDITOR="nvim"
+#export TERMINAL="alacritty"
+#export BROWSER="microsoft-edge"
+#export READER="zathura"
+#export FILE="vifmrun"
 #export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
 #export QT_SCALE_FACTOR=1.3
 #export ELM_SCALE=1.6
@@ -28,7 +28,7 @@ export LESS_TERMCAP_se="$(printf '%b' '[0m')"; a="${a%_}"
 export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"; a="${a%_}"
 export LESS_TERMCAP_ue="$(printf '%b' '[0m')"; a="${a%_}"
 
-#mpd >/dev/null 2>&1 &
+mpd >/dev/null 2>&1 &
 
 [ ! -f ~/.config/shortcutrc ] && shortcuts >/dev/null 2>&1
 

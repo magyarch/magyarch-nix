@@ -20,18 +20,18 @@ in
         systemPackages = with pkgs; [
      alacritty
      appimage-run
-#     acpi
-#     atool 
+     acpi
+     xorg.xhost 
      bat 
- #    rofi-wayland
-#     bc 
-     brave
+#     rofi
+     bc
+ #    brave
      binutils  
      curl
-#     dunst
+  #   dunst
 #     dxvk 
 #     discord 
-#     dmenu-rs
+#     dmenu
 #     dmenu-rs-enable-plugins 
 #     dzen2
      eza 
@@ -40,7 +40,7 @@ in
      glib
      xfce.exo
      eww 
-#     feh
+   #  feh
      ffmpeg
      firefox-bin
      filezilla
@@ -49,7 +49,7 @@ in
      handbrake
     # hyprshade
      htop 
-     jamesdsp
+#     jamesdsp
      killall
      kitty
      libnotify
@@ -57,10 +57,10 @@ in
 #     lf
      lm_sensors 
     # librewolf
-     unstable.lutris
-   #  lxappearance
-   #  lxqt.lxqt-policykit
-    # lxqt.lxqt-openssh-askpass
+     lutris
+#     lxappearance
+#     lxqt.lxqt-policykit
+   #  lxqt.lxqt-openssh-askpass
 #     kdePackages.polkit-kde-agent-1
      hyprpolkitagent
      #libbluray
@@ -68,10 +68,10 @@ in
      mangohud
  #    mate.mate-polkit
      mesa
-     microsoft-edge
+#     microsoft-edge
      mpd 
      ncmpcpp 
-    # maim 
+     maim 
      mpv 
      fastfetch
      neovim 
@@ -97,13 +97,13 @@ in
      protonup
      qbittorrent 
     # rofi-wayland
-  #   scrot
+   #  scrot
 #     smplayer
 #     spectrwm
      sublime3
-     #st
- #    sxhkd 
-  #   sxiv 
+    # st
+   #  sxhkd 
+   #  sxiv 
      system-config-printer 
 #     stalonetray
      stremio
@@ -121,23 +121,13 @@ in
      vifm
      zellij 
 #     unstable.hyprland
-#     xorg.xev
-#      xclip 
-#    #  x264 
-#      xcape 
-#      xdg-user-dirs
- #     xdg-utils 
-#      xdo 
-#      xdotool 
-#      xorg.xdpyinfo
-#      xorg.xsetroot
 #      xorg.libxcb
 #      xmonadctl
 # #     xmobar
 #      xsel
 #      xorg.xinit
 #      xorg.libX11 
-#      xwallpaper 
+#      xwallpaper
      yt-dlp 
 #    (vivaldi.override {
  #   proprietaryCodecs = true;
@@ -185,5 +175,7 @@ in
      
 	
           }; 
+
+       
 
 }

@@ -22,8 +22,8 @@ Plug 'kovetskiy/sxhkd-vim'
 call plug#end()
 
 set bg=dark
-colorsheme dracula
-set go=a
+" colorsheme dracula
+" set go=a
 set mouse=a
 set nohlsearch
 set clipboard=unnamedplus

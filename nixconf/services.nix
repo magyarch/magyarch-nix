@@ -6,7 +6,7 @@
 #        enable = true;
 	xkb.layout = "hu";
 	xkb.variant = "";
-	dpi = 144;
+	dpi = 120;
 #	screenSection = ''Option "TearFree" "true"'';
        # windowManager.bspwm.configFile = "/home/xeoncpu/.config/bspwm/bspwmrc";
       # windowManager.bspwm.sxhkd.configFile = "/home/xeoncpu/.config/sxhkd/sxhkdrc";
@@ -38,14 +38,14 @@
 	   avahi.enable = true;
 	   avahi.nssmdns4 = true;
 	   avahi.openFirewall = true;
-          flatpak.enable = true;
-	  # picom.enable = true;
+ #         flatpak.enable = true;
+#	   picom.enable = true;
      dbus.enable = true;
 	   fstrim = {
 	   enable = true;
 	   interval = "weekly";
 	   };
-	   #unclutter-xfixes.enable = true;
+#	   unclutter-xfixes.enable = true;
 	   openssh.enable = true;       
 	   gvfs.enable = true;
 	   tumbler.enable = true;

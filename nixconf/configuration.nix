@@ -11,8 +11,9 @@
       ./packages.nix
       ./services.nix
 #      ./sync.nix
-      ./amdgpu.nix
-#       ./nvidia.nix
+#      ./amdgpu.nix
+       ./nvidia.nix
+#       ./nvidia-fan-daemon.nix
  #     ./awesomewm.nix
       ./appimage.nix   
         ./bluetooth.nix
@@ -61,16 +62,18 @@
         systemd-boot.memtest86.enable = true;
 	timeout = 1;
     };
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_zen;
     kernelParams = [
 #      "amd_pstate=active" 
-      "kernel.nmi_watchdog=0"
+      "nmi_watchdog=0"
+      "split_lock_mitigate=0"
 #      "quiet"
       "splash"
       "vga=current"
       "rd.systemd.show_status=false"
       "rd.udev.log_level=3"
       "udev.log_priority=3"
+ #     "nvidia-drm.modeset=1"
    ];
     consoleLogLevel = 0;
     initrd.verbose =false;
@@ -86,17 +89,16 @@
   #     "net.ipv4.tcp_wmem" = "4096 87380 1073741824";
   #   };
    };
-
-
+    
     fileSystems."/media" =
-     { device = "/dev/disk/by-uuid/11af2718-e665-4f1e-983e-e8b28def6e5f";
+     { device = "/dev/disk/by-uuid/862572ff-ab09-452e-a020-221bbfa598a2";
        fsType = "ext4";
        options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
      };
 
 
   fileSystems."/mnt" =
-    { device = "/dev/disk/by-uuid/c60239a9-e693-4773-8c6c-5c15441a479d";
+    { device = "/dev/disk/by-uuid/3a2e5190-91e1-4c8b-b648-f4903369255f";
       fsType = "ext4";
       options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
     };
@@ -107,7 +109,7 @@
 
   nixpkgs.config.allowUnsupportedSystem = true;
  # nixpkgs.config.allowUnfree = true;
- # nixpkgs.config.nvidia.acceptLicense = true;  
+  nixpkgs.config.nvidia.acceptLicense = true;  
   # Enable networking
   networking = {
         networkmanager.enable = true;
@@ -173,29 +175,16 @@
     };
 
     #virtualisation.docker.enable = true;
-  
-  # security.sudo.extraRules = [{
-  #    users = [ "xeoncpu" ];
-  #    commands = [{command = "ALL";
-  #    options = ["NOPASSWD"];
-  #    }];
-  # }];
-  # networking.firewall.allowedTCPPorts = [22];
-  # services.openssh.settings.PasswordAuthentication = true;
-  # programs.ssh = {
-  #   enableAskPassword = true;
-  #   askPassword = "${pkgs.lxqt.lxqt-openssh-askpass}/bin/lxqt-openssh-askpass";
-  # };
-  #programs = { steam.gamescopeSession.enable = true; };
-#  programs.nix-ld.enable = true;
-#  programs.nix-ld.libraries = with pkgs; [
-    # Add any missing dynamic libraries for unpackaged programs
-    # here, NOT in environment.systemPackages
- # ];
-  
+   security.sudo.extraRules = [{
+      users = [ "xeoncpu" ];
+      commands = [{command = "ALL";
+      options = ["NOPASSWD"];
+      }];
+   }];
+
   programs = {
 	   dconf.enable = true;
-    # coolercontrol.enable = true;
+#     coolercontrol.enable = true;
      file-roller.enable = true;
      gamemode.enable = true;
      gamescope.enable = true;
@@ -327,6 +316,7 @@
     joypixels
     dejavu_fonts
     liberation_ttf
+  #  nerd-fonts.jetbrains-mono
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
