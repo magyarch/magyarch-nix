@@ -1,4 +1,8 @@
-{ pkgs, ... }:  
+{ config, pkgs, ... }:  
+
+let
+  pkgsUnstable = import <nixos-unstable> { config = config.nixpkgs.config; };
+in
  
  {
   programs.hyprland = {
@@ -19,8 +23,9 @@
   
 # List packages installed in system profile
     environment.systemPackages = with pkgs; [
-	                       meson
-			             mako
+#	                       unstable.hyprland
+                         meson
+			                   mako
 			                   swww
                          #swappy
                          #slurp
@@ -38,7 +43,7 @@
                          wlsunset
                          #wlprop
                          #wlr-randr
-			                   wofi
+			 wofi
                          wf-recorder
                          waybar
                          dotool

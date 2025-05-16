@@ -11,8 +11,8 @@
       ./packages.nix
       ./services.nix
 #      ./sync.nix
-#      ./amdgpu.nix
-       ./nvidia.nix
+      ./amdgpu.nix
+#       ./nvidia.nix
 #       ./nvidia-fan-daemon.nix
  #     ./awesomewm.nix
       ./appimage.nix   
@@ -50,7 +50,7 @@
  
   boot = {
      bootspec.enable = true;
-    # initrd.kernelModules = [ "amdgpu" ];
+     initrd.kernelModules = [ "amdgpu" "bfq" ];
   #  kernelModules = [ "bfq" ];
 #    plymouth = {
 #  theme = "catppuccin-mocha";
@@ -62,9 +62,10 @@
         systemd-boot.memtest86.enable = true;
 	timeout = 1;
     };
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
 #      "amd_pstate=active" 
+      "amdgpu.ppfeaturemask=0xffffffff"
       "nmi_watchdog=0"
       "split_lock_mitigate=0"
 #      "quiet"
@@ -90,6 +91,8 @@
   #   };
    };
     
+     systemd.services."NetworkManager-wait-online".enable = false;
+
     fileSystems."/media" =
      { device = "/dev/disk/by-uuid/862572ff-ab09-452e-a020-221bbfa598a2";
        fsType = "ext4";
@@ -111,12 +114,11 @@
  # nixpkgs.config.allowUnfree = true;
   nixpkgs.config.nvidia.acceptLicense = true;  
   # Enable networking
-  networking = {
-        networkmanager.enable = true;
-#	wireless.enable = true;
-        hostName="nixos";
-    };
-
+  networking.networkmanager = {
+        enable = true;
+      };
+  networking.hostName="nixos";
+    
 
   # Set your time zone.
   time.timeZone = "Europe/Budapest";
@@ -184,7 +186,7 @@
 
   programs = {
 	   dconf.enable = true;
-#     coolercontrol.enable = true;
+     coolercontrol.enable = true;
      file-roller.enable = true;
      gamemode.enable = true;
      gamescope.enable = true;
@@ -327,6 +329,9 @@
    # Automatic Updates
   system.autoUpgrade = {
     enable = true;
+    dates = "weekly"; # csak hetente egyszer fusson, nem bootnál
+    persistent = true;
+    randomizedDelaySec = "30min";
     channel = "https://nixos.org/channels/nixos-24.11";
   };
 

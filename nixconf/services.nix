@@ -25,9 +25,9 @@
 };
     
 
-      services.displayManager.ly = {
+      services.displayManager.sddm = {
       enable = true;
-#      wayland.enable = true;   
+      wayland.enable = true;   
     };
                       
                 
@@ -38,7 +38,7 @@
 	   avahi.enable = true;
 	   avahi.nssmdns4 = true;
 	   avahi.openFirewall = true;
- #         flatpak.enable = true;
+          flatpak.enable = true;
 #	   picom.enable = true;
      dbus.enable = true;
 	   fstrim = {
@@ -79,19 +79,20 @@
 
   
       # System76 Scheduler 
-                 services.system76-scheduler = {
-                                 enable = true;
-                                 settings.processScheduler.foregroundBoost.foreground.nice = 6;
-                                 useStockConfig = true;
-                               };
+      #             services.system76-scheduler = {
+      #                             enable = true;
+      #                             settings.processScheduler.foregroundBoost.foreground.nice = -5;
+      #                             settings.processScheduler.foregroundBoost.foreground.ioPrio = 0;
+      #                             useStockConfig = false;
+      #                           };
 
-      #= IRQBalance
-    #  services.irqbalance.enable = true;
+      # #= IRQBalance
+      # services.irqbalance.enable = true;
 
- #   virtualisation.podman = {
- #  enable = true;
- #  dockerCompat = true;
- # };
+   virtualisation.podman = {
+  enable = true;
+  dockerCompat = true;
+ };
 
       
 }

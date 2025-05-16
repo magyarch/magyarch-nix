@@ -21,19 +21,21 @@ in
      alacritty
      appimage-run
      acpi
-     xorg.xhost 
+#     xorg.xhost 
      bat 
 #     rofi
      bc
  #    brave
      binutils  
      curl
+     corectrl
   #   dunst
 #     dxvk 
-#     discord 
+     discord 
 #     dmenu
 #     dmenu-rs-enable-plugins 
 #     dzen2
+     distrobox
      eza 
      exfat 
      exfatprogs 
@@ -43,6 +45,8 @@ in
    #  feh
      ffmpeg
      firefox-bin
+     floorp
+     protonplus
      filezilla
      fzf 
      git
@@ -73,6 +77,7 @@ in
      ncmpcpp 
      maim 
      mpv 
+     mprime
      fastfetch
      neovim 
      networkmanagerapplet
@@ -101,7 +106,7 @@ in
 #     smplayer
 #     spectrwm
      sublime3
-    # st
+     stress-ng
    #  sxhkd 
    #  sxiv 
      system-config-printer 
@@ -129,15 +134,6 @@ in
 #      xorg.libX11 
 #      xwallpaper
      yt-dlp 
-#    (vivaldi.override {
- #   proprietaryCodecs = true;
-  #  enableWidevine = true;
-  #})
-     (unstable.discord.override {
-       withOpenASAR = true;
-       withVencord = true;
-     })
-
      (heroic.override {
   extraPkgs = pkgs: [
     pkgs.gamescope

@@ -69,6 +69,7 @@
     "custom/gpu-usage": {
     "format": "GPU: {} {icon}",
     "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader",
+    "exec": "sensors | awk  '/edge:/ {print $2}'",
     "format-icons": "󰾲",
     "on-click": "kitty amdgpu_top",
     "interval": 1,
