@@ -318,8 +318,8 @@
     joypixels
     dejavu_fonts
     liberation_ttf
-  #  nerd-fonts.jetbrains-mono
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    nerd-fonts.jetbrains-mono
+  #  (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
 
@@ -356,7 +356,7 @@
   system.stateVersion = "24.11"; # Did you read the comment?
 
   nixpkgs.config.permittedInsecurePackages = [
-                "openssl-1.1.1w" "qbittorrent-4.6.4"
+                "openssl-1.1.1w" "qbittorrent-4.6.4" "ventoy-1.1.05"
               ];
   #nix.settings.auto-optimise-store = true;
   

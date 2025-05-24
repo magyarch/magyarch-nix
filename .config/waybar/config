@@ -7,15 +7,15 @@
     "modules-left": [
       "clock",
       "hyprland/window",
-      "network",
+      "custom/updates",
       ],
     "modules-center": [
       "hyprland/workspaces",
       ],
     "modules-right": [
-      "custom/cpu-usage",
+      "custom/amdcpu",
       "cpu",
-      "custom/gpu-usage",
+      "custom/amdgpu",
       "memory",
       "pulseaudio",
       "custom/powermenu",
@@ -60,36 +60,30 @@
         "default": ""
       }
     },
-    "network": {
-      "interface": "eno1",
-      "tooltip-format-ethernet": "{ifname} ",
-      "interval": 2,
-      "format": " {bandwidthDownBits}  {bandwidthUpBits}"
+    "custom/amdgpu": {
+    "format": "{}",
+    "exec": "~/.config/waybar/amdgpu.sh",
+    "return-type": "json",
+    "interval": 3,
+    "tooltip": true,
+    "on-click": "~/.config/waybar/amdgpu.sh --force && pkill -SIGRTMIN+10 waybar"
     },
-    "custom/gpu-usage": {
-    "format": "GPU: {} {icon}",
-    "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader",
-    "exec": "sensors | awk  '/edge:/ {print $2}'",
-    "format-icons": "󰾲",
-    "on-click": "kitty amdgpu_top",
-    "interval": 1,
-    },
-    "custom/cpu-usage": {
-    "format": "CPU: {} {icon}",
-    "exec": "sensors | awk  '/Tctl:/ {print $2}'",
-    "format-icons": "󰾲",
-    "on-click": "kitty amdgpu_top",
-    "interval": 1,
+    "custom/amdcpu": {
+    "exec": "~/.config/waybar/amdcpu.sh",
+    "interval": 2,
+    "format": "{}",
+    "return-type": "json",
+    "tooltip": "false"
     },
     "memory": {
       "format": "󰍛 {used:0.1f}GiB/{total:0.1f}GiB ({percentage}%)",
       "tooltip": "false",
-      "on-click": "exec kitty -e htop",
+      "on-click": "exec kitty -e htop"
     },
     "cpu": {
       "format": "  {avg_frequency}GHz",
-      "tooltip": "false",
-      "interval": 1,
+      "tooltip": "true",
+      "interval": 1
     },
     "custom/powermenu": {
       "format": "",
@@ -97,10 +91,13 @@
       "on-click": "exec wlogout --protocol layer-shell"
     },
     "custom/updates": {
-      "format": "<span color=\"#61afef\"></span> {}",
-      "tooltip": false,
-      "interval": 3600,
-      "exec": "exec $HOME/.config/waybar/checkupdate.sh"
+      "format": "{}",
+      "tooltip": true,
+      "interval": 1200,
+      "signal": 10,
+      "return-type": "json",
+      "exec": "exec $HOME/.config/waybar/weather2.sh",
+      "on-click": "~/.config/waybar/weather2.sh --force && pkill -SIGRTMIN+10 waybar"
     },
     "pulseaudio": {
       "format": "{volume}% {icon}",

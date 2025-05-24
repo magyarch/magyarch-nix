@@ -59,7 +59,8 @@ in
      libnotify
      libbsd
 #     lf
-     lm_sensors 
+     lm_sensors
+     util-linux
     # librewolf
      lutris
 #     lxappearance
@@ -133,6 +134,7 @@ in
 #      xorg.xinit
 #      xorg.libX11 
 #      xwallpaper
+       wdisplays
      yt-dlp 
      (heroic.override {
   extraPkgs = pkgs: [

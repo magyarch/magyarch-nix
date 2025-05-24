@@ -34,12 +34,13 @@ button:hover {
 }
 
 #custom-powermenu,
-#custom-gpu-usage,
-#custom-cpu-usage,
+#custom-amdgpu,
+#custom-amdcpu,
 #cpu,
 #memory,
 #workspaces,
 #clock,
+#custom-updates
 #window,
 #pulseaudio,
 
@@ -49,7 +50,7 @@ button:hover {
   padding-left: 6px;
 }
 
-#network {
+#custom-updates {
   color: #ec0075;
   padding-right: 6px;
   padding-left: 4px;
@@ -67,14 +68,17 @@ button:hover {
   margin-right: 8px;
 }
 
-#custom-gpu-usage {
+#custom-amdgpu {
   color: #e06c75;
   padding-right: 11px;
   margin-right: 8px;
 }
 
-#custom-cpu-usage {
+#custom-amdcpu {
+  font-family: "JetBrainsMono Nerd Font";
   color: #6272a4;
+  padding-right: 11px;
+  margin-right: 8px;
 }
 
 #scratchpad {
