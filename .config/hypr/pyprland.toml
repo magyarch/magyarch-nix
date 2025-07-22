@@ -25,18 +25,21 @@ unfocus = "hide"
 
 [scratchpads.music]
 animation = "fromTop"
-command = "kitty --class Music -e ncmpcpp"
+command = "kitty --class Music -e rmpc"
 class = "Music"
 size = "75% 60%"
 
-[scratchpads.file]
+[scratchpads.launcher]
 animation = "fromTop"
-command = "kitty --class kitty -e vifm"
+command = "kitty --class kitty -e fzf-app.sh"
 unfocus = "hide"
-size = "75% 60%"
+class = "kitty"
+size = "26% 15%"
 lazy = true
 
 [expose]
 include_special = false
+
+
 
 

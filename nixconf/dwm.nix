@@ -6,7 +6,7 @@
 
 {
    
-  services.xserver.displayManager.defaultSession = "none+dwm";
+  services.displayManager.defaultSession = "none+dwm";
   services.xserver.windowManager.dwm.enable = true;
  
  # Suckless Tools
@@ -19,7 +19,18 @@
    })
   ];
 
-   environment.variables = {
+
+    xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk  # GTK alkalmazásokhoz
+    #  pkgs.xdg-desktop-portal-hyprland # Hyprland használata esetén
+    ];
+    config.common.default = "*"; # opcionális
+  };
+   
+   environment = {
+   variables = {
                  #GDK_SCALE = "2";
                  #GDK_DPI_SCALE = "0.5";
                  XCURSOR_SIZE = "24";
@@ -31,8 +42,10 @@
                #_JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
     #            VDPAU_DRIVER = "radeonsi";
        #         LIBVA_DRIVER_NAME = "radeonsi";
+    systemPackages = with pkgs; [
+                slstatus ];    
              };
-  
+           }; 
 
 
 }

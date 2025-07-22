@@ -7,21 +7,6 @@
 	xkb.layout = "hu";
 	xkb.variant = "";
 	dpi = 120;
-#	screenSection = ''Option "TearFree" "true"'';
-       # windowManager.bspwm.configFile = "/home/xeoncpu/.config/bspwm/bspwmrc";
-      # windowManager.bspwm.sxhkd.configFile = "/home/xeoncpu/.config/sxhkd/sxhkdrc";
-# 	desktopManager = {
-# 	            xfce = {
-#     enable = true;
-#     noDesktop = true;
-#     enableXfwm = false;
-#   };
-# };  
-#	windowManager.herbstluftwm.package = pkgs.herbstluftwm.overrideAttrs ( o: {
-#    disabledTests = o.disabledTests ++ ["test_complete_keybind_offers_additional_mods_without_duplication"];
-#  });
-
-
 };
     
 
@@ -54,8 +39,9 @@
 	   #alsa.enable = true;
            alsa.support32Bit = true;
            pulse.enable = true;
-	   }; 
+       };
 
+#    cpupower-gui.enable = true;
 
     mpd = {
     enable = true;
@@ -79,15 +65,15 @@
 
   
       # System76 Scheduler 
-      #             services.system76-scheduler = {
-      #                             enable = true;
-      #                             settings.processScheduler.foregroundBoost.foreground.nice = -5;
-      #                             settings.processScheduler.foregroundBoost.foreground.ioPrio = 0;
-      #                             useStockConfig = false;
-      #                           };
+          #        services.system76-scheduler = {
+           #                       enable = true;
+            #                      settings.processScheduler.foregroundBoost.foreground.nice = -5;
+             #                     settings.processScheduler.foregroundBoost.foreground.ioPrio = 0;
+              #                    useStockConfig = false;
+               #                 };
 
       # #= IRQBalance
-      # services.irqbalance.enable = true;
+       services.irqbalance.enable = true;
 
    virtualisation.podman = {
   enable = true;

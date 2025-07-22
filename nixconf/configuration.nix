@@ -2,96 +2,109 @@
  # My config
 { config, pkgs, ... }:
 
-
 {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./packages.nix
+    ./services.nix
+    # ./sync.nix
+    ./amdgpu.nix
+    # ./nvidia.nix
+    # ./nvidia-fan-daemon.nix
+    # ./awesomewm.nix
+    ./appimage.nix
+    ./bluetooth.nix
+    # ./bspwm.nix
+    # ./cinnamon.nix
+    # ./i3.nix
+    # ./ld.nix
+    # ./homem.nix
+    # ./dwm.nix
+    ./plex.nix
+    # ./gnome.nix
+    # ./river.nix
+    # ./spectrwm.nix
+    # ./hyprland.nix
+    # ./herbst.nix
+    ./wm.nix
+    # ./makemkv.nix
+    # ./redshift.nix
+    ./ssh.nix
+    ./samba.nix
+    # ./plex.nix
+    # ./sway.nix
+    # ./jellyfin.nix
+    # ./qtile.nix
+    # ./qtile-wayland.nix
+    ./hyprland.nix
+    # ./wayfire.nix
+    # ./nimdow.nix
+    # ./xmonad.nix
+    # ./xdg-default-apps.nix
+    # ./inputs.hyprland.nixosModules.default
+  ];
 
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./packages.nix
-      ./services.nix
-#      ./sync.nix
-      ./amdgpu.nix
-#       ./nvidia.nix
-#       ./nvidia-fan-daemon.nix
- #     ./awesomewm.nix
-      ./appimage.nix   
-        ./bluetooth.nix
-#        ./bspwm.nix
-#        ./cinnamon.nix
-#     ./i3.nix
-       #  ./ld.nix
-#       ./homem.nix
-#      ./dwm.nix
-       ./plex.nix
-#       ./gnome.nix
- #      ./river.nix
-#      ./spectrwm.nix
-     ./hyprland.nix
-#        ./herbst.nix
-        ./wm.nix
-#       ./makemkv.nix
-#       ./redshift.nix
-        ./ssh.nix
-        ./samba.nix
- #     ./plex.nix
-#       ./sway.nix
-#      ./jellyfin.nix
-#       ./qtile.nix
-#       ./qtile-wayland.nix
- #       ./hyprland.nix
-#         ./wayfire.nix
-#       ./nimdow.nix
-#      ./xmonad.nix
-#       ./xdg-default-apps.nix
-        #./inputs.hyprland.nixosModules.default
-    ];
-
- 
   boot = {
-     bootspec.enable = true;
-     initrd.kernelModules = [ "amdgpu" "bfq" ];
-  #  kernelModules = [ "bfq" ];
-#    plymouth = {
-#  theme = "catppuccin-mocha";
-#  themePackages = [ (pkgs.catppuccin-plymouth.override { variant = "mocha"; }) ];
-#};
-    loader = {
-        systemd-boot.enable = true;
-        efi.canTouchEfiVariables = true;
-        systemd-boot.memtest86.enable = true;
-	timeout = 1;
+    bootspec.enable = true;
+
+    initrd.kernelModules = [ "amdgpu" "tcp_bbr" ];
+
+    kernel.sysctl = {
+      "net.ipv4.tcp_congestion_control" = "bbr";
+      "net.core.default_qdisc" = "fq";
+      "net.ipv4.tcp_fastopen" = 3;
+      "net.ipv4.tcp_low_latency" = 1;
+      "net.core.rmem_max" = 16777216;
+      "net.core.wmem_max" = 16777216;
+      "net.ipv4.tcp_rmem" = "4096 87380 16777216";
+      "net.ipv4.tcp_wmem" = "4096 65536 16777216";
+
+      # Default on some gaming (SteamOS) and desktop (Fedora) distributions
+      # Might help with gaming performance
+      "vm.max_map_count" = 2147483642;
+      "fs.file-max" = 524288;
+
+      # Gyorsabb fájl-I/O
+      "vm.dirty_ratio" = 10;
+      "vm.dirty_background_ratio" = 5;
+
+      # Alacsonyabb latency real-time hangra / játékra
+      "kernel.sched_latency_ns" = 10000000;
+      "kernel.sched_min_granularity_ns" = 1000000;
+      "kernel.sched_wakeup_granularity_ns" = 1500000;
     };
-    kernelPackages = pkgs.linuxPackages_latest;
+
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+      systemd-boot.memtest86.enable = true;
+      timeout = 1;
+    };
+
+    kernelPackages = pkgs.linuxPackages_lqx;
+
     kernelParams = [
-#      "amd_pstate=active" 
+#       "amd_pstate=guided"
       "amdgpu.ppfeaturemask=0xffffffff"
       "nmi_watchdog=0"
       "split_lock_mitigate=0"
-#      "quiet"
+      # "quiet"
       "splash"
       "vga=current"
       "rd.systemd.show_status=false"
       "rd.udev.log_level=3"
       "udev.log_priority=3"
- #     "nvidia-drm.modeset=1"
-   ];
+      # "nvidia-drm.modeset=1"
+    ];
+
     consoleLogLevel = 0;
-    initrd.verbose =false;
+    initrd.verbose = false;
     tmp.cleanOnBoot = true;
-  #   kernelModules = ["tcp_bbr"];
-  #   kernel.sysctl = {
-  #     "net.ipv4.tcp_congestion_control" = "bbr";
-  #     "net.core.default_qdisc" = "fq";
-  #     "net.ipv4.tcp_fastopen" = 3;
-  #     "net.core.wmem_max" = 1073741824;
-  #     "net.core.rmem_max" = 1073741824;
-  #     "net.ipv4.tcp_rmem" = "4096 87380 1073741824";
-  #     "net.ipv4.tcp_wmem" = "4096 87380 1073741824";
-  #   };
-   };
+  };
+
     
-     systemd.services."NetworkManager-wait-online".enable = false;
+    systemd.services."NetworkManager-wait-online".enable = false;
 
     fileSystems."/media" =
      { device = "/dev/disk/by-uuid/862572ff-ab09-452e-a020-221bbfa598a2";
@@ -100,19 +113,19 @@
      };
 
 
-  fileSystems."/mnt" =
-    { device = "/dev/disk/by-uuid/3a2e5190-91e1-4c8b-b648-f4903369255f";
-      fsType = "ext4";
-      options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
+    fileSystems."/mnt" =
+     { device = "/dev/disk/by-uuid/3a2e5190-91e1-4c8b-b648-f4903369255f";
+       fsType = "ext4";
+       options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
     };
 
   # ZRAM
   zramSwap.enable = true;
   zramSwap.memoryPercent = 50;
 
-  nixpkgs.config.allowUnsupportedSystem = true;
+ # nixpkgs.config.allowUnsupportedSystem = true;
  # nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.nvidia.acceptLicense = true;  
+ # nixpkgs.config.nvidia.acceptLicense = true;  
   # Enable networking
   networking.networkmanager = {
         enable = true;
@@ -144,8 +157,9 @@
 
   nixpkgs.config = {
     allowUnfree = true;
+    allowUnsupportedSystem = true;
   #allowBroken = true;
-  #  oraclejdk.accept_license = true;
+   nvidia.accept_license = true;
     joypixels.acceptLicense = true;
   };
 
@@ -185,8 +199,8 @@
    }];
 
   programs = {
-	   dconf.enable = true;
-     coolercontrol.enable = true;
+     dconf.enable = true;
+  #   coolercontrol.enable = true;
      file-roller.enable = true;
      gamemode.enable = true;
      gamescope.enable = true;
@@ -258,6 +272,7 @@
          nrs="sudo nixos-rebuild switch";
          ncu="sudo nix-channel --update";
          addunstable="sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos";
+         addstable="sudo nix-channel --add https://nixos.org/channels/nixos-25.05 nixos";
          nixupgrade="sudo nixos-rebuild switch --upgrade-all";
          rmoldgen="sudo nix-collect-garbage -d";
          rebuildboot="sudo /run/current-system/bin/switch-to-configuration boot";
@@ -310,7 +325,7 @@
 # #      st = prev.st.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/st ;});
 #     })
 #   ];
-  
+   
   fonts.packages = with pkgs; [
     noto-fonts-emoji
     font-awesome_4

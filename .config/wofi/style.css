@@ -1,71 +1,33 @@
-/* Latte Rosewater */
-@define-color accent #6272a4;
-@define-color txt #c3cdc8;
-@define-color bg #282a36;
-@define-color bg2 #282a36;
-@define-color bg3 transparent;
+window {
+  border-radius: 12px;
+  background-color: rgba(30, 30, 30, 0.95);
+  font-family: sans-serif;
+  font-size: 16px;
+  color: #ffffff;
+}
 
- * {
-    font-family: 'JetBrainsMono', Nerd;
-    font-size: 12pt;
- }
+#input {
+  padding: 10px;
+  margin: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(50, 50, 50, 1.0);
+  color: #ffffff;
+}
 
- /* Window */
- window {
-    margin: 0px;
-    padding: 5px;
-    border: 2px solid @accent;
-    border-radius: 16px;
-    background-color: @bg;
- }
+#entry {
+  padding: 10px;
+  margin: 6px 12px;
+  border-radius: 6px;
+  background-color: transparent;
+}
 
+#entry:selected {
+  background-color: rgba(100, 100, 100, 0.6);
+  color: white;
+}
 
- /* Inner Box */
- #inner-box {
-    margin: 5px;
-    padding: 5px;
-    border: none;
-    background-color: @bg;
- }
+#text {
+  margin-left: 8px;
+}
 
-
- /* Outer Box */
- #outer-box {
-    margin: 5px;
-    padding: 5px;
-    border: none;
-    background-color: @bg;
- }
-
- /* Scroll */
- #scroll {
-    margin: 0px;
-    padding: 2px;
-    border: none;
- }
-
- /* Input */
- #input {
-    margin: 5px;
-    padding: 4px;
-    border: none;
-    color: @accent;
-    background-color: @bg2;
- }
-
- /* Text */
- #text {
-    margin: 2px;
-    padding: 2px;
-    border: none;
-    color: @txt;
- }
-
- /* Selected Entry */
- #entry:selected {
-   background-color: @accent;
- }
-
- #entry:selected #text {
-    color: @bg;
- }

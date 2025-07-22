@@ -28,10 +28,11 @@ in
 			                   mako
 			                   swww
                          #swappy
-                         #slurp
+                         slurp
                          hyprland-protocols
                          hyprshot
                          hyprshade
+			 hyprpolkitagent
                          pyprland  
                          #hyprlandPlugins.hy3
                          wayland-utils
@@ -45,10 +46,13 @@ in
                          #wlr-randr
 			 wofi
                          wf-recorder
+                         wl-screenrec
                          waybar
+                         woomer
                          dotool
                          jq
-#                         copyq
+                        grim
+#                        tophat
                          #cliphist
 	 		 ];
 

@@ -1,13 +1,13 @@
-width=40%
-lines=11
-
-hide_scroll = true
-allow_images = true
-image_size = 25
-prompt=Search...
-normal_window = false
-
-matching=fuzzy
+width=600
+height=400
+location=center
+show-icons=true
+prompt=
+term=alacritty
+hide-scroll=true
 insensitive=true
-columns=2
-show = drun
+allow-markup=true
+no-filter-hints=true
+filter-rate=100
+always_parse_args=false
+

@@ -70,5 +70,6 @@ static const struct arg args[] = {
 	{ run_command,  " 🔥 %s | ",	"sensors | awk  '/Tctl:/ {print $2}' " },
 	{ run_command,  " 💸 %s | ",  "sensors | awk '/edge:/ {print $2}' " },
 	{ datetime,	" 📅 %s | ",  "%Y-%m-%d 🕛 %H:%M " },
-	{ run_command,  " %s	| ", "volume " },
+	{ run_command, "🔊 %s | ", "pamixer --get-volume-human" },
+
 };

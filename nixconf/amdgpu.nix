@@ -5,6 +5,8 @@
 # Load AMD driver for Xorg and Wayland
 # services.xserver.videoDrivers = ["modesetting"];
   hardware.cpu.amd.sev.enable = true;
+  powerManagement.cpuFreqGovernor = "schedutil"; # vagy "performance", "powersave"
+
 
   #Enable OpenGL
   hardware.graphics = {
