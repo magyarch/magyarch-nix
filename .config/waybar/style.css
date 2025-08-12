@@ -5,16 +5,15 @@
   margin: 0;
   padding: 0;
 }
-#waybar {
-  background: rgba(40, 42, 54, 1.0);
-  border-bottom: 1px solid rgba(98, 114, 164, 0.5);
-  border-radius: 0;
+ #waybar {
+  background: rgba(40, 42, 54, 0.2);
+  border-radius: 12;
   font-size: 13px;
-  font-family: "JetBrainsMono Nerd Font";
+  font-family: "JetBrainsMono Nerd Font Propo";
   transition-duration: .5s;
-}
+  }
 
-#workspaces button {
+ #workspaces button {
   padding: 0 2px;
   font-size: 18px;
 }
@@ -40,7 +39,7 @@ button:hover {
 #memory,
 #workspaces,
 #clock,
-#custom-updates
+#custom-weather
 #window,
 #pulseaudio,
 
@@ -50,7 +49,7 @@ button:hover {
   padding-left: 6px;
 }
 
-#custom-updates {
+#custom-weather {
   color: #ec0075;
   padding-right: 6px;
   padding-left: 4px;

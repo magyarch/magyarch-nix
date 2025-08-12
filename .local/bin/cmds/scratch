@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
-case "$1" in
+APP_NAME="$1"
 
-	scratchpad)
+case "$APP_NAME" in
+    scratchpad)
         entry="kitty --class kitty -T scratchpad"
         ;;
-	FM)
+    FM)
         entry="kitty --class kitty -T FM -e vifm"
         ;;
     Mail)
@@ -19,9 +20,18 @@ case "$1" in
         ;;
     launcher)
         entry="kitty --class kitty -T launcher -e fzf-launcher.sh"
+        ;;
+    *)
+        echo "Unknown app"
+        exit 1
+        ;;
 esac
 
-xdotool search --onlyvisible --name "$1" windowunmap \
-    || xdotool search --name "$1" windowmap \
-    || $entry &
-
+# Check if window exists
+if hyprctl clients | grep -q "title: $APP_NAME"; then
+    # If already open, toggle visibility using Hyprland's special workspace
+    hyprctl dispatch togglespecialworkspace $APP_NAME
+else
+    # Launch app into special workspace
+    hyprctl dispatch exec "[workspace special:$APP_NAME silent] $entry"
+fi

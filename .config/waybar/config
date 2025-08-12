@@ -2,12 +2,12 @@
 
   "layer": "top",
     "position": "top",
-    "height": 24,
-    "margin-bottom": 0,
+    "height": 25,
+    "margin-top": 2,
     "modules-left": [
       "clock",
       "hyprland/window",
-      "custom/updates",
+      "custom/weather",
       ],
     "modules-center": [
       "hyprland/workspaces",
@@ -63,10 +63,10 @@
     "custom/amdgpu": {
     "format": "{}",
     "exec": "~/.config/waybar/amdgpu.sh",
-    "return-type": "json",
     "interval": 3,
     "tooltip": true,
-    "on-click": "~/.config/waybar/amdgpu.sh --force && pkill -SIGRTMIN+10 waybar"
+    "return-type": "json",
+    "on-click": "pkill -SIGRTMIN+10 waybar"
     },
     "custom/amdcpu": {
     "exec": "~/.config/waybar/amdcpu.sh",
@@ -90,7 +90,7 @@
       "tooltip": false,
       "on-click": "exec wlogout --protocol layer-shell"
     },
-    "custom/updates": {
+    "custom/weather": {
       "format": "{}",
       "tooltip": true,
       "interval": 1200,
@@ -104,12 +104,6 @@
       "format-bluetooth": "{volume}% {icon}",
       "format-muted": "",
       "format-icons": {
-          "headphone": "",
-          "hands-free": "",
-          "headset": "",
-          "phone": "",
-          "portable": "",
-          "car": "",
           "default": ["", ""]
       },
       "scroll-step": 1,

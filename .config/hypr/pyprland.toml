@@ -31,10 +31,10 @@ size = "75% 60%"
 
 [scratchpads.launcher]
 animation = "fromTop"
-command = "kitty --class kitty -e fzf-app.sh"
+command = "kitty --class kitty -e fzf-launcher.sh"
 unfocus = "hide"
 class = "kitty"
-size = "26% 15%"
+size = "26% 20%"
 lazy = true
 
 [expose]

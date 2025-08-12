@@ -1,15 +1,29 @@
 #!/usr/bin/env bash
 
-CARD_PATH="/sys/class/drm/card1/device"
 
-TEMP=$(cat "$CARD_PATH/hwmon/"*/temp1_input 2>/dev/null)
-FREQ=$(cat "$CARD_PATH/pp_dpm_sclk" 2>/dev/null | grep "*" | awk '{print $2}')
-POWER=$(cat "$CARD_PATH/hwmon/"*/power1_average 2>/dev/null)
+# Hőmérséklet lekérése
+TEMP_RAW=$(sensors | awk '/amdgpu-pci-/{f=1} f && /edge/ {gsub(/\+|°C/,"",$2); print $2; exit}')
+TEMP_INT=${TEMP_RAW%.*}
 
-# Konvertálás
-TEMP_C=$((TEMP / 1000))
-POWER_W=$((POWER / 1000000))
+# Ikon, szín és class hőmérséklet alapján
+if (( TEMP_INT < 45 )); then
+    ICON=""
+    COLOR="#00afff"
+    CLASS="cool"
+elif (( TEMP_INT < 70 )); then
+    ICON=""
+    COLOR="#ffaa00"
+    CLASS="warm"
+else
+    ICON=""
+    COLOR="#ff4444"
+    CLASS="hot"
+fi
 
-echo -n "{\"text\": \"🎮 ${TEMP_C}°C\", "
-echo -n "\"tooltip\": \"🌡️ Temp: ${TEMP_C}°C\\n⚙️ Clock: ${FREQ}\\n🔋 Power: ${POWER_W} W\"}"
+# JSON kimenet — tooltip elhagyva!
+echo -n "{"
+echo -n "\"text\": \"$ICON ${TEMP_INT}°C\", "
+echo -n "\"class\": \"$CLASS\", "
+echo -n "\"color\": \"$COLOR\""
+echo "}"
 

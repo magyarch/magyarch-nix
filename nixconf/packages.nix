@@ -84,6 +84,7 @@ in
       networkmanagerapplet
       # nix-du
       nix-search-cli
+#      nix-disk-manager
       ntfs3g
       nwg-look
       # nwg-dock-hyprland
@@ -134,6 +135,7 @@ in
       wdisplays
       # slstatus
       yt-dlp
+      ytarchive
       unstable.heroic
  #     ulauncher
 

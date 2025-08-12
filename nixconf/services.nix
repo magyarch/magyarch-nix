@@ -17,7 +17,6 @@
                       
                 
     services = {
-       
            printing.enable = true;
            printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
 	   avahi.enable = true;

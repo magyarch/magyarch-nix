@@ -16,9 +16,22 @@
         libva-utils
         libvdpau-va-gl
         vaapiVdpau
+	libva
+	mesa
+        vulkan-loader
+        vulkan-tools
+        vulkan-validation-layers
+        vulkan-extension-layer
         rocmPackages.clr
     ];
    
+     extraPackages32 = with pkgs; [
+        vaapiVdpau
+        libvdpau-va-gl
+        libva
+       
+      ];
+
   };
 
    environment.variables = {

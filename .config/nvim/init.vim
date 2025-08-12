@@ -21,6 +21,10 @@ Plug 'vifm/vifm.vim'
 Plug 'kovetskiy/sxhkd-vim'
 call plug#end()
 
+if empty(glob('~/.config/nvim/plugged/*'))
+  autocmd VimEnter * PlugInstall --sync | source ~/.config/nvim/init.vim
+endif
+
 set bg=dark
 " colorsheme dracula
 " set go=a

@@ -16,15 +16,22 @@
 
   environment.systemPackages = with pkgs; [
                    #haskellPackages.xmonad_0_18_0
+
                
   ];
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common.default = "*"; # opcionális
+  };
+
   environment.variables = {
-                 GDK_SCALE = "2";
-                 GDK_DPI_SCALE = "0.5";
+#                 GDK_SCALE = "1.33";
+ #                GDK_DPI_SCALE = "0.5";
                  XCURSOR_SIZE = "24";
     # #           DISPLAY=":  0";
-                 QT_SCALE_FACTOR = "1.5";
+  #               QT_SCALE_FACTOR = "1.33";
     #             QT_AUTO_SCREEN_SCALE_FACTOR = "auto";
                 #WLR_NO_HARDWARE_CURSOR = "1";
                 #NIXOS_OZONE_WL = "1";

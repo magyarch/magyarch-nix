@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 initializeANSI()
 {
@@ -8,7 +8,7 @@ initializeANSI()
   yellowf="${esc}[33m";   bluef="${esc}[34m";
   cyanf="${esc}[36m";     purplef="${esc}[35m";
   whitef="${esc}[1m";     lightbluef="${esc}104m"
-  
+
   blink="${esc}[5m"
   boldon="${esc}[1m";
   reset="${esc}[0m";
@@ -37,10 +37,10 @@ ${boldon}${yellowf}   \      /      |  ^"=.. . . . . . . ._++""\\''^   \\
 ${boldon}${yellowf}    \    |       |       )^|^^~'---'~^^      \\     )
 ${boldon}${yellowf}    )   /        )      /   \\                 \\    \\
 ${boldon}${yellowf}    |;  |        \\     /\\    \\                (    /
-${boldon}${yellowf}    |   |         (   (  \\ .. \\               |   (    
-${boldon}${yellowf}    )   |         )   )   ^^^^^^              |   |    
-${boldon}${yellowf}   /. . \\         |  '|                       )   (   
-${boldon}${yellowf}   ^^^^^^         )   \\                       /. . \\  
+${boldon}${yellowf}    |   |         (   (  \\ .. \\               |   (
+${boldon}${yellowf}    )   |         )   )   ^^^^^^              |   |
+${boldon}${yellowf}   /. . \\         |  '|                       )   (
+${boldon}${yellowf}   ^^^^^^         )   \\                       /. . \\
 ${boldon}${yellowf}                  / . .\\                      ^^^^^^
 ${boldon}${yellowf}                  ^^^^^^^  ${reset}
 

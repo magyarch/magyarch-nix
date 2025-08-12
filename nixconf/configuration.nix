@@ -60,19 +60,10 @@
       "net.ipv4.tcp_rmem" = "4096 87380 16777216";
       "net.ipv4.tcp_wmem" = "4096 65536 16777216";
 
-      # Default on some gaming (SteamOS) and desktop (Fedora) distributions
-      # Might help with gaming performance
-      "vm.max_map_count" = 2147483642;
-      "fs.file-max" = 524288;
-
-      # Gyorsabb fájl-I/O
-      "vm.dirty_ratio" = 10;
-      "vm.dirty_background_ratio" = 5;
-
-      # Alacsonyabb latency real-time hangra / játékra
       "kernel.sched_latency_ns" = 10000000;
       "kernel.sched_min_granularity_ns" = 1000000;
       "kernel.sched_wakeup_granularity_ns" = 1500000;
+
     };
 
     loader = {
@@ -82,11 +73,13 @@
       timeout = 1;
     };
 
-    kernelPackages = pkgs.linuxPackages_lqx;
+    kernelPackages = pkgs.linuxPackages_latest;
 
     kernelParams = [
-#       "amd_pstate=guided"
+       "amd_pstate=active"
       "amdgpu.ppfeaturemask=0xffffffff"
+      "amdgpu.async_gfx_ring=1"
+      "amdgpu.dc=1"
       "nmi_watchdog=0"
       "split_lock_mitigate=0"
       # "quiet"
@@ -120,8 +113,12 @@
     };
 
   # ZRAM
-  zramSwap.enable = true;
-  zramSwap.memoryPercent = 50;
+  zramSwap = {
+      enable = true;
+      algorithm = "zstd";
+      memoryPercent = 25;
+      priority = 5;
+    };
 
  # nixpkgs.config.allowUnsupportedSystem = true;
  # nixpkgs.config.allowUnfree = true;
@@ -203,7 +200,10 @@
   #   coolercontrol.enable = true;
      file-roller.enable = true;
      gamemode.enable = true;
-     gamescope.enable = true;
+     gamescope = {
+      enable = true;
+      capSysNice = true;
+    };
      steam = {
 	           enable = true;
  #            gamescopeSession.enable = true;

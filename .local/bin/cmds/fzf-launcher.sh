@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
 
-DIR1="/run/current-system/sw/bin/"
-#DIR2="/bin"
 
-Menu="$(ls -a $DIR1 $DIR2 | uniq -u \
-    | fzf --prompt="Which Program Would You Like To Run?: " \
+
+# Gyors programlista a PATH alapján
+Menu=$(compgen -c | sort -u | fzf --prompt="Run application: " \
     --border=rounded \
-    --color='bg:#1d2021,fg:#ebdbb2,hl:#444444' \
+    --color='bg:#282a36,fg:#ebdbb2,hl:#6272a4' \
     --margin=5% \
     --height 100% \
     --reverse \
-    --header="          PROGRAMS " --info=hidden)"
+)
+#    --header="          PROGRAMS " --info=hidden)
 
-exec $Menu
+if [ -n "$Menu" ]; then
+    hyprctl dispatch exec "$Menu"
+fi
+
