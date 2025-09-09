@@ -8,9 +8,11 @@
       "clock",
       "hyprland/window",
       "custom/weather",
+      "sway/window",
       ],
     "modules-center": [
       "hyprland/workspaces",
+      "sway/workspaces",
       ],
     "modules-right": [
       "custom/amdcpu",
@@ -35,6 +37,11 @@
           //"kitty (.*)": "<span color=\"#ffffff\"></span>  $1",
           "Search(.*)": "<span color=\"#a855f7\"></span>  Search$1",
       },
+      "sway/window": {
+	    "format": "{title}",
+ 		"max-length": 333,
+	    "seperate-outputs": true
+  },
       "separate-outputs": false
     },
     "hyprland/submap": {

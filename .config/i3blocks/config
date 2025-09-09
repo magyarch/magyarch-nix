@@ -74,7 +74,7 @@ border_left=0
 command=cpu_freq.sh
 #command=cpu
 label=<span color="#d36135"><b>CPUFREQ:</b></span>
-interval=2
+interval=1
 border=#d36135"
 border_top=0
 border_right=0
@@ -129,7 +129,7 @@ border_left=0
 [volume]
 #command=pulseaudio-ctl full-status | awk '{ printf "%i<span color=\"#bd93f9\">%</span>\n", $1 }'
 command=volume
-interval=once
+interval=1
 signal=10
 #label=<span color="#bd93f9"> </span>
 border=#bd93f9
@@ -137,4 +137,5 @@ border_top=0
 border_right=0
 border_bottom=1
 border_left=0
-
+scroll-up=pamixer --allow-boost -i 1
+scroll-down=pamixer --allow-boost -d 1

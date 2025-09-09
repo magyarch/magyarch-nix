@@ -13,7 +13,7 @@ case "$APP_NAME" in
         entry="kitty --class kitty -T Mail -e neomutt"
         ;;
     Music)
-        entry="kitty --class kitty -T Music -e ncmpcpp"
+        entry="kitty --class kitty -T Music -e rmpc"
         ;;
     Todo)
         entry="kitty --class kitty -T Todo -e edconf.sh"
@@ -28,10 +28,26 @@ case "$APP_NAME" in
 esac
 
 # Check if window exists
-if hyprctl clients | grep -q "title: $APP_NAME"; then
-    # If already open, toggle visibility using Hyprland's special workspace
-    hyprctl dispatch togglespecialworkspace $APP_NAME
-else
-    # Launch app into special workspace
-    hyprctl dispatch exec "[workspace special:$APP_NAME silent] $entry"
-fi
+# if hyprctl clients | grep -q "title: $APP_NAME"; then
+#     # If already open, toggle visibility using Hyprland's special workspace
+#     hyprctl dispatch togglespecialworkspace $APP_NAME
+# else
+#     # Launch app into special workspace
+#     hyprctl dispatch exec "[workspace special:$APP_NAME silent] $entry"
+# fi
+# xdotool search --onlyvisible --name "$1" windowunmap \
+#     || xdotool search --name "$1" windowmap \
+#     || $entry &
+
+    # Ellenőrizzük, hogy fut-e már az adott ablak
+    if swaymsg -t get_tree | grep -q "\"name\": \"$APP_NAME\""; then
+        # Ha fut, akkor scratchpad toggle
+        swaymsg "[title=\"$APP_NAME\"] scratchpad show"
+    else
+        # Ha nem fut, akkor indítsd el, és küldd scratchpadba
+        $entry &
+        sleep 0.2
+        swaymsg "[title=\"$APP_NAME\"] move scratchpad"
+        swaymsg "[title=\"$APP_NAME\"] scratchpad show"
+    fi    
+

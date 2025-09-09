@@ -1,7 +1,7 @@
-# i3 config file (v4) by xeoncpu
+# i3 config file by xeoncpu
 
 
-output DP-2 scale 1.33
+output DP-1 scale 1.25
 # Input configuration
 input * {
     xkb_layout hu
@@ -15,7 +15,7 @@ gaps outer 6
 gaps inner 8
 
 set $mod Mod4
-set $altmod Mod1
+set $alt Mod1
 
 # Basic definition #######################################################################
 
@@ -33,21 +33,20 @@ floating_modifier $mod
 
 # Font for window titles. Will also be used by the bar unless a different font ##############
 # is used in the bar {} block below.
-font pango:JetBrains Mono Nerd Font 9
+#font pango:Source Code Pro 9
 
 # Autostart  ######################################################
 # exec --no-startup-id xrandr --dpi 192
  exec_always --no-startup-id /nix/store/$(ls -la /nix/store | grep 'mate-polkit' | grep '4096' | awk '{print $9}' | sed -n '$p')/libexec/polkit-mate-authentication-agent-1 &
- exec --no-startup-id systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+ #exec --no-startup-id systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
  exec --no-startup-id swww init && swww img ~/.local/bin/wallpapers/Future/xy.png
 exec --no-startup-id exec wlsunset -l 16.6 -L 47.6
-exec --no-startup-id dbus-update-activation-enviroment --systemd WAYLAND_DISPLAY SWAYSOCK
- #exec --no-startup-id xset r rate 300 50
- #exec --no-startup-id xsetroot -cursor_name left_ptr
-# exec --no-startup-id xrandr --output HDMI-0 --scale 2x2 --mode 1920x1080 --rotate left --output $monitor1 --primary --mode 3840x2160 --left-of HDMI-0
+exec --no-startup-id systemctl --user import-environment DISPLAY WAYLAND_DISPLAYSWAYSOCK
+exec --no-startup-id hash dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAYSWAYSOCK
+exec_always autotiling
+#exec_always --no-startup-id sxhkd -c ~/.config/sway/sxhkdrc &
+#exec_always --no-startup-id /run/current-system/sw/bin/sxhkd &
 
-
-#default_orientation vertical
 
 
 # Workspaces ######################################################
@@ -132,53 +131,67 @@ bindsym $mod+space focus mode_toggle
 
 
 # Focus between output
-bindsym $mod+Return exec kitty
-bindsym $mod+d exec fuzzel 
-bindsym $mod+e exec subl
+bindsym $mod+Return exec alacritty
+bindsym $mod+Shift+Return exec scratch scratchpad
+bindsym $mod+d exec wofi --show drun
+bindsym $mod+Shift+e exec subl
 bindsym $mod+Shift+p exec thunar
+bindsym $mod+p exec discord
 bindsym $mod+w exec firefox
-bindsym $mod+F5 exec grim -g "$(slurp)" - | swappy -f -
+bindsym $mod+F5 exec grim -g "$(slurp)" ~/Képek/screenshot.png
 bindsym $mod+q kill
-bindsym $mod+Shift+n exec kitty -e ncmpcpp
+bindsym $mod+Shift+n exec scratch Music
+bindsym $mod+r exec alacritty -e vifmrun
+
+bindsym $alt+Up exec pamixer -i 5
+bindsym $alt+Down exec pamixer -d 5
 
 bindsym $mod+Shift+Escape reload
-bindsym $mod+c exec power
+bindsym $mod+c exec wlogout
 bindsym $mod+f fullscreen toggle
 bindsym $mod+Shift+t layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+v splitv
+
+# resize window
+bindsym $mod+Ctrl+Left resize shrink width 20px
+bindsym $mod+Ctrl+Right resize grow width 20px
 
 # resize window (you can also use the mouse for that)
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+# mode "resize" {
+#         # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym l resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym j resize shrink height 10 px or 10 ppt
-        bindsym h resize grow width 10 px or 10 ppt
+#         # Pressing left will shrink the window’s width.
+#         # Pressing right will grow the window’s width.
+#         # Pressing up will shrink the window’s height.
+#         # Pressing down will grow the window’s height.
+#         bindsym l resize shrink width 10 px or 10 ppt
+#         bindsym k resize grow height 10 px or 10 ppt
+#         bindsym j resize shrink height 10 px or 10 ppt
+#         bindsym h resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+#         # same bindings, but for the arrow keys
+#         bindsym Left resize shrink width 10 px or 10 ppt
+#         bindsym Down resize grow height 10 px or 10 ppt
+#         bindsym Up resize shrink height 10 px or 10 ppt
+#         bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape or $mod+z
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+z mode "default"
-}
+#         # back to normal: Enter or Escape or $mod+z
+#         bindsym Return mode "default"
+#         bindsym Escape mode "default"
+#         bindsym $mod+z mode "default"
+# }
 
-bindsym $mod+z mode "resize"
+# bindsym $mod+z mode "resize"
+# Nagyítás be/ki kapcsolása
+bindsym $mod+z exec swaymsg exec "swaymsg seat seat0 zoom toggle"
 
 
 # Floating enable #####################################################################
 
 for_window [app_id="Pinentry"] sticky enable
 #for_window [app_id="ncmpcpp"] floating enable, resize set 1280 620, move position center, focus
-for_window [app_id="ncmpcpp"] floating enable, resize set 1276px 814px
+for_window [app_id="rmpc"] floating enable, resize set 1276px 814px
 
 # Scratchpad:
 #
@@ -192,7 +205,12 @@ for_window [app_id="ncmpcpp"] floating enable, resize set 1276px 814px
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+s scratchpad show
 #
-
+for_window [app_id="pavucontrol"] floating enable
+for_window [app_id="galculator"] floating enable
+for_window [app_id="kitty"] floating enable, resize set 1280 720
+for_window [app_id="nwg-look"] floating enable
+for_window [app_id="mpv"] floating enable, resize set 1280 720
+for_window [app_id="qimgv"] floating enable, resize set 1280 720
 
 
 
@@ -208,9 +226,9 @@ for_window [app_id="ncmpcpp"] floating enable, resize set 1276px 814px
 # for_window [title="Default - Wine desktop"] floating enable
 # for_window [app_id="(?i)Pavucontrol|mupdf|sxiv|feh"] floating enable, resize set 1680 1020, move position center, focus
 # for_window [app_id="(?i)mpv"] floating enable, resize set 1680 1020, move position center, focus
- for_window [app_id="ncmpcpp"] move scratchpad
- for_window [app_id="ncmpcpp"] floating enable
- for_window [app_id="ncmpcpp"] scratchpad show
+ for_window [app_id="rmpc"] move scratchpad
+ for_window [app_id="rmpc"] floating enable
+ for_window [app_id="rmpc"] scratchpad show
 # for_window [app_id="Lxappearance|system-config-printer|System-config-printer.py"] floating enable, resize set 1680 1020, move position center, focus
 
 
@@ -227,23 +245,24 @@ assign [app_id="subl|Subl|Subl3|subl3"] $ws3
 for_window [app_id="subl|Subl|Subl3|subl3"] focus
 
 assign [app_id="$BROWSER|Brave-browser|Microsoft-edge|firefox"] $ws1
-for_window [app_id="$BROWSER|Brave-browser|Microsoft-edge|firefox"] focus 
+for_window [app_id="$BROWSER|Brave-browser|Microsoft-edge|firefox"] focus
 
 assign [app_id="qBittorrent"] $ws7
-for_window [app_id="qBittorrent"] focus 
+for_window [app_id="qBittorrent"] focus
 
-assign [app_id="discord|Discord"] $ws2 
-for_window [app_id="discord|Discord"] focus
+#assign [app_id="discord|Discord"] $ws2
+assign [class=".*discord.*"] $ws2
+for_window [class="discord|Discord"] focus
 
-assign [app_id="steam|Steam"] $ws5 
-for_window [app_id="steam|Steam"] focus 
+assign [app_id="steam|Steam"] $ws5
+for_window [app_id="steam|Steam"] focus
 
 assign [app_id="mpv|Mpv"] $ws6
-for_window [app_id="mpv|Mpv"] focus 
+for_window [app_id="mpv|Mpv"] focus
 
-assign [app_id="thunar|Thunar|pcmanfm"] $ws8 
-for_window [app_id="thunar|Thunar|pcmanfm"] focus 
- 
+assign [app_id="thunar|Thunar|pcmanfm"] $ws8
+for_window [app_id="thunar|Thunar|pcmanfm"] focus
+
 
 # Colors ############################################################################
 
@@ -258,27 +277,27 @@ client.background       #282a36
 
 bar {
 #     output $monitor1
-     font pango: JetBrains Mono Nerd Font 9
-     status_command i3status-rs ~/.config/i3status-rust/config.toml
-     strip_workspace_numbers yes
+   #  font pango: JetBrains Mono Nerd Font 10
+     swaybar_command waybar
+#     strip_workspace_numbers yes
  #    status_command ~/.local/bin/bumblebee-status/bumblebee-status -m spacer sensors disk nvidiagpu memory date time pasink -p sensors.show_freq  sensors.match_number=0  interval=0.5 spacer.left-click="wal" disk.left-click="gnome-disks"  date.left-click="eww open --toggle calendar" pasink.left-click="pavucontrol" \
      #-t firefox-dark-powerline
-     position top
+  #    position top
 
 
 
-  colors {
-    background #282a36
-    statusline #C3CDC8
-    separator  #C3CDC8
+  # colors {
+  #   background #282a36
+  #   statusline #C3CDC8
+  #   separator  #C3CDC8
 
 
-    focused_workspace  #6272a4 #6272a4 #C3CDC8
-    active_workspace   #6272a4 #6272a4 #C3CDC8
-    inactive_workspace #333333 #222222 #888888
-    urgent_workspace   #2F343A #900000 #FFFFFF
-    binding_mode       #2F343A #900000 #FFFFFF
+  #   focused_workspace  #6272a4 #6272a4 #C3CDC8
+  #   active_workspace   #6272a4 #6272a4 #C3CDC8
+  #   inactive_workspace #333333 #222222 #888888
+  #   urgent_workspace   #2F343A #900000 #FFFFFF
+  #   binding_mode       #2F343A #900000 #FFFFFF
   }
 
- #include /etc/sway/config.d/*
+ include /home/xeoncpu/.config/sway/config.d/*
 }

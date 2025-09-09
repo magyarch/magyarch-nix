@@ -1,0 +1,448 @@
+
+#########################################################################################################################################################################
+#
+#____/\\\\\\\\\_________/\\\\\\\\\_____/\\\\\\\\\\\\\\\__/\\\\\\\\\\\\\_________/\\\\\_______/\\\\\\\\\\\_____/\\\\\\\\\\\_________/\\\\\_______/\\\\\_____/\\\_
+# __/\\\///////\\\_____/\\\\\\\\\\\\\__\///////\\\/////__\/\\\/////////\\\_____/\\\///\\\____\/////\\\///____/\\\/////////\\\_____/\\\///\\\____\/\\\\\\___\/\\\_
+#  _\/\\\_____\/\\\____/\\\/////////\\\_______\/\\\_______\/\\\_______\/\\\___/\\\/__\///\\\______\/\\\______\//\\\______\///____/\\\/__\///\\\__\/\\\/\\\__\/\\\_
+#   _\/\\\\\\\\\\\/____\/\\\_______\/\\\_______\/\\\_______\/\\\\\\\\\\\\\/___/\\\______\//\\\_____\/\\\_______\////\\\__________/\\\______\//\\\_\/\\\//\\\_\/\\\_
+#    _\/\\\//////\\\____\/\\\\\\\\\\\\\\\_______\/\\\_______\/\\\/////////____\/\\\_______\/\\\_____\/\\\__________\////\\\______\/\\\_______\/\\\_\/\\\\//\\\\/\\\_
+#     _\/\\\____\//\\\___\/\\\/////////\\\_______\/\\\_______\/\\\_____________\//\\\______/\\\______\/\\\_____________\////\\\___\//\\\______/\\\__\/\\\_\//\\\/\\\_
+#      _\/\\\_____\//\\\__\/\\\_______\/\\\_______\/\\\_______\/\\\______________\///\\\__/\\\________\/\\\______/\\\______\//\\\___\///\\\__/\\\____\/\\\__\//\\\\\\_
+#       _\/\\\______\//\\\_\/\\\_______\/\\\_______\/\\\_______\/\\\________________\///\\\\\/______/\\\\\\\\\\\_\///\\\\\\\\\\\/______\///\\\\\/_____\/\\\___\//\\\\\_
+#        _\///________\///__\///________\///________\///________\///___________________\/////_______\///////////____\///////////__________\/////_______\///_____\/////__
+#
+###########################################################################################################################################################################
+
+
+
+# AUTOSTART
+#--------------------------------------------
+ exec xmodmap .xmodmaprc
+# #export GDK_SCALE=2
+ #exec sleep 2s && bar.sh
+exec sleep 3 && ~/.config/polybar/launch.sh && poly.sh
+# exec xsetroot -cursor_name left_ptr
+# exec xset r rate 400 30
+# exec unclutter
+# exec udiskie
+# exec xset s off -dpms
+# exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+# #(sleep 1s && picom --experimental-backend --shadow-exclude-reg '1920+0-0' --inactive-opacity 1.00  --opacity-rule "85:class_g ='urxvt'" --opacity-rule "80:class_g = 'rofi'" --opacity-rule "90:class_g = 'Alacritty'" --blur-background-exclude n:a:slop -CGfF -o 0.70 -O 0.028 -I 0.028 -t 0 -l 0 -r 7 -D2 -m 1.00) &
+# pkill picom
+# exec picom -b --config ~/.config/picom.conf --experimental-backends
+# exec dunst
+# #setbg &
+# #feh --bg-fill --randomize ~/.local/bin/wallpapers/Future/*
+# #pkill redshift
+# exec redshift -l 47.162495:19.503304 -t 6000:3600 -g 0.8 -m randr -v
+# pkill -f change_background
+# exec change_background
+
+
+# ALTKEY="M"
+# WINKEY aka SUPER="s"
+# LEFT_CTRL="C"
+
+
+# System
+#------------------------------
+#exec /usr/bin/rpws init 6 -k
+
+unmanage polybar-mainbar-bspwm_DP-1
+
+# Mouse
+#-------------------------------
+# Ban mouse to bottom right corner
+#exec ratpoison -c "banish"
+
+
+# Focus follow mouse (bad behavior with ratpoison)
+#exec /usr/share/ratpoison/sloppy
+
+
+# SETTINGS
+#--------------------------------
+rudeness 15
+warp off
+startup_message on
+
+set padding 20 50 20 20
+set winname title
+set border 3
+
+set bargravity c
+#set barborder 3
+#set barinpadding 1 1
+#set barpadding 6 6
+
+set wingravity center
+set transgravity center
+set border 2
+set barborder 1
+set msgwait 1
+set framemsgwait 1
+
+set font "Source Code Pro Font:size=12:antialias=true"
+set bgcolor #282a36
+set fgcolor #6272a4
+set fwcolor #6272a4
+set bwcolor #282a36
+
+
+# ALIAS
+#----------------------------
+
+
+# ESCAPE KEY (replace key chord C-t with win)
+#---------------------------------------------
+#escape Super_L
+escape F13
+
+
+#addhook key bind f exec toggle_padding
+
+# KEYBINDS (remove)
+#----------------------------------
+# unbind a
+# unbind A
+# unbind C-A
+# unbind b
+# unbind C-b
+# unbind i
+# unbind l
+# unbind C-l
+# unbind K
+# unbind C-K
+# unbind r
+# unbind p
+# unbind C-p
+# unbind s
+# unbind S
+# unbind C-S
+# unbind n
+# unbind C-n
+# unbind u
+# unbind C-u
+# unbind f
+# unbind Return
+# unbind C-Return
+# unbind x
+# unbind C-x
+# unbind w
+# unbind C-V
+# unbind v
+
+
+
+# MAGYARCH KEYBINDS (after win keypress)
+#----------------------------------
+# Open terminal
+bind Return exec $TERMINAL
+definekey top s-Return exec $TERMINAL
+
+# Start alacritty with tabs
+bind s exec ~/.local/bin/rpscripts/fakefloat.sh
+
+# Start tmux with alacritty
+bind T exec wmctrl -x -a "alacritty" || alacritty -e tmux
+bind a exec ratpoison -d :0.0 -c "echo `date +'%r - %A %n    %D - %B'`  `cal | tail -n +2 | sed -e 's/^Su/\n\n Su/' -e 's/.*/ & /' -e \"s/\ $(date +%e)\ /\<$(date +%e)\>/\"`"
+
+# Open browser
+bind w exec ratpoison -c "rpws1" && ratpoison -c "exec firefox"
+definekey top s-w exec ratpoison -c "rpws1" && ratpoison -c "exec firefox"
+
+bind W exec ratpoison -c "select $(ratpoison -c "prompt $(ratpoison -c "windows [%n] %c" | sed -z 's/\n/ | /g'):")"
+
+bind V exec ~/.local/bin/rpscripts/fakescratch.sh
+
+# Toggle fullscreen
+bind f exec toggle_padding
+
+# Open dmenu app launcher
+bind d exec rofi_run
+definekey top s-d exec rofi_run
+#definekey top  Hyper_Ld-d exec ratpoison -d :0.0 -c "echo `date +'%r - %A %n    %D - %B'`  `cal | tail -n +2 | sed -e 's/^Su/\n\n Su/' -e 's/.*/ & /' -e \"s/\ $(date +%e)\ /\<$(date +%e)\>/\"`"
+
+# Open TUI filemanager
+bind r restart
+definekey top s-r exec $TERMINAL -e vifm
+
+# Resize frame
+bind R resize
+#bind a exec ratpoison -c "vsplit 1/2" && scratch FM
+
+# Open editor
+bind E exec ratpoison -c "rpws3" && ratpoison -c "exec subl"
+definekey top s-E exec ratpoison -c "rpws3" && ratpoison -c "exec subl"
+
+# Open preset layouts
+bind L exec rp_layout.sh
+
+# Open gui filemanager
+bind P exec ratpoison -c "rpws8" && ratpoison -c "exec thunar"
+definekey top s-P exec ratpoison -c "rpws8" && ratpoison -c "exec thunar"
+
+# Open discord
+bind p exec ratpoison -c "rpws2" && ratpoison -c "exec discord"
+definekey top s-p exec ratpoison -c "rpws2" && ratpoison -c "exec discord"
+
+# Undo command
+bind U undo
+
+# Swap windows
+bind S swap
+
+# Open music
+bind m exec prompt "Listen some music?" "scratch Music"
+definekey s-m exec ~/.local/bin/cmd/scratch Music
+# Next window in fullscreen mode
+bind n next
+
+# Only one focused window
+bind o exec ratpoison -c "echo restore" -c "select -" -c "only" -c "next"
+
+# Shell commands
+bind e exec
+
+# Ratcommandsq
+bind c colon
+
+# Choose soundcard
+bind x exec rofi_run -l
+
+# S,R,L
+#bind X exec rplogout.sh
+definekey top s-c exec eww open --toggle powermenu
+definekey top s-C exec eww close powermenu
+
+# Split windows vertical
+#bind h exec split_and_focus.sh horiz
+definekey top s-v exec smartsplit.sh hsplit
+
+
+# Split windows horizontal
+#bind v exec ratpoison -c "hsplit" -c "next"
+definekey top s-h exec smartsplit.sh vsplit
+
+
+# Kill/Remove selected window/frame
+bind q exec ratpoison -c delete
+definekey top s-q exec ratpoison -c delete -c remove
+bind Q exec ratpoison -c delete -c remove
+
+# Choose groups
+bind G exec rp_groups.sh
+
+bind C-Tab nextscreen
+
+
+# LEFT CTRL KEYBINDS (after win keypress)
+#----------------------------------
+# Open powermenu
+bind C-c exec rofi_run -l
+
+
+
+# KEYBINDS (no win keypress)
+#------------------------------------
+definekey top s-Tab focus
+
+definekey top s-x restart
+
+definekey top s-Escape quit
+
+
+# LEFT ALTKEYBINDS (no win keypress)
+#------------------------------------
+definekey top M-Tab next
+
+
+# FUNCTION KEYS
+#--------------
+bind F1 help
+bind F2 exec edconf.sh
+bind F3 exec dmenurecord;\notify-send "Screenrecord starting"
+bind F4 exec import -window root png:$HOME/Képek/Képernyőképek-$(date +%s)$$.png
+bind F5 exec maimpick
+bind F6 exec live.sh;\notify-send "Live stream starting."
+bind F7 exec stop_live.sh;\notify-send "Stop live stream"
+
+
+# Layouts [ ] [|] [|= [-] [+]
+#---------------------------
+definekey top C-F1 exec ratpoison -c "echo Layout 1" -c "select -" -c "only" -c "next"
+definekey top C-F2 exec ratpoison -c "echo Layout 2" -c "select -" -c "only" -c "hsplit" -c "next"
+definekey top C-F3 exec ratpoison -c "echo Layout 3" -c "select -" -c "only" -c "hsplit" -c "next" -c "focusright" -c "next" -c "vsplit" -c "next"
+definekey top C-F4 exec ratpoison -c "echo Layout 4" -c "select -" -c "only" -c "vsplit" -c "next"
+definekey top C-F5 exec ratpoison -c "echo Layout 5" -c "select -" -c "only" -c "hsplit" -c next -c "vsplit" -c next -c "focusright" -c next -c "vsplit" -c "next"
+
+
+# WINDOW MANIPULATION
+#--------------------
+#bind M-h exec ratpoison -c fdump > $HOME/.rpfdump; ratpoison -c 'select -' -c only
+#bind M-s exec ratpoison -c "frestore `cat $HOME/.rpfdump`"
+bind X exec dumporrestore.sh
+bind M-t exec toggle_borders
+definekey top M-h resize -30 0
+definekey top M-j resize  0 -30
+definekey top M-k resize  0  30
+definekey top M-l resize 30  30
+
+# Focus
+#--------------------
+bind <UP> focusup
+bind <DOWN> focusdown
+bind <LEFT> focusleft
+bind <RIGHT> focusright
+
+
+# Swap windows
+#--------------------
+#bind C-Left exchangeleft
+#bind C-Right exchangeright
+#bind C-Up exchangeup
+#bind C-Down exchangedown
+
+
+definekey top s-Left exchangeleft
+definekey top s-Right exchangeright
+definekey top s-Up exchangeup
+definekey top s-Down exchangedown
+
+
+
+# Groups
+#----------
+# gnew web
+# gnewbg chat
+# gnewbg edit
+# gnewbg music
+# gnewbg games
+# gnewbg video
+# gmerge default
+# gdelete default
+
+exec /run/current-system/sw/bin/rpws init 9 -k &
+
+# moving to workspaces
+bind 1 rpws1
+bind 2 rpws2
+bind 3 rpws3
+bind 4 rpws4
+bind 5 rpws5
+bind 6 rpws6
+bind 7 rpws7
+bind 8 rpws8
+bind 9 rpws9
+
+bind s-1 rpws1
+bind s-2 rpws2
+bind s-3 rpws3
+bind s-4 rpws4
+bind s-5 rpws5
+bind s-6 rpws6
+bind s-7 rpws7
+bind s-8 rpws8
+biind s-9 rpws9
+
+# moving windows to workspaces
+bind C-1 rpwsm1
+bind C-2 rpwsm2
+bind C-3 rpwsm3
+bind C-4 rpwsm4
+bind C-5 rpwsm5
+bind C-6 rpwsm6
+bind C-7 rpwsm7
+bind C-8 rpwsm8
+bind C-9 rpwsm9
+
+# cycle workspaces
+bind s-period exec rpws next
+bind s-comma exec rpws prev
+bind period exec rpws next
+bind comma exec rpws prev
+
+
+# RPWS (ratpoison workspaces)
+#-----------------------------
+# bind 1 exec rpws 1
+# bind 2 exec rpws 2
+# bind 3 exec rpws 3
+# bind 4 exec rpws 4
+# bind 5 exec rpws 5
+# bind 6 exec rpws 6
+
+# bind 1 exec ratpoison -c "gselect 1" -c "select -" -c "only" -c "next" -c "echo web"
+# bind 2 exec ratpoison -c "gselect 2" -c "select -" -c "only" -c "next" -c "echo chat"
+# bind 3 exec ratpoison -c "gselect 3" -c "select -" -c "only" -c "next" -c "echo edit"
+# bind 4 exec ratpoison -c "gselect 4" -c "select -" -c "only" -c "next" -c "echo music"
+# bind 5 exec ratpoison -c "gselect 5" -c "select -" -c "only" -c "next" -c "echo games"
+# bind 6 exec ratpoison -c "gselect 6" -c "select -" -c "only" -c "next" -c "echo video"
+
+# definekey top s-1 exec ratpoison -c "gselect 1" -c "select -" -c "only" -c "next" -c "echo web"
+# definekey top s-2 exec ratpoison -c "gselect 2" -c "select -" -c "only" -c "next" -c "echo chat"
+# definekey top s-3 exec ratpoison -c "gselect 3" -c "select -" -c "only" -c "next" -c "echo edit"
+# definekey top s-4 exec ratpoison -c "gselect 4" -c "select -" -c "only" -c "next" -c "echo music"
+# definekey top s-5 exec ratpoison -c "gselect 5" -c "select -" -c "only" -c "next" -c "echo games"
+# definekey top s-6 exec ratpoison -c "gselect 6" -c "select -" -c "only" -c "next" -c "echo video"
+
+
+# Move windows to next/prev workspaces
+#-------------------------------------
+ bind M-n gnext
+ bind M-p gprev
+
+
+# Send windows to workspace 1-9
+#-----------------------------
+# bind M-1 exec ratpoison -c "gmove 1" -c "select -" -c "only" -c "next" -c "echo web"
+# bind M-2 exec ratpoison -c "gmove 2" -c "select -" -c "only" -c "next" -c "echo chat"
+# bind M-3 exec ratpoison -c "gmove 3" -c "select -" -c "only" -c "next" -c "echo edit"
+# bind M-4 exec ratpoison -c "gmove 4" -c "select -" -c "only" -c "next" -c "echo music"
+# bind M-5 exec ratpoison -c "gmove 5" -c "select -" -c "only" -c "next" -c "echo games"
+# bind M-6 exec ratpoison -c "gmove 6" -c "select -" -c "only" -c "next" -c "echo video"
+
+# bind M-1 gmove 1
+# bind M-2 gmove 2
+# bind M-3 gmove 3
+# bind M-4 gmove 4
+# bind M-5 gmove 5
+# bind M-6 gmove 6
+
+
+# Multimedia
+#--------------------
+# bind XF86MonBrightnessUp exec lux -a 10%
+# bind XF86MonBrightnessDown exec lux -s 10%
+definekey top M-Up exec pamixer --allow-boost -i 10 >/dev/null
+definekey top M-Down exec pamixer --allow-boost -d 10 >/dev/null
+
+#addhook restart exec pkill -9 -f dzen2
+
+#pkill -9 -f bar.sh; bar2.sh
+
+
+
+#----------------------------------------------------------------------
+#-------------------------- END ---------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -5,46 +5,46 @@
 # Dmenu script for editing some of my more frequently edited config files.
 
 
-declare options=("aliasrc
-zshrc
+declare options=("hlwm
+ratpoison
 bspwmrc
 nixconfig
-.profile
+xmonad
 sxhkdrc
-vifmrc
-Xresources
+hyprland
+polybar
 .xprofile
 quit")
 
-choice=$(echo -e "${options[@]}" | dmenu -p 'Edit files: ')
+choice=$(echo -e "${options[@]}" | rofi -dmenu -p 'Edit files: ')
 
 case "$choice" in
 	quit)
 		echo "Program terminated." && exit 1
 	;;
-	aliasrc)
-		choice="$HOME/.config/aliasrc"
+	hlwm)
+		choice="$HOME/.config/herbstluftwm/autostart"
 	;;
-	zshrc)
-		choice="$HOME/.config/zsh/.zshrc"
+	ratpoison)
+		choice="$HOME/.ratpoisonrc"
 	;;
 	bspwmrc)
 		choice="$HOME/.config/bspwm/bspwmrc"
 	;;
-	.profile)
-		choice="$HOME/.profile"
+	xmonad)
+		choice="$HOME/.config/xmonad/xmonad.hs"
 	;;
 	sxhkdrc)
 	        choice="$HOME/.config/sxhkd/sxhkdrc"
 	;;
-	vifmrc)
-		choice="$HOME/.config/vifm/vifmrc"
+	hyprland)
+		choice="$HOME/.config/hypr/hyprland.conf"
 	;;
 	nixconfig)
 		choice="/etc/nixos/configuration.nix"
 	;;
-	Xresources)
-		choice="$HOME/.Xresources"
+	polybar)
+		choice="$HOME/.config/polybar/config.ini"
 	;;
     xprofile)
 		choice="$HOME/.xprofile"
