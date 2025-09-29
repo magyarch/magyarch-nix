@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+BOOKFILE="$HOME/.config/rofi/bookmarks.txt"
+
+choice=$(rofi -dmenu -i -p "Bookmarks" < "$BOOKFILE")
+[ -z "$choice" ] && exit 0
+
+# Ha a sor parancs szóközt tartalmaz (pl. "kitty nvim ..."),
+# futtasd mint parancs; ha csak URL, akkor xdg-open.
+
+eval "$choice" &

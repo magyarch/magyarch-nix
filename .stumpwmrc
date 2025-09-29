@@ -5,45 +5,142 @@
 (pushnew #P"~/.stumpwm.d/contrib/" asdf:*central-registry* :test #'equal)
 (set-module-dir (pathname-as-directory (concat (getenv "HOME") "/.stumpwm.d/contrib")))
 
-;;; load TTF
-;;(ql:quickload :clx-truetype)
-;;(load-module "ttf-fonts")
-;;(xft:cache-fonts)
-;;(set-font (make-instance 'xft:font :family "Source Code Pro" :subfamily "Bold" :size 7 :antialias t))
+ (set-font "-xos4-terminus-bold-r-normal-*-22-*-*-*-*-*-*-*")
 
-;; Prefix key átállítása (ha nem akarod a Ctrl+t-t)
-(set-prefix-key (kbd "F13"))  ;
 
-;;; billentyűk
-(define-key *top-map* (kbd "s-Return") "exec alacritty")
-(define-key *top-map* (kbd "s-d") "exec rofi -show run")
-(define-key *top-map* (kbd "s-w") "exec firefox")
-(define-key *top-map* (kbd "s-p") "exec discord")
-(define-key *top-map* (kbd "s-P") "exec thunar")
-(define-key *top-map* (kbd "s-E") "exec subl")
 
-;; Konfig újratöltése
-(define-key *top-map* (kbd "s-r") "reload")
+;; (load-module "ttf-fonts")
+;; (setq clx-truetype::*font-dirs*
+;;          (append (list (namestring "~/.local/share/fonts"
+;;                         ))
+;;                  clx-truetype::*font-dirs*))
+;; (set-font (make-instance 'xft:font
+;;       :family "DejaVuSansM Nerd Font"
+;;,,,,,,,,                          :subfamily "Regular"
+;;                          :size 11))
 
-;; Restart (újraindítás)
-(define-key *top-map* (kbd "s-R") "restart-hard")
 
-;; Ablak bezárása
-(define-key *top-map* (kbd "s-q") "delete")
-(define-key *top-map* (kbd "s-Q") "remove")
-(define-key *root-map* (kbd "f") "fullscreen")
+;;; --- Osztás (split) ---------------------------------------------
 
-;; Ablakok közti váltás
-(define-key *top-map* (kbd "s-Tab") "next")
-(define-key *top-map* (kbd "M-Tab") "pull-hidden-next")
+;; toggle hor/vert split (only with 2 windows)
+(defcommand toggle-split () ()
+  (let* ((group (current-group))
+         (cur-frame (tile-group-current-frame group))
+         (frames (group-frames group)))
+    (if (eq (length frames) 2)
+        (progn (if (or (neighbour :left cur-frame frames)
+                       (neighbour :right cur-frame frames))
+                   (progn
+                     (only)
+                     (vsplit))
+                 (progn
+                   (only)
+                   (hsplit))))
+      (message "Works only with 2 frames"))))
+;;_____________________________________________________________________________________________
 
-;; Ablak áthelyezése másik keretbe (tilingnél)
-(define-key *top-map* (kbd "s-S-Right") "move-window right")
-(define-key *top-map* (kbd "s-S-Left")  "move-window left")
-(define-key *top-map* (kbd "s-S-Up")    "move-window up")
-(define-key *top-map* (kbd "s-S-Down")  "move-window down")
+(defcommand reload++ () ()
+  "Reload StumpWM Configuration."
+  (run-commands "reload" "loadrc" "redisplay" "refresh" "refresh-heads"))
 
-;;; --- Osztás (split) ---
+;; Loadrc -- remember current state
+(defcommand loadrc-forget () () "Reload the @file{~/.stumpwmrc} file without remember current state."
+  (handler-case
+   (progn
+     (with-restarts-menu (load-rc-file nil)))
+   (error (c)
+          (message "^B^1*Error loading rc file:^n ~A" c))
+   (:no-error (&rest args)
+              (declare (ignore args))
+              (message "rc file loaded successfully."))))
+
+(defcommand loadrc () () "Reload the @file{~/.stumpwmrc} file while remembering current state."
+  (remember-all) (loadrc-forget))
+
+(defun remember-all () ()
+"Similiar to remember-group except all information is dumped, useful
+for next startup or recalling all undo actions."
+  (dump-to-datadir "rules") (dump-to-datadir "desktop"))
+
+(defcommand dump-to-datadir (expr) (:rest)
+  "Dump group (from current-screen), screen (current-screen), desktop or rules to file in data-dir.
+Just specify what you want to dump and this will dynamically create and name file accordingly."
+  (cond ((string-equal expr 'group)
+         (let* ((o (make-pathname :name (format nil "screen_~{~A~}_group_~{~A~}"
+                                                (list (char (getenv "DISPLAY") 1)) (list (group-name (current-group))))
+                                  :type "lisp" :defaults *data-dir*)))
+           (dump-group-to-file o) (message "~A dumped" expr)))
+        ((string-equal expr 'screen)
+         (let* ((o (make-pathname :name (format nil "screen_~{~A~}" (list (char (getenv "DISPLAY") 1)))
+                                  :type "lisp" :defaults *data-dir*)))
+           (dump-screen-to-file o) (message "~A dumped" expr)))
+        ((string-equal expr 'rules)
+         (let* ((o (make-pathname :name "tile-rules" :type "lisp" :defaults *data-dir*)))
+           (dump-window-placement-rules o) (message "~A dumped" expr)))
+        ((string-equal expr 'desktop)
+         (let* ((o (make-pathname :name "desktop" :type "lisp" :defaults *data-dir*)))
+           (dump-desktop-to-file o) (message "~A dumped" expr)))
+        (t (message "dont know how to dump ~a" expr))))
+
+;; restore [current]-group (for current-screen), [current]-screen, desktop or window-placement-rules
+;; from a previously created file (more correctly from DUMP-TO-DATADIR) in user defined *data-dir*.
+(defcommand restore-from-datadir (expr) (:rest)
+"Restore file from data-dir, previously created by 'dump-to-datadir', according to what you specify.
+You may restore group (for current-screen), screen (for current-screen), desktop or rules. This will
+restore file dynamically by pattern patching, according to what you're restoring, to file name by
+looking at what you're currently using.
+E.g. if you're in group 2 on screen 0 and you enter 'restore-from-datadir group' it will look for a
+file named 'screen_0_group_2.lisp' (created by accompanying 'dump-to-datadir') in your data-dir and
+restore it. If no matching file is found it will skip loading of any files and print an error message.
+Note: if restoring a group file was successful then an undo state is created so you can technically
+undo the loading of that file. There are no undo states when loading 'screen', 'desktop' or 'rules'."
+  (cond ((string-equal expr 'group)
+          (let* ((i (make-pathname :name (format nil "screen_~{~A~}_group_~{~A~}"
+                    (list (char (getenv "DISPLAY") 1)) (list (group-name (current-group))))
+                    :type "lisp" :defaults *data-dir*)))
+            (if (probe-file i)
+                (progn (restore-from-file i) (remember-group) (message "~A restored" expr))
+              (message "unable to find valid ~A file in data dir" expr))))
+        ((string-equal expr 'screen)
+          (let* ((i (make-pathname :name (format nil "screen_~{~A~}" (list (char (getenv "DISPLAY") 1)))
+                    :type "lisp" :defaults *data-dir*)))
+            (if (probe-file i)
+                (progn (restore-from-file i) (message "~A restored" expr))
+              (message "unable to find valid ~A file in data dir" expr))))
+        ((string-equal expr 'rules)
+          (if (probe-file (data-dir-file "tile-rules.lisp"))
+              (progn (restore-window-placement-rules (data-dir-file "tile-rules.lisp"))
+                     (message "~A restored" expr))
+            (message "unable to find valid ~A file in data dir" expr)))
+        ((string-equal expr 'desktop)
+          (if (probe-file (data-dir-file "desktop.lisp"))
+              (progn (restore-from-file (data-dir-file "desktop.lisp")) (message "~A restored" expr))
+            (message "unable to find valid ~A file in data dir" expr)))
+        (t (message "dont know how to restore ~a" expr))))
+
+;; dump to file, which is silent, but with more informative prompts.
+(defcommand dump-group-to-file (file) ((:rest "group to file: "))
+  "Dumps the frames of the current group of the current screen to the named file."
+  (dump-to-file (dump-group (current-group)) file))
+(defcommand dump-screen-to-file (file) ((:rest "screen to file: "))
+  "Dumps the frames of all groups of the current screen to the named file."
+  (dump-to-file (dump-screen (current-screen)) file))
+(defcommand dump-desktop-to-file (file) ((:rest "desktop to file: "))
+  "Dumps the frames of all groups of all screens to the named file."
+  (dump-to-file (dump-desktop) file))
+
+(defun remember-group (&optional (group (current-group))) ()
+"Remember current group information before calling another command or
+function. Combined with 'undo' command this allows for toggling between
+the two undo states."
+  (if (ensure-directories-exist *undo-data-dir*)
+    (when group
+      (dump-group-to-file
+        (make-pathname :name (format nil "screen_~{~A~}_group_~{~A~}"
+        (list (char (getenv "DISPLAY") 1)) (list (group-name (current-group))))
+        :type "lisp" :defaults *undo-data-dir*)))))
+
+;;________________________________________________________________________
 
 ;; Commands
 (defcommand fullscreen-and-raise () ()
@@ -68,50 +165,72 @@
 (remove-split)
 (balance-frames))
 
+;;; Helpers
+(defun tr-define-key (key command)
+  (define-key *top-map* (kbd (concat "M-" key )) command)
+  (define-key *root-map* (kbd key) command))
 
-(define-key *top-map* (kbd "s-v") "hsplit-and-focus")
-(define-key *top-map* (kbd "s-h") "vsplit-and-focus")
+;;; Hide and Show Windows
+(defcommand pull-from-trash () ()
+  (let* ((windows (windows-in-group ".trash"))
+         (window  (window-from-menu windows)))
+    (when window
+      (move-window-to-group window (current-group))
+      (stumpwm::pull-window window))))
 
-;; Split bezárása
-(define-key *top-map* (kbd "s-x") "only")
+(defcommand move-to-trash () ()
+  (stumpwm:run-commands "gmove .trash"))
 
-;;; workspace-ek (groupok)
-(gnew "web")
-(gnew "chat")
-(gnew "dev")
-(gselect "web")
+(tr-define-key "t" "move-to-trash")
+(tr-define-key "j" "pull-from-trash")
 
-;; A group-ok nevei
-(defparameter *my-groups* '("web" "chat" "dev"))
+(defun windows-in-group (group)
+  (group-windows (find group (the list (screen-groups (current-screen)))
+                       :key 'group-name :test 'equal)))
 
-;; Super + szám → váltás a group-ra
-(loop for i from 1 to (length *my-groups*)
-      for name = (nth (1- i) *my-groups*) do
-      (define-key *top-map*
-        (kbd (format nil "s-~a" i))
-        (format nil "gselect ~a" name)))
+(defun window-menu-format (w)
+  (list (format-expand *window-formatters* *window-format* w) w))
 
+(defun window-from-menu (windows)
+  (when windows
+    (second (select-from-menu
+             (group-screen (window-group (car windows)))
+             (mapcar 'window-menu-format windows)
+             "Select Window: "))))
 
+(defun floatingp (window)
+  "Return T if WINDOW is floating and NIL otherwise"
+  (typep window 'stumpwm::float-window))
 
+(defun always-on-top-off (window) ()
+       "Stop the given WINDOW from always being on top of other windows"
+       (let ((ontop-wins (group-on-top-windows (current-group))))
+         (setf (group-on-top-windows (current-group))
+               (remove window ontop-wins))))
+
+(defun always-on-top-on (window) ()
+       "Set the given WINDOW to always be on top of other windows"
+       (let ((w window)
+             (windows (the list (group-on-top-windows (current-group)))))
+         (when w
+           (unless (find w windows)
+             (push window (group-on-top-windows (current-group)))))))
 
 (setf
  *mode-line-background-color* "#282a36";
  *mode-line-foreground-color* "#bbbbbb"
  *mode-line-border-color* "#282a36"
- *mode-line-border-width* 0
+ *mode-line-border-width* 2
+ *mode-line-pad-x* 6
+ *mode-line-pad-y* 6
  *mode-line-timeout* 1
  *group-format* " %t "
  *time-modeline-string* "%H:%M"
  *window-format* "<%n:%25t>"
- *screen-mode-line-format* (list "%g  %v ^> " '(:eval  (string-trim '(#\Newline) (run-shell-command "sensors | grep Tctl | awk '{print $2}' | sed 's/+//g'" t))) " | " '(:eval  (string-trim '(#\Newline) (run-shell-command "sensors | awk '/edge:/ {print $2}'" t))) " | " '(:eval (string-trim '(#\Newline) (run-shell-command "$(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq) | awk '{printf("%.2f GHz", $1/1000000)}'" t))) " |  %d")
-)
+ *screen-mode-line-format* (list "%g  %v ^> " '(:eval (string-trim '(#\Newline) (run-shell-command "cpupower frequency-info -fm | grep -oP '(?<=frequency: )([^ ]+ [^ ]+)'
+  " t))) " | " '(:eval (string-trim '(#\Newline) (run-shell-command "sensors | awk  '/Tctl:/ {print $2}' | sed 's/+//g'" t))) " | " '(:eval  (string-trim '(#\Newline) (run-shell-command "sensors | awk  '/edge:/ {print $2}'" t))) " | " '(:eval (string-trim '(#\Newline) (run-shell-command "date" t)))))
 
 (enable-mode-line (current-screen) (current-head) t)
-
-;;; téma / színek
-(set-fg-color "#ffffff")
-(set-bg-color "#282a36")
-(set-border-color "#282a36")
 
 
 
@@ -121,28 +240,91 @@
         "#BF6262"   ;red
         "#a1bf78"   ;green
         "#dbb774"   ;yellow
-        "#7D8FA3"   ;blue
+        "#6272a4"   ;blue
         "#ff99ff"   ;magenta
         "#53cdbd"   ;cyan
         "#ffffff")) ;white
 
 (update-color-map (current-screen))
 
+(set-focus-color "#6272a4")
+(set-unfocus-color "#282a36")
+(set-fg-color "#00AA00")
+(set-bg-color "#282a36")
+(set-border-color "#6272a4")
+
 
 ;;; Basic Settings
 
 (setf *message-window-gravity* :center
+      *input-window-gravity* :center
+      *message-window-padding* 8
+      *message-window-y-padding* 6
       *window-border-style* :thin
-      *message-window-padding* 3
+;;      *message-window-padding* 3
       *maxsize-border-width* 2
       *normal-border-width* 2
       *transient-border-width* 2
+      *mouse-focus-policy* :click
       stumpwm::*float-window-border* 1
       stumpwm::*float-window-title-height* 1)
 
+
+;;; workspace-ek (groupok)
+(gnew "web")
+(gnew "chat")
+(gnew "dev")
+(gnew "vid")
+(gnew "game")
+(gnew ".trash")
+;;;(gnew-dynamic "dwm")
+;;(gselect "web")
+
+
+
+;; A group-ok nevei
+(defparameter *my-groups* '("web" "chat" "dev" "vid" "game"))
+
+;; Super + szám → váltás a group-ra
+(loop for i from 1 to (length *my-groups*)
+      for name = (nth (1- i) *my-groups*) do
+      (define-key *top-map*
+        (kbd (format nil "s-~a" i))
+        (format nil "gselect ~a" name)))
+
+(loop for i from 0
+      for g in (sort-groups (current-screen))
+      do (setf (group-number g) i))
+
+(define-frame-preference "web"
+    (0 T T :class "Vivaldi-stable")
+    (0 T T :class "firefox"))
+
+
+(define-frame-preference "chat"
+    (0 T T :class "qutebrowser")
+    (2 T T :class "discord"))
+
+(define-frame-preference "dev"
+    (0 T T :class "Sublime_text")
+    (0 T T :class "subl3"))
+
+(define-frame-preference "vid"
+    (0 T T :class "mpv"))
+
+(define-frame-preference "game"
+    (0 T T :class "steam"))
+
+(define-key *top-map* (kbd "C-s-1") "gmove web")
+(define-key *top-map* (kbd "C-s-2") "gmove chat")
+(define-key *top-map* (kbd "C-s-3") "gmove dev")
+(define-key *top-map* (kbd "C-s-4") "gmove vid")
+(define-key *top-map* (kbd "C-s-5") "gmove game")
+
+
 ;;; Gaps
 (load-module "swm-gaps")
-(setf swm-gaps:*inner-gaps-size* 13
+(setf swm-gaps:*inner-gaps-size* 7
       swm-gaps:*outer-gaps-size* 7
       swm-gaps:*head-gaps-size* 0)
 (when *initializing*
@@ -153,3 +335,70 @@
 ;;;  end session module
 (load-module "end-session")
 (define-key *root-map* (kbd "Escape") "end-session")
+
+(load-module "rotate-windows")
+(define-key *top-map* (kbd "s-C-r") "rotate-windows")
+
+(load-module "globalwindows")
+(define-key *top-map* (kbd "s-C-w") "global-windowlist")
+(define-key *top-map* (kbd "s-C-p") "global-pull-windowlist")
+
+
+(defcommand vol-up () ()
+  (run-shell-command "pamixer --allow-boost -i 5"))
+
+(defcommand vol-down () ()
+  (run-shell-command "pamixer --allow-boost -d 5"))
+
+(define-key *top-map* (kbd "M-Up") "vol-up")
+(define-key *top-map* (kbd "M-Down") "vol-down")
+
+;; Prefix key átállítása (ha nem akarod a Ctrl+t-t)
+(set-prefix-key (kbd "F13"))  ;
+
+;;; billentyűk
+(define-key *top-map* (kbd "s-Return") "exec kitty")
+(define-key *top-map* (kbd "s-d") "exec rofi -show run")
+(define-key *top-map* (kbd "s-w") "exec firefox-esr")
+(define-key *top-map* (kbd "s-p") "exec discord")
+(define-key *top-map* (kbd "s-P") "exec thunar")
+(define-key *top-map* (kbd "s-E") "exec subl")
+(define-key *top-map* (kbd "s-s") "float-this")
+(define-key *top-map* (kbd "s-S") "unfloat-this")
+(define-key *top-map* (kbd "s-r") "exec kitty -e vifm")
+(define-key *top-map* (kbd "s-F5") "exec maim -s -u -m 1 ~/Képek/$(date '+%Y%m%d.%H%M%S').png")
+
+
+;; Restart (újraindítás)
+(define-key *top-map* (kbd "s-R") "reload++")
+(define-key *top-map* (kbd "s-L")  "loadrc")
+
+(define-key *groups-map* (kbd "d") "gnew-dynamic")
+
+;; Ablak bezárása
+(define-key *top-map* (kbd "s-q") "delete")
+(define-key *top-map* (kbd "s-Q") "remove")
+(define-key *top-map* (kbd "M-f") "fullscreen")
+
+;; Ablakok közti váltás
+(define-key *top-map* (kbd "s-Tab") "next")
+(define-key *top-map* (kbd "M-Tab") "pull-hidden-next")
+
+;; Ablak áthelyezése másik keretbe (tilingnél)
+(define-key *top-map* (kbd "s-S-Right") "exchange-direction right")
+(define-key *top-map* (kbd "s-S-Left")  "exchange-direction left")
+(define-key *top-map* (kbd "s-S-Up")    "exchange-direction up")
+(define-key *top-map* (kbd "s-S-Down")  "exchange-direction down")
+(define-key *root-map* (kbd "x") "colon")
+(define-key *root-map* (kbd "i") "iresize")
+
+
+
+(define-key *top-map* (kbd "s-v") "hsplit-and-focus")
+(define-key *top-map* (kbd "s-h") "vsplit-and-focus")
+(define-key *top-map* (kbd "s-C-o") "remove-and-balance")
+(define-key *top-map* (kbd "s-o") "only")
+(define-key *top-map* (kbd "s-C-b") "remove-and-balance")
+
+
+

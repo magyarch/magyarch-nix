@@ -1,4 +1,4 @@
-####################################################################
+###################################################################
               # Basic herbstluftwm keybinds #
 ####################################################################
 
@@ -8,15 +8,15 @@ super + {_,shift + } Return
 
 # Dmenu2 and rofi(window switcher, application launcher)
 super + {_,shift +} d
-    {dmenu_run, scratch launcher}
+    {rofi_run -r, rofi_run -w}
 
 # Tui filemanager and same command with sudo
 super + {_,shift + } r
     {$TERMINAL -e $FILE, $TERMINAL -e sudo $FILE}
 
 #  Gui editors
-super + {_,shift + } e
-    {wmctrl -a Code || code, wmctrl -a Sublime || subl}
+super + shift + e
+    wmctrl -a Sublime || subl
 
 # News, tui music player
 super + {_,shift + } n
@@ -32,7 +32,7 @@ super + c ; + {q,l,r}
 
 # Default web browser brave and firefox
 super + {_,shift + } w
-    {wmctrl -a Microsoft-edge || $BROWSER, wmctrl -a microsoft-edge-stable || $BROWSER2}
+    {wmctrl -a brave || brave, wmctrl -a microsoft-edge-stable || $BROWSER2}
 
 # Chat client, gui filemanager
 super + {_,shift + } p

@@ -35,19 +35,19 @@ esac
 #     # Launch app into special workspace
 #     hyprctl dispatch exec "[workspace special:$APP_NAME silent] $entry"
 # fi
-# xdotool search --onlyvisible --name "$1" windowunmap \
-#     || xdotool search --name "$1" windowmap \
-#     || $entry &
+xdotool search --onlyvisible --name "$1" windowunmap \
+    || xdotool search --name "$1" windowmap \
+    || $entry &
 
     # Ellenőrizzük, hogy fut-e már az adott ablak
-    if swaymsg -t get_tree | grep -q "\"name\": \"$APP_NAME\""; then
-        # Ha fut, akkor scratchpad toggle
-        swaymsg "[title=\"$APP_NAME\"] scratchpad show"
-    else
-        # Ha nem fut, akkor indítsd el, és küldd scratchpadba
-        $entry &
-        sleep 0.2
-        swaymsg "[title=\"$APP_NAME\"] move scratchpad"
-        swaymsg "[title=\"$APP_NAME\"] scratchpad show"
-    fi    
+    # if swaymsg -t get_tree | grep -q "\"name\": \"$APP_NAME\""; then
+    #     # Ha fut, akkor scratchpad toggle
+    #     swaymsg "[title=\"$APP_NAME\"] scratchpad show"
+    # else
+    #     # Ha nem fut, akkor indítsd el, és küldd scratchpadba
+    #     $entry &
+    #     sleep 0.2
+    #     swaymsg "[title=\"$APP_NAME\"] move scratchpad"
+    #     swaymsg "[title=\"$APP_NAME\"] scratchpad show"
+    # fi    
 

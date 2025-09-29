@@ -8,7 +8,7 @@ super + {_,shift + } Return
 
 # Dmenu2 and rofi(window switcher, application launcher)
 super + {_,shift +} d
-    {dmenu_run, rofi_run -r}
+    {rofi_run -r, dmenu_run}
 
 # Tui filemanager and same command with sudo
 super + {_,shift + } r
@@ -28,23 +28,24 @@ super + {_,shift + } i
 
 # S,R,lock script,calendar app
 super + {_,shift + } c
-    {rofi_run -l, eww open powermenu}
+    {rofi-exit.sh, eww open powermenu}
 
 # Default web browser brave and firefox
 super + {_,shift + } w
-    {wmctrl -a Microsoft-edge || $BROWSER, wmctrl -a microsoft-edge-stable || $BROWSER2}
+    {firefox-esr, wmctrl -a microsoft-edge-stable || $BROWSER2}
 
 # Chat client, gui filemanager
 super + {_,shift + } p
     {wmctrl -a Discord || discord, wmctrl -a Thunar || thunar}
 
 # Hide polybar/Reload polybar
-super + {_,shift + } b
-    {polybar-msg cmd toggle, $HOME/.config/polybar/launch.sh}
+#super + {_,shift + } b
+#   {polybar-msg cmd toggle, $HOME/.config/polybar/launch.sh}
 
 # Volume control
-alt + {Up,Down}
-     {pactl set-sink-volume @DEFAULT_SINK@ +5%, pactl set-sink-volume @DEFAULT_SINK@ -5%}
+alt + {Down,Up}
+     {pamixer -d 5, pamixer -i 5}
+
     #{$HOME/.local/bin/statusbar/volume_brightness.sh volume_up, volume_brightness.sh volume_down}
 # Screencast and Stream to twitch
 super + {_,shift + } KP_Home
@@ -54,6 +55,8 @@ super + {_,shift + } KP_Home
 super +  Escape
     {pkill -USR1 -x sxhkd ;\notify-send "Sxhkd újratölt."}
 
+super + shift + b
+    ~/.local/bin/rofi-bookmarks
 
 ############################################################
                     #Function binds#

@@ -1,8 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx       = 3;        /* border pixel of windows */
-static const unsigned int gappx          = 20;        /* gaps between windows */
+static const unsigned int borderpx       = 2;        /* border pixel of windows */
+static const unsigned int gappx          = 10;        /* gaps between windows */
 static const unsigned int snap           = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 3;   /* systray spacing */
@@ -10,7 +10,7 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray             = 1;     /* 0 means no systray */
 static const int showbar                 = 1;        /* 0 means no bar */
 static const int topbar                  = 1;        /* 0 means bottom bar */
-static const char *fonts[]               = { "JetBrains Mono Nerd:size=11" , "JoyPixels:size=8" , "FontAwesome:size=11:antialias=true:autohint=true" };
+static const char *fonts[]               = { "JetBrains Mono Nerd:size=11" , "JoyPixels:size=9" , "FontAwesome:size=10:antialias=true:autohint=true" };
 static const char dmenufont[]            = "JetBrainsMono Nerd:size=12";
 static const char col_1[]                = "#282a36";  /* background color of bar and border color unfocused windows */
 static const char col_2[]                = "#f8f8f2";  /* foreground color of bar and tags */
@@ -34,15 +34,15 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class           instance    title       tags mask     isfloating   monitor */
+        { "firefox",        NULL,       NULL,       1 << 0,        0,           -1 },
 	{ "qBittorrent",    NULL,       NULL,       1 << 6,        0,           -1 },
 	{ "st-256color",    NULL,       NULL,       0,             1,           -1 },
-	{ "Microsoft-edge", NULL,       NULL,       1 << 0,        0,           -1 },
 	{ "discord",        NULL,       NULL,       1 << 1,        0,          -1 },
 	{ "Thunar",         NULL,       NULL,       1 << 7,        0,          -1 },
 	{ "steam",          NULL,       NULL,       1 << 4,        0,          -1 },
     { "Pavucontrol",    NULL,       NULL,       0,             1,          -1 },
-    { "upc.exe",        NULL,       NULL,       0,             1,          -1 },
-    { "Sublime_text",    NULL,       NULL,      1 << 3,        0,          -1 },
+    { "kitty",        NULL,       NULL,       0,             1,          -1 },
+    { "Sublime_text",    NULL,       NULL,      1 << 2,        0,          -1 },
     { "Lxappearance",        NULL,       NULL,       0,             1,          -1 },
 
 };
@@ -83,14 +83,14 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run -c -g 1 -l 10 ", "-m", dmenumon, "-fn", dmenufont, NULL };
 static const char scratchpadname[] = "scratchpad";
-static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "110x30", "-e", "ncmpcpp", NULL };
-static const char *termcmd[] = { "st", "-g", "110x30", NULL };
+static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", "-e", "ncmpcpp", NULL };
+static const char *termcmd[] = { "st-256color", NULL };
 
 #include "movestack.c"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	/*{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },*/
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_g,      spawn,          {.v = termcmd } },
 	{ ALTMOD,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_Tab,    focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
@@ -101,16 +101,17 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Right,  movestack,      {.i = -1 } },
 	{ MODKEY,                       XK_z,      zoom,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
-	{ ALTMOD,                       XK_t,      setlayout,      {.v = &layouts[0]} },  /* tile */
-	{ ALTMOD,                       XK_a,      setlayout,      {.v = &layouts[1]} },  /* dwindle */
-	{ ALTMOD,                       XK_s,      setlayout,      {.v = &layouts[2]} },  /* spiral */
-	{ ALTMOD,                       XK_f,      setlayout,      {.v = &layouts[3]} },  /* floating */
-	{ ALTMOD,                       XK_m,      setlayout,      {.v = &layouts[4]} },  /* monocle */
-	{ ALTMOD,                       XK_u,      setlayout,      {.v = &layouts[5]} },  /* centeredmaster */
-    { ALTMOD,                       XK_o,      setlayout,      {.v = &layouts[6]} },  /* centeredfloatingmaster */
-    { ALTMOD,                       XK_h,      setlayout,      {.v = &layouts[7]} },  /* horizgrid */
-    { MODKEY,                       XK_g,      togglescratch,  {.v = scratchpadcmd } },
+	{ MODKEY|ControlMask,           XK_m,      setlayout,      {.v = &layouts[0]} },  /* tile */
+	{ MODKEY|ControlMask,           XK_d,      setlayout,      {.v = &layouts[1]} },  /* dwindle */
+	{ MODKEY|ControlMask,           XK_s,      setlayout,      {.v = &layouts[2]} },  /* spiral */
+	{ MODKEY|ControlMask,           XK_f,      setlayout,      {.v = &layouts[3]} },  /* floating */
+	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[4]} },  /* monocle */
+	{ MODKEY|ControlMask,           XK_c,      setlayout,      {.v = &layouts[5]} },  /* centeredmaster */
+        { ALTMOD,                       XK_o,      setlayout,      {.v = &layouts[6]} },  /* centeredfloatingmaster */
+        { MODKEY|ControlMask,           XK_h,      setlayout,      {.v = &layouts[7]} },  /* horizgrid */
+        { MODKEY|ControlMask,           XK_t,      togglescratch,  {.v = scratchpadcmd } },
 	/*{ MODKEY|ShiftMask,             XK_b,      setlayout,      {0} },*/
+    { MODKEY|ShiftMask,             XK_f,     fullscreen,     {0}  },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_s,      togglesticky,   {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
@@ -122,8 +123,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Up,     setgaps,        {.i = -1 } },
 	{ MODKEY,                       XK_Down,   setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_Down,   setgaps,        {.i = 0  } },
-	{ MODKEY,		                XK_space,  cyclelayout,    {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_v,      cyclelayout,    {.i = +1 } },
+	{ MODKEY,		        XK_space,  cyclelayout,    {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_space,  cyclelayout,    {.i = +1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
