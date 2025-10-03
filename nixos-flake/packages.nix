@@ -18,36 +18,33 @@
   # List packages installed in system profile
   environment = {
     systemPackages = with pkgs; [
-# Terminals      
+# Terminals
       alacritty
       kitty
-# -------------------------      
-# Utilities      
+# -------------------------
+# Utilities
       acpi
       bat
       curl
-      corectrl
       eza
       htop
       lm_sensors
-      localsend
       util-linux
       fastfetch
       ntfs3g
       rofi
       unstable.wmctrl
-      dmenu
       dunst
       fzf
+      ripgrep
       exfat
       exfatprogs
       xfce.exo
+      xclip
       st
-      mako
-      fuzzel
-      xwayland-satellite
+     # xwayland-satellite
      # autotiling
-# --------------------------       
+# --------------------------
 # X11/xorg pkg
      #   xorg.libxcb
      # #  xmonadctl
@@ -95,10 +92,10 @@
       mangohud
       mate.mate-polkit
       mesa
-# Browsers      
+# Browsers
       microsoft-edge
       brave
-# -------------------------------      
+# -------------------------------
       mpc
       ncmpcpp
       maim
@@ -112,7 +109,7 @@
       unzip
       pamixer
       pavucontrol
-      polybar
+ #     polybar
  #     pyprland
       protonplus
       picom-pijulius

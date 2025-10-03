@@ -67,7 +67,7 @@
       timeout = 1;
     };
 
-    kernelPackages = pkgs.linuxPackages_xanmod;
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
     kernelParams = [
 #       "amd_pstate=active"
@@ -264,12 +264,10 @@
       syntaxHighlighting.enable = true;
       autosuggestions.enable = true;
       shellAliases = {
-         nrs="cd ~/nixos-flake && nix flake update && sudo nixos-rebuild switch --flake .#nixos-btw";
-         ncu="sudo nix-channel --update";
+         nrs="cd ~/nixos-flake && sudo nixos-rebuild switch --flake .#nixos";
          addunstable="sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos";
          addstable="sudo nix-channel --add https://nixos.org/channels/nixos-25.05 nixos";
-         nixupgrade="sudo nixos-rebuild switch --upgrade-all";
-         nixos-upgrade="cd ~/nixos-flake && nix flake update && sudo nixos-rebuild switch --flake .#nixos-btw";
+         nixos-upgrade="cd ~/nixos-flake && nix flake update && sudo nixos-rebuild switch --flake .#nixos";
          rmoldgen="sudo nix-collect-garbage -d";
          rebuildboot="sudo /run/current-system/bin/switch-to-configuration boot";
         # runheroic="~/Letöltések && appimage-run Heroic-2.9.1.AppImage";
@@ -293,6 +291,7 @@
           x="sxiv -ft *";
           sdn="sudo shutdown -h now";
           sr="sudo reboot";
+          sp="sudo poweroff";
           diff="diff --color=auto";
           q="exit";
           df="df -h";
@@ -352,6 +351,7 @@
    # Nix Package Management
   nix = {
     settings.auto-optimise-store = true;
+    settings.download-buffer-size = 524288000;
     settings.experimental-features = [ "nix-command" "flakes" ];
     gc = {
       automatic = true;
