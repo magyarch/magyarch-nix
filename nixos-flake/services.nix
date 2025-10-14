@@ -3,7 +3,7 @@
 {
     # List services that you want to enable:
     services.xserver = {
-        enable = true;
+#        enable = true;
 	xkb.layout = "hu";
 	xkb.variant = "";
 	dpi = 120;

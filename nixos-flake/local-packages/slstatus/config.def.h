@@ -69,6 +69,6 @@ static const struct arg args[] = {
     { cpu_perc,     " [ 📢 %s ] ",       NULL   },
 	{ run_command, " [ %s ] ",         "~/.local/bin/temp.sh"   },
 	{ datetime,	" [ 📅 %s] ",     "%Y-%m-%d 🕛 %H:%M "   },
-	{ run_command, " 🔊 %s ",            "pamixer --get-volume-human"     },
+	{ volume, " [ 🔊 %s ] ",      NULL     },
 
 };

@@ -1,18 +1,5 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, unstable, lib, ... }:
 
-# let
-#   unstableTarball = fetchTarball {
-#     url    = "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-#     sha256 = "F8WmEwFoHsnix7rt290R0rFXNJiMbClMZyIC/e+HYf0=";
-#   };
-# in {
-#   nixpkgs.config = {
-#     packageOverrides = pkgs: {
-#       unstable = import unstableTarball {
-#         config = config.nixpkgs.config;
-#       };
-#     };
-#   };
 
 {
   # List packages installed in system profile
@@ -25,93 +12,83 @@
 # Utilities
       acpi
       bat
+      bc
       curl
+      curlftpfs
+      lftp
       eza
       htop
       lm_sensors
       util-linux
       fastfetch
       ntfs3g
-      rofi
-      unstable.wmctrl
+#      rofi
+      wmctrl
       dunst
       fzf
       ripgrep
+#      syncthing
       exfat
       exfatprogs
       xfce.exo
       xclip
       st
-     # xwayland-satellite
+    #  xwayland-satellite
      # autotiling
 # --------------------------
 # X11/xorg pkg
      #   xorg.libxcb
-     # #  xmonadctl
-        xdotool
+       xmonadctl
+#        xdotool
      #  xorg.xmodmap
-     # # sbcl
-     #  xorg.xdpyinfo
-     #  xorg.xwininfo
-     #  xorg.libX11
-     #  xorg.libXft
-     #  xorg.libXinerama
-     #  harfbuzz
-     #  gnumake
-     #  pkg-config
       killall
-      bc
       binutils
      # rlwrap
      # ratpoison.contrib
       # dzen2
       discord
-      glib
-      gcc
       eww
       feh
-      ffmpeg
+      ffmpeg-full
       filezilla
-      unstable.firefox-esr
+      firefox-esr
       git
-      geany
-      handbrake
-      jamesdsp
+ #     geany
+      #handbrake
+      #jamesdsp
       imagemagick
       libnotify
       libbsd
       libva
       libva-utils
-      libvdpau-va-gl
+#      libvdpau-va-gl
       vaapiVdpau
       lutris
 #      i3blocks
       lxappearance
-      # lxqt.lxqt-policykit
-      # lxqt.lxqt-openssh-askpass
       mangohud
       mate.mate-polkit
       mesa
 # Browsers
-      microsoft-edge
-      brave
+      #microsoft-edge
+      #brave
 # -------------------------------
       mpc
       ncmpcpp
-      maim
+#      maim
       mpv
       neovim
       networkmanagerapplet
       nix-search-cli
-      #nwg-look
+      nwg-look
       ueberzug
       unrar
       unzip
-      pamixer
+      pulsemixer
       pavucontrol
- #     polybar
- #     pyprland
-      protonplus
+      polybar
+      pyprland
+ #     protonplus
       picom-pijulius
       qbittorrent
       rmpc
@@ -121,26 +98,33 @@
       sxiv
       system-config-printer
       # stalonetray
-      stremio
+#      stremio
       slstatus
       ventoy-full
       # onlyoffice-desktopeditors
       wineWowPackages.full
-      #wineWowPackages.waylandFull
-      # wmctrl
-      #wmenu
+      wineWowPackages.waylandFull
       vifm
       vulkan-tools
       vulkan-loader
-      #xmonadctl
       yt-dlp
       ytarchive
       unstable.heroic
       xwallpaper
-  #     (pkgs.st.overrideAttrs (_ : {
-  #        src = /home/xeoncpu/.config/suckless/st;
-	 # patches = [ ];
-	 # }))
+      xorg.libxcb
+      xdotool
+      xorg.xdpyinfo
+      xorg.xwininfo
+      xorg.libX11
+      xorg.libXft
+      xorg.libXinerama
+      harfbuzz
+      gnumake
+      gcc
+      glib
+      binutils
+      pkg-config
+      rofi
     ];
 
    };

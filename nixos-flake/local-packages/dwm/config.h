@@ -10,7 +10,7 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray             = 1;     /* 0 means no systray */
 static const int showbar                 = 1;        /* 0 means no bar */
 static const int topbar                  = 1;        /* 0 means bottom bar */
-static const char *fonts[]               = { "JetBrains Mono Nerd:size=11" , "JoyPixels:size=9" , "FontAwesome:size=10:antialias=true:autohint=true" };
+static const char *fonts[]               = { "JetBrains Mono Nerd:style=Bold:size=11" , "JoyPixels:size=9" , "FontAwesome:size=10:antialias=true:autohint=true" };
 static const char dmenufont[]            = "JetBrainsMono Nerd:size=12";
 static const char col_1[]                = "#282a36";  /* background color of bar and border color unfocused windows */
 static const char col_2[]                = "#f8f8f2";  /* foreground color of bar and tags */

@@ -8,7 +8,7 @@ dim_inactive_colors.urgent    #aa0000aa
 # Blur effekt
 # értéktartomány: passes (0-10), radius (0-10),
 # noise (0.0-1.0), brightness/contrast/saturation (0.0-2.0)
-blur enable
+blur disable
 blur_passes 3
 blur_radius 7
 blur_noise 0.02
@@ -23,7 +23,7 @@ titlebar_separator disable
 # Shadow effekt
 shadows enable
 shadows_on_csd enable
-shadow_blur_radius 28
+shadow_blur_radius 50
 shadow_color #0000007f
 shadow_offset 0 6
 shadow_inactive_color #00000044
@@ -36,7 +36,7 @@ layer_effects "waybar" {
     corner_radius 8;
 }
 
-layer_effects "mako" {
+layer_effects "wofi" {
     blur enable;
     shadows enable;
     corner_radius 6;

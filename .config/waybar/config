@@ -6,9 +6,9 @@
     "margin-top": 2,
     "modules-left": [
       "clock",
-      "hyprland/window",
-      "custom/weather",
       "sway/window",
+      "custom/weather",
+      "hyprland/window",
       ],
     "modules-center": [
       "hyprland/workspaces",
@@ -50,22 +50,19 @@
       "tooltip": true
     },
     "hyprland/workspaces": {
-      "format": "{icon}",
-      "format-icons": {
-        "1": "󰲠",
-        "2": "󰲢",
-        "3": "󰲤",
-        "4": "󰲦",
-        "5": "󰲨",
-        "6": "󰲪",
-        "7": "󰲬",
-        "8": "󰲮",
-        "9": "󰲰",
-        "10": "󰿬",
-        "-99": "",
-        "active": "",
-        "default": ""
-      }
+        "format": "{name}",
+        "format-icons": {
+            // "1": "",
+            // "2": "",
+            // "3": "",
+            // "4": "",
+            // "5": "",
+            "active": "",
+            "default": ""
+        },
+        "persistent-workspaces": {
+            // "*": 5, // 5 workspaces by default on every monitor
+        }
     },
     "custom/amdgpu": {
     "format": "{}",

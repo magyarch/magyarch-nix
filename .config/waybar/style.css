@@ -7,9 +7,9 @@
 }
  #waybar {
   background: rgba(40, 42, 54, 0.2);
-  border-radius: 12;
+  border-radius: 12px;
   font-size: 13px;
-  font-family: "JetBrainsMono Nerd Font Propo";
+  font-family: JetBrains Mono NF;
   transition-duration: .5s;
   }
 
@@ -40,7 +40,6 @@ button:hover {
 /* #workspaces button.focused { */
 #workspaces button.active {
   color: #6272a4;
-  font-size: 18px;
 }
 
 #custom-powermenu,
@@ -85,7 +84,6 @@ button:hover {
 }
 
 #custom-amdcpu {
-  font-family: "JetBrainsMono Nerd Font";
   color: #6272a4;
   padding-right: 11px;
   margin-right: 8px;

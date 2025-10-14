@@ -5,27 +5,23 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+#    ./hardware-configuration.nix
     ./packages.nix
     ./services.nix
     ./amdgpu.nix
     # ./nvidia.nix
     # ./nvidia-fan-daemon.nix
-    # ./awesomewm.nix
 #    ./appimage.nix
 #    ./bluetooth.nix
     # ./bspwm.nix
-    # ./cinnamon.nix
     # ./i3.nix
-     ./dwm.nix
+#     ./dwm.nix
     ./plex.nix
     # ./ratpoison.nix
     # ./spectrwm.nix
 #     ./hyprland.nix
 #     ./herbst.nix
-    ./wm.nix
-    # ./makemkv.nix
-    # ./redshift.nix
+#    ./wm.nix
     ./ssh.nix
     ./samba.nix
     # ./plex.nix
@@ -33,32 +29,16 @@
     # ./jellyfin.nix
     # ./qtile.nix
  #    ./sddm.nix
-    #./hyprland.nix
+    ./hyprland.nix
  #    ./stump.nix
-    # ./xmonad.nix
-#     ./niri.nix
+ #    ./xmonad.nix
+    # ./niri.nix
   ];
 
   boot = {
     bootspec.enable = true;
 
-    initrd.kernelModules = [ "amdgpu" "tcp_bbr" ];
-
-    kernel.sysctl = {
-      "net.ipv4.tcp_congestion_control" = "bbr";
-      "net.core.default_qdisc" = "fq";
-      "net.ipv4.tcp_fastopen" = 3;
-      "net.ipv4.tcp_low_latency" = 1;
-      "net.core.rmem_max" = 16777216;
-      "net.core.wmem_max" = 16777216;
-      "net.ipv4.tcp_rmem" = "4096 87380 16777216";
-      "net.ipv4.tcp_wmem" = "4096 65536 16777216";
-
-      "kernel.sched_latency_ns" = 10000000;
-      "kernel.sched_min_granularity_ns" = 1000000;
-      "kernel.sched_wakeup_granularity_ns" = 1500000;
-
-    };
+    initrd.kernelModules = [ "amdgpu" ];
 
     loader = {
       systemd-boot.enable = true;
@@ -67,7 +47,7 @@
       timeout = 1;
     };
 
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    kernelPackages = pkgs.linuxPackages_zen;
 
     kernelParams = [
 #       "amd_pstate=active"
@@ -115,14 +95,11 @@
       priority = 100;
     };
 
- # nixpkgs.config.allowUnsupportedSystem = true;
- # nixpkgs.config.allowUnfree = true;
- # nixpkgs.config.nvidia.acceptLicense = true;
-  # Enable networking
   networking.networkmanager = {
         enable = true;
       };
-  networking.hostName="nixos";
+
+networking.hostName="nixos";
 
 
   # Set your time zone.
@@ -165,9 +142,16 @@
   #   Option "OffTime" "0"
   #   '';
 
-  # Enable sound with pipewire.
-  #sound.enable = true;
   security.rtkit.enable = true;
+
+xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk  # GTK alkalmazásokhoz
+    #  pkgs.xdg-desktop-portal-hyprland # Hyprland használata esetén
+    ];
+    config.common.default = "*"; # opcionális
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -194,6 +178,7 @@
      dconf.enable = true;
   #   coolercontrol.enable = true;
      file-roller.enable = true;
+     localsend.enable = true;
      gamemode.enable = true;
      gamescope = {
       enable = true;
@@ -202,7 +187,7 @@
      steam = {
 	           enable = true;
  #            gamescopeSession.enable = true;
-             remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+#             remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
              dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     };
 
@@ -265,6 +250,7 @@
       autosuggestions.enable = true;
       shellAliases = {
          nrs="cd ~/nixos-flake && sudo nixos-rebuild switch --flake .#nixos";
+         cdn="cd ~/nixos-flake";
          addunstable="sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos";
          addstable="sudo nix-channel --add https://nixos.org/channels/nixos-25.05 nixos";
          nixos-upgrade="cd ~/nixos-flake && nix flake update && sudo nixos-rebuild switch --flake .#nixos";
@@ -312,14 +298,6 @@
 
   };
 
-#      # Suckless Tools
-#    nixpkgs.overlays = [
-#      (final: prev: {
-# # #      dwm = prev.dwm.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dwm ;});
-# #       dmenu = prev.dmenu.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dmenu ;});
-#       tabbed = prev.st.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/tabbed ;});
-#      })
-#    ];
 
   fonts.packages = with pkgs; [
     noto-fonts-emoji
@@ -335,9 +313,10 @@
   ];
 
 
-  networking.firewall.allowedTCPPorts = [ 445 139 ];
-  networking.firewall.allowedUDPPorts = [ 137 138 ];
-
+#  networking.firewall.allowedTCPPorts = [ 445 139 ];
+#  networking.firewall.allowedUDPPorts = [ 137 138 ];
+  
+  
    # Automatic Updates
   system.autoUpgrade = {
     enable = true;
@@ -360,17 +339,11 @@
     };
   };
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
 
   nixpkgs.config.permittedInsecurePackages = [
-                "openssl-1.1.1w" "qbittorrent-4.6.4" "ventoy-1.1.05"
+                "openssl-1.1.1w" "ventoy-1.1.05"  
               ];
-  #nix.settings.auto-optimise-store = true;
+  
 
 }

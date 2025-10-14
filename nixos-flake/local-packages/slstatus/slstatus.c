@@ -11,6 +11,21 @@
 #include "slstatus.h"
 #include "util.h"
 
+const char *
+volume(const char *unused)
+{
+    static char volume[16];
+    FILE *fp = popen("pulsemixer --get-volume | awk '{print $1\"%\"}'", "r");
+    if (fp == NULL) {
+        snprintf(volume, sizeof(volume), "n/a");
+        return volume;
+    }
+    if (fgets(volume, sizeof(volume), fp) == NULL) {
+        snprintf(volume, sizeof(volume), "n/a");
+    }
+    pclose(fp);
+    return volume;
+}
 struct arg {
 	const char *(*func)();
 	const char *fmt;

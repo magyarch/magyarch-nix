@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+FOLDER=/mnt/Movies/
+
+openvid() {
+  # Rekurzívan megkeresi az összes videófájlt, kihagyva a 'sample' fájlokat
+  mapfile -t files < <(find "$FOLDER" -type f \
+    \( -iname "*.mp4" -o -iname "*.mkv" -o -iname "*.webm" -o -iname "*.avi" \) \
+    ! -iname "*sample*")
+
+  # Csak a fájlneveket küldjük a wofi-nak
+  filenames=()
+  for f in "${files[@]}"; do
+    filenames+=("$(basename "$f")")
+  done
+
+  # wofi dmenu mód
+  selected="$(printf '%s\n' "${filenames[@]}" | wofi --dmenu --prompt "Select video:")" || exit 0
+
+  # A kiválasztott fájl teljes elérési útját megkeressük
+  for f in "${files[@]}"; do
+    if [[ "$(basename "$f")" == "$selected" ]]; then
+      mpv "$f" >/dev/null 2>&1 &
+      break
+    fi
+  done
+}
+
+openvid

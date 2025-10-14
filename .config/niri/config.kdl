@@ -21,6 +21,7 @@ input {
 
     //    focus-follows-mouse // Automatically focus windows under the mouse pointer
    // workspace-auto-back-and-forth // Enable workspace back & forth switching
+       focus-follows-mouse max-scroll-amount="0%"
 }
 
 // ────────────── Output Configuration ──────────────
@@ -29,8 +30,8 @@ input {
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
 
  output "DP-1" {
-    mode "1920x1080@60.000" // Set resolution and refresh rate
-    scale 1 // No scaling (use 2 for HiDPI)
+    mode "2560x1440@119.998" // Set resolution and refresh rate
+    scale 1.2 // No scaling (use 2 for HiDPI)
 }
 
 // ────────────── Keybindings ──────────────
@@ -41,12 +42,22 @@ binds {
 
     // ─── Applications ───
     MOD+RETURN                          hotkey-overlay-title="Open Terminal: Alacritty" { spawn "alacritty"; }
-    MOD+D                     hotkey-overlay-title="Open App Launcher: fuzzel" { spawn "fuzzel"; }
-    MOD+W                               hotkey-overlay-title="Open Browser: firefox" { spawn "firefox"; }
-   // MOD+ALT+L                           hotkey-overlay-title="Lock Screen: swaylock" { spawn "swaylock"; }
+    MOD+D                               hotkey-overlay-title="Open App Launcher: wofi" { spawn "wofi" "--show" "drun" "--allow-images"; }
+    MOD+W                               hotkey-overlay-title="Open Browser: firefox" { spawn "firefox-esr"; }
+    MOD+R                               hotkey-overlay-title="Open Tui FileManager: vifm" { spawn "alacritty" "-e" "vifm"; }
+    MOD+SHIFT+M                         hotkey-overlay-title="Open Music Manager: rmpc" { spawn-sh "pkill kitty || kitty -e rmpc"; }
+    MOD+SHIFT+E                         hotkey-overlay-title="Open Editor: sublime" { spawn "sublime_text"; } 
+    MOD+SHIFT+B                         hotkey-overlay-title="Open App Launcher: wofi" { spawn-sh "rofi-bookmarks"; }
     
     // Please choose your own file manager
     MOD+SHIFT+P                             hotkey-overlay-title="File Manager: Thunar" { spawn "thunar"; }
+     Mod+Shift+H  { consume-or-expel-window-left; }
+    Mod+Shift+L { consume-or-expel-window-right; }
+    
+    // Consume one window from the right to the bottom of the focused column.
+    Mod+SHIFT+K  { consume-window-into-column; }
+    // Expel the bottom window from the focused column to the right.
+    Mod+SHIFT+J { expel-window-from-column; }
 
     // ─── Audio Controls ───
     XF86AUDIORAISEVOLUME                allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
@@ -115,23 +126,23 @@ binds {
    // MOD+TAB                             { focus-workspace-previous; }
 
     // ─── Layout Controls ───
-    MOD+M                          { expand-column-to-available-width; }
+    MOD+M                               { expand-column-to-available-width; }
     MOD+C                               { center-column; }
-    MOD+SHIFT+SPACE                          { center-visible-columns; }
-    MOD+SHIFT+RIGHT                           { set-column-width "-10%"; }
-    MOD+SHIFT+LEFT                           { set-column-width "+10%"; }
-    MOD+SHIFT+UP                     { set-window-height "+10%"; }
-    MOD+SHIFT+DOWN                     { set-window-height "-10%"; }
+    MOD+SHIFT+SPACE                     { center-visible-columns; }
+    MOD+SHIFT+RIGHT                     { set-column-width "-10%"; }
+    MOD+SHIFT+LEFT                      { set-column-width "+10%"; }
+    MOD+SHIFT+UP                        { set-window-height "+10%"; }
+    MOD+SHIFT+DOWN                      { set-window-height "-10%"; }
 
     // ─── Modes ───
     MOD+T                               { toggle-window-floating; }
     MOD+F                               { fullscreen-window; }
-    MOD+CTRL+W                          { toggle-column-tabbed-display; }
+    // MOD+CTRL+W                          { toggle-column-tabbed-display; }
 
     // ─── Screenshots ───
-    CTRL+SHIFT+1                        { screenshot; }
-    CTRL+SHIFT+2                        { screenshot-screen; }
-    CTRL+SHIFT+3                        { screenshot-window; }
+    MOD+F4                        { screenshot; }
+    MOD+F5                        { screenshot-screen; }
+    // CTRL+SHIFT+3                        { screenshot-window; }
 
     // ─── Emergency Escape Key ───
     // Use this when a fullscreen app blocks your keybinds.
@@ -149,7 +160,7 @@ binds {
 
     spawn-at-startup "/usr/lib/polkit-gnome-authentication-agent-1" "&" // Polkit
     spawn-at-startup "xwayland-satellite" // XWayland support
-    spawn-at-startup "swww-daemon" "&"// Wallpaper daemon
+    spawn-at-startup "swww-daemon" // Wallpaper daemon
     spawn-at-startup "swww img" "~/.local/bin/wallpapers/Future/xy.png" // Set wallpaper
   //  spawn-at-startup "qs" // Launch Quickshell
     spawn-at-startup "waybar" // Launch Vesktop
@@ -225,10 +236,14 @@ binds {
 
 // ────────────── Named Workspaces ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
-
     workspace "1"
     workspace "2"
     workspace "3"
+    workspace "4"
+    workspace "5"
+    workspace "6"
+    workspace "7"
+    workspace "8"
 
 // ────────────── Window Rules ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
@@ -239,13 +254,34 @@ binds {
         open-maximized true
         match is-focused=true
     }
+    
+    window-rule {
+        match app-id="Alacritty$"
+    //    open-maximized true
+        match is-focused=true
+    }
+    
+    // Open the Firefox picture-in-picture window as floating with 480×270 size.
+    window-rule {
+        match app-id="pavucontrol$" 
+        open-floating true
+        default-column-width { fixed 1280; }
+        default-window-height { fixed 680; }
+}
 
     window-rule {
-        match app-id="Firefox$"
+        match app-id="firefox$"
         open-on-workspace "1"
-        open-maximized true
+        open-maximized false
         match is-focused=true
       //  match is-active-in-column=true
+    }
+
+    window-rule {
+        match app-id="kitty$"
+        open-floating true
+        default-column-width { proportion 0.60; }
+        default-window-height { fixed 700; } 
     }
 
     window-rule {

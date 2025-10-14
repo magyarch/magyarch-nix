@@ -1,0 +1,12 @@
+--- 🌐 Weboldalak ---
+xdg-open https://nixos.org
+xdg-open https://search.nixos.org/packages
+xdg-open https://github.com/NixOS/nixpkgs
+xdg-open https://chat.openai.com
+--- 🖥 Kitty parancsok ---
+kitty nvim ~/nixos-flake/configuration.nix
+kitty nvim ~/nixos-flake/packages.nix
+kitty nvim ~/.config/rofi/bookmarks.txt
+--- Filmek (rekurzívan, mpv) ---
+bash -c 'mpv --fs "$(find /mnt/Movies -type f \( -iname "*.mkv" -o -iname "*.mp4" -o -iname "*.avi" \) | rofi -dmenu -i -p "Válassz filmet")"'
+

@@ -150,7 +150,7 @@ myScratchPads = [
 --myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 --myWorkspaces = clickable . (map xmobarEscape) $ ["\61612","\61899","\61947","\61635","\61502","\61501","\61705","\61564","\62150","\61872"]
   --   where
-    --           clickable l = [ "<action=xdotool key super+" ++ show (n) ++ ">" ++ ws ++ "</action>" | (i,ws) <- zip [1..9] l, let n = i ]    
+    --           clickable l = [ "<action=xdotool key super+" ++ show (n) ++ ">" ++ ws ++ "</action>" | (i,ws) <- zip [1..9] l, let n = i ]
 
 myWorkspaces    = clickable $ ["\61612","\61899","\61947","\61635","\61502","\61501","\61705","\61564","\62150","\61872"]
 
@@ -200,7 +200,7 @@ white     = "#c3cdc8"
 
 ------------------------------------------------------------------------
 
-myEventHook = serverModeEventHook <+> serverModeEventHookCmd <+> serverModeEventHookF "XMONAD_PRINT" (io . putStrLn) <+> minimizeEventHook <+> handleEventHook def 
+myEventHook = serverModeEventHook <+> serverModeEventHookCmd <+> serverModeEventHookF "XMONAD_PRINT" (io . putStrLn) <+> minimizeEventHook <+> handleEventHook def
 
 --docksEventHook <+> fullscreenEventHook
 ------------------------------------------------------------------------
@@ -255,7 +255,7 @@ dbusOutput dbus str = do
 myStartupHook = do
      spawnOnce "(sleep 1s && ~/.config/polybar/launch.sh) &"
      spawnOnce "sxhkd -c ~/.config/xmonad/sxhkdrc &"
-     spawnOnce "compfy --config $HOME/.config/compfy.conf &"
+     spawnOnce "pkill setbg && ~/.local/bin/tools/setbg &"
 ------------------------------------------------------------------------
 -- Command to launch the bar.
 --myBar = "xmobar"

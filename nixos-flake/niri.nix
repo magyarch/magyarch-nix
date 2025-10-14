@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 
-let
-  pkgsUnstable = import <nixos-unstable> { config = config.nixpkgs.config; };
-in
+#let
+#  pkgsUnstable = import <nixos-unstable> { config = config.nixpkgs.config; };
+#in
  
  {
   programs.niri = {
@@ -28,6 +28,10 @@ in
 		wlogout
 		waybar
 #		meson
+                swww
+		fuzzel
+		wofi
+		nwg-look
 		];
 
     

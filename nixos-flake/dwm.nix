@@ -5,7 +5,8 @@
 { config, pkgs, ... }:
 
 {
-
+  
+  services.xserver.enable = true;
   services.displayManager.defaultSession = "none+dwm";
   services.xserver.windowManager.dwm = {
                   enable = true;
@@ -57,7 +58,10 @@
       xorg.libXinerama
       harfbuzz
       gnumake
+      gcc
+      binutils
       pkg-config
+      rofi
 #      lukesmithxyz-st
       ];
              };

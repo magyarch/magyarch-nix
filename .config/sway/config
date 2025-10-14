@@ -9,9 +9,14 @@ input * {
  #   xkb_options caps:swapescape
 }
 
+#set $env MOZ_ENABLE_WAYLAND 1
+#exec_always {
+#    export MOZ_ENABLE_WAYLAND=1
+#}
+
 # Gaps ####################################################################################
 
-gaps outer 6
+gaps outer 8
 gaps inner 8
 
 set $mod Mod4
@@ -136,7 +141,7 @@ bindsym $mod+Shift+Return exec scratch scratchpad
 bindsym $mod+d exec wofi --show drun
 bindsym $mod+Shift+e exec subl
 bindsym $mod+Shift+p exec thunar
-bindsym $mod+p exec discord
+bindsym $mod+p exec discord --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto
 bindsym $mod+w exec firefox
 bindsym $mod+F5 exec grim -g "$(slurp)" ~/Képek/screenshot.png
 bindsym $mod+q kill

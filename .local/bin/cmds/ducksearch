@@ -1,21 +1,40 @@
-#!/bin/sh
-# Gives a dmenu prompt to search DuckDuckGo.
-# Without input, will open DuckDuckGo.com.
-# URLs will be directly handed to the browser.
-# Anything else, it search it.
-browser=${BROWSER:-brave}
 
-pgrep -x dmenu && exit
+#!/usr/bin/env bash
+# Simple DuckDuckGo search or URL opener for Wayland (Wofi + Hyprland)
+# Works on NixOS / Hyprland
 
-choice=$(echo "🦆" | dmenu -p "Search DuckDuckGo:") || exit 1
+browser=${BROWSER:-firefox-esr}
 
-if [ "$choice" = "🦆"  ]; then
-    $browser "https://duckduckgo.com"
-else
-    if echo "$choice" | grep "^(http:\/\/|https:\/\/)?[a-zA-Z0-9]+\.[a-zA-Z]+(/)?.*$"; then
-        $browser "$choice"
-    else
-        $browser "https://duckduckgo.com/?q=$choice&t=ffab&atb=v1-1"
-    fi
+# PATH biztosítása NixOS alatt
+export PATH=$PATH:/run/current-system/sw/bin:/usr/bin:/bin
+
+# Keresd meg a böngésző teljes útvonalát
+browser_path="$(command -v "$browser" || true)"
+if [ -z "$browser_path" ]; then
+    notify-send "DuckDuckGo" "⚠️ Böngésző nem található: $browser"
+    exit 1
 fi
-
+
+# Ne induljon, ha már fut a wofi
+if pgrep -x wofi >/dev/null; then
+    exit 0
+fi
+
+choice=$(echo "🦆" | wofi --dmenu -p "Search DuckDuckGo:") || exit 1
+[ -z "$choice" ] && exit 0
+
+if [ "$choice" = "🦆" ]; then
+    "$browser_path" "https://duckduckgo.com" &
+    notify-send "DuckDuckGo" "Megnyitva a kezdőlap"
+    exit 0
+fi
+
+# URL ellenőrzés
+if echo "$choice" | grep -Eq '^(https?://)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(/.*)?$'; then
+    "$browser_path" "$choice" &
+    notify-send "DuckDuckGo" "Megnyitva: $choice"
+else
+    query=$(printf '%s' "$choice" | sed 's/ /+/g')
+    "$browser_path" "https://duckduckgo.com/?q=$query&t=ffab&atb=v1-1" &
+    notify-send "DuckDuckGo" "Keresés: $choice"
+fi
