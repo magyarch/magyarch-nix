@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Ez a script fut, ha duplakattintasz egy képre thumbnail módban
+
+echo "$1"
+

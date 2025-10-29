@@ -2,6 +2,7 @@
 show=drun
 location=top           
 width=600
+height=400
 lines=11
 columns=1              
 dynamic_lines=false

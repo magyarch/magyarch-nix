@@ -29,10 +29,11 @@
     # ./jellyfin.nix
     # ./qtile.nix
  #    ./sddm.nix
-    ./hyprland.nix
+#    ./hyprland.nix
  #    ./stump.nix
+      ./mango.nix
  #    ./xmonad.nix
-    # ./niri.nix
+#     ./niri.nix
   ];
 
   boot = {
@@ -55,7 +56,7 @@
 #      "amdgpu.async_gfx_ring=1"
 #      "amdgpu.dc=1"
       "nmi_watchdog=0"
-#      "split_lock_mitigate=0"
+      "split_lock_mitigate=0"
       # "quiet"
       "splash"
       "vga=current"
@@ -342,7 +343,7 @@ xdg.portal = {
   system.stateVersion = "25.05"; # Did you read the comment?
 
   nixpkgs.config.permittedInsecurePackages = [
-                "openssl-1.1.1w" "ventoy-1.1.05"  
+                "openssl-1.1.1w" "ventoy-1.1.05" "mbedtls-2.28.10"
               ];
   
 

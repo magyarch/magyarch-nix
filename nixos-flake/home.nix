@@ -10,6 +10,7 @@
        brave
        maim
        stremio
+       xorg.xrdb
   ];
 }
 

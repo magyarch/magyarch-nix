@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, lib, ... }:
+{ config, pkgs, unstable, ... }:
 
 
 {
@@ -21,11 +21,11 @@
       lm_sensors
       util-linux
       fastfetch
+      fzf
       ntfs3g
 #      rofi
       wmctrl
       dunst
-      fzf
       ripgrep
 #      syncthing
       exfat
@@ -33,7 +33,7 @@
       xfce.exo
       xclip
       st
-    #  xwayland-satellite
+      xwayland-satellite
      # autotiling
 # --------------------------
 # X11/xorg pkg
@@ -53,7 +53,7 @@
       filezilla
       firefox-esr
       git
- #     geany
+      geany
       #handbrake
       #jamesdsp
       imagemagick
@@ -61,7 +61,7 @@
       libbsd
       libva
       libva-utils
-#      libvdpau-va-gl
+      libvdpau-va-gl
       vaapiVdpau
       lutris
 #      i3blocks
@@ -70,7 +70,7 @@
       mate.mate-polkit
       mesa
 # Browsers
-      #microsoft-edge
+      microsoft-edge
       #brave
 # -------------------------------
       mpc
@@ -95,7 +95,7 @@
       sublime3
       #spectrwm
       sxhkd
-      sxiv
+      unstable.nsxiv
       system-config-printer
       # stalonetray
 #      stremio
@@ -118,6 +118,7 @@
       xorg.libX11
       xorg.libXft
       xorg.libXinerama
+      qutebrowser
       harfbuzz
       gnumake
       gcc

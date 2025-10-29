@@ -3,16 +3,11 @@
 #![enable(unwrap_variant_newtypes)]
 (
     address: "127.0.0.1:6600",
-    cache_dir: None,
-    lyrics_dir: None,
     password: None,
     theme: "catppuccin_mocha",
-
-
-
-
-
-    on_song_change: ["~/.config/rmpc/increment_play_count"],
+	enable_config_hot_reload: true,
+    cache_dir: None,
+    on_song_change: None,
     volume_step: 5,
     max_fps: 30,
     scrolloff: 0,
@@ -20,12 +15,11 @@
     enable_mouse: true,
     status_update_interval_ms: 1000,
     select_current_song_on_change: false,
-    browser_column_widths: [20, 38, 42],
     album_art: (
         method: Auto,
-        max_size_px: (width: 900, height: 900),
+        max_size_px: (width: 500, height: 500),
         disabled_protocols: ["http://", "https://"],
-        vertical_align: Top,
+        vertical_align: Center,
         horizontal_align: Center,
     ),
     keybinds: (
@@ -36,12 +30,10 @@
             ".":       VolumeUp,
             "<Tab>":   NextTab,
             "<S-Tab>": PreviousTab,
-            "1":       SwitchToTab("Queue"),
-            "2":       SwitchToTab("Artists"),
-            "3":       SwitchToTab("Albums"),
-            "4":       SwitchToTab("Search"),
-            "5":       SwitchToTab("Directories"),
-            "6":       SwitchToTab("Lyrics"),
+            "1":       SwitchToTab("Playing"),
+            "4":       SwitchToTab("Dir"),
+            "3":       SwitchToTab("Lists"),
+            "2":       SwitchToTab("Find"),
             "q":       Quit,
             ">":       NextTrack,
             "p":       TogglePause,
@@ -105,12 +97,11 @@
         mode: Contains,
         tags: [
             (value: "any",         label: "Any Tag"),
-            (value: "artist",      label: "Artist"),
-            (value: "album",       label: "Album"),
             (value: "title",       label: "Title"),
+            (value: "album",       label: "Album"),
+            (value: "artist",      label: "Artist"),
             (value: "filename",    label: "Filename"),
             (value: "genre",       label: "Genre"),
-            (value: "albumartist", label: "Featured"),
         ],
     ),
     artists: (
@@ -119,35 +110,23 @@
     ),
     tabs: [
         (
-            name: "Queue",
+            name: "Playing",
             pane: Split(
                 direction: Horizontal,
-                panes: [(size: "20%", pane: Pane(AlbumArt)), (size: "80%", pane: Pane(Queue))],
+                panes: [(size: "65%", pane: Pane(Queue)), (size: "35%", pane: Pane(AlbumArt))],
             ),
         ),
         (
-            name: "Artists",
-            pane: Pane(Artists),
-        ),
-        (
-            name: "Albums",
-            pane: Pane(Albums),
-        ),
-        (
-            name: "Search",
+            name: "Find",
             pane: Pane(Search),
         ),
-        (
-            name: "Directories",
-            pane: Pane(Directories),
+       (
+            name: "Lists",
+            pane: Pane(Playlists),
         ),
-        (
-            name: "Lyrics",
-            pane: Split(
-                direction: Vertical,
-                panes: [(size: "25%", pane: Pane(AlbumArt)), (size: "70%", pane: Pane(Lyrics), vertical_align: Bottom)],
-            ),
+       (
+            name: "Dir",
+            pane: Pane(Directories),
         ),
     ],
 )
-
