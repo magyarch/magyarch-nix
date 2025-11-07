@@ -23,17 +23,14 @@
       fastfetch
       fzf
       ntfs3g
-#      rofi
-      wmctrl
-      dunst
       ripgrep
 #      syncthing
       exfat
       exfatprogs
       xfce.exo
       xclip
-      st
-      xwayland-satellite
+     # st
+#      xwayland-satellite
      # autotiling
 # --------------------------
 # X11/xorg pkg
@@ -46,14 +43,10 @@
      # rlwrap
      # ratpoison.contrib
       # dzen2
-      discord
       eww
-      feh
+    #  feh
       ffmpeg-full
-      filezilla
-      firefox-esr
       git
-      geany
       #handbrake
       #jamesdsp
       imagemagick
@@ -63,43 +56,24 @@
       libva-utils
       libvdpau-va-gl
       vaapiVdpau
-      lutris
 #      i3blocks
-      lxappearance
-      mangohud
       mate.mate-polkit
       mesa
-# Browsers
-      microsoft-edge
-      #brave
 # -------------------------------
-      mpc
-      ncmpcpp
-#      maim
-      mpv
       neovim
       networkmanagerapplet
       nix-search-cli
       nwg-look
-      ueberzug
+      ueberzugpp
       unrar
       unzip
-      pulsemixer
-      pavucontrol
-      polybar
+  #    polybar
       pyprland
- #     protonplus
-      picom-pijulius
-      qbittorrent
-      rmpc
-      sublime3
-      #spectrwm
-      sxhkd
-      unstable.nsxiv
+      imagemagick
       system-config-printer
       # stalonetray
 #      stremio
-      slstatus
+#      slstatus
       ventoy-full
       # onlyoffice-desktopeditors
       wineWowPackages.full
@@ -109,23 +83,14 @@
       vulkan-loader
       yt-dlp
       ytarchive
-      unstable.heroic
-      xwallpaper
-      xorg.libxcb
-      xdotool
-      xorg.xdpyinfo
-      xorg.xwininfo
-      xorg.libX11
-      xorg.libXft
-      xorg.libXinerama
-      qutebrowser
-      harfbuzz
-      gnumake
-      gcc
-      glib
-      binutils
-      pkg-config
-      rofi
+ #     xorg.libxcb
+ #     xdotool
+ #     xorg.xdpyinfo
+ #     xorg.xwininfo
+ #     xorg.libX11
+ #     xorg.libXft
+ #     xorg.libXinerama
+       xorg.xrdb
     ];
 
    };

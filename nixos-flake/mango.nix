@@ -4,8 +4,8 @@
   programs.mango.enable = true;
 
   environment.systemPackages = with pkgs; [
-    foot
-    wmenu
+#    foot
+#    wmenu
     wl-clipboard
     grim
     slurp
@@ -14,7 +14,7 @@
     wofi
     wlogout
     waybar
-    firefox
+ #   firefox
   ];
   
   environment.localBinInPath = true;

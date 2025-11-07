@@ -2,7 +2,7 @@
 
 BOOKFILE="$HOME/.config/rofi/bookmarks.txt"
 
-choice=$(wofi --dmenu -p "Bookmarks" --lines=15 --allow-markup=true --height=400  < "$BOOKFILE")
+choice=$(rofi -dmenu -p "Bookmarks" --lines=15 --allow-markup=true --height=400  < "$BOOKFILE")
 [ -z "$choice" ] && exit 0
 
 # Ha a sor parancs szóközt tartalmaz (pl. "kitty nvim ..."),

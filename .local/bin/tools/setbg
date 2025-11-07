@@ -1,5 +1,24 @@
 #!/usr/bin/env bash
-# Sets the background. If given an argument, will set file as background.
-[ ! -z "$1" ] && cp "$1" ~/.config/wall.png && notify-send -i "$HOME/.config/wall.png" "Wallpaper changed."
-swww img ~/.config/wall.png
-#xwallpaper --zoom ~/.config/wall.png
+
+# Ha kap paramétert (képfájlt), másoljuk el és jelezzük
+if [ -n "$1" ]; then
+    cp "$1" "$HOME/.config/wall.png"
+    notify-send -i "$HOME/.config/wall.png" "Háttérkép frissítve" "$(basename "$1")"
+fi
+
+# Alapértelmezett kép, ha nincs paraméter
+WALL="${HOME}/.config/wall.png"
+[ ! -f "$WALL" ] && WALL="${HOME}/.local/bin/wallpapers/default.jpg"
+
+# Környezet felismerése
+if [ "$XDG_SESSION_TYPE" = "wayland" ] || [ -n "$WAYLAND_DISPLAY" ]; then
+    echo "Wayland észlelve → swww használata"
+    swww img "$WALL" --transition-type random --transition-duration 1
+elif [ "$XDG_SESSION_TYPE" = "x11" ] || [ -n "$DISPLAY" ]; then
+    echo "X11 észlelve → xwallpaper használata"
+    xwallpaper --zoom "$WALL"
+else
+    echo "Nem sikerült felismerni az ablakkezelőt."
+    exit 1
+fi
+

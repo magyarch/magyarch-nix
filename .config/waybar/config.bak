@@ -8,10 +8,10 @@
       "clock",
       "sway/window",
       "custom/weather",
-      "niri/window",
+      "hyprland/window",
       ],
     "modules-center": [
-      "niri/workspaces",
+      "hyprland/workspaces",
       "sway/workspaces",
       ],
     "modules-right": [
@@ -27,7 +27,7 @@
       "icon-size": 16,
       "spacing": 10
     },
-    "niri/window": {
+    "hyprland/window": {
       "format": "{}",
       "rewrite": {
           "(\\d\\. )?(.*) - Chromium": "<span color=\"#4285F4\"></span>  $2 ",
@@ -49,7 +49,7 @@
       "max-length": 8,
       "tooltip": true
     },
-    "niri/workspaces": {
+    "hyprland/workspaces": {
       "format": "{icon}",
       "format-icons": {
         "1": "󰲠",

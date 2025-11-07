@@ -7,11 +7,25 @@ list() {
   find "$1" -type f | grep -Ei "\.($(echo "$exts" | sed 's/ /|/g'))$"
 }
 
+# háttérkép beállítása Wayland vagy X11 szerint
 set_wall() {
   sel="$1"
   [ -n "$sel" ] || exit 1
-  pkill swaybg 2>/dev/null
-  swaybg -i "$sel" -m fill &
+
+  if [ -n "$WAYLAND_DISPLAY" ] && command -v swaybg >/dev/null 2>&1; then
+    pkill swaybg 2>/dev/null
+    swaybg -i "$sel" -m fill &
+  elif [ -n "$DISPLAY" ] && command -v xwallpaper >/dev/null 2>&1; then
+    xwallpaper --zoom "$sel"
+  else
+    # fallback: ha Wayland de nincs swaybg, próbáljuk xwallpapert
+    if command -v xwallpaper >/dev/null 2>&1; then
+      xwallpaper --zoom "$sel"
+    else
+      notify-send "Nincs háttérkép-kezelő!" "Telepítsd a swaybg vagy xwallpaper programot."
+      exit 1
+    fi
+  fi
 }
 
 # wofi mód

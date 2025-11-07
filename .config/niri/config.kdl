@@ -6,18 +6,14 @@
 
 input {
     keyboard {
-        repeat-delay 350
-        repeat-rate 30
+        repeat-delay 250
+        repeat-rate 25
         xkb {
             layout "hu" // Use the German keyboard layout
         }
         numlock // Enable numlock on startup
     }
 
-    touchpad {
-        tap // Enable tap-to-click
-        natural-scroll // Enable natural (macOS-style) scrolling
-    }
 
     //    focus-follows-mouse // Automatically focus windows under the mouse pointer
    // workspace-auto-back-and-forth // Enable workspace back & forth switching
@@ -31,7 +27,9 @@ input {
 
  output "DP-1" {
     mode "2560x1440@119.998" // Set resolution and refresh rate
-    scale 1.2 // No scaling (use 2 for HiDPI)
+    scale 1.26 // No scaling (use 2 for HiDPI)
+    transform "normal"
+    position x=0 y=0
 }
 
 // ────────────── Keybindings ──────────────
@@ -48,9 +46,8 @@ binds {
     MOD+SHIFT+M                         hotkey-overlay-title="Open Music Manager: rmpc" { spawn-sh "pkill kitty || kitty -e rmpc"; }
     MOD+SHIFT+E                         hotkey-overlay-title="Open Editor: sublime" { spawn "sublime_text"; } 
     MOD+SHIFT+B                         hotkey-overlay-title="Open App Launcher: wofi" { spawn-sh "rofi-bookmarks"; }
+    MOD+SHIFT+P                         hotkey-overlay-title="File Manager: Thunar" { spawn "thunar"; }
     
-    // Please choose your own file manager
-    MOD+SHIFT+P                             hotkey-overlay-title="File Manager: Thunar" { spawn "thunar"; }
     Mod+Shift+H  { consume-or-expel-window-left; }
     Mod+Shift+L { consume-or-expel-window-right; }
     
@@ -113,20 +110,20 @@ binds {
     MOD+8                               { focus-workspace 8; }
     MOD+9                               { focus-workspace 9; }
 
-    MOD+CTRL+1                          { move-column-to-workspace 1; }
-    MOD+CTRL+2                          { move-column-to-workspace 2; }
-    MOD+CTRL+3                          { move-column-to-workspace 3; }
-    MOD+CTRL+4                          { move-column-to-workspace 4; }
-    MOD+CTRL+5                          { move-column-to-workspace 5; }
-    MOD+CTRL+6                          { move-column-to-workspace 6; }
-    MOD+CTRL+7                          { move-column-to-workspace 7; }
-    MOD+CTRL+8                          { move-column-to-workspace 8; }
-    MOD+CTRL+9                          { move-column-to-workspace 9; }
+    MOD+SHIFT+1                          { move-column-to-workspace 1; }
+    MOD+SHIFT+2                          { move-column-to-workspace 2; }
+    MOD+SHIFT+3                          { move-column-to-workspace 3; }
+    MOD+SHIFT+4                          { move-column-to-workspace 4; }
+    MOD+SHIFT+5                          { move-column-to-workspace 5; }
+    MOD+SHIFT+6                          { move-column-to-workspace 6; }
+    MOD+SHIFT+7                          { move-column-to-workspace 7; }
+    MOD+SHIFT+8                          { move-column-to-workspace 8; }
+    MOD+SHIFT+9                          { move-column-to-workspace 9; }
 
    // MOD+TAB                             { focus-workspace-previous; }
 
     // ─── Layout Controls ───
-    MOD+M                               { expand-column-to-available-width; }
+    MOD+F                               { expand-column-to-available-width; }
     MOD+C                               { center-column; }
     MOD+SHIFT+SPACE                     { center-visible-columns; }
     MOD+SHIFT+RIGHT                     { set-column-width "-10%"; }
@@ -136,12 +133,12 @@ binds {
 
     // ─── Modes ───
     MOD+T                               { toggle-window-floating; }
-    MOD+F                               { fullscreen-window; }
+    MOD+SHIFT+F                         { fullscreen-window; }
     // MOD+CTRL+W                          { toggle-column-tabbed-display; }
 
     // ─── Screenshots ───
-    MOD+F4                        { screenshot; }
-    MOD+F5                        { screenshot-screen; }
+    MOD+F4                             { screenshot; }
+    MOD+F5                             { screenshot-screen; }
     // CTRL+SHIFT+3                        { screenshot-window; }
 
     // ─── Emergency Escape Key ───
@@ -162,12 +159,10 @@ binds {
     spawn-at-startup "xwayland-satellite" // XWayland support
     spawn-at-startup "swww-daemon" // Wallpaper daemon
     spawn-at-startup "swww img" "~/.local/bin/wallpapers/Future/xy.png" // Set wallpaper
-  //  spawn-at-startup "qs" // Launch Quickshell
-    spawn-at-startup "waybar" // Launch Vesktop
+    spawn-at-startup "mako"
+    spawn-at-startup "~/.config/niri/launchwaybar.sh" 
 
     prefer-no-csd // Disable program decorations
-//    screenshot-path null // Disable screenshot saving
-
 // ────────────── Layout Settings ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 
@@ -250,18 +245,25 @@ binds {
 
 // ────────────── Window Rules ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
-
+    window-rule {
+    match app-id=r#"^firefox$"#
+    default-column-width { proportion 0.9;}
+    open-maximized true
+    open-on-workspace "1"
+}
+    
+    
     window-rule {
         match app-id="discord$"
         open-on-workspace "2"
         open-maximized true
-        match is-focused=true
+        default-column-width { proportion 0.9; }
     }
     
     window-rule {
         match app-id="Alacritty$"
-    //    open-maximized true
-        match is-focused=true
+        default-column-width { proportion 0.5; }
+        open-maximized true
     }
     
     // Open the Firefox picture-in-picture window as floating with 480×270 size.
@@ -271,14 +273,6 @@ binds {
         default-column-width { fixed 1280; }
         default-window-height { fixed 680; }
 }
-
-    window-rule {
-        match app-id="firefox$"
-        open-on-workspace "1"
-        open-maximized  true
-        match is-focused=true
-      //  match is-active-in-column=true
-    }
 
     window-rule {
         match app-id="kitty$"

@@ -32,7 +32,7 @@ super + {_,shift + } c
 
 # Default web browser brave and firefox
 super + {_,shift + } w
-    {firefox-esr, wmctrl -a microsoft-edge-stable || $BROWSER2}
+    {wmctrl -a firefox-esr || $BROWSER, set-wallpaper.sh}
 
 # Chat client, gui filemanager
 super + {_,shift + } p

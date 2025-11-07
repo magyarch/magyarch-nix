@@ -6,9 +6,12 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
+  #  inputs.hyprland.follows = "hyprland";
+#      };
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    scenefx = {
+      url = "github:wlrfx/scenefx";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     mangowc = {
       url = "github:DreamMaoMao/mangowc";
@@ -16,9 +19,8 @@
     };
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-  };
-
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, mangowc, ... }@inputs:
+    };
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, flake-parts, mangowc, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {

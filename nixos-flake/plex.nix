@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, unstable, ... }:
 
 {
 
@@ -8,10 +8,10 @@ services.jellyfin = {
   user="jellyfin";
  };
 
-  environment.systemPackages = [
-    pkgs.jellyfin
-    pkgs.jellyfin-web
-    pkgs.jellyfin-ffmpeg
+  environment.systemPackages =  with pkgs; [
+    unstable.jellyfin
+    unstable.jellyfin-web
+    unstable.jellyfin-ffmpeg
   ];
 }
 

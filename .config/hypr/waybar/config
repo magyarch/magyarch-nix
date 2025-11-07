@@ -8,10 +8,10 @@
       "clock",
       "sway/window",
       "custom/weather",
-      "niri/window",
+      "hyprland/window",
       ],
     "modules-center": [
-      "niri/workspaces",
+      "hyprland/workspaces",
       "sway/workspaces",
       ],
     "modules-right": [
@@ -27,7 +27,7 @@
       "icon-size": 16,
       "spacing": 10
     },
-    "niri/window": {
+    "hyprland/window": {
       "format": "{}",
       "rewrite": {
           "(\\d\\. )?(.*) - Chromium": "<span color=\"#4285F4\"></span>  $2 ",
@@ -49,7 +49,7 @@
       "max-length": 8,
       "tooltip": true
     },
-    "niri/workspaces": {
+    "hyprland/workspaces": {
       "format": "{icon}",
       "format-icons": {
         "1": "󰲠",
@@ -69,14 +69,14 @@
     },
     "custom/amdgpu": {
     "format": "{}",
-    "exec": "~/.config/waybar/amdgpu.sh",
+    "exec": "~/.config/hypr/scripts/amdgpu.sh",
     "interval": 3,
     "tooltip": true,
     "return-type": "json",
     "on-click": "pkill -SIGRTMIN+10 waybar"
     },
     "custom/amdcpu": {
-    "exec": "~/.config/waybar/amdcpu.sh",
+    "exec": "~/.config/hypr/scripts/amdcpu.sh",
     "interval": 2,
     "format": "{}",
     "return-type": "json",
@@ -103,8 +103,8 @@
       "interval": 1200,
       "signal": 10,
       "return-type": "json",
-      "exec": "exec $HOME/.config/waybar/weather2.sh",
-      "on-click": "~/.config/waybar/weather2.sh --force && pkill -SIGRTMIN+10 waybar"
+      "exec": "exec $HOME/.config/hypr/scripts/weather2.sh",
+      "on-click": "~/.config/hypr/scripts/weather2.sh --force && pkill -SIGRTMIN+10 waybar"
     },
     "pulseaudio": {
       "format": "{volume}% {icon}",

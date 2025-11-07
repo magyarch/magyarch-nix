@@ -29,11 +29,11 @@
     # ./jellyfin.nix
     # ./qtile.nix
  #    ./sddm.nix
-#    ./hyprland.nix
+    ./hyprland.nix
  #    ./stump.nix
-      ./mango.nix
+#      ./mango.nix
  #    ./xmonad.nix
-#     ./niri.nix
+ #    ./niri.nix
   ];
 
   boot = {
