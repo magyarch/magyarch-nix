@@ -38,6 +38,7 @@
        lxappearance
        picom-pijulius
        wmctrl
+#       wlroots_0_19
   ];
 }
 

@@ -79,6 +79,7 @@
       wineWowPackages.full
       wineWowPackages.waylandFull
       vifm
+      wmenu
       vulkan-tools
       vulkan-loader
       yt-dlp

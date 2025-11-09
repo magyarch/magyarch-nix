@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, unstable, ... }:
 
 {
   programs.mango.enable = true;
@@ -15,6 +15,8 @@
     wlogout
     waybar
  #   firefox
+    
+
   ];
   
   environment.localBinInPath = true;

@@ -7,6 +7,11 @@ xdg-open https://chat.openai.com
 kitty nvim ~/nixos-flake/configuration.nix
 kitty nvim ~/nixos-flake/packages.nix
 kitty nvim ~/.config/rofi/bookmarks.txt
+kitty nvim ~/.config/mango/config.conf
+kitty nvim ~/.config/mango/bind.conf
+kitty nvim ~/.config/mango/env.conf
+kitty nvim ~/.config/mango/rule.conf
+kitty nvim ~/.config/mango/autostart.sh
 --- Filmek (rekurzívan, mpv) ---
 bash -c 'mpv --fs "$(find /mnt/Movies -type f \( -iname "*.mkv" -o -iname "*.mp4" -o -iname "*.avi" \) | rofi -dmenu -i -p "Válassz filmet")"'
 

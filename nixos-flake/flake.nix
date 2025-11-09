@@ -10,12 +10,15 @@
 #      };
     flake-parts.url = "github:hercules-ci/flake-parts";
     scenefx = {
-      url = "github:wlrfx/scenefx";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:wlrfx/scenefx?rev=7f9e7409f6169fa637f1265895c121a8f8b70272";
+#      inputs.nixpkgs.follows = "nixpkgs";
+      flake = false;
     };
+
     mangowc = {
-      url = "github:DreamMaoMao/mangowc";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:DreamMaoMao/mangowc?rev=df46194b5f720eaa9650e16d316a2bb340d424f8";
+      inputs.nixpkgs.follows = "nixpkgs";
+#      inputs.scenefx.follows = "scenefx";
     };
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
