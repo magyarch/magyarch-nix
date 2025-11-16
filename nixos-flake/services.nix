@@ -38,7 +38,7 @@
 	   avahi.nssmdns4 = true;
 	   avahi.openFirewall = true;
           flatpak.enable = true;
-#	   picom.enable = true;
+#	   lsfg-vk.enable = true;
      dbus.enable = true;
 	   fstrim = {
 	   enable = true;

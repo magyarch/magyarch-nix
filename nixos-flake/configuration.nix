@@ -145,14 +145,14 @@ networking.hostName="nixos";
 
   security.rtkit.enable = true;
 
-xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk  # GTK alkalmazásokhoz
+#xdg.portal = {
+#    enable = true;
+#    extraPortals = [
+#      pkgs.xdg-desktop-portal-gtk  # GTK alkalmazásokhoz
     #  pkgs.xdg-desktop-portal-hyprland # Hyprland használata esetén
-    ];
-    config.common.default = "*"; # opcionális
-  };
+#    ];
+#    config.common.default = "*"; # opcionális
+#  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;

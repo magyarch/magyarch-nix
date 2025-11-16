@@ -10,14 +10,15 @@
        brave
        dunst
        discord
+       unstable.faugus-launcher
        filezilla
-       firefox-esr
+       unstable.floorp-bin
        geany
-       lutris
+       jq
+       unstable.lsfg-vk
        mangohud
        maim
        mpc
-       microsoft-edge
        mpv
        ncmpcpp
        rmpc
@@ -29,6 +30,7 @@
        sxhkd
        stremio
        slstatus
+       swww
        unstable.nsxiv
        unstable.heroic
        qutebrowser
@@ -40,5 +42,6 @@
        wmctrl
 #       wlroots_0_19
   ];
+
 }
 

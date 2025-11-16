@@ -13,6 +13,7 @@ echo "################################################################"
 tput sgr0
 echo
 
+cp -rf nixos-flake ~
 cp -rf .config ~
 cp -rf .local ~
 cp -rf .themes ~
