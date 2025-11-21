@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set +e
+
+# wallpaper
+swaybg -i ~/.config/mango/wallpaper/xy.png >/dev/null 2>&1 &
+
+# top bar
+waybar -c ~/.config/mango/waybar/config.jsonc -s ~/.config/mango/waybar/style.css >/dev/null 2>&1 &
+
+# xwayland dpi scale
+echo "Xft.dpi: 144" | xrdb -merge #dpi缩放
+# xrdb merge ~/.Xresources >/dev/null 2>&1
+
+# keep clipboard content
+wl-clip-persist --clipboard regular --reconnect-tries 0 >/dev/null 2>&1 &
+
+# clipboard content manager
+wl-paste --type text --watch cliphist store >/dev/null 2>&1 &
+
+mako &
+
+/nix/store/$(ls -la /nix/store | grep 'mate-polkit' | grep '4096' | awk '{print $9}' | sed -n '$p')/libexec/polkit-mate-authentication-agent-1 &
+
