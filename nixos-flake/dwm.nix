@@ -25,29 +25,30 @@
     })
    ];
 
-
-    xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk  # GTK alkalmazásokhoz
-    #  pkgs.xdg-desktop-portal-hyprland # Hyprland használata esetén
-    ];
-    config.common.default = "*"; # opcionális
-  };
+ xdg.portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
+      config.common.default = ["gtk"];
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal
+      ];
+    };
 
    environment = {
    variables = {
                  #GDK_SCALE = "2";
                  #GDK_DPI_SCALE = "0.5";
-                 XCURSOR_SIZE = "24";
+                 XCURSOR_SIZE = "32";
     # #           DISPLAY=":  0";
  #                QT_SCALE_FACTOR = "1.2";
     #             QT_AUTO_SCREEN_SCALE_FACTOR = "auto";
                 #WLR_NO_HARDWARE_CURSOR = "1";
                 #NIXOS_OZONE_WL = "1";
                #_JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-    #            VDPAU_DRIVER = "radeonsi";
-       #         LIBVA_DRIVER_NAME = "radeonsi";
+                VDPAU_DRIVER = "radeonsi";
+                LIBVA_DRIVER_NAME = "radeonsi";
     systemPackages = with pkgs; [
       xorg.libxcb
       xdotool
@@ -61,7 +62,6 @@
       gcc
       binutils
       pkg-config
-      rofi
 #      lukesmithxyz-st
       ];
              };

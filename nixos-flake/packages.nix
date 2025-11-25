@@ -13,14 +13,16 @@
       acpi
       bat
       bc
+      unstable.mesa
       curl
       curlftpfs
+      fd
       lftp
       eza
       htop
       lm_sensors
       util-linux
-      fastfetch
+#      fastfetch
       fzf
       ntfs3g
       ripgrep
@@ -69,6 +71,7 @@
       unzip
   #    polybar
       pyprland
+      unstable.pciutils
       imagemagick
       system-config-printer
       # stalonetray

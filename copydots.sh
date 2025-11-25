@@ -13,6 +13,7 @@ echo "################################################################"
 tput sgr0
 echo
 
+
 cp -rf nixos-flake ~
 cp -rf .config ~
 cp -rf .local ~
@@ -22,8 +23,9 @@ cp -rf .fonts ~
 #cp -rf .xmonad ~
 cp .zshenv ~
 cp .profile ~
-cp .xprofile ~
+cp .xprofile.bak ~
 cp .Xresources ~
+cp -rf mango ~/.config
 
 echo
 echo

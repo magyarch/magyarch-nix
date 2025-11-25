@@ -9,13 +9,13 @@
   home.packages = with pkgs; [
        brave
        dunst
-       discord
        unstable.faugus-launcher
        filezilla
-       unstable.floorp-bin
+       firefox
+       fastfetch
+       inxi
        geany
        jq
-       unstable.lsfg-vk
        mangohud
        maim
        mpc
@@ -33,6 +33,7 @@
        swww
        unstable.nsxiv
        unstable.heroic
+       vesktop
        qutebrowser
        qbittorrent
        xwallpaper
@@ -40,7 +41,8 @@
        lxappearance
        picom-pijulius
        wmctrl
-#       wlroots_0_19
+       unstable.cliphist
+       wlr-randr
   ];
 
 }

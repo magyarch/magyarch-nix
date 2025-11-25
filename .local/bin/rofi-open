@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+file=$(fd -t f --hidden --strip-cwd-prefix --exclude .git | rofi -dmenu -i -p "Open")
+
+[ -z "$file" ] && exit 0
+
+case "$file" in
+    *.mp4|*.mkv|*.webm|*.avi|*.mov)
+        mpv "$file" &
+        ;;
+    *.jpg|*.jpeg|*.png|*.webp|*.gif|*.bmp)
+        nsxiv "$file" &
+        ;;
+    *)
+        alacritty -e nvim "$file" &
+        ;;
+esac
+

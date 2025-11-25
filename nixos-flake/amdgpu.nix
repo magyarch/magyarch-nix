@@ -5,7 +5,7 @@
 # Load AMD driver for Xorg and Wayland
  services.xserver.videoDrivers = ["modesetting"];
   hardware.cpu.amd.sev.enable = true;
-  powerManagement.cpuFreqGovernor = "performance"; # vagy "performance", "powersave"
+#  powerManagement.cpuFreqGovernor = "performance"; # vagy "performance", "powersave"
 
 
   #Enable OpenGL
@@ -14,9 +14,9 @@
     enable32Bit = true;
     extraPackages = with pkgs; [
         libva-utils
-#        libvdpau-va-gl
+        vulkan-loader
         vaapiVdpau
-	libva
+    	libva
         rocmPackages.clr.icd
         rocmPackages.clr
 	mesa
@@ -32,7 +32,7 @@
   };
 
    environment.variables = {
-#                 AMD_VULKAN_ICD="RADV";
+                 AMD_VULKAN_ICD="RADV";
                  VDPAU_DRIVER = "radeonsi";
                  LIBVA_DRIVER_NAME = "radeonsi";
               };

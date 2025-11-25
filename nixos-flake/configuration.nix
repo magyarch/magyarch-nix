@@ -53,10 +53,9 @@
     kernelParams = [
 #       "amd_pstate=active"
 #      "amdgpu.ppfeaturemask=0xffffffff"
-#      "amdgpu.async_gfx_ring=1"
-#      "amdgpu.dc=1"
+#      "radeon"
       "nmi_watchdog=0"
-      "split_lock_mitigate=0"
+#      "split_lock_mitigate=0"
       # "quiet"
       "splash"
       "vga=current"
@@ -71,22 +70,6 @@
     initrd.verbose = false;
     tmp.cleanOnBoot = true;
   };
-
-
-    systemd.services."NetworkManager-wait-online".enable = false;
-
-    fileSystems."/media" =
-     { device = "/dev/disk/by-uuid/862572ff-ab09-452e-a020-221bbfa598a2";
-       fsType = "ext4";
-       options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
-     };
-
-
-    fileSystems."/mnt" =
-     { device = "/dev/disk/by-uuid/3a2e5190-91e1-4c8b-b648-f4903369255f";
-       fsType = "ext4";
-       options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
-    };
 
   # ZRAM
   zramSwap = {
@@ -262,6 +245,8 @@ networking.hostName="nixos";
          fixnonixsearchpath="sudo nixos-rebuild boot -I nixos-config=/etc/nixos/configuration.nix --upgrade";
          listallinstalled="sudo nix-store --query --requisites /run/current-system | cut -d- -f2- | sort | uniq";
         # gscope="gamescope -w 1920 -h 1080 -W 2560 -H 1440 -f -F fsr -e  -- steam -tenfoot";
+         fman="compgen -c | fzf | xargs man";
+         ls="eza --no-filesize --long --color=always --icons=always --no-user"; 
 
 
          # Shorts
