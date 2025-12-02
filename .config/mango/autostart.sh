@@ -10,9 +10,9 @@ swaybg -i ~/.config/mango/wallpaper/xy.png >/dev/null 2>&1 &
 # top bar
 waybar -c ~/.config/mango/waybar/config.jsonc -s ~/.config/mango/waybar/style.css >/dev/null 2>&1 &
 
-xwayland-satellite :11 &
+#xwayland-satellite :11 &
 # xwayland dpi scale
-#echo "Xft.dpi: 144" | xrdb -merge #dpi缩放
+echo "Xft.dpi: 120" | xrdb -merge #dpi缩放
 # xrdb merge ~/.Xresources >/dev/null 2>&1
 
 # keep clipboard content

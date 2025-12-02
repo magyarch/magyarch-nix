@@ -28,19 +28,19 @@ super + {_,shift + } i
 
 # S,R,lock script,calendar app
 super + {_,shift + } c
-    {rofi-exit.sh, eww open powermenu}
+    {rofi-dwm_exit.sh, eww open powermenu}
 
 # Default web browser brave and firefox
 super + {_,shift + } w
-    {wmctrl -a firefox-esr || $BROWSER, set-wallpaper.sh}
+    {wmctrl -a firefox || $BROWSER, set-wallpaper.sh}
 
 # Chat client, gui filemanager
 super + {_,shift + } p
     {wmctrl -a Discord || discord, wmctrl -a Thunar || thunar}
 
 # Hide polybar/Reload polybar
-#super + {_,shift + } b
-#   {polybar-msg cmd toggle, $HOME/.config/polybar/launch.sh}
+super + {_,shift + } b
+   {rofi-bookmarks, rofi-open}
 
 # Volume control
 alt + {Down,Up}

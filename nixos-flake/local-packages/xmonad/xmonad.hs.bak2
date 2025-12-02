@@ -1,0 +1,144 @@
+-- XMonad + Polybar konfiguráció (XMobar teljes eltávolítva)
+
+import Data.Map qualified as M
+import XMonad
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers (doRectFloat, doCenterFloat, isDialog)
+import XMonad.ManageHook ((-->), composeAll)
+import XMonad.Hooks.InsertPosition
+import XMonad.Layout.NoBorders
+import XMonad.Layout.ResizableTile
+import XMonad.Layout.Spacing
+import XMonad.Layout.Spiral
+import XMonad.Layout.Renamed
+import XMonad.StackSet qualified as W
+import XMonad.Util.EZConfig (additionalKeysP)
+import XMonad.Util.SpawnOnce
+
+-- TokyoNight Colors
+colorBg = "#1a1b26"
+colorFg = "#a9b1d6"
+colorBlk = "#32344a"
+colorRed = "#f7768e"
+colorGrn = "#9ece6a"
+colorYlw = "#e0af68"
+colorBlu = "#7aa2f7"
+colorMag = "#6272a4"
+colorCyn = "#0db9d7"
+colorBrBlk = "#282a36"
+
+-- Appearance
+myBorderWidth = 2
+myNormalBorderColor = colorBrBlk
+myFocusedBorderColor = colorMag
+mySpacing = spacingWithEdge 8
+
+-- Workspaces
+myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
+-- Mod key
+myModMask = mod4Mask
+myTerminal = "alacritty"
+
+-- Layouts
+myLayoutHook =
+  avoidStruts $
+    renamed [Replace "Tall"] (mySpacing tall)
+    ||| renamed [Replace "Wide"] (mySpacing (Mirror tall))
+    ||| renamed [Replace "Full"] (mySpacing Full)
+    ||| renamed [Replace "Spiral"] (mySpacing (spiral (6 / 7)))
+  where
+    tall = ResizableTall 1 (3 / 100) (11 / 20) []
+
+myCenterFloatLarge :: ManageHook
+myCenterFloatLarge = doRectFloat (W.RationalRect 0.15 0.15 0.7 0.7)
+
+-- Window rules
+myManageHook =
+  composeAll
+    [ className =? "Pavucontrol" --> doCenterFloat <+> doRectFloat (W.RationalRect 0.15 0.15 0.7 0.7)
+    , className =? "discord" --> doShift "2"
+    , className =? "firefox" --> doShift "1"
+    , className =? "steam" --> doShift "4"
+    , className =? "thunar" --> doShift "8"
+    , resource =? "GtkFileChooserDialog" --> doCenterFloat
+    , className =? "Lxappearance" --> doCenterFloat <+> doRectFloat (W.RationalRect 0.15 0.15 0.7 0.7)
+    , isDialog --> doCenterFloat
+    ]
+    <+> insertPosition Below Newer  <+> manageHook def
+--    <+> manageDocks
+
+-- Keybindings
+myKeys =
+  [ ("M-<Return>", spawn "alacritty")
+  , ("M-d", spawn "rofi -show drun")
+  , ("M-r", spawn "alacritty -e vifm")
+  , ("M-p", spawn "discord")
+  , ("C-<Print>", spawn "maim -s | xclip -selection clipboard -t image/png")
+  , ("M-q", kill)
+  , ("M-j", windows W.focusDown)
+  , ("M-k", windows W.focusUp)
+  , ("M-<Tab>", windows W.focusDown)
+  , ("M-h", sendMessage Expand)
+  , ("M-g", sendMessage Shrink)
+  , ("M-i", sendMessage (IncMasterN 1))
+  , ("M-S-d", sendMessage (IncMasterN (-1)))
+  , ("M-t", sendMessage $ JumpToLayout "Tall")
+  , ("M-f", sendMessage $ JumpToLayout "Full")
+  , ("M-c", sendMessage $ JumpToLayout "Spiral")
+  , ("M-S-<Return>", sendMessage NextLayout)
+  , ("M-n", sendMessage NextLayout)
+  , ("M-S-<Space>", withFocused toggleFloat)
+  , ("M-z", incWindowSpacing 3)
+  , ("M-x", decWindowSpacing 3)
+  , ("M-a", toggleWindowSpacingEnabled >> toggleScreenSpacingEnabled)
+  , ("M-S-a", setWindowSpacing (Border 8 8 8 8) >> setScreenSpacing (Border 8 8 8 8))
+  , ("M-S-r", spawn "xmonad --recompile && xmonad --restart")
+  , ("M-<Space> 1", windows $ W.greedyView "1")
+  , ("M-<Space> 2", windows $ W.greedyView "2")
+  , ("M-<Space> 3", windows $ W.greedyView "3")
+  , ("M-<Space> 4", windows $ W.greedyView "4")
+  , ("M-<Space> 5", windows $ W.greedyView "5")
+  , ("M-<Space> 6", windows $ W.greedyView "6")
+  , ("M-<Space> 7", windows $ W.greedyView "7")
+  , ("M-<Space> 8", windows $ W.greedyView "8")
+  , ("M-<Space> 9", windows $ W.greedyView "9")
+  , ("M-w", spawn "firefox")
+  , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +3%")
+  , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -3%")
+  , ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+  ]
+    ++
+    [ (mask ++ "M-" ++ [key], windows $ action tag)
+    | (tag, key) <- zip myWorkspaces "123456789"
+    , (action, mask) <- [(W.greedyView, ""), (W.shift, "S-")]
+    ]
+
+-- Floating toggle helper
+toggleFloat w =
+  windows
+    ( \s ->
+        if M.member w (W.floating s)
+          then W.sink w s
+          else W.float w (W.RationalRect 0.15 0.15 0.7 0.7) s
+    )
+
+-- Final config with Polybar support
+myConfig = def
+  { modMask = myModMask
+  , terminal = myTerminal
+  , workspaces = myWorkspaces
+  , borderWidth = myBorderWidth
+  , normalBorderColor = myNormalBorderColor
+  , focusedBorderColor = myFocusedBorderColor
+  , layoutHook = myLayoutHook
+  , manageHook = myManageHook <+> manageDocks
+  , startupHook = do
+      spawnOnce "xsetroot -cursor_name left_ptr"
+      spawnOnce "(sleep 1s && ~/.config/polybar/launch.sh) &"
+  }
+  `additionalKeysP` myKeys
+
+main :: IO ()
+main = xmonad . docks . ewmhFullscreen . ewmh $ myConfig

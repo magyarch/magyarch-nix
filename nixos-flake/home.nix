@@ -4,17 +4,19 @@
   
   home.username = "xeoncpu";
   home.homeDirectory = "/home/xeoncpu";
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
   #programs.zsh.enable = true;
   home.packages = with pkgs; [
        brave
        dunst
        unstable.faugus-launcher
        filezilla
+       file-roller
        firefox
        fastfetch
        inxi
        geany
+#       ghc
        jq
        mangohud
        maim
@@ -28,13 +30,14 @@
        protonplus
        sublime3
        sxhkd
-       stremio
+#       stremio
        slstatus
        swww
        unstable.nsxiv
        unstable.heroic
-       vesktop
-       qutebrowser
+#       vesktop
+       discord
+ #      qutebrowser
        qbittorrent
        xwallpaper
        xwayland-satellite
@@ -43,6 +46,7 @@
        wmctrl
        unstable.cliphist
        wlr-randr
+       wpsoffice
   ];
 
 }

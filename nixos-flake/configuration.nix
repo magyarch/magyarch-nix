@@ -12,10 +12,10 @@
     # ./nvidia.nix
     # ./nvidia-fan-daemon.nix
 #    ./appimage.nix
-#    ./bluetooth.nix
+    ./gamemode.nix
     # ./bspwm.nix
     # ./i3.nix
-#     ./dwm.nix
+ #    ./dwm.nix
     ./plex.nix
     # ./ratpoison.nix
     # ./spectrwm.nix
@@ -25,14 +25,14 @@
     ./ssh.nix
     ./samba.nix
     # ./plex.nix
- #    ./sway.nix
+#     ./sway.nix
     # ./jellyfin.nix
     # ./qtile.nix
  #    ./sddm.nix
 #    ./hyprland.nix
  #    ./stump.nix
       ./mango.nix
- #    ./xmonad.nix
+#     ./xmonad.nix
  #    ./niri.nix
   ];
 
@@ -48,7 +48,7 @@
       timeout = 1;
     };
 
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_xanmod;
 
     kernelParams = [
 #       "amd_pstate=active"
@@ -107,6 +107,12 @@ networking.hostName="nixos";
     LC_TIME = "hu_HU.UTF-8";
   };
 
+ fileSystems."/mnt" =
+{ device = "/dev/disk/by-uuid/655a6ae3-944b-47ed-b579-15f3b0e5d2d4";
+fsType = "ext4";
+options = [ "defaults" "nofail" ];
+
+}; 
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -160,24 +166,9 @@ networking.hostName="nixos";
 
   programs = {
      dconf.enable = true;
-  #   coolercontrol.enable = true;
-     file-roller.enable = true;
-     localsend.enable = true;
-     gamemode.enable = true;
-     gamescope = {
-      enable = true;
-      capSysNice = true;
-    };
-     steam = {
-	           enable = true;
- #            gamescopeSession.enable = true;
-#             remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-             dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    };
-
-
-
-
+     coolercontrol.enable = true;
+#     file-roller.enable = true;
+  
 
 	   thunar = {
 	   enable = true;
@@ -221,9 +212,8 @@ networking.hostName="nixos";
         unbind K
         bind K confirm-before "kill-server"
   '';
-};
-
-  };
+   };
+ };
 
 
  # Enable zsh as default shell
@@ -286,7 +276,7 @@ networking.hostName="nixos";
 
 
   fonts.packages = with pkgs; [
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     font-awesome_4
     source-code-pro
     joypixels
@@ -328,7 +318,7 @@ networking.hostName="nixos";
   system.stateVersion = "25.05"; # Did you read the comment?
 
   nixpkgs.config.permittedInsecurePackages = [
-                "openssl-1.1.1w" "ventoy-1.1.05" "mbedtls-2.28.10"
+                "openssl-1.1.1w" "ventoy-1.1.07" "mbedtls-2.28.10" 
               ];
   
 

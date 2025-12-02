@@ -18,7 +18,7 @@
 #export WLR_NO_HARDWARE_CURSOR=1
 
  #less/man colors
-export GTK_THEME=NovaOS-nord org.pulseaudio.pavucontrol
+#export GTK_THEME=NovaOS-nord org.pulseaudio.pavucontrol
 export LESS=-R
 export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"; a="${a%_}"
 export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"; a="${a%_}"
@@ -30,19 +30,7 @@ export LESS_TERMCAP_ue="$(printf '%b' '[0m')"; a="${a%_}"
 
 mpd >/dev/null 2>&1 &
 
-[ ! -f ~/.config/shortcutrc ] && shortcuts >/dev/null 2>&1
-
-
-# Screenshot export.
-if [[ "$LANG" = "hu_HU.UTF-8" ]]
-then
-    export SCREENSHOTS="$(xdg-user-dir PICTURES)/Képernyőképek"
-    [ ! -d $SCREENSHOTS ] && mkdir -p $SCREENSHOTS >/dev/null 2>&1
-
-else
-    export SCREENSHOTS="$(xdg-user-dir PICTURES)/screenshots"
-    [ ! -d $SCREENSHOTS ] && mkdir -p $SCREENSHOTS >/dev/null 2>&1
-fi
 
 
 
+STEAM_FORCE_DESKTOPUI_SCALING='1.5'

@@ -15,16 +15,15 @@
     extraPackages = with pkgs; [
         libva-utils
         vulkan-loader
-        vaapiVdpau
-    	libva
+    	libva-vdpau-driver
+        libva
         rocmPackages.clr.icd
         rocmPackages.clr
 	mesa
     ];
    
      extraPackages32 = with pkgs; [
-        vaapiVdpau
- #       libvdpau-va-gl
+        libva-vdpau-driver
         libva
        
       ];

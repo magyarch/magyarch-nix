@@ -1,11 +1,6 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, unstable, ... }:
 
-let
-  unstable = import <nixos-unstable> {
-    config = {};
-    system = builtins.currentSystem;
-  };
-in
+
 {
   programs.sway = {
     enable = true;

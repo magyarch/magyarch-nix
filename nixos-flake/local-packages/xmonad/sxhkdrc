@@ -2,12 +2,12 @@
 # -------------------------------
 
 # Main and float terminal
-super + Return
-    $TERMINAL
+#super + Return
+#  $TERMINAL
 
 # Dmenu2 and rofi(window switcher, application launcher)
-super + {_,shift +} d
-    {rofi -show run, rofi -show run}
+#super + {_,shift +} d
+#  {rofi -show drun, rofi -show run}
 
 # Tui filemanager and same command with sudo
 super + {_,shift + } r
@@ -20,10 +20,6 @@ super + {_,shift + } e
 # News, tui music player
 super + shift + i
     switch_audio.sh
-
-# S,R,lock script,calendar app
-super + {_,shift + } c
-    {$HOME/.config/xmonad/rofi_power, eww open --toggle powermenu}
 
 # Default web browser brave and firefox
 super + {_,shift + } w

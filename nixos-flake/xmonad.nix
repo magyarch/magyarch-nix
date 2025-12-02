@@ -1,7 +1,7 @@
 { config, pkgs, ...}:
 
 {
-#  services.displayManager.defaultSession = "none+xmonad";
+  services.xserver.enable = true;
   services.xserver.windowManager.xmonad = {
     enable = true;
     enableContribAndExtras = true;
@@ -15,7 +15,7 @@
   services.xserver.windowManager.xmonad.config = builtins.readFile ./local-packages/xmonad/xmonad.hs;
 
   environment.systemPackages = with pkgs; [
-                   #haskellPackages.xmonad_0_18_0
+                   haskellPackages.Xauth
 
                
   ];
@@ -29,7 +29,7 @@
   environment.variables = {
 #                 GDK_SCALE = "1.33";
  #                GDK_DPI_SCALE = "0.5";
-                 XCURSOR_SIZE = "24";
+                 XCURSOR_SIZE = "32";
     # #           DISPLAY=":  0";
   #               QT_SCALE_FACTOR = "1.33";
     #             QT_AUTO_SCREEN_SCALE_FACTOR = "auto";

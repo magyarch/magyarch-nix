@@ -21,7 +21,7 @@ services.samba = {
       "map to guest" = "bad user";
     };
     "public" = {
-      "path" = "/Movies";
+      "path" = "/mnt/Movies";
       "browseable" = "yes";
       "read only" = "no";
       "guest ok" = "yes";

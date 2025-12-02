@@ -11,7 +11,7 @@ configuration {
 	display-ssh: "~#";
 	show-icons: true;
 	sidebar-mode: false;
-	font: "Source Code Pro 15";
+	font: "Source Code Pro Medium 15";
 }
 
 * {
@@ -152,5 +152,7 @@ element alternate.active {
 //@theme "/home/xeoncpu/.local/share/rofi/themes/nord-oneline.rasi"
 
 //@theme "/nix/store/vpjv093i335jgnz23sglifrj9rlsamcv-rofi-1.7.9/share/rofi/themes/Arc-Dark.rasi"
+
+//@theme "/home/xeoncpu/.local/share/rofi/themes/spotlight-dark.rasi"
 
 @theme "/home/xeoncpu/.local/share/rofi/themes/spotlight-dark.rasi"

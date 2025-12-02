@@ -1,7 +1,8 @@
 # i3 config file by xeoncpu
 
 
-output DP-1 scale 1.25
+output DP-2 scale 1.25
+
 # Input configuration
 input * {
     xkb_layout hu
@@ -43,8 +44,8 @@ floating_modifier $mod
 # Autostart  ######################################################
 # exec --no-startup-id xrandr --dpi 192
  exec_always --no-startup-id /nix/store/$(ls -la /nix/store | grep 'mate-polkit' | grep '4096' | awk '{print $9}' | sed -n '$p')/libexec/polkit-mate-authentication-agent-1 &
- #exec --no-startup-id systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
- exec --no-startup-id swww init && swww img ~/.local/bin/wallpapers/Future/xy.png
+exec --no-startup-id swww-daemon >/dev/null 2>&1 &
+exec --no-startup-id swww init && swww img ~/.local/bin/wallpapers/Future/xy.png
 exec --no-startup-id exec wlsunset -l 16.6 -L 47.6
 exec --no-startup-id systemctl --user import-environment DISPLAY WAYLAND_DISPLAYSWAYSOCK
 exec --no-startup-id hash dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAYSWAYSOCK
@@ -138,7 +139,7 @@ bindsym $mod+space focus mode_toggle
 # Focus between output
 bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+Return exec scratch scratchpad
-bindsym $mod+d exec wofi --show drun
+bindsym $mod+d exec rofi -show drun
 bindsym $mod+Shift+e exec subl
 bindsym $mod+Shift+p exec thunar
 bindsym $mod+p exec discord --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto
@@ -147,7 +148,7 @@ bindsym $mod+F5 exec grim -g "$(slurp)" ~/Képek/screenshot.png
 bindsym $mod+q kill
 bindsym $mod+Shift+n exec scratch Music
 bindsym $mod+r exec alacritty -e vifmrun
-
+bindsym $mod+Ctrl+b exec rofi-bookmarks
 bindsym $alt+Up exec pamixer -i 5
 bindsym $alt+Down exec pamixer -d 5
 

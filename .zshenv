@@ -9,8 +9,22 @@ export TERMINAL="alacritty"
 export BROWSER="firefox"
 export READER="zathura"
 export FILE="vifmrun"
-#export GTK_USE_PORTAL=0
-#export MOZ_ENABLE_WAYLAND=1
+export QT_FONT_DPI=120
+#export QT_SCALE_FACTOR=1.25
+
+export AMD_VULKAN_ICD="RADV"
+#export STEAM_FORCE_DESKTOPUI_SCALING=2 
+export VDPAU_DRIVER = "radeonsi"
+export LIBVA_DRIVER_NAME = "radeonsi"
+
+export QT_QPA_PLATFORM = "wayland"
+export QT_WAYLAND_DISABLE_WINDOWDECORATION =1
+export RADV_PERFTEST = "aco"
+export WLR_RENDERER = "vulkan"
+export WLR_RENDERER_ALLOW_SOFTWARE =0
+export MOZ_ENABLE_WAYLAND =1
+
+
 # ------------FZF--------------
 # Set up fzf key bindings and fuzzy completion
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"

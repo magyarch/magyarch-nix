@@ -18,6 +18,7 @@
       curlftpfs
       fd
       lftp
+#      ghc
       eza
       htop
       lm_sensors
@@ -33,11 +34,12 @@
       xclip
      # st
 #      xwayland-satellite
-     # autotiling
+      autotiling
 # --------------------------
 # X11/xorg pkg
      #   xorg.libxcb
        xmonadctl
+       xorg.xauth
 #        xdotool
      #  xorg.xmodmap
       killall
@@ -57,7 +59,8 @@
       libva
       libva-utils
       libvdpau-va-gl
-      vaapiVdpau
+#      vaapiVdpau
+      vkbasalt
 #      i3blocks
       mate.mate-polkit
       mesa
@@ -69,7 +72,7 @@
       ueberzugpp
       unrar
       unzip
-  #    polybar
+      polybar
       pyprland
       unstable.pciutils
       imagemagick
@@ -91,9 +94,10 @@
  #     xdotool
  #     xorg.xdpyinfo
  #     xorg.xwininfo
- #     xorg.libX11
+      xorg.libX11
  #     xorg.libXft
- #     xorg.libXinerama
+      xorg.xrandr
+      xdg-user-dirs
        xorg.xrdb
     ];
 

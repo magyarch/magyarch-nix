@@ -14,7 +14,7 @@ DIFF_IDLE=$((IDLE - PREV_IDLE))
 CPU_USAGE=$(( (100 * (DIFF_TOTAL - DIFF_IDLE)) / DIFF_TOTAL ))
 
 # Hőmérséklet
-TEMP=$(sensors | grep -m 1 -Po 'Tctl:\s+\+?\K[0-9.]+(?=°C)')
+TEMP=$(sensors | grep -m 1 -Po 'Core 0:\s+\+?\K[0-9.]+(?=°C)')
 
 # Frekvencia
 FREQ=$(awk -F: '/^cpu MHz/ { sum += $2; count++ } END { if (count > 0) print int(sum / count); else print "N/A" }' /proc/cpuinfo)
