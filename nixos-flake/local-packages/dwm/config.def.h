@@ -10,7 +10,7 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray             = 1;     /* 0 means no systray */
 static const int showbar                 = 1;        /* 0 means no bar */
 static const int topbar                  = 1;        /* 0 means bottom bar */
-static const char *fonts[]               = { "JetBrains Mono Nerd:style=SemiBold:size=10" , "JoyPixels:size=9" , "FontAwesome:size=10:antialias=true:autohint=true" };
+static const char *fonts[]               = { "JetBrains Mono Nerd:style=SemiBold:size=11" , "JoyPixels:size=9" , "FontAwesome:size=11:antialias=true:autohint=true" };
 static const char dmenufont[]            = "JetBrainsMono Nerd:size=12";
 static const char col_1[]                = "#282a36";  /* background color of bar and border color unfocused windows */
 static const char col_2[]                = "#f8f8f2";  /* foreground color of bar and tags */
@@ -83,14 +83,14 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run -c -g 1 -l 10 ", "-m", dmenumon, "-fn", dmenufont, NULL };
 static const char scratchpadname[] = "scratchpad";
-static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", "-e", "ncmpcpp", NULL };
-static const char *termcmd[] = { "st-256color", NULL };
+static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "180x50", "-e", "rmpc", NULL };
+static const char *termcmd[] = { "alacritty", NULL };
 
 #include "movestack.c"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	/*{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },*/
-	{ MODKEY|ShiftMask,             XK_g,      spawn,          {.v = termcmd } },
+	{ MODKEY,             XK_Return,      spawn,          {.v = termcmd } },
 	{ ALTMOD,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_Tab,    focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
@@ -109,7 +109,7 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_c,      setlayout,      {.v = &layouts[5]} },  /* centeredmaster */
         { ALTMOD,                       XK_o,      setlayout,      {.v = &layouts[6]} },  /* centeredfloatingmaster */
         { MODKEY|ControlMask,           XK_h,      setlayout,      {.v = &layouts[7]} },  /* horizgrid */
-        { MODKEY|ControlMask,           XK_t,      togglescratch,  {.v = scratchpadcmd } },
+        { MODKEY|ShiftMask,           XK_n,      togglescratch,  {.v = scratchpadcmd } },
 	/*{ MODKEY|ShiftMask,             XK_b,      setlayout,      {0} },*/
     { MODKEY|ShiftMask,             XK_f,     fullscreen,     {0}  },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },

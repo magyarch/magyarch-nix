@@ -32,7 +32,7 @@ super + c ; + {q,l,r}
 
 # Default web browser brave and firefox
 super + {_,shift + } w
-    {wmctrl -a brave || brave, wmctrl -a microsoft-edge-stable || $BROWSER2}
+    {wmctrl -a firefox || firefox, wmctrl -a microsoft-edge-stable || $BROWSER2}
 
 # Chat client, gui filemanager
 super + {_,shift + } p

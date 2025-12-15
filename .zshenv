@@ -9,20 +9,29 @@ export TERMINAL="alacritty"
 export BROWSER="firefox"
 export READER="zathura"
 export FILE="vifmrun"
-export QT_FONT_DPI=120
+#export QT_WAYLAND_FORCE_DPI=110
 #export QT_SCALE_FACTOR=1.25
+export GDK_SCALE=1
+export GDK_DPI_SCALE=1.1   # ez 140%-os skálázás
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export QT_SCALE_FACTOR=1.2
+export QT_FONT_DPI=120
+export ELECTRON_FORCE_DEVICE_SCALE_FACTOR=1.2
+export QTWEBENGINE_CHROMIUM_FLAGS="--force-device-scale-factor=1.2"
 
-export AMD_VULKAN_ICD="RADV"
+
+
+#export AMD_VULKAN_ICD="RADV"
 #export STEAM_FORCE_DESKTOPUI_SCALING=2 
-export VDPAU_DRIVER = "radeonsi"
-export LIBVA_DRIVER_NAME = "radeonsi"
+#export VDPAU_DRIVER = "radeonsi"
+#export LIBVA_DRIVER_NAME = "radeonsi"
 
-export QT_QPA_PLATFORM = "wayland"
-export QT_WAYLAND_DISABLE_WINDOWDECORATION =1
-export RADV_PERFTEST = "aco"
-export WLR_RENDERER = "vulkan"
-export WLR_RENDERER_ALLOW_SOFTWARE =0
-export MOZ_ENABLE_WAYLAND =1
+#export QT_SCALE_FACTOR=1.2
+#export QT_WAYLAND_DISABLE_WINDOWDECORATION =1
+#export RADV_PERFTEST = "aco"
+#export WLR_RENDERER = "vulkan"
+#export WLR_RENDERER_ALLOW_SOFTWARE =0
+#export MOZ_ENABLE_WAYLAND =1
 
 
 # ------------FZF--------------
@@ -41,3 +50,5 @@ export FZF_ALT_C_OPTS="--preview 'eza --icons=always --tree --color=always {} | 
 
 # fzf preview for tmux
 export FZF_TMUX_OPTS=" -p90%,70% "  
+
+

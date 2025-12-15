@@ -11,26 +11,9 @@
     
 
        services.displayManager.ly = {
-       enable = true;
-    #  wayland.enable = true;   
+       enable = true;   
      };
    
-#   services.greetd = {
-#    enable = true;
-#    settings = {
-#      default_session = {
-#        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd stumpwm";
-#      user = "greeter";
-#      };
-#    };
-#  };
-
-
-
-#   xdg.portal.enable = true;
- #  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  # xdg.portal.config.common.default = "*";
-
     services = {
            printing.enable = true;
            printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
@@ -44,7 +27,6 @@
 	   enable = true;
 	   interval = "weekly";
 	   };
-#	   unclutter-xfixes.enable = true;
 	   openssh.enable = true;       
 	   gvfs.enable = true;
 	   tumbler.enable = true;

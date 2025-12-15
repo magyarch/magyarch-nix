@@ -10,6 +10,7 @@
        brave
        dunst
        unstable.faugus-launcher
+       fancontrol-gui
        filezilla
        file-roller
        firefox
@@ -31,7 +32,7 @@
        sublime3
        sxhkd
 #       stremio
-       slstatus
+#       slstatus
        swww
        unstable.nsxiv
        unstable.heroic
@@ -46,8 +47,34 @@
        wmctrl
        unstable.cliphist
        wlr-randr
-       wpsoffice
-  ];
+#       wpsoffice
+       (pkgs.st.overrideAttrs (_: {
+      src = ./local-packages/st;
+      patches = [ ];
+    }))
+    (pkgs.dmenu.overrideAttrs (_: {
+      src = ./local-packages/dmenu;
+      patches = [ ];
+    }))
+    (pkgs.slstatus.overrideAttrs (_: {
+      src = ./local-packages/slstatus;
+      patches = [ ];
+    }))
+#      surf
+      xorg.libxcb
+      xdotool
+      xorg.xdpyinfo
+      xorg.xwininfo
+      xorg.libX11
+      xorg.libXft
+      xorg.libXinerama
+      harfbuzz
+      gnumake
+      gcc
+      binutils
+      pkg-config
 
+  ];
+  
 }
 

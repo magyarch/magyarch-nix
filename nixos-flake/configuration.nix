@@ -13,9 +13,10 @@
     # ./nvidia-fan-daemon.nix
 #    ./appimage.nix
     ./gamemode.nix
-    # ./bspwm.nix
+     ./bspwm.nix
     # ./i3.nix
- #    ./dwm.nix
+#     ./dwm.nix
+#     ./dwl.nix
     ./plex.nix
     # ./ratpoison.nix
     # ./spectrwm.nix
@@ -31,9 +32,10 @@
  #    ./sddm.nix
 #    ./hyprland.nix
  #    ./stump.nix
-      ./mango.nix
+#      ./mango.nix
 #     ./xmonad.nix
  #    ./niri.nix
+   #   ./oxwm.nix
   ];
 
   boot = {
@@ -315,10 +317,10 @@ options = [ "defaults" "nofail" ];
     };
   };
 
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.11"; # Did you read the comment?
 
   nixpkgs.config.permittedInsecurePackages = [
-                "openssl-1.1.1w" "ventoy-1.1.07" "mbedtls-2.28.10" 
+                "openssl-1.1.1w" "ventoy-1.1.07" "mbedtls-2.28.10" "qtwebengine-5.15.19" 
               ];
   
 

@@ -3,7 +3,7 @@
 {
 
 # Load AMD driver for Xorg and Wayland
- services.xserver.videoDrivers = ["modesetting"];
+ services.xserver.videoDrivers = ["amdgpu"];
   hardware.cpu.amd.sev.enable = true;
 #  powerManagement.cpuFreqGovernor = "performance"; # vagy "performance", "powersave"
 

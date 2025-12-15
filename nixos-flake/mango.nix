@@ -5,7 +5,7 @@
      xdg.portal = {
       enable = true;
       xdgOpenUsePortal = true;
-      config.common.default = ["gtk"];
+      config.common.default = ["wlr"];
       wlr.enable = true;
       extraPortals = with pkgs; [
         xdg-desktop-portal-gtk
@@ -43,7 +43,7 @@
 #  XCURSOR_SIZE = "24";
   QT_QPA_PLATFORM = "wayland";
   QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-  QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+#  QT_AUTO_SCREEN_SCALE_FACTOR = "1";
 
  # ELECTRON_OZONE_PLATFORM_HINT = "auto";
   ELECTRON_DISABLE_GPU_INSTANCE = "1";

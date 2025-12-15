@@ -5,6 +5,13 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    oxwm = {
+        url = "github:tonybanters/oxwm";
+    inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    # Xlibre
+#    xlibre-overlay.url = "git+https://codeberg.org/takagemacoed/xlibre-overlay";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,7 +32,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, mangowc, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, mangowc, oxwm, ... }@inputs:
     let
       system = "x86_64-linux";
 
@@ -49,8 +56,11 @@
         modules = [
           ./configuration.nix
           ./hardware-configuration.nix
-
-          # Mangowc as window compositor
+        # xlibre-overlay.nixosModules.overlay-xlibre-xserver
+        # xlibre-overlay.nixosModules.overlay-xlibre-xf86-input-libinput
+         
+         oxwm.nixosModules.default
+         # Mangowc as window compositor
           mangowc.nixosModules.mango
 
           # Home Manager integration
