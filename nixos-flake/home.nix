@@ -47,6 +47,7 @@
        wmctrl
        unstable.cliphist
        wlr-randr
+
 #       wpsoffice
        (pkgs.st.overrideAttrs (_: {
       src = ./local-packages/st;

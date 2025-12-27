@@ -32,7 +32,7 @@ super + {_,shift + } i
 
 # S,R,lock script,calendar app
 super + {_,shift + } c
-    {rofi_power, eww open --toggle powermenu}
+    {rofi_power, rofi_power}
 
 # Default web browser brave and firefox
 super + {_,shift + } w

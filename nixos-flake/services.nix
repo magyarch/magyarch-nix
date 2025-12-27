@@ -59,20 +59,11 @@
       "/run/user/1000"; # User-id 1000 must match above user. MPD will look inside this directory for the PipeWire socket.
   };
 
-   powerManagement.cpuFreqGovernor = "performance"; # vagy "performance", "powersave"
-  # Példa NixOS konfigurációban:
-
-
-      # System76 Scheduler 
-          #        services.system76-scheduler = {
-           #                       enable = true;
-            #                      settings.processScheduler.foregroundBoost.foreground.nice = -5;
-             #                     settings.processScheduler.foregroundBoost.foreground.ioPrio = 0;
-              #                    useStockConfig = false;
-               #                 };
-
-      # #= IRQBalance
+# #= IRQBalance
        services.irqbalance.enable = true;
+       services.udev.extraRules = ''
+      ACTION=="add|change", SUBSYSTEM=="block", ATTR{queue/scheduler}="bfq"
+    '';
 
    virtualisation.podman = {
   enable = true;

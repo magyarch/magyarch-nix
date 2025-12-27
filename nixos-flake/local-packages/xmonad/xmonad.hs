@@ -9,13 +9,14 @@ import System.Exit
 import System.IO (Handle, hPutStrLn)
 
 --HOOKS
-import XMonad.Hooks.ManageHelpers(doFullFloat, doCenterFloat, isFullscreen, isDialog)
+import XMonad.Hooks.ManageHelpers(doFullFloat, doCenterFloat, doRectFloat, doFocus, doRaise, isFullscreen, isDialog)
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.Minimize
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.InsertPosition
+import XMonad.Hooks.Place
 -- (ServerMode import eltávolítva)
 
 --LAYOUT
@@ -110,6 +111,10 @@ myScratchPads =
 
   , NS "pavucontrol" "pavucontrol" (className =? "pavucontrol")
         (customFloating $ W.RationalRect (0.15) (0.15) (0.7) (0.7))
+
+   , NS "lxappearance" "lxappearance" (className =? "Lxappearance")
+        (customFloating $ W.RationalRect (0.15) (0.15) (0.7) (0.7))
+      
   ]
 
 ----------------------------------------------------------------------
@@ -129,18 +134,19 @@ myWorkspaces = clickable
 -- MANAGEHOOK
 
 myManageHook :: XMonad.Query (Endo WindowSet)
-myManageHook = composeAll . concat $
-    [ [isDialog --> doCenterFloat]
+myManageHook = placeHook (smart (0.5, 0.5)) <+> (composeAll . concat $
+--myManageHook = composeAll . concat $
+    [ [isDialog --> doFloat]
     , [isFullscreen --> (doF W.focusDown <+> doFullFloat)]
-    , [title =? "calcurse"  --> doFloat]
+    , [title =? "faugus-launcher"  --> doFloat]
     , [resource =? "Downloads" --> doFloat]
     , [resource =? "Save As..." --> doFloat]
     , [resource =? "desktop_window" --> doIgnore]
     , [resource =? "sxiv" --> doCenterFloat]
-    , [className =? "Lxappearance" --> doCenterFloat]
-    , [className =? "pavucontrol" --> doCenterFloat]
-    , [title =? "pavucontrol" --> doFloat]
-    , [className =? "Zathura" --> doCenterFloat]
+    , [className =? "Lxappearance" -->  doRectFloat (W.RationalRect 0.15 0.15 0.70 0.70)]
+--    , [className =? "pavucontrol" --> doRectFloat (W.RationalRect 0.15 0.15 0.70 0.70)]
+--    , [title =? "pavucontrol" --> doRectFloat (W.RationalRect 0.15 0.15 0.70 0.70)]
+    , [className =? "Faugus-launcher" --> doFloat]
     , [className =? "firefox" --> doShift(ws 0) <+> viewShift(ws 0)]
     , [className =? "discord" --> doShift(ws 1) <+> viewShift(ws 1)]
     , [className =? "Sublime_text"  --> doShift(ws 2) <+> viewShift(ws 2)]
@@ -150,7 +156,7 @@ myManageHook = composeAll . concat $
     , [className =? "Virtualbox" --> doShift(ws 6) <+> viewShift(ws 6)]
     , [className =? "Thunar" --> doShift(ws 7) <+> viewShift(ws 7)]
     , [className =? "mkvtoolnix-gui" --> doShift(ws 8) <+> viewShift(ws 8)]
-    ]
+    ]) 
   where
     ws i = myWorkspaces !! i
     viewShift = doF . liftM2 (.) W.greedyView W.shift
@@ -276,6 +282,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_Return), namedScratchpadAction myScratchPads "scratchpad")
     , ((modm .|. controlMask, xK_h), namedScratchpadAction myScratchPads "pavucontrol")
     , ((modm .|. shiftMask, xK_n), namedScratchpadAction myScratchPads "ncmpcpp")
+    , ((modm .|. shiftMask, xK_l), namedScratchpadAction myScratchPads "lxappearance")
     , ((modm .|. shiftMask, xK_q), io (exitWith ExitSuccess))
     ]
     ++

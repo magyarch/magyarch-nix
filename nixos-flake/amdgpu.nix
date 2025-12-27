@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, unstable, ... }:
 
 {
 
@@ -13,22 +13,20 @@
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
-        libva-utils
-        vulkan-loader
-    	libva-vdpau-driver
-        libva
-        rocmPackages.clr.icd
-        rocmPackages.clr
-	mesa
-    ];
-   
-     extraPackages32 = with pkgs; [
-        libva-vdpau-driver
-        libva
+        unstable.libva-vdpau-driver
+        #libvdpau-va-gl
+        unstable.libva
+        unstable.vulkan-loader
+        unstable.vulkan-validation-layers
+      ];
+      extraPackages32 = with pkgs; [
+        unstable.libva-vdpau-driver
+        #libvdpau-va-gl
+        unstable.libva
        
       ];
+    };
 
-  };
 
    environment.variables = {
                  AMD_VULKAN_ICD="RADV";

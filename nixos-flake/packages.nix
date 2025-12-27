@@ -70,11 +70,30 @@
       nix-search-cli
       nwg-look
       ueberzugpp
+      arj
+      brotli
+      bzip2
+      cpio
+      gnutar
+      gzip
+      lha
+      libarchive
+      lrzip
+      lz4
+      lzop
+      p7zip
+      pbzip2
+      pigz
+      pixz
       unrar
       unzip
+      xz
+      zip
+      zstd
       polybar
       pyprland
       unstable.pciutils
+      unstable.usbutils
       imagemagick
       system-config-printer
       # stalonetray
@@ -87,7 +106,7 @@
       vifm
       wmenu
       vulkan-tools
-      vulkan-loader
+#      vulkan-loader
       yt-dlp
       ytarchive
  #     xorg.libxcb

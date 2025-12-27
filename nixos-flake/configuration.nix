@@ -6,6 +6,7 @@
   imports = [
     # Include the results of the hardware scan.
 #    ./hardware-configuration.nix
+    ./kernel.nix
     ./packages.nix
     ./services.nix
     ./amdgpu.nix
@@ -38,50 +39,57 @@
    #   ./oxwm.nix
   ];
 
-  boot = {
-    bootspec.enable = true;
 
-    initrd.kernelModules = [ "amdgpu" ];
+   boot = {
+      bootspec.enable = true;
 
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-      systemd-boot.memtest86.enable = true;
-      timeout = 1;
+      kernelPackages = pkgs.linuxPackages_latest;
+
+      initrd.kernelModules = [ "amdgpu" ];
+
+      loader = {
+#        grub.enable = false;  
+        systemd-boot.enable = true;
+        efi.canTouchEfiVariables = true;
+        systemd-boot.memtest86.enable = true;
+        timeout = 1;
+      };
+
+      kernelParams = [
+        "amd_pstate=active"
+        "nosplit_lock_mitigate"
+        "clearcpuid=514"
+      ];
+
+      kernel.sysctl = {
+        "kernel.split_lock_mitigate" = 0;
+        "vm.swappiness" = 10;
+        "vm.vfs_cache_pressure" = 50;
+        "vm.dirty_bytes" = 268435456;
+        "vm.max_map_count" = 16777216;
+        "vm.dirty_background_bytes" = 67108864;
+        "vm.dirty_writeback_centisecs" = 1500;
+        "kernel.nmi_watchdog" = 0;
+        "kernel.unprivileged_userns_clone" = 1;
+        "kernel.printk" = "3 3 3 3";
+        "kernel.kptr_restrict" = 2;
+        "kernel.kexec_load_disabled" = 1;
+      };
+
+      consoleLogLevel = 0;
+      initrd.verbose = false;
+      tmp.cleanOnBoot = true;
     };
 
-    kernelPackages = pkgs.linuxPackages_xanmod;
 
-    kernelParams = [
-#       "amd_pstate=active"
-#      "amdgpu.ppfeaturemask=0xffffffff"
-#      "radeon"
-      "nmi_watchdog=0"
-#      "split_lock_mitigate=0"
-      # "quiet"
-      "splash"
-      "vga=current"
-      "rd.systemd.show_status=false"
-      "rd.udev.log_level=3"
-      "udev.log_priority=3"
-      #"console=tty1"
-      # "nvidia-drm.modeset=1"
-    ];
-
-    consoleLogLevel = 0;
-    initrd.verbose = false;
-    tmp.cleanOnBoot = true;
-  };
-
-  # ZRAM
-  zramSwap = {
+ zramSwap = {
       enable = true;
       algorithm = "lz4";
       memoryPercent = 50;
       priority = 100;
     };
 
-  networking.networkmanager = {
+networking.networkmanager = {
         enable = true;
       };
 
@@ -168,9 +176,7 @@ options = [ "defaults" "nofail" ];
 
   programs = {
      dconf.enable = true;
-     coolercontrol.enable = true;
-#     file-roller.enable = true;
-  
+     nix-ld.enable = true;  
 
 	   thunar = {
 	   enable = true;
