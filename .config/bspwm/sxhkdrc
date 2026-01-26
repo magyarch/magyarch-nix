@@ -36,7 +36,7 @@ super + {_,shift + } c
 
 # Default web browser brave and firefox
 super + {_,shift + } w
-    {wmctrl -a Microsoft-edge || $BROWSER, $BROWSER2}
+    {wmctrl -a firefox || $BROWSER, $BROWSER2}
 
 # Chat client, gui filemanager
 super + {_,shift + } p

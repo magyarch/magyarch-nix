@@ -53,7 +53,7 @@ local bar_font = "JetBrainsMono Nerd Font:size=12"
 local blocks = {
     oxwm.bar.block.ram({
         format = "Ram: {used}/{total} GB",
-        interval = 5,
+        interval = 2,
         color = colors.light_blue,
         underline = true,
     }),
@@ -66,7 +66,7 @@ local blocks = {
     oxwm.bar.block.shell({
         format = "Cpu: {}",
         command = "sensors | awk '/Tctl:/ {print $2}'",
-        interval = 999999999,
+        interval = 1,
         color = colors.red,
         underline = true,
     }),
@@ -79,7 +79,7 @@ local blocks = {
     oxwm.bar.block.shell({
         format = "Gpu: {}",
         command = "sensors | awk '/edge:/ {print $2}'",
-        interval = 999999999,
+        interval = 1,
         color = colors.green,
         underline = true,
     }),
@@ -134,7 +134,7 @@ oxwm.border.set_width(3)
 -- Color of focused window border
 oxwm.border.set_focused_color(colors.blue)
 -- Color of unfocused window borders
-oxwm.border.set_unfocused_color(colors.grey)
+oxwm.border.set_unfocused_color(colors.bg)
 
 -- Smart Enabled = No border if 1 window
 oxwm.gaps.set_smart(enabled)

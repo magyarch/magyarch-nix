@@ -13,40 +13,7 @@
     
   };
   
-   xdg.portal = {
-      enable = true;
-      xdgOpenUsePortal = true;
-      config.common.default = ["gtk"];
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
-        xdg-desktop-portal-wlr
-        xdg-desktop-portal
-      ];
-    };
-
-
-  environment.variables = {
-    #             GDK_SCALE = "2";
-     #            GDK_DPI_SCALE = "0.5";
-      #           XCURSOR_SIZE = "24";
-    # #           DISPLAY=":  0";
-                 QT_SCALE_FACTOR = "1.25";
-    #             QT_AUTO_SCREEN_SCALE_FACTOR = "auto";
-                #WLR_NO_HARDWARE_CURSOR = "1";
-                #NIXOS_OZONE_WL = "1";
-               #_JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-    #            VDPAU_DRIVER = "radeonsi";
-       #         LIBVA_DRIVER_NAME = "radeonsi";
-             };
-
-# nixpkgs.overlays = [
-#    (final: prev: {
-#      #spectrwm = prev.spectrwm.overrideAttrs (old: { src = /home/xeoncpu/.config/spectrwm/.src/spectrwm ;});
-#      dmenu = prev.dmenu.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/dmenu ;});
-#      st = prev.st.overrideAttrs (old: { src = /home/xeoncpu/.config/suckless/st ;});
-#     })
-#   ];
-
+   
 }
 
 

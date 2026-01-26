@@ -3,7 +3,7 @@
 {
 
 # Load AMD driver for Xorg and Wayland
- services.xserver.videoDrivers = ["amdgpu"];
+ services.xserver.videoDrivers = ["modesetting"];
   hardware.cpu.amd.sev.enable = true;
 #  powerManagement.cpuFreqGovernor = "performance"; # vagy "performance", "powersave"
 
@@ -26,13 +26,18 @@
        
       ];
     };
+   environment.systemPackages = with pkgs; [
+    lact
+  ];
 
-
-   environment.variables = {
-                 AMD_VULKAN_ICD="RADV";
-                 VDPAU_DRIVER = "radeonsi";
-                 LIBVA_DRIVER_NAME = "radeonsi";
-              };
-
+  systemd.services.lact = {
+    description = "AMDGPU Control Daemon";
+    after = ["multi-user.target"];
+    wantedBy = ["multi-user.target"];
+    serviceConfig = {
+      ExecStart = "${pkgs.lact}/bin/lact daemon";
+    };
+    enable = true;
+  };
 
  }

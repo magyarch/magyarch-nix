@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Define the options to display
 options="Restart\nPower Off\nLog Out"
@@ -15,7 +15,7 @@ case $selected in
         systemctl poweroff
         ;;
     "Log Out")
-        pkill -KILL -u $USER
+        fancy-quit || bspc quit
         ;;
     *)
         echo "No valid option selected."

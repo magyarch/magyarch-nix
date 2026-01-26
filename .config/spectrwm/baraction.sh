@@ -41,7 +41,7 @@ echo -e "+@fn=1;$icon+@fn=0; $vol%"
 
 cpu(){
   cpu_freq=$(awk '{printf("%.2f GHz", $1/1000000)}' /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq)
- echo -e " R5 5500 $cpu_freq "
+ echo -e " R5 5600 $cpu_freq "
 
 }
 

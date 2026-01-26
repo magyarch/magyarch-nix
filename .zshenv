@@ -6,18 +6,16 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 export TERMINAL="alacritty"
-export BROWSER="firefox"
-export READER="zathura"
+export BROWSER="firefox-esr"
+#export DISPLAY=:0
 export FILE="vifmrun"
-#export QT_WAYLAND_FORCE_DPI=110
-#export QT_SCALE_FACTOR=1.25
-export GDK_SCALE=1
-export GDK_DPI_SCALE=1.1   # ez 140%-os skálázás
-export QT_AUTO_SCREEN_SCALE_FACTOR=1
-export QT_SCALE_FACTOR=1.2
-export QT_FONT_DPI=120
-export ELECTRON_FORCE_DEVICE_SCALE_FACTOR=1.2
-export QTWEBENGINE_CHROMIUM_FLAGS="--force-device-scale-factor=1.2"
+#export QT_WAYLAND_FORCE_DPI=120
+export QT_SCALE_FACTOR=1.25
+#export QT_AUTO_SCREEN_SCALE_FACTOR=1
+#export QT_SCALE_FACTOR=1.
+#export QT_FONT_DPI=120
+export ELECTRON_FORCE_DEVICE_SCALE_FACTOR=1.25
+export QTWEBENGINE_CHROMIUM_FLAGS="--force-device-scale-factor=1.25"
 
 
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Profile file. Runs on login.
+#unset LD_PRELOAD
 
 # Adds `~/.local/bin` and all subdirectories to $PATH
 #export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
@@ -12,8 +13,8 @@
 #export QT_SCALE_FACTOR=1.3
 #export ELM_SCALE=1.6
 #export GDK_SCALE=0.6
-#export XCURSOR_SIZE=24
-#export DISPLAY=":0"
+export XCURSOR_SIZE=32
+#export DISPLAY=:0
 #export AMD_VULKAN_ICD="RADV"
 #export WLR_NO_HARDWARE_CURSOR=1
 
@@ -33,4 +34,4 @@ mpd >/dev/null 2>&1 &
 
 
 
-STEAM_FORCE_DESKTOPUI_SCALING='1.5'
+#STEAM_FORCE_DESKTOPUI_SCALING='1.5'

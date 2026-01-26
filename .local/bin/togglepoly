@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if polybar-msg cmd toggle >/dev/null 2>&1; then
+    exit 0
+else
+    ~/.config/polybar/launch.sh &
+fi
+

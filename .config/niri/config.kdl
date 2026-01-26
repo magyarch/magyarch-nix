@@ -14,12 +14,12 @@ input {
         numlock // Enable numlock on startup
     }
 
+// Focus follows mouse cursor
+    // Only focus windows that are completely visible (not scrolled off-screen)
+    focus-follows-mouse max-scroll-amount="0%"
 
-    //    focus-follows-mouse // Automatically focus windows under the mouse pointer
-   // workspace-auto-back-and-forth // Enable workspace back & forth switching
-       focus-follows-mouse max-scroll-amount="0%"
+
 }
-
 // ────────────── Output Configuration ──────────────
 // You can run `niri msg outputs` to get the correct name for your displays.
 // You will have to remove "/-" and edit it before it takes effect.
@@ -27,7 +27,7 @@ input {
 
  output "DP-1" {
     mode "2560x1440@119.998" // Set resolution and refresh rate
-    scale 1.26 // No scaling (use 2 for HiDPI)
+    scale 1.25 // No scaling (use 2 for HiDPI)
     transform "normal"
     position x=0 y=0
 }
@@ -40,7 +40,7 @@ binds {
 
     // ─── Applications ───
     MOD+RETURN                          hotkey-overlay-title="Open Terminal: Alacritty" { spawn "alacritty"; }
-    MOD+D                               hotkey-overlay-title="Open App Launcher: wofi" { spawn "wofi" "--show" "drun" "--allow-images"; }
+    MOD+D                               hotkey-overlay-title="Open App Launcher: wofi" { spawn "rofi" "-show" "drun" "--allow-images"; }
     MOD+W                               hotkey-overlay-title="Open Browser: firefox" { spawn "firefox-esr"; }
     MOD+R                               hotkey-overlay-title="Open Tui FileManager: vifm" { spawn "alacritty" "-e" "vifm"; }
     MOD+SHIFT+M                         hotkey-overlay-title="Open Music Manager: rmpc" { spawn-sh "pkill kitty || kitty -e rmpc"; }
@@ -155,27 +155,24 @@ binds {
 // ────────────── Startup Applications ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-at-startup
 
-    spawn-at-startup "/usr/lib/polkit-gnome-authentication-agent-1" "&" // Polkit
-    spawn-at-startup "xwayland-satellite" // XWayland support
-    spawn-at-startup "swww-daemon" // Wallpaper daemon
-    spawn-at-startup "swww img" "~/.local/bin/wallpapers/Future/xy.png" // Set wallpaper
-    spawn-at-startup "mako"
-    spawn-at-startup "~/.config/niri/launchwaybar.sh" 
+    spawn-at-startup "/nix/store/$(ls -la /nix/store | grep 'mate-polkit' | grep '4096' | awk '{print $9}' | sed -n '$p')/libexec/polkit-mate-authentication-agent-1" ">/dev/null" "2>&1" "&" // Polkit
+    spawn-at-startup "xwayland-satellite" // XWayland support 
+    spawn-at-startup "noctalia-shell" 
 
     prefer-no-csd // Disable program decorations
-// ────────────── Layout Settings ──────────────
-// https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 
+
+// ────────────── Layout Settings ─────────────     
+    
     layout {
-        gaps 16 // Gap between windows
+        gaps 12 // Gap between windows
         center-focused-column "never" // Don’t auto-center focused column
         default-column-width { proportion 0.5; }
 
         preset-column-widths {
-            proportion 0.25
+            proportion 0.33333
             proportion 0.5
-            proportion 0.75
-            proportion 1.0
+            proportion 0.66667
         }
 
         focus-ring {
@@ -185,9 +182,9 @@ binds {
         }
 
         shadow {
-            softness 30
+            softness 45
             spread 5
-            offset x=0 y=5
+            offset x=0 y=0
             color "#0007"
         }
 
@@ -247,7 +244,6 @@ binds {
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
     window-rule {
     match app-id=r#"^firefox$"#
-    default-column-width { proportion 0.9;}
     open-maximized true
     open-on-workspace "1"
 }
@@ -259,13 +255,7 @@ binds {
         open-maximized true
         default-column-width { proportion 0.9; }
     }
-    
-    window-rule {
-        match app-id="Alacritty$"
-        default-column-width { proportion 0.5; }
-        open-maximized true
-    }
-    
+        
     // Open the Firefox picture-in-picture window as floating with 480×270 size.
     window-rule {
         match app-id="pavucontrol$" 
@@ -317,3 +307,15 @@ binds {
 hotkey-overlay {
     skip-at-startup
 }
+
+gestures {
+    hot-corners { 
+        off
+    }
+}
+    
+
+include "dms/cursor.kdl"
+include "dms/binds.kdl"
+
+include "dms/outputs.kdl"

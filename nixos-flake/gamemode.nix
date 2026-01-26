@@ -25,6 +25,7 @@
     steam = {
       enable = true;
       dedicatedServer.openFirewall = true;
+      gamescopeSession.enable = true;
     };
   };
 }

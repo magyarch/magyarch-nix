@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, ... }:
+{ config, pkgs, unstable, inputs, ... }:
 
 
 {
@@ -17,10 +17,11 @@
       curl
       curlftpfs
       fd
+#      unstable.fresh
       lftp
 #      ghc
       eza
-      htop
+      btop
       lm_sensors
       util-linux
 #      fastfetch
@@ -32,15 +33,15 @@
       exfatprogs
       xfce.exo
       xclip
-     # st
+      st
 #      xwayland-satellite
       autotiling
 # --------------------------
 # X11/xorg pkg
-     #   xorg.libxcb
+#        xorg.libxcb
        xmonadctl
        xorg.xauth
-#        xdotool
+        xdotool
      #  xorg.xmodmap
       killall
       binutils
@@ -91,7 +92,7 @@
       zip
       zstd
       polybar
-      pyprland
+      unstable.pyprland
       unstable.pciutils
       unstable.usbutils
       imagemagick
@@ -109,16 +110,27 @@
 #      vulkan-loader
       yt-dlp
       ytarchive
- #     xorg.libxcb
- #     xdotool
- #     xorg.xdpyinfo
- #     xorg.xwininfo
+      xorg.libxcb
+      xdotool
+      xorg.xdpyinfo
+      xorg.xwininfo
       xorg.libX11
- #     xorg.libXft
+      xorg.libXft
+      xorg.xinit
       xorg.xrandr
+      xorg.libXinerama
+      harfbuzz
+      gnumake
+      gcc
+      binutils
+      pkg-config
       xdg-user-dirs
        xorg.xrdb
+        inputs.zen-browser.packages."${system}".default
+
     ];
+#      inputs.zen-browser.packages."${system}".default
+
 
    };
 }

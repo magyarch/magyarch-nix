@@ -1,6 +1,6 @@
 
  # My config
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, unstable, ... }:
 
 {
   imports = [
@@ -11,34 +11,37 @@
     ./services.nix
     ./amdgpu.nix
     # ./nvidia.nix
-    # ./nvidia-fan-daemon.nix
-#    ./appimage.nix
+     ./env.nix
+    ./appimage.nix
     ./gamemode.nix
-     ./bspwm.nix
+  #   ./bspwm.nix
     # ./i3.nix
 #     ./dwm.nix
-#     ./dwl.nix
+ #    ./xdg.nix
     ./plex.nix
     # ./ratpoison.nix
-    # ./spectrwm.nix
-#     ./hyprland.nix
+#     ./spectrwm.nix
+    # ./hyprland.nix
 #     ./herbst.nix
 #    ./wm.nix
     ./ssh.nix
     ./samba.nix
-    # ./plex.nix
-#     ./sway.nix
+     ./bluetooth.nix
+     ./sway.nix
     # ./jellyfin.nix
     # ./qtile.nix
  #    ./sddm.nix
-#    ./hyprland.nix
  #    ./stump.nix
 #      ./mango.nix
 #     ./xmonad.nix
- #    ./niri.nix
-   #   ./oxwm.nix
+#     ./niri.nix
+     ./noctalia.nix
+#      ./oxwm.nix
+#       ./dms.nix
+    inputs.dms.nixosModules.dank-material-shell
   ];
 
+   custom.kernel.enable = true;
 
    boot = {
       bootspec.enable = true;
@@ -59,6 +62,8 @@
         "amd_pstate=active"
         "nosplit_lock_mitigate"
         "clearcpuid=514"
+        "elevator=bfq"
+#        "amdgpu.ppfeaturemask=0xffffffff"
       ];
 
       kernel.sysctl = {
@@ -176,9 +181,13 @@ options = [ "defaults" "nofail" ];
 
   programs = {
      dconf.enable = true;
-     nix-ld.enable = true;  
-
-	   thunar = {
+   #  nix-ld.enable = true;
+     dank-material-shell = {
+     enable = true;
+      enableSystemMonitoring = true;
+  dgop.package = inputs.dgop.packages.${pkgs.system}.default;
+	   };
+       thunar = {
 	   enable = true;
 	   plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman thunar-media-tags-plugin ];
            };

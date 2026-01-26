@@ -9,19 +9,23 @@
   home.packages = with pkgs; [
        brave
        dunst
+#       unstable.dgop
        unstable.faugus-launcher
-       fancontrol-gui
        filezilla
        file-roller
-       firefox
+       firefox-esr
        fastfetch
        inxi
+#       st
        geany
 #       ghc
        jq
        mangohud
        maim
+       scrot
        mpc
+       unstable.mission-center
+ #      unstable.quickshell
        mpv
        ncmpcpp
        rmpc
@@ -36,8 +40,8 @@
        swww
        unstable.nsxiv
        unstable.heroic
-#       vesktop
-       discord
+       vesktop
+#       discord
  #      qutebrowser
        qbittorrent
        xwallpaper
@@ -47,7 +51,6 @@
        wmctrl
        unstable.cliphist
        wlr-randr
-
 #       wpsoffice
        (pkgs.st.overrideAttrs (_: {
       src = ./local-packages/st;
@@ -60,20 +63,7 @@
     (pkgs.slstatus.overrideAttrs (_: {
       src = ./local-packages/slstatus;
       patches = [ ];
-    }))
-#      surf
-      xorg.libxcb
-      xdotool
-      xorg.xdpyinfo
-      xorg.xwininfo
-      xorg.libX11
-      xorg.libXft
-      xorg.libXinerama
-      harfbuzz
-      gnumake
-      gcc
-      binutils
-      pkg-config
+    }))  
 
   ];
   

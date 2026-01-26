@@ -17,11 +17,8 @@ in
               structuredExtraConfig = with lib.kernel; {
                 HZ_1000 = yes;
                 HZ = freeform "1000";
-                PREEMPT_FULL = yes;
-                IOSCHED_BFQ = yes;
-                DEFAULT_BFQ = yes;
-                DEFAULT_IOSCHED = freeform "bfq";
-                V4L2_LOOPBACK = module;
+                PREEMPT_DYNAMIC = yes;
+                IOSCHED_BFQ = module;
                 HID = yes;
               };
             };

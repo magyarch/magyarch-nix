@@ -1,21 +1,17 @@
 # MagyArch Linux spectrwm keybinds #
 #########################################
 
-# Floating terminal emulator
-super + {_,shift + } Return
-    {$TERMINAL, scratch scratchpad}
-
 # Dmenu and rofi(window switcher, application launcher)
 super + {_,shift +} d
-    {rofi -show run, rofi -show window}
+    {rofi -show drun, rofi -show window}
 
 # Chat client, gui filemanager
 super + {_,shift + } p
-    {wmctrl -s 1 && discord,xdotool set_desktop 7 && thunar}
+    {wmctrl -s 1 && vesktop,xdotool set_desktop 7 && thunar}
 
 # Default web browser brave,tui browser
 super + {_,shift + } w
-    {wmctrl -s 0 && $BROWSER, rofi_run -b}
+    {wmctrl -s 0 && firefox-esr, rofi_run -b}
 
 # open gui text editor sublime
 super + {_,shift + } e
@@ -40,9 +36,6 @@ alt + {_,shift + }b
 super + Escape
     pkill -USR1 -x sxhkd ;\notify-send "Sxhkd újratölt."
 
-# Quit,reboot,shutdown
-super + r
-     $TERMINAL -e vifm
 
 # MPD and ncmpcpp
 super + shift + {n,u}

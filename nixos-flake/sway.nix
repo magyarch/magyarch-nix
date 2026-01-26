@@ -4,6 +4,7 @@
 {
   programs.sway = {
     enable = true;
+    wrapperFeatures.gtk = true;
     # Használd az unstable csomagból a sway-t
     package = unstable.sway;
     # opcionálisan extra konfigurációk...
@@ -17,19 +18,14 @@
     slurp # screenshot functionality
     wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
     mako # notification system developed by swaywm maintainer
-    wayland-protocols
-    wayland-utils
-    wlroots
     wlogout
-    waybar
+#    waybar
     wlsunset
-    wofi
+#    wofi
     wf-recorder
-    fuzzel
-    wtype
-    dotool
     swww
-    xdg-desktop-portal-wlr
+    swaybg
+#    xdg-desktop-portal-wlr
     jq
     copyq
     cliphist

@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-wmctrl -l | awk '{print $1}' | while read APP; do
-wmctrl -i -c $APP || echo "$APP not killed"
-done
+while read -r APP; do
+    wmctrl -i -c "$APP" || echo "$APP not closed"
+done < <(wmctrl -l | awk '{print $1}')
+
+
 

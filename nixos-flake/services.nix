@@ -59,11 +59,9 @@
       "/run/user/1000"; # User-id 1000 must match above user. MPD will look inside this directory for the PipeWire socket.
   };
 
+  services.power-profiles-daemon.enable = true;
 # #= IRQBalance
        services.irqbalance.enable = true;
-       services.udev.extraRules = ''
-      ACTION=="add|change", SUBSYSTEM=="block", ATTR{queue/scheduler}="bfq"
-    '';
 
    virtualisation.podman = {
   enable = true;

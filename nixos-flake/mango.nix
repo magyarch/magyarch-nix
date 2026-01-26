@@ -2,18 +2,7 @@
 
 {
   programs.mango.enable = true;
-     xdg.portal = {
-      enable = true;
-      xdgOpenUsePortal = true;
-      config.common.default = ["wlr"];
-      wlr.enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
-        xdg-desktop-portal-wlr
-        xdg-desktop-portal
-      ];
-    };
-
+    
   environment.systemPackages = with pkgs; [
 #    foot
 #    wmenu
@@ -25,6 +14,7 @@
     wofi
     wlogout
     waybar
+    mako
  #   firefox
     
 

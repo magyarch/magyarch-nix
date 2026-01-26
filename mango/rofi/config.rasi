@@ -18,7 +18,7 @@
 }
 
 configuration {
-    font: "Maple Mono NF CN bold 16";
+    font: "Maple Mono NF CN bold 12";
     modi: "drun";
     show-icons: true;
     sort: true;

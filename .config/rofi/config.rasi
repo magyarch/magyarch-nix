@@ -11,8 +11,8 @@ configuration {
 	display-ssh: "~#";
 	show-icons: true;
 	sidebar-mode: false;
-	font: "Source Code Pro Medium 11";
-    dpi : 120;
+	font: "Source Code Pro Medium 12";
+    dpi: 120;
 }
 
 * {

@@ -230,7 +230,7 @@ hc rule class~'(VirtualBox Manager|Vmplayer|qBittorrent)' tag='' switchtag=on
 hc rule class~'(Thunar|Pcmanfm|Nemo)' tag='' switchtag=on focus=on
 hc rule class~'(Shotcut|Gpick)' tag='' switchtag=on pseudotile=on focus=on
 hc rule class~'(gimp|Gimp)' tag='' switchtag=on focus=on
-hc rule class~'(Zathura|zathura|upc.exe|steam|Steam)' tag='' switchtag=on floating=on focus=on
+hc rule class~'(Zathura|zathura|upc.exe|steam|Steam)' tag='' switchtag=on focus=on
 hc rule class~'dropterm' floating=on floatplacement=none floating_geometry=1400x800+760+25
 
 

@@ -8,7 +8,7 @@ dim_inactive_colors.urgent    #aa0000aa
 # Blur effekt
 # értéktartomány: passes (0-10), radius (0-10),
 # noise (0.0-1.0), brightness/contrast/saturation (0.0-2.0)
-blur disable
+blur enable
 blur_passes 3
 blur_radius 7
 blur_noise 0.02

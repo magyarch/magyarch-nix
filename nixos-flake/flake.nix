@@ -24,15 +24,36 @@
       flake = false;
     };
 
+    zen-browser = { 
+         url = "github:0xc000022070/zen-browser-flake";
+         inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     mangowc = {
       url = "github:DreamMaoMao/mangowc";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    dgop = {
+      url = "github:AvengeMedia/dgop";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+  
 
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, mangowc, oxwm, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, noctalia, mangowc, dms, dgop, zen-browser, ... }@inputs:
     let
       system = "x86_64-linux";
 
@@ -56,11 +77,12 @@
         modules = [
           ./configuration.nix
           ./hardware-configuration.nix
-        # xlibre-overlay.nixosModules.overlay-xlibre-xserver
-        # xlibre-overlay.nixosModules.overlay-xlibre-xf86-input-libinput
-         
-         oxwm.nixosModules.default
-         # Mangowc as window compositor
+ #        xlibre-overlay.nixosModules.overlay-xlibre-xserver
+ #        xlibre-overlay.nixosModules.overlay-xlibre-xf86-input-libinput
+
+#         oxwm.nixosModules.default
+        
+        # Mangowc as window compositor
           mangowc.nixosModules.mango
 
           # Home Manager integration
