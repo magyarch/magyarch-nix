@@ -14,14 +14,15 @@
     enable32Bit = true;
     extraPackages = with pkgs; [
         unstable.libva-vdpau-driver
-        #libvdpau-va-gl
+        unstable.libvdpau-va-gl
         unstable.libva
         unstable.vulkan-loader
         unstable.vulkan-validation-layers
+        rocmPackages.clr.icd
       ];
       extraPackages32 = with pkgs; [
         unstable.libva-vdpau-driver
-        #libvdpau-va-gl
+        unstable.libvdpau-va-gl
         unstable.libva
        
       ];

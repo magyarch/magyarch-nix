@@ -4,11 +4,8 @@
 {
   programs.sway = {
     enable = true;
-    wrapperFeatures.gtk = true;
-    # Használd az unstable csomagból a sway-t
     package = unstable.sway;
-    # opcionálisan extra konfigurációk...
-  };
+  };  
 
 #{
   environment.systemPackages = with pkgs; [

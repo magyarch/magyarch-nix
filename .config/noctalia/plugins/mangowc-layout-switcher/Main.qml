@@ -2,15 +2,19 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import qs.Services.UI
+import qs.Services.Compositor
 
 Item {
   id: root
 
   property var pluginApi: null
 
+  visible: CompositorService.isMango
+
   IpcHandler {
     target: "plugin:mangowc-layout-switcher"
     function toggle() {
+      if (!CompositorService.isMango) return
       if (pluginApi) {
         pluginApi.withCurrentScreen(screen => {
           pluginApi.openPanel(screen);
@@ -20,6 +24,10 @@ Item {
   }
 
   // ===== PUBLIC DATA =====
+  Component.onCompleted: {
+    if (!CompositorService.isMango) return
+    refresh()
+  }
 
   property var monitorLayouts: ({})
   property var availableLayouts: []
@@ -174,10 +182,6 @@ Item {
     if (!eventWatcher.running) eventWatcher.running = true
   }
 
-  function getMonitorLayout(monitorName) {
-    return root.monitorLayouts[monitorName] || "?"
-  }
-
   function setLayout(monitorName, layoutCode) {
     if (!monitorName || !layoutCode) return
 
@@ -192,6 +196,4 @@ Item {
     root.availableMonitors.forEach(m => setLayout(m, layoutCode))
     ToastService.showNotice("Global layout set: " + layoutCode)
   }
-
-  Component.onCompleted: refresh()
 }

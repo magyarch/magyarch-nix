@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, inputs, ... }:
+{ config, pkgs, unstable, ... }:
 
 
 {
@@ -16,6 +16,7 @@
       unstable.mesa
       curl
       curlftpfs
+      corectrl
       fd
 #      unstable.fresh
       lftp
@@ -40,7 +41,6 @@
 # X11/xorg pkg
 #        xorg.libxcb
        xmonadctl
-       xorg.xauth
         xdotool
      #  xorg.xmodmap
       killall
@@ -64,7 +64,7 @@
       vkbasalt
 #      i3blocks
       mate.mate-polkit
-      mesa
+#     unstable.mesa
 # -------------------------------
       neovim
       networkmanagerapplet
@@ -72,7 +72,6 @@
       nwg-look
       ueberzugpp
       arj
-      brotli
       bzip2
       cpio
       gnutar
@@ -92,7 +91,7 @@
       zip
       zstd
       polybar
-      unstable.pyprland
+ #     unstable.pyprland
       unstable.pciutils
       unstable.usbutils
       imagemagick
@@ -110,23 +109,23 @@
 #      vulkan-loader
       yt-dlp
       ytarchive
-      xorg.libxcb
+      libxcb
       xdotool
-      xorg.xdpyinfo
-      xorg.xwininfo
-      xorg.libX11
-      xorg.libXft
-      xorg.xinit
-      xorg.xrandr
-      xorg.libXinerama
-      harfbuzz
-      gnumake
-      gcc
-      binutils
-      pkg-config
+#      xorg.xdpyinfo
+#      xorg.xwininfo
+#      xorg.libX11
+#      xorg.libXft
+#      xorg.xinit
+#      xorg.xrandr
+#      xorg.libXinerama
+#      harfbuzz
+#      gnumake
+#      gcc
+  #    binutils
+ #     pkg-config
       xdg-user-dirs
        xorg.xrdb
-        inputs.zen-browser.packages."${system}".default
+#        inputs.zen-browser.packages."${system}".default
 
     ];
 #      inputs.zen-browser.packages."${system}".default

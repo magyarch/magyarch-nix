@@ -32,13 +32,14 @@
     # ./qtile.nix
  #    ./sddm.nix
  #    ./stump.nix
-#      ./mango.nix
+     ./mango.nix
 #     ./xmonad.nix
 #     ./niri.nix
      ./noctalia.nix
 #      ./oxwm.nix
 #       ./dms.nix
     inputs.dms.nixosModules.dank-material-shell
+#    inputs.noctalia.nixosModules.noctalia
   ];
 
    custom.kernel.enable = true;
@@ -59,15 +60,15 @@
       };
 
       kernelParams = [
-        "amd_pstate=active"
+#        "amd_pstate=active"
         "nosplit_lock_mitigate"
         "clearcpuid=514"
         "elevator=bfq"
-#        "amdgpu.ppfeaturemask=0xffffffff"
+        "amdgpu.ppfeaturemask=0xffffffff"
       ];
 
       kernel.sysctl = {
-        "kernel.split_lock_mitigate" = 0;
+ #       "kernel.split_lock_mitigate" = 0;
         "vm.swappiness" = 10;
         "vm.vfs_cache_pressure" = 50;
         "vm.dirty_bytes" = 268435456;
@@ -84,6 +85,15 @@
       consoleLogLevel = 0;
       initrd.verbose = false;
       tmp.cleanOnBoot = true;
+ 
+  kernelPatches = [{
+  name = "disable-qcom-pmic-glink";
+  patch = null;
+  extraConfig = ''
+    QCOM_PMIC_GLINK n
+  '';
+}];
+
     };
 
 
@@ -133,7 +143,7 @@ options = [ "defaults" "nofail" ];
     allowUnfree = true;
     allowUnsupportedSystem = true;
   #allowBroken = true;
-   nvidia.accept_license = true;
+ #  nvidia.accept_license = true;
     joypixels.acceptLicense = true;
   };
 
@@ -304,20 +314,6 @@ options = [ "defaults" "nofail" ];
     nerd-fonts.jetbrains-mono
   #  (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
-
-
-#  networking.firewall.allowedTCPPorts = [ 445 139 ];
-#  networking.firewall.allowedUDPPorts = [ 137 138 ];
-  
-  
-   # Automatic Updates
-  system.autoUpgrade = {
-    enable = true;
-    dates = "weekly"; # csak hetente egyszer fusson, nem bootnál
-    persistent = true;
-    randomizedDelaySec = "30min";
-    channel = "https://nixos.org/channels/nixos-25.05";
-  };
 
 
    # Nix Package Management

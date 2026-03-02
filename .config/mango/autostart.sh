@@ -10,6 +10,7 @@ wlr-randr --output DP-1 --mode 2560x1440@144 --scale 1.25 >/dev/null 2>&1 &
 # top bar
 #waybar -c ~/.config/mango/waybar/config.jsonc -s ~/.config/mango/waybar/style.css 
 noctalia-shell
+#dms run
 
 dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots 
 

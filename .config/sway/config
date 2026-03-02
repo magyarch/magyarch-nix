@@ -46,7 +46,7 @@ floating_modifier $mod
  exec_always --no-startup-id /nix/store/$(ls -la /nix/store | grep 'mate-polkit' | grep '4096' | awk '{print $9}' | sed -n '$p')/libexec/polkit-mate-authentication-agent-1 &
 exec --no-startup-id swww-daemon >/dev/null 2>&1 &
 exec --no-startup-id swww init && swww img ~/.local/bin/wallpapers/Future/xy.png
-exec --no-startup-id exec wlsunset -l 16.6 -L 47.6
+#exec --no-startup-id exec wlsunset -l 16.6 -L 47.6
 exec --no-startup-id systemctl --user import-environment DISPLAY WAYLAND_DISPLAYSWAYSOCK
 exec --no-startup-id hash dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAYSWAYSOCK
 exec_always autotiling
