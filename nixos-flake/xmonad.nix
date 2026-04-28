@@ -1,7 +1,14 @@
 { config, pkgs, ...}:
 
 {
-  services.xserver.enable = true;
+      # List services that you want to enable:
+ services.xserver = {
+        enable = true;
+       xkb.layout = "hu";
+       xkb.variant = "";
+#	dpi = 144;
+};
+
   services.xserver.windowManager.xmonad = {
     enable = true;
     enableContribAndExtras = true;
@@ -20,16 +27,10 @@
                
   ];
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    config.common.default = "*"; # opcionális
-  };
-
   environment.variables = {
 #                 GDK_SCALE = "1.33";
  #                GDK_DPI_SCALE = "0.5";
-                 XCURSOR_SIZE = "32";
+#                 XCURSOR_SIZE = "32";
     # #           DISPLAY=":  0";
   #               QT_SCALE_FACTOR = "1.33";
     #             QT_AUTO_SCREEN_SCALE_FACTOR = "auto";

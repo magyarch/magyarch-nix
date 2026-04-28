@@ -17,70 +17,30 @@
       "network.cookie.lifetimePolicy" = 0;
     };
   };
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = "firefox.desktop";
+    };
+  };
 
   home.packages = with pkgs; [
 #       brave
-       dunst
-#       unstable.gajim
-       unstable.dino
-#       element-desktop
-#       unstable.schildichat-web
-       unstable.faugus-launcher
-       filezilla
-       file-roller
-       firefox-esr
-#       unstable.microsoft-edge
-       fastfetch
-       inxi
-       handbrake
-#       st
-       geany
-#       ghc
-       jq
-       mangohud
-       maim
-       scrot
-       mpc
-#       unstable.mission-center
- #      unstable.quickshell
-       mpv
-       ncmpcpp
-       rmpc
-       rofi
-       pavucontrol
-       pulsemixer
-       protonplus
-       sublime3
-       sxhkd
-#       stremio
-#       slstatus
-       swww
-       unstable.nsxiv
-       unstable.heroic
-       vesktop
-#       discord
- #      qutebrowser
-       qbittorrent
-       xwallpaper
-       xwayland-satellite
-       lxappearance
-       picom-pijulius
-       wmctrl
-       unstable.cliphist
-       wlr-randr
+        protontricks
+        vkbasalt
 #       wpsoffice
-       (pkgs.st.overrideAttrs (_: {
-      src = ./local-packages/st;
-      patches = [ ];
-    }))
-    (pkgs.dmenu.overrideAttrs (_: {
-      src = ./local-packages/dmenu;
-      patches = [ ];
-    }))
-    (pkgs.slstatus.overrideAttrs (_: {
-      src = ./local-packages/slstatus;
-      patches = [ ];
-    }))  
+#       (pkgs.st.overrideAttrs (_: {
+#      src = ./local-packages/st;
+#      patches = [ ];
+#    }))
+#    (pkgs.dmenu.overrideAttrs (_: {
+#      src = ./local-packages/dmenu;
+#      patches = [ ];
+#    }))
+#    (pkgs.slstatus.overrideAttrs (_: {
+#       src = ./local-packages/slstatus;
+#      patches = [ ];
+#    }))  
 
   ];
   

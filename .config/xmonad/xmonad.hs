@@ -255,7 +255,7 @@ dbusOutput dbus str = do
 myStartupHook = do
      spawnOnce "(sleep 1s && ~/.config/polybar/launch.sh) &"
      spawnOnce "sxhkd -c ~/.config/xmonad/sxhkdrc &"
-     spawnOnce "pkill setbg && ~/.local/bin/tools/setbg &"
+     spawnOnce "~/.xprofile &"
 ------------------------------------------------------------------------
 -- Command to launch the bar.
 --myBar = "xmobar"

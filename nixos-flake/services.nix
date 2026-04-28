@@ -1,22 +1,14 @@
 { config, lib, pkgs, ... }:
 
 {
-    # List services that you want to enable:
-    services.xserver = {
-#        enable = true;
-	xkb.layout = "hu";
-	xkb.variant = "";
-	dpi = 144;
-};
-    
-
-       services.displayManager.ly = {
+        
+  services.displayManager.ly = {
        enable = true;   
      };
    
     services = {
            printing.enable = true;
-           printing.drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
+           printing.drivers = [ pkgs.hplip pkgs.hplipWithPlugin ];
 	   avahi.enable = true;
 	   avahi.nssmdns4 = true;
 	   avahi.openFirewall = true;

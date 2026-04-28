@@ -15,24 +15,24 @@
     ./appimage.nix
     ./gamemode.nix
   #   ./bspwm.nix
-    # ./i3.nix
+#     ./i3.nix
 #     ./dwm.nix
- #    ./xdg.nix
-    ./plex.nix
+     ./xdg.nix
+#    ./plex.nix
     # ./ratpoison.nix
 #     ./spectrwm.nix
     # ./hyprland.nix
 #     ./herbst.nix
 #    ./wm.nix
     ./ssh.nix
-    ./samba.nix
-     ./bluetooth.nix
+ #   ./samba.nix
+#     ./bluetooth.nix
      ./sway.nix
     # ./jellyfin.nix
     # ./qtile.nix
  #    ./sddm.nix
  #    ./stump.nix
-     ./mango.nix
+#     ./mango.nix
 #     ./xmonad.nix
 #     ./niri.nix
      ./noctalia.nix
@@ -96,14 +96,6 @@
 
     };
 
-
- zramSwap = {
-      enable = true;
-      algorithm = "lz4";
-      memoryPercent = 50;
-      priority = 100;
-    };
-
 networking.networkmanager = {
         enable = true;
       };
@@ -139,7 +131,8 @@ options = [ "defaults" "nofail" ];
 
 }; 
 
-  nixpkgs.config = {
+
+nixpkgs.config = {
     allowUnfree = true;
     allowUnsupportedSystem = true;
   #allowBroken = true;
@@ -175,7 +168,7 @@ options = [ "defaults" "nofail" ];
   users.users.xeoncpu = {
     isNormalUser = true;
     description = "xeoncpu";
-   extraGroups = [ "users" "audio" "video" "networkmanager" "wheel" "input" "disk" "samba" "kwm" ];
+   extraGroups = [ "users" "audio" "video" "networkmanager" "wheel" "input" "disk" "samba" "kwm" "gamemode" "docker" ];
    # packages = with pkgs; [
     #  firefox
     #  thunderbird
@@ -250,7 +243,7 @@ options = [ "defaults" "nofail" ];
       syntaxHighlighting.enable = true;
       autosuggestions.enable = true;
       shellAliases = {
-         nrs="cd ~/nixos-flake && sudo nixos-rebuild switch --flake .#nixos";
+         nrs="cd ~/nixos-flake && nix flake update && sudo nixos-rebuild switch --flake .#nixos";
          cdn="cd ~/nixos-flake";
          addunstable="sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos";
          addstable="sudo nix-channel --add https://nixos.org/channels/nixos-25.05 nixos";
@@ -307,10 +300,6 @@ options = [ "defaults" "nofail" ];
     font-awesome_4
     source-code-pro
     joypixels
-    dejavu_fonts
-    terminus_font
-    terminus_font_ttf
-    liberation_ttf
     nerd-fonts.jetbrains-mono
   #  (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
@@ -331,7 +320,7 @@ options = [ "defaults" "nofail" ];
   system.stateVersion = "25.11"; # Did you read the comment?
 
   nixpkgs.config.permittedInsecurePackages = [
-                "openssl-1.1.1w" "ventoy-1.1.07" "mbedtls-2.28.10" "qtwebengine-5.15.19" 
+                "openssl-1.1.1w" "ventoy-1.1.10" "mbedtls-2.28.10" "qtwebengine-5.15.19" 
               ];
   
 

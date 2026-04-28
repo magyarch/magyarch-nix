@@ -9,7 +9,12 @@
 
     oxwm = {
       url = "github:tonybanters/oxwm";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    
+    zig = {
+      url = "github:mitchellh/zig-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
@@ -47,7 +52,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, mangowm, noctalia, dgop, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, noctalia, dgop, zig, oxwm, ... }@inputs:
     let
       system = "x86_64-linux";
       
@@ -66,8 +71,9 @@
         modules = [
           ./configuration.nix
           ./hardware-configuration.nix
-          
-          mangowm.nixosModules.mango
+           
+           oxwm.nixosModules.default
+#          mangowm.nixosModules.mango
           home-manager.nixosModules.home-manager
 
           {

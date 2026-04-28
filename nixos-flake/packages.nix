@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, ... }:
+ {config, pkgs, unstable, ... }:
 
 
 {
@@ -10,6 +10,9 @@
       kitty
 # -------------------------
 # Utilities
+      ayu-theme-gtk
+      arc-theme
+#      kvantum
       acpi
       bat
       bc
@@ -18,14 +21,22 @@
       curlftpfs
       corectrl
       fd
-#      unstable.fresh
+#      dmenu
+#      gnome-disk-utility
+#      isoimagewriter
+#      unstable.dino
       lftp
 #      ghc
       eza
+      eog
+      nwg-displays
+      nwg-drawer
+      ytmdl
       btop
       lm_sensors
       util-linux
 #      fastfetch
+      unstable.goverlay
       fzf
       ntfs3g
       ripgrep
@@ -34,43 +45,43 @@
       exfatprogs
       xfce.exo
       xclip
-      st
+ #     st
+      unstable.signal-desktop
+      mkvtoolnix
 #      xwayland-satellite
       autotiling
 # --------------------------
 # X11/xorg pkg
 #        xorg.libxcb
-       xmonadctl
-        xdotool
+#       xmonadctl
+#        xdotool
      #  xorg.xmodmap
       killall
       binutils
      # rlwrap
      # ratpoison.contrib
       # dzen2
-      eww
+ #     eww
     #  feh
       ffmpeg-full
+      ffmpegthumbnailer
       git
-      #handbrake
       #jamesdsp
       imagemagick
       libnotify
-      libbsd
-      libva
-      libva-utils
-      libvdpau-va-gl
 #      vaapiVdpau
       vkbasalt
+      protontricks
 #      i3blocks
       mate.mate-polkit
-#     unstable.mesa
 # -------------------------------
       neovim
       networkmanagerapplet
       nix-search-cli
       nwg-look
-      ueberzugpp
+ #     microsoft-edge
+      firefox
+      ueberzug
       arj
       bzip2
       cpio
@@ -88,43 +99,79 @@
       unrar
       unzip
       xz
-      zip
       zstd
       polybar
- #     unstable.pyprland
-      unstable.pciutils
-      unstable.usbutils
-      imagemagick
-      system-config-printer
-      # stalonetray
-#      stremio
-#      slstatus
+#      system-config-printer
       ventoy-full
       # onlyoffice-desktopeditors
       wineWowPackages.full
       wineWowPackages.waylandFull
+      wmctrl
       vifm
-      wmenu
+       faugus-launcher
+       usbimager
+       qimgv
+       filezilla
+       file-roller
+       firefox-esr
+       fastfetch
+       inxi
+       handbrake
+       geany
+       jq
+       mangohud
+#       maim
+#       scrot
+       mpc
+       mpv
+       ncmpcpp
+       rmpc
+       rofi
+       pavucontrol
+       pulsemixer
+       protonplus
+       protontricks
+#       sublime3
+#       sxhkd
+#       stremio
+#       slstatus
+       swww
+       unstable.nsxiv
+       unstable.heroic
+#       vesktop
+#       discord
+ #      qutebrowser
+       qbittorrent
+       xwallpaper
+#       xwayland-satellite
+       lxappearance
+       picom-pijulius
+       wmctrl
+       unstable.cliphist
+#       wlr-randr
+#      wmenu
       vulkan-tools
 #      vulkan-loader
       yt-dlp
       ytarchive
       libxcb
       xdotool
-#      xorg.xdpyinfo
-#      xorg.xwininfo
-#      xorg.libX11
-#      xorg.libXft
+      xorg.xdpyinfo
+      xorg.xwininfo
+      xorg.libX11
+      xorg.libXft
 #      xorg.xinit
 #      xorg.xrandr
-#      xorg.libXinerama
+      xorg.libXinerama
+#      zig
 #      harfbuzz
 #      gnumake
 #      gcc
   #    binutils
- #     pkg-config
+      pkg-config
       xdg-user-dirs
-       xorg.xrdb
+ #      xorg.xrdb
+#        winboat
 #        inputs.zen-browser.packages."${system}".default
 
     ];

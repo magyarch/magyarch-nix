@@ -23,7 +23,7 @@ super + shift + i
 
 # S,R,lock script,calendar app
 super + {_,shift + } c
-    {$HOME/.config/xmonad/rofi_power, eww open --toggle powermenu}
+    {rofi_power, eww open --toggle powermenu}
 
 # Default web browser brave and firefox
 super + {_,shift + } w

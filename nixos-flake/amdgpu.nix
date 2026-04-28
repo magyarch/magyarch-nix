@@ -19,6 +19,7 @@
         unstable.vulkan-loader
         unstable.vulkan-validation-layers
         rocmPackages.clr.icd
+        vkbasalt
       ];
       extraPackages32 = with pkgs; [
         unstable.libva-vdpau-driver

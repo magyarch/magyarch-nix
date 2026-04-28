@@ -6,8 +6,13 @@
 
 {
    
-  services.xserver.enable = true;
-  services.xserver.windowManager.herbstluftwm.enable = true;
+services.xserver = {
+    enable = true;
+	xkb.layout = "hu";
+	xkb.variant = "";
+	dpi = 125;
+};
+services.xserver.windowManager.herbstluftwm.enable = true;
 #  xsession.windowManager.herbstluftwm.enable = true;
  # services.xserver.windowManager.herbstluftwm.configFile = /home/xeoncpu/.config/herbstluftwm/autostart;
 #  services.xserver.windowManager.herbstluftwm.package = /etc/nixos/pkgs.herbst.nix;
@@ -16,5 +21,4 @@ services.displayManager = {
          defaultSession = "none+herbstluftwm";
   };
  
-   
 }
