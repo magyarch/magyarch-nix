@@ -1,7 +1,9 @@
 # i3 config file by xeoncpu
 
-
-output DP-1 scale 1.25
+#output DP-1 res 2560x1440@144Hz scale 1.25
+#output DP-2 res 1920x1080@60Hz pos 0 1440 transform 270 scale 1.1
+output DP-1 res 2560x1440@144Hz scale 1.25 pos 982 261
+output DP-2 pos 0 0 res 1920x1080@60.0Hz transform 270 scale 1.1 
 
 # Input configuration
 input * {
@@ -16,55 +18,41 @@ set $env XDG_SESSION_TYPE wayland
 
 
 # Gaps ####################################################################################
-
-gaps outer 8
-gaps inner 8
+gaps outer 6
+gaps inner 6
 
 set $mod Mod4
 set $alt Mod1
 
 # Basic definition #######################################################################
-
 for_window [app_id="^.*"] border pixel 3
 #for_window [app_id="^"] split toggle
-
-
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # Only initiate a tiling drag when the modifier is held:
-#tiling_drag modifier titlebar
-
-
-# Font for window titles. Will also be used by the bar unless a different font ##############
-# is used in the bar {} block below.
-#font pango:Source Code Pro 9
+#tiling_drag modifier $mod
 
 # Autostart  ######################################################
 # exec --no-startup-id xrandr --dpi 192
- exec_always --no-startup-id /nix/store/$(ls -la /nix/store | grep 'mate-polkit' | grep '4096' | awk '{print $9}' | sed -n '$p')/libexec/polkit-mate-authentication-agent-1 &
-exec --no-startup-id swww-daemon >/dev/null 2>&1 &
-exec --no-startup-id swww init && swww img ~/.local/bin/wallpapers/Future/xy.png
+exec_always --no-startup-id /nix/store/$(ls -la /nix/store | grep 'mate-polkit' | grep '4096' | awk '{print $9}' | sed -n '$p')/libexec/polkit-mate-authentication-agent-1 &
+#exec --no-startup-id swww-daemon >/dev/null 2>&1 &
+#exec --no-startup-id swww init && swww img ~/.local/bin/wallpapers/Future/xy.png
 #exec --no-startup-id exec wlsunset -l 16.6 -L 47.6
-exec --no-startup-id systemctl --user import-environment DISPLAY WAYLAND_DISPLAYSWAYSOCK
-exec --no-startup-id hash dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAYSWAYSOCK
 exec_always autotiling
-exec --no-startup-id dms run
-#exec_always --no-startup-id noctalia-shell 
+#exec --no-startup-id dms run
+exec_always --no-startup-id noctalia-shell 
 #exec_always --no-startup-id wlr-randr --output DP-2 --mode 2560x1440@144 --scale 1.25 >/dev/null 2>&1 &
 
-
-
+# sway does not set DISPLAY/WAYLAND_DISPLAY in the systemd user environment
+# See FS#63021
+# Adapted from xorg's 50-systemd-user.sh, which achieves a similar goal.
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
 # Workspaces ######################################################
-
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
-# orientation for new workspaces
-
-
-
 set $ws1 "1: WWW.. ☢️"
 set $ws2 "2: Chat 🤬"
 set $ws3 "3: Editor ⚒️"
@@ -76,20 +64,19 @@ set $ws8 "8: Vifm 🗃️"
 set $ws9 "9: Spotify 📀"
 set $ws10 "10: Terminals 🎯"
 
-# example for dual monitors
+# Example for dual monitors ###########################################
+set $monitor1 "DP-1"
+set $monitor2 "DP-2"
 
-#set $monitor1 "DP-0"
-#set $monitor2 "HDMI-0"
-
-#workspace $ws1 output $monitor1
-#workspace $ws2 output $monitor2
-#workspace $ws3 output $monitor1
-#workspace $ws4 output $monitor1
-#workspace $ws5 output $monitor1
-#workspace $ws6 output $monitor1
-#workspace $ws7 output $monitor1
-#workspace $ws8 output $monitor1
-#workspace $ws9 output $monitor1
+workspace $ws1 output $monitor1
+workspace $ws2 output $monitor2
+workspace $ws3 output $monitor1
+workspace $ws4 output $monitor1
+workspace $ws5 output $monitor1
+workspace $ws6 output $monitor1
+workspace $ws7 output $monitor1
+workspace $ws8 output $monitor1
+workspace $ws9 output $monitor1
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -116,8 +103,7 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+odiaeresis move container to workspace number $ws10
 
 
-
-# Moving workspaces between screens
+# Moving workspaces between screens ###################################
 bindsym $mod+Shift+m move workspace to output right
 
 # _move_ the focused window with the same, but add Shift
@@ -126,26 +112,25 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# Move your focus around
+# Move your focus around ###########################################
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# Toggle the current focus between tiling and floating mode
+# Toggle the current focus between tiling and floating mode ########
 bindsym $mod+Shift+space floating toggle
-# Swap focus between the tiling area and the floating area
+# Swap focus between the tiling area and the floating area #######
 bindsym $mod+space focus mode_toggle
 
-
-# Focus between output
+# Focus between output ############################################
 bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+Return exec scratch scratchpad
 bindsym $mod+d exec rofi -show drun
-bindsym $mod+Shift+e exec subl
+bindsym $mod+Shift+e exec geany
 bindsym $mod+Shift+p exec thunar
-bindsym $mod+p exec vesktop 
-bindsym $mod+w exec firefox-esr
+bindsym $mod+p exec signal-desktop 
+bindsym $mod+w exec firefox
 bindsym $mod+F5 exec grim -g "$(slurp)" ~/Képek/screenshot.png
 bindsym $mod+q kill
 bindsym $mod+Shift+n exec scratch Music
@@ -155,7 +140,6 @@ bindsym $mod+Ctrl+o exec rofi-open
 bindsym $mod+Ctrl+w exec set-wallpaper.sh
 bindsym $alt+Up exec pamixer -i 5
 bindsym $alt+Down exec pamixer -d 5
-
 bindsym $mod+Shift+Escape reload
 bindsym $mod+c exec wlogout
 bindsym $mod+f fullscreen toggle
@@ -163,7 +147,7 @@ bindsym $mod+Shift+t layout tabbed
 bindsym $mod+e layout toggle split
 bindsym $mod+v splitv
 
-# resize window
+# resize window #####################################################xx
 bindsym $mod+Ctrl+Left resize shrink width 20px
 bindsym $mod+Ctrl+Right resize grow width 20px
 
@@ -193,17 +177,17 @@ bindsym $mod+Ctrl+Right resize grow width 20px
 # }
 
 # bindsym $mod+z mode "resize"
-# Nagyítás be/ki kapcsolása
+
+# Nagyítás be/ki kapcsolása ###############################################
 bindsym $mod+z exec swaymsg exec "swaymsg seat seat0 zoom toggle"
 
 
 # Floating enable #####################################################################
-
 for_window [app_id="Pinentry"] sticky enable
 #for_window [app_id="ncmpcpp"] floating enable, resize set 1280 620, move position center, focus
 for_window [app_id="rmpc"] floating enable, resize set 1276px 814px
 
-# Scratchpad:
+# Scratchpad #################################################################
 #
     # Sway has a "scratchpad", which is a bag of holding for windows.
     # You can send windows there and get them back later.
@@ -219,20 +203,20 @@ for_window [app_id="pavucontrol"] floating enable
 for_window [app_id="galculator"] floating enable
 for_window [app_id="kitty"] floating enable, resize set 1280 720
 for_window [app_id="nwg-look"] floating enable
-for_window [app_id="mpv"] floating enable, resize set 1280 720
+for_window [app_id="mpv"] floating enable, resize set 640 480
 for_window [app_id="qimgv"] floating enable, resize set 1280 720
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="dialog"] floating enable
+for_window [window_type="dialog"] floating enable
 
-
-
-
-# # for my 4k resolution
 # for_window [app_id="Pinentry"] sticky enable
-# for_window [app_id="sent"] border pixel 0px
+ for_window [app_id="sent"] border pixel 0px
 # for_window [title="GIMP Startup"] move workspace $ws5
 # for_window [app_id="Gimp"] move workspace $ws5
 # for_window [title="^QEMU$"] floating enable
-# for_window [window_role="GtkFileChooserDialog"] resize set 1680 1020
-# for_window [window_role="GtkFileChooserDialog"] move position center
+ for_window [window_role="GtkFileChooserDialog"] floating enable, resize set 640 480 
+ for_window [window_role="GtkFileChooserDialog"] move position center
 # for_window [title="Default - Wine desktop"] floating enable
 # for_window [app_id="(?i)Pavucontrol|mupdf|sxiv|feh"] floating enable, resize set 1680 1020, move position center, focus
 # for_window [app_id="(?i)mpv"] floating enable, resize set 1680 1020, move position center, focus
@@ -240,19 +224,14 @@ for_window [app_id="qimgv"] floating enable, resize set 1280 720
  for_window [app_id="rmpc"] floating enable
  for_window [app_id="rmpc"] scratchpad show
 # for_window [app_id="Lxappearance|system-config-printer|System-config-printer.py"] floating enable, resize set 1680 1020, move position center, focus
-
-
 # for_window [title="float"] floating enable, resize set 1080 800, move position center, focus
 # for_window [title="floating"] floating enable, resize set 1680 1020, move position center, focus
-
 # for_window [window_role="pop-up"] floating enable
 # for_window [window_role="task_dialog"] floating enable
 
-
-
 # Assign application to workspace ####################################################
-assign [app_id="subl|Subl|Subl3|subl3"] $ws3
-for_window [app_id="subl|Subl|Subl3|subl3"] focus
+assign [app_id="geany|Subl|Subl3|subl3"] $ws3
+for_window [app_id="geany|Subl|Subl3|subl3"] focus
 
 assign [app_id="$BROWSER|Brave-browser|Microsoft-edge|firefox"] $ws1
 for_window [app_id="$BROWSER|Brave-browser|Microsoft-edge|firefox"] focus
@@ -261,18 +240,17 @@ assign [app_id="qBittorrent"] $ws7
 for_window [app_id="qBittorrent"] focus
 
 #assign [app_id="discord|Discord"] $ws2
-assign [app_id="vesktop"] $ws2
-for_window [app_id="vesktop|Vesktop"] focus
+assign [app_id="signal"] $ws2
+for_window [app_id="signal|Vesktop"] focus
 
-assign [app_id="steam|Steam"] $ws5
-for_window [app_id="steam|Steam"] focus
+assign [title="Steam"] $ws5
+for_window [title="Steam"] focus
 
 assign [app_id="mpv|Mpv"] $ws6
 for_window [app_id="mpv|Mpv"] focus
 
 assign [app_id="thunar|Thunar|pcmanfm"] $ws8
 for_window [app_id="thunar|Thunar|pcmanfm"] focus
-
 
 # Colors ############################################################################
 
@@ -283,7 +261,7 @@ client.unfocused        #333333 #222222 #888888 #292D2E   #222222
 client.urgent           #2F343A #900000 #FFFFFF #900000   #900000
 client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
-client.background       #282a36
+client.background       #2e3440
 
 #bar {
 #     output $monitor1

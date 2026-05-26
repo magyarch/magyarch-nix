@@ -84,6 +84,21 @@
         "widgets": {
             "center": [
                 {
+                    "clockColor": "none",
+                    "customFont": "",
+                    "formatHorizontal": "MMMM dd, h:mm AP",
+                    "formatVertical": "HH mm - ddd, MMM dd",
+                    "id": "Clock",
+                    "tooltipFormat": "HH:mm ddd, MMM dd",
+                    "useCustomFont": false
+                },
+                {
+                    "iconColor": "none",
+                    "id": "WallpaperSelector"
+                }
+            ],
+            "left": [
+                {
                     "characterCount": 2,
                     "colorizeIcons": false,
                     "emptyColor": "secondary",
@@ -103,18 +118,20 @@
                     "showBadge": true,
                     "showLabelsOnlyWhenOccupied": true,
                     "unfocusedIconsOpacity": 1
+                },
+                {
+                    "colorizeIcons": false,
+                    "hideMode": "hidden",
+                    "id": "ActiveWindow",
+                    "maxWidth": 145,
+                    "scrollingMode": "hover",
+                    "showIcon": true,
+                    "showText": true,
+                    "textColor": "none",
+                    "useFixedWidth": false
                 }
             ],
-            "left": [
-                {
-                    "clockColor": "none",
-                    "customFont": "",
-                    "formatHorizontal": "MMMM dd, h:mm AP",
-                    "formatVertical": "HH mm - ddd, MMM dd",
-                    "id": "Clock",
-                    "tooltipFormat": "HH:mm ddd, MMM dd",
-                    "useCustomFont": false
-                },
+            "right": [
                 {
                     "compactMode": false,
                     "diskPath": "/",
@@ -138,46 +155,6 @@
                     "usePadding": false
                 },
                 {
-                    "compactMode": false,
-                    "hideMode": "hidden",
-                    "hideWhenIdle": false,
-                    "id": "MediaMini",
-                    "maxWidth": 145,
-                    "panelShowAlbumArt": true,
-                    "scrollingMode": "hover",
-                    "showAlbumArt": false,
-                    "showArtistFirst": true,
-                    "showProgressRing": true,
-                    "showVisualizer": false,
-                    "textColor": "none",
-                    "useFixedWidth": false,
-                    "visualizerType": "linear"
-                },
-                {
-                    "colorizeIcons": false,
-                    "hideMode": "hidden",
-                    "id": "ActiveWindow",
-                    "maxWidth": 145,
-                    "scrollingMode": "hover",
-                    "showIcon": true,
-                    "showText": true,
-                    "textColor": "none",
-                    "useFixedWidth": false
-                }
-            ],
-            "right": [
-                {
-                    "iconColor": "none",
-                    "id": "WallpaperSelector"
-                },
-                {
-                    "displayMode": "onhover",
-                    "iconColor": "none",
-                    "id": "Volume",
-                    "middleClickCommand": "pwvucontrol || pavucontrol",
-                    "textColor": "none"
-                },
-                {
                     "colorizeDistroLogo": false,
                     "colorizeSystemIcon": "none",
                     "colorizeSystemText": "none",
@@ -188,36 +165,11 @@
                     "useDistroLogo": false
                 },
                 {
-                    "defaultSettings": {
-                        "audioCodec": "opus",
-                        "audioSource": "default_output",
-                        "colorRange": "limited",
-                        "copyToClipboard": false,
-                        "directory": "",
-                        "filenamePattern": "recording_yyyyMMdd_HHmmss",
-                        "frameRate": "60",
-                        "hideInactive": false,
-                        "iconColor": "none",
-                        "quality": "very_high",
-                        "resolution": "original",
-                        "showCursor": true,
-                        "videoCodec": "h264",
-                        "videoSource": "portal"
-                    },
-                    "id": "plugin:screen-recorder"
-                },
-                {
-                    "defaultSettings": {
-                        "cursorPosition": 0,
-                        "filePath": "",
-                        "fontSize": 14,
-                        "panelHeight": 400,
-                        "panelWidth": 600,
-                        "scratchpadContent": "",
-                        "scrollPositionX": 0,
-                        "scrollPositionY": 0
-                    },
-                    "id": "plugin:notes-scratchpad"
+                    "displayMode": "onhover",
+                    "iconColor": "none",
+                    "id": "Volume",
+                    "middleClickCommand": "pwvucontrol || pavucontrol",
+                    "textColor": "none"
                 },
                 {
                     "iconColor": "error",
@@ -233,6 +185,10 @@
                     "id": "Tray",
                     "pinned": [
                     ]
+                },
+                {
+                    "iconColor": "none",
+                    "id": "NoctaliaPerformance"
                 }
             ]
         }
@@ -363,7 +319,7 @@
         "colorizeIcons": false,
         "deadOpacity": 0.6,
         "displayMode": "exclusive",
-        "dockType": "floating",
+        "dockType": "attached",
         "enabled": true,
         "floatingRatio": 1,
         "groupApps": false,
@@ -379,6 +335,7 @@
         "launcherPosition": "end",
         "launcherUseDistroLogo": false,
         "monitors": [
+            "DP-2"
         ],
         "onlySameOutput": true,
         "pinnedApps": [
@@ -392,7 +349,7 @@
         ],
         "pinnedStatic": false,
         "position": "left",
-        "showDockIndicator": false,
+        "showDockIndicator": true,
         "showLauncherIcon": false,
         "sitOnFrame": false,
         "size": 1
@@ -525,7 +482,7 @@
     },
     "noctaliaPerformance": {
         "disableDesktopWidgets": true,
-        "disableWallpaper": true
+        "disableWallpaper": false
     },
     "notifications": {
         "backgroundOpacity": 1,
@@ -570,6 +527,8 @@
         ],
         "location": "top_right",
         "monitors": [
+            "DP-2",
+            "DP-1"
         ],
         "overlayLayer": true
     },
@@ -697,7 +656,7 @@
     },
     "wallpaper": {
         "automationEnabled": false,
-        "directory": "/home/xeoncpu/Pictures/Wallpapers",
+        "directory": "/home/xeoncpu/.local/bin/wallpapers/Future",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "favorites": [
@@ -717,7 +676,7 @@
         "showHiddenFiles": false,
         "skipStartupTransition": false,
         "solidColor": "#1a1a2e",
-        "sortOrder": "date_desc",
+        "sortOrder": "date_asc",
         "transitionDuration": 1000,
         "transitionEdgeSmoothness": 0.05,
         "transitionType": [

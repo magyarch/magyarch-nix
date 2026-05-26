@@ -14,6 +14,7 @@
       arc-theme
 #      kvantum
       acpi
+      rocmPackages.clr.icd
       bat
       bc
       unstable.mesa
@@ -36,7 +37,7 @@
       lm_sensors
       util-linux
 #      fastfetch
-      unstable.goverlay
+ #     unstable.goverlay
       fzf
       ntfs3g
       ripgrep
@@ -70,8 +71,8 @@
       imagemagick
       libnotify
 #      vaapiVdpau
-      vkbasalt
-      protontricks
+ #     vkbasalt
+#      protontricks
 #      i3blocks
       mate.mate-polkit
 # -------------------------------
@@ -108,12 +109,11 @@
       wineWowPackages.waylandFull
       wmctrl
       vifm
-       faugus-launcher
+       unstable.faugus-launcher
        usbimager
        qimgv
        filezilla
        file-roller
-       firefox-esr
        fastfetch
        inxi
        handbrake

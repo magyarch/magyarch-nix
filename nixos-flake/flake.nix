@@ -3,19 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-
-    
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    oxwm = {
-      url = "github:tonybanters/oxwm";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    
-    zig = {
-      url = "github:mitchellh/zig-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -52,7 +40,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, noctalia, dgop, zig, oxwm, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, noctalia, dgop, ... }@inputs:
     let
       system = "x86_64-linux";
       
@@ -72,7 +60,7 @@
           ./configuration.nix
           ./hardware-configuration.nix
            
-           oxwm.nixosModules.default
+#           oxwm.nixosModules.default
 #          mangowm.nixosModules.mango
           home-manager.nixosModules.home-manager
 

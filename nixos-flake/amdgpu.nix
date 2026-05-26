@@ -19,7 +19,7 @@
         unstable.vulkan-loader
         unstable.vulkan-validation-layers
         rocmPackages.clr.icd
-        vkbasalt
+#        rocm-opencl-icd
       ];
       extraPackages32 = with pkgs; [
         unstable.libva-vdpau-driver
