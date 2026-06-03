@@ -1,0 +1,40 @@
+# Először létre kell hoznunk egy virtuális merevlemez-képet
+qemu-img create -f qcow2 testing-image.img 20G
+
+
+# virtuális gép létrehozása
+qemu-system-x86_64 -m 2048 -boot d -enable-kvm -vga none -device virtio-vga,virgl=on -display sdl.gl=off -smp 4 -net nic -net user -hda testing-image.img -cdrom ~/Letöltések/xxxxx.iso
+
+
+# Inditás képfájl nélkül
+qemu-system-x86_64 -m 2048 -boot d -enable-kvm -smp 4 -net nic -net user -show-cursor -hda testing-image.img
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# -vga none -device virtio-vga,virgl=on
+# -display sdl,gl=off

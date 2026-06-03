@@ -37,7 +37,7 @@ static const Rule rules[] = {
         { "firefox",        NULL,       NULL,       1 << 0,        0,           -1 },
 	{ "qBittorrent",    NULL,       NULL,       1 << 6,        0,           -1 },
 	{ "st-256color",    NULL,       NULL,       0,             1,           -1 },
-	{ "discord",        NULL,       NULL,       1 << 1,        0,          -1 },
+	{ "signal",        NULL,       NULL,       1 << 1,        0,          1 },
 	{ "Thunar",         NULL,       NULL,       1 << 7,        0,          -1 },
 	{ "steam",          NULL,       NULL,       1 << 4,        0,          -1 },
     { "Pavucontrol",    NULL,       NULL,       0,             1,          -1 },
@@ -83,7 +83,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run -c -g 1 -l 10 ", "-m", dmenumon, "-fn", dmenufont, NULL };
 static const char scratchpadname[] = "scratchpad";
-static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "180x50", "-e", "rmpc", NULL };
+static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "160x40", "-e", "rmpc", NULL };
 static const char *termcmd[] = { "alacritty", NULL };
 
 #include "movestack.c"
@@ -116,10 +116,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_s,      togglesticky,   {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	/*{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },*/
-/*	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },*/
+	{ MODKEY,                       XK_Left,  focusmon,       {.i = -1 } },
+	{ MODKEY,                       XK_Right, focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY,                       XK_Up,     setgaps,        {.i = -1 } },
 	{ MODKEY,                       XK_Down,   setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_Down,   setgaps,        {.i = 0  } },

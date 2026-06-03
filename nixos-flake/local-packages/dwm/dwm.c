@@ -249,7 +249,7 @@ static void sigterm(int unused);
 static void spawn(const Arg *arg);
 static Monitor *systraytomon(Monitor *m);
 static void tag(const Arg *arg);
-/*static void tagmon(const Arg *arg);*/
+static void tagmon(const Arg *arg);
 static void togglesticky(const Arg *arg);
 static void tile(Monitor *);
 static void togglebar(const Arg *arg);

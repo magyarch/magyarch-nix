@@ -2,7 +2,7 @@
 
 set +e
 
-wlr-randr --output DP-1 --mode 2560x1440@144 --scale 1.25 >/dev/null 2>&1 &
+#wlr-randr --output DP-1 --mode 2560x1440@144 --scale 1.2 --output DP-2 --mode 1920x1080@60 --transform 90 --scale 1.1 --left-of DP-1 >/dev/null 2>&1 & 
 
 # wallpaper
 #swaybg -i ~/.config/mango/wallpaper/xy.png >/dev/null 2>&1 &
@@ -15,8 +15,7 @@ dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
 #xwayland-satellite :11 &
 # xwayland dpi scale
-echo "Xft.dpi: 120" | xrdb -merge #dpi缩放
-# xrdb merge ~/.Xresources >/dev/null 2>&1
+echo "Xft.dpi: 120" | xrdb -merge >/dev/null 2>&1
 
 # keep clipboard content
 wl-clip-persist --clipboard regular --reconnect-tries 0 >/dev/null 2>&1 &

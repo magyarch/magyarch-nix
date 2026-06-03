@@ -6,7 +6,12 @@
 
 {
   
-  services.xserver.enable = true;
+  services.xserver = {
+    enable = true;
+	xkb.layout = "hu";
+	xkb.variant = "";
+};
+
   services.displayManager.defaultSession = "none+dwm";
   services.xserver.windowManager.dwm = {
                   enable = true;

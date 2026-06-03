@@ -7,14 +7,11 @@
 #    foot
 #    wmenu
     wl-clipboard
+    wlogout
     grim
     slurp
     swappy
     swaybg
-    wofi
-    wlogout
-    waybar
-    mako
  #   firefox
     
 

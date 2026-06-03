@@ -1,0 +1,488 @@
+{
+  "cheatsheetData": [
+    {
+      "title": "reload config",
+      "binds": [
+        {
+          "keys": "Super + Shift + r",
+          "desc": "Reload config"
+        },
+        {
+          "keys": "Super + c",
+          "desc": "Run: wlogout -C ~/.config/mango/wlogout/style.css -l  ~/.config/mango/wlogout/layout  -b 6 --protocol layer-shell"
+        }
+      ]
+    },
+    {
+      "title": "menu and terminal",
+      "binds": [
+        {
+          "keys": "Super + Enter",
+          "desc": "Run: alacritty"
+        },
+        {
+          "keys": "Super + d",
+          "desc": "Run: rofi -show drun"
+        },
+        {
+          "keys": "Super + Shift + d",
+          "desc": "Run: rofi-open"
+        },
+        {
+          "keys": "Super + Ctrl + b",
+          "desc": "Run: rofi-bookmarks"
+        },
+        {
+          "keys": "Super + r",
+          "desc": "Run: alacritty -e vifm"
+        },
+        {
+          "keys": "Super + w",
+          "desc": "Run: firefox"
+        },
+        {
+          "keys": "Super + Shift + q",
+          "desc": "Quit compositor"
+        },
+        {
+          "keys": "Super + q",
+          "desc": "Close window"
+        },
+        {
+          "keys": "Super + p",
+          "desc": "Run: vesktop"
+        }
+      ]
+    },
+    {
+      "title": "switch window focus",
+      "binds": [
+        {
+          "keys": "Super + Tab",
+          "desc": "Focusstack"
+        },
+        {
+          "keys": "Super + u",
+          "desc": "Focuslast"
+        },
+        {
+          "keys": "Alt + Left",
+          "desc": "Focus LEFT"
+        },
+        {
+          "keys": "Alt + Right",
+          "desc": "Focus RIGHT"
+        },
+        {
+          "keys": "Alt + Up",
+          "desc": "Focus UP"
+        },
+        {
+          "keys": "Alt + Down",
+          "desc": "Focus DOWN"
+        }
+      ]
+    },
+    {
+      "title": "swap window",
+      "binds": [
+        {
+          "keys": "Super + Shift + Up",
+          "desc": "Swap UP"
+        },
+        {
+          "keys": "Super + Shift + Down",
+          "desc": "Swap DOWN"
+        },
+        {
+          "keys": "Super + Shift + Left",
+          "desc": "Swap LEFT"
+        },
+        {
+          "keys": "Super + Shift + Right",
+          "desc": "Swap RIGHT"
+        }
+      ]
+    },
+    {
+      "title": "movewin",
+      "binds": [
+        {
+          "keys": "Shift + Ctrl + Up",
+          "desc": "Movewin"
+        },
+        {
+          "keys": "Shift + Ctrl + Down",
+          "desc": "Movewin"
+        },
+        {
+          "keys": "Shift + Ctrl + Left",
+          "desc": "Movewin"
+        },
+        {
+          "keys": "Shift + Ctrl + Right",
+          "desc": "Movewin"
+        }
+      ]
+    },
+    {
+      "title": "resizewin",
+      "binds": [
+        {
+          "keys": "Ctrl + Alt + Up",
+          "desc": "Resizewin"
+        },
+        {
+          "keys": "Ctrl + Alt + Down",
+          "desc": "Resizewin"
+        },
+        {
+          "keys": "Ctrl + Alt + Left",
+          "desc": "Resizewin"
+        },
+        {
+          "keys": "Ctrl + Alt + Right",
+          "desc": "Resizewin"
+        }
+      ]
+    },
+    {
+      "title": "switch window status",
+      "binds": [
+        {
+          "keys": "Alt + Tab",
+          "desc": "Toggle overview"
+        },
+        {
+          "keys": "Shift + Alt + s",
+          "desc": "Toggle floating"
+        },
+        {
+          "keys": "Alt + a",
+          "desc": "Maximize"
+        },
+        {
+          "keys": "Alt + f",
+          "desc": "Toggle fullscreen"
+        },
+        {
+          "keys": "Shift + Alt + f",
+          "desc": "Togglefakefullscreen"
+        },
+        {
+          "keys": "Super + i",
+          "desc": "Minimized"
+        },
+        {
+          "keys": "Super + Shift + I",
+          "desc": "Restore Minimized"
+        }
+      ]
+    },
+    {
+      "title": "scroller layout",
+      "binds": [
+        {
+          "keys": "Alt + e",
+          "desc": "Set Proportion"
+        },
+        {
+          "keys": "Alt + Space",
+          "desc": "Cycle column width"
+        }
+      ]
+    },
+    {
+      "title": "tile layout",
+      "binds": [
+        {
+          "keys": "Super + e",
+          "desc": "Increase masters"
+        },
+        {
+          "keys": "Super + t",
+          "desc": "Increase masters"
+        },
+        {
+          "keys": "Alt + s",
+          "desc": "Zoom"
+        }
+      ]
+    },
+    {
+      "title": "switch layout",
+      "binds": [
+        {
+          "keys": "Super + Ctrl + v",
+          "desc": "Setlayout"
+        },
+        {
+          "keys": "Super + Ctrl + s",
+          "desc": "Setlayout"
+        },
+        {
+          "keys": "Super + Ctrl + t",
+          "desc": "Setlayout"
+        },
+        {
+          "keys": "Super + Ctrl + l",
+          "desc": "Setlayout"
+        },
+        {
+          "keys": "Super + Space",
+          "desc": "Switch layout"
+        }
+      ]
+    },
+    {
+      "title": "tag switch",
+      "binds": [
+        {
+          "keys": "Super + Left",
+          "desc": "Viewtoleft"
+        },
+        {
+          "keys": "Ctrl + Left",
+          "desc": "Viewtoleft Have Client"
+        },
+        {
+          "keys": "Super + Right",
+          "desc": "Viewtoright"
+        },
+        {
+          "keys": "Ctrl + Right",
+          "desc": "Viewtoright Have Client"
+        },
+        {
+          "keys": "Super + Ctrl + Left",
+          "desc": "Tagtoleft"
+        },
+        {
+          "keys": "Super + Ctrl + Right",
+          "desc": "Tagtoright"
+        },
+        {
+          "keys": "Super + Shift + 1",
+          "desc": "Tag"
+        },
+        {
+          "keys": "Super + Shift + 2",
+          "desc": "Tag"
+        },
+        {
+          "keys": "Super + Shift + 3",
+          "desc": "Tag"
+        },
+        {
+          "keys": "Super + Shift + 4",
+          "desc": "Tag"
+        },
+        {
+          "keys": "Super + Shift + 5",
+          "desc": "Tag"
+        },
+        {
+          "keys": "Super + Shift + 6",
+          "desc": "Tag"
+        },
+        {
+          "keys": "Super + Shift + 7",
+          "desc": "Tag"
+        },
+        {
+          "keys": "Super + Shift + 8",
+          "desc": "Tag"
+        },
+        {
+          "keys": "Super + Shift + 9",
+          "desc": "Tag"
+        },
+        {
+          "keys": "Super + 1",
+          "desc": "Comboview"
+        },
+        {
+          "keys": "Super + 2",
+          "desc": "Comboview"
+        },
+        {
+          "keys": "Super + 3",
+          "desc": "Comboview"
+        },
+        {
+          "keys": "Super + 4",
+          "desc": "Comboview"
+        },
+        {
+          "keys": "Super + 5",
+          "desc": "Comboview"
+        },
+        {
+          "keys": "Super + 6",
+          "desc": "Comboview"
+        },
+        {
+          "keys": "Super + 7",
+          "desc": "Comboview"
+        },
+        {
+          "keys": "Super + 8",
+          "desc": "Comboview"
+        },
+        {
+          "keys": "Super + 9",
+          "desc": "Comboview"
+        }
+      ]
+    },
+    {
+      "title": "gaps",
+      "binds": [
+        {
+          "keys": "Shift + Alt + i",
+          "desc": "Incgaps"
+        },
+        {
+          "keys": "Shift + Alt + d",
+          "desc": "Incgaps"
+        },
+        {
+          "keys": "Shift + Alt + R",
+          "desc": "Togglegaps"
+        }
+      ]
+    },
+    {
+      "title": "Mouse Button Bindings",
+      "binds": [
+        {
+          "keys": "Super + Left Click",
+          "desc": "Moveresize"
+        },
+        {
+          "keys": "Alt + Middle Click",
+          "desc": "Set Proportion"
+        },
+        {
+          "keys": "Super + Right Click",
+          "desc": "Moveresize"
+        },
+        {
+          "keys": "Super + Ctrl + Left Click",
+          "desc": "Minimized"
+        },
+        {
+          "keys": "Super + Ctrl + Right Click",
+          "desc": "Close window"
+        },
+        {
+          "keys": "Super + Ctrl + Middle Click",
+          "desc": "Toggle fullscreen"
+        },
+        {
+          "keys": "Middle Click",
+          "desc": "Maximize"
+        },
+        {
+          "keys": "Left Click",
+          "desc": "Toggle overview"
+        },
+        {
+          "keys": "Right Click",
+          "desc": "Close window"
+        }
+      ]
+    },
+    {
+      "title": "brightness and volume",
+      "binds": [
+        {
+          "keys": "Vol Up",
+          "desc": "Run: ~/.config/mango/scripts/volume.sh up"
+        },
+        {
+          "keys": "Vol Down",
+          "desc": "Run: ~/.config/mango/scripts/volume.sh down"
+        },
+        {
+          "keys": "Bright Up",
+          "desc": "Run: ~/.config/mango/scripts/brightness.sh up"
+        },
+        {
+          "keys": "Bright Down",
+          "desc": "Run: ~/.config/mango/scripts/brightness.sh down"
+        }
+      ]
+    },
+    {
+      "title": "custom app bind",
+      "binds": [
+        {
+          "keys": "Super + F5",
+          "desc": "Run: sh -c grim -g \"$(slurp)\" - | swappy -f -"
+        },
+        {
+          "keys": "Super + b",
+          "desc": "Run: bash ~/.config/mango/scripts/hide_waybar_mango.sh"
+        },
+        {
+          "keys": "Super + Ctrl + c",
+          "desc": "Run: sh -c 'cliphist list | wofi --dmenu --width 840 --height 340 | cliphist decode | wl-copy'"
+        },
+        {
+          "keys": "Super + Ctrl + w",
+          "desc": "Run: cliphist wipe"
+        }
+      ]
+    },
+    {
+      "title": "namescrtachpad",
+      "binds": [
+        {
+          "keys": "Super + m",
+          "desc": "Toggle Named Scratchpad"
+        },
+        {
+          "keys": "Super + Shift + Enter",
+          "desc": "Toggle Named Scratchpad"
+        }
+      ]
+    }
+  ],
+  "detectedCompositor": "mango",
+  "windowWidth": 1400,
+  "windowHeight": 850,
+  "autoHeight": true,
+  "columnCount": 3,
+  "modKeyVariable": "$mod",
+  "hyprlandConfigPath": "~/.config/hypr/hyprland.conf",
+  "hyprlandLuaConfigPath": "~/.config/hypr/hyprland.lua",
+  "hyprlandParserMode": "auto",
+  "niriConfigPath": "~/.config/niri/config.kdl",
+  "mangoConfigPath": "~/.config/mango/config.conf",
+  "mergeSequentialBinds": true,
+  "showUndescribedBinds": true,
+  "splitLargeWorkspaceCategory": true,
+  "workspaceSplitThreshold": 12,
+  "keyColorAlt": "#FF6B6B",
+  "keyColorXF86": "#4ECDC4",
+  "keyColorPrint": "#95E1D3",
+  "keyColorNumeric": "#A8DADC",
+  "keyColorMouse": "#F38181",
+  "keyColorSuper": "",
+  "keyColorCtrl": "",
+  "keyColorShift": "",
+  "keyColorDefault": "#6C757D",
+  "keyLabelColor": "#FFFFFF",
+  "keyTextSuper": "",
+  "keyTextCtrl": "",
+  "keyTextShift": "",
+  "keyTextAlt": "",
+  "keyTextXF86": "",
+  "keyTextPrint": "",
+  "keyTextNumeric": "",
+  "keyTextMouse": "",
+  "keyTextDefault": "",
+  "descriptionTextColor": "",
+  "bindOverrides": {}
+}

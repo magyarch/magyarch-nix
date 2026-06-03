@@ -40,7 +40,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, noctalia, dgop, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, noctalia, dgop, mangowm, ... }@inputs:
     let
       system = "x86_64-linux";
       
@@ -61,7 +61,7 @@
           ./hardware-configuration.nix
            
 #           oxwm.nixosModules.default
-#          mangowm.nixosModules.mango
+          mangowm.nixosModules.mango
           home-manager.nixosModules.home-manager
 
           {

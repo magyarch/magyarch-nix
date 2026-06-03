@@ -5,7 +5,13 @@
 {config, pkgs, ... }:
 
 {
-  services.xserver.enable = true;  
+  services.xserver = {
+    enable = true;
+	xkb.layout = "hu";
+	xkb.variant = "";
+#	dpi = 125;
+};
+  
   services.displayManager.defaultSession = "none+spectrwm";
   services.xserver.windowManager.spectrwm.enable = true;               
   services.xserver.windowManager.session = [{

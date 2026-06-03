@@ -107,7 +107,7 @@
       # onlyoffice-desktopeditors
       wineWowPackages.full
       wineWowPackages.waylandFull
-      wmctrl
+#      wmctrl
       vifm
        unstable.faugus-launcher
        usbimager
@@ -132,9 +132,9 @@
        protonplus
        protontricks
 #       sublime3
-#       sxhkd
+       sxhkd
 #       stremio
-#       slstatus
+       slstatus
        swww
        unstable.nsxiv
        unstable.heroic
@@ -145,7 +145,7 @@
        xwallpaper
 #       xwayland-satellite
        lxappearance
-       picom-pijulius
+       unstable.picom-pijulius
        wmctrl
        unstable.cliphist
 #       wlr-randr

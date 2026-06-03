@@ -263,8 +263,8 @@ hc unlock
 
 
 #Dualmonitor setup
-# hc detect_monitors
-#hc set_monitors 1920x1080+0+0 1920x1080+1920+0
+hc detect_monitors
+#hc set_monitors 2560x1440+0+0 1920x1080+1080+0
 #hc remove_monitor 1
 
 

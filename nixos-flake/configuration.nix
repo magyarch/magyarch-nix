@@ -27,12 +27,12 @@
     ./ssh.nix
  #   ./samba.nix
 #     ./bluetooth.nix
-     ./sway.nix
+#     ./sway.nix
     # ./jellyfin.nix
     # ./qtile.nix
  #    ./sddm.nix
  #    ./stump.nix
-#     ./mango.nix
+     ./mango.nix
 #     ./xmonad.nix
 #     ./niri.nix
      ./noctalia.nix

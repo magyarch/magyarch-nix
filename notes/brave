@@ -1,0 +1,23 @@
+# Backup Brave
+tar -czvf my-brave-browser-backup.tar.gz BraveSoftware
+
+# Archivum titkositása
+gpg -c my-brave-browser-backup.tar.gz
+
+# Mentés minimum 3 különböző helyre
+felhő,pendrive,külső hdd(Nas) akár
+
+# Ha végeztünk töröljük a gépen lévő fájlokat
+rm my-brave-browser-backup.tar.gz
+rm my-brave-browser-backup.tar.gz.gpg
+
+# Visszaállitás
+
+# A fájl visszaállitása
+1. gpg my-brave-browser-backup.tar.gz.gpg
+
+# Másolás az eredeti helyére
+2. tar xvf my-brave-browser-backup.tar.gz -C ~/.config
+
+3. Töröljük az archiv fájlt
+rm my-brave-browser-backup.tar.gz
