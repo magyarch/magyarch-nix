@@ -7,9 +7,9 @@
 {
   
   services.xserver = {
-    enable = true;
-	xkb.layout = "hu";
-	xkb.variant = "";
+       enable = true;
+       xkb.layout = "hu";
+	   xkb.variant = "";  
 };
 
   services.displayManager.defaultSession = "none+dwm";

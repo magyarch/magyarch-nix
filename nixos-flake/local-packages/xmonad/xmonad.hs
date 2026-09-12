@@ -3,6 +3,7 @@
 --import XMonad
 import XMonad hiding ((|||))
 import XMonad.ManageHook
+import XMonad.Actions.CycleWS
 
 --SYSTEM
 import System.Exit
@@ -106,7 +107,7 @@ myScratchPads =
   [ NS "scratchpad" "kitty --class=kitty -T scratchpad" (title =? "scratchpad")
         (customFloating $ W.RationalRect (0.15) (0.15) (0.7) (0.7))
 
-  , NS "ncmpcpp" "kitty --class=kitty -T ncmpcpp -e ncmpcpp" (title =? "ncmpcpp")
+  , NS "ncmpcpp" "kitty --class=kitty -T rmpc -e rmpc" (title =? "rmpc")
         (customFloating $ W.RationalRect (0.15) (0.15) (0.7) (0.7))
 
   , NS "pavucontrol" "pavucontrol" (className =? "pavucontrol")
@@ -230,6 +231,7 @@ main = do
        ,("M-d", spawn "rofi -show drun")
        ,("M-q", kill)
        ,("M-c", spawn "eww open --toggle powermenu")
+       ,("M-w", spawn "firefox")
         ])
           { logHook = dynamicLogWithPP (myLogHook dbus) }
 
@@ -292,8 +294,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ]
     ++
     [ ((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_a, xK_y, xK_z] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
+        | (key, sc) <- zip [xK_Right, xK_Left] [0..]
+        , (f, m) <- [(W.view, controlMask), (W.shift, controlMask .|. shiftMask)]
     ]
 
 ------------------------------------------------------------------------

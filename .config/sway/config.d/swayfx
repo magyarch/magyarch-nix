@@ -1,5 +1,8 @@
 ### --- SwayFX extra beállítások --- ###
 
+# Window animations
+animation_duration_ms 250
+
 # Inaktív ablakok halványítása
 default_dim_inactive 0.15
 dim_inactive_colors.unfocused #00000066
@@ -8,9 +11,9 @@ dim_inactive_colors.urgent    #aa0000aa
 # Blur effekt
 # értéktartomány: passes (0-10), radius (0-10),
 # noise (0.0-1.0), brightness/contrast/saturation (0.0-2.0)
-blur enable
-blur_passes 3
-blur_radius 7
+blur disable
+blur_passes 4
+blur_radius 4
 blur_noise 0.02
 blur_brightness 1.0
 blur_contrast 1.0

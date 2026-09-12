@@ -5,13 +5,14 @@
  # Biztosítjuk, hogy az XDG portálok fussonak és tudják, mit kell megnyitni
 xdg.portal = {
   enable = true;
+  wlr.enable = true;
   extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  config = {
-    common = {
-      default = [ "gtk" ];
+  config.sway = {
+      "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
+      "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
     };
   };
-};
+
 
 # Megmondjuk a rendszernek, hogy a Firefox a default az URL-ekhez
 xdg.mime = {

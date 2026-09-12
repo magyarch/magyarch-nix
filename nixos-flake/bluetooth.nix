@@ -2,7 +2,14 @@
 
 {
   
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth = {
+      enable = true;
+      settings = {
+       General = {
+           ControllerMode = "dual";
+       };
+      };
+     }; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
   services.pipewire.wireplumber.extraConfig = {
   "monitor.bluez.properties" = {

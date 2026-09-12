@@ -4,7 +4,7 @@ sensors | awk '
    /Core 0:/ {core=$3}
   /Tctl:/ {tctl=$2}
   /edge:/ {edge=$2}
-  END     {print " 🔥 " core "  |  💸 " edge}
+  END     {print " 🔥 " tctl "  |  💸 " edge}
 '
 
 

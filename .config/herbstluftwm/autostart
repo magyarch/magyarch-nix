@@ -21,26 +21,31 @@ hc keyunbind --all
 #Mod=Mod1  # Use alt as the main modifier
 Mod=Mod4   # Use the super key as the main modifier
 
+hc keybind Super-Control-Right  focus_monitor 0
+hc keybind Super-Control-Left focus_monitor 1
+
+hc keybind Super-Shift-Control-Right  shift_to_monitor 0
+hc keybind Super-Shift-Control-Left shift_to_monitor 1
 
 # Moving clients to ... on single Monitor
-hc keybind $Mod-Shift-Left  shift left
-hc keybind $Mod-Shift-Down  shift down
-hc keybind $Mod-Shift-Up    shift up
-hc keybind $Mod-Shift-Right shift right
-hc keybind $Mod-Shift-h     shift left
-hc keybind $Mod-Shift-j     shift down
-hc keybind $Mod-Shift-k     shift up
-hc keybind $Mod-Shift-l     shift right
+#hc keybind $Mod-Shift-Left  shift left
+#hc keybind $Mod-Shift-Down  shift down
+#hc keybind $Mod-Shift-Up    shift up
+#hc keybind $Mod-Shift-Right shift right
+#hc keybind $Mod-Shift-h     shift left
+#hc keybind $Mod-Shift-j     shift down
+#hc keybind $Mod-Shift-k     shift up
+#hc keybind $Mod-Shift-l     shift right
 
 # Moving clients to ... on dual monitor
-# hc keybind $Mod-Shift-h chain , lock , shift_to_monitor -l , focus_monitor -l , unlock
-# hc keybind $Mod-Shift-Left chain , lock , shift_to_monitor -l , focus_monitor -l , unlock
-# hc keybind $Mod-Shift-j chain , lock , shift_to_monitor -l , focus_monitor -l , unlock
-# hc keybind $Mod-Shift-Down chain , lock , shift_to_monitor -l , focus_monitor -l , unlock
-# hc keybind $Mod-Shift-k chain , lock , shift_to_monitor -r , focus_monitor -r , unlock
-# hc keybind $Mod-Shift-Up chain , lock , shift_to_monitor -r , focus_monitor -r , unlock
-# hc keybind $Mod-Shift-l chain , lock , shift_to_monitor -r , focus_monitor -r , unlock
-# hc keybind $Mod-Shift-Right chain , lock , shift_to_monitor -r , focus_monitor -r , unlock
+ hc keybind $Mod-Shift-h chain , lock , shift_to_monitor -l , focus_monitor -l , unlock
+ hc keybind $Mod-Shift-Left chain , lock , shift_to_monitor -l , focus_monitor -l , unlock
+ hc keybind $Mod-Shift-j chain , lock , shift_to_monitor -l , focus_monitor -l , unlock
+ hc keybind $Mod-Shift-Down chain , lock , shift_to_monitor -l , focus_monitor -l , unlock
+ hc keybind $Mod-Shift-k chain , lock , shift_to_monitor -r , focus_monitor -r , unlock
+ hc keybind $Mod-Shift-Up chain , lock , shift_to_monitor -r , focus_monitor -r , unlock
+ hc keybind $Mod-Shift-l chain , lock , shift_to_monitor -r , focus_monitor -r , unlock
+ hc keybind $Mod-Shift-Right chain , lock , shift_to_monitor -r , focus_monitor -r , unlock
 
 # FRAMES
 # create an empty frame at the specified direction
@@ -266,7 +271,10 @@ hc unlock
 hc detect_monitors
 #hc set_monitors 2560x1440+0+0 1920x1080+1080+0
 #hc remove_monitor 1
-
+#hc focus_monitor 1
+#hc use_index 1   # másodlagos monitor = 2. tag
+#hc focus_monitor 0
+#hc use_index 0   # elsődleges monitor = 1. tag
 
 #room for polybar on both monitors
 # find the panel
@@ -274,15 +282,13 @@ hc detect_monitors
 #[ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel.sh
 panel=$HOME/.config/polybar/launch.sh
 for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
-start it on each monitor
+#start it on each monitor
 $panel  $monitor &
 #hc pad 0 "" "" 25
-hc pad 0 28 0 0
+hc pad 28 0 0
 #hc pad 0 "" 5
 #hc pad 0 "" "" "" 5
 done
-
-
 
 
 

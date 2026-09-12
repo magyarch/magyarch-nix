@@ -40,14 +40,14 @@ xdotool search --onlyvisible --name "$1" windowunmap \
     || $entry &
 
     # Ellenőrizzük, hogy fut-e már az adott ablak
-    # if swaymsg -t get_tree | grep -q "\"name\": \"$APP_NAME\""; then
+#     if swaymsg -t get_tree | grep -q "\"name\": \"$APP_NAME\""; then
     #     # Ha fut, akkor scratchpad toggle
-    #     swaymsg "[title=\"$APP_NAME\"] scratchpad show"
-    # else
+#         swaymsg "[title=\"$APP_NAME\"] scratchpad show"
+#     else
     #     # Ha nem fut, akkor indítsd el, és küldd scratchpadba
-    #     $entry &
-    #     sleep 0.2
-    #     swaymsg "[title=\"$APP_NAME\"] move scratchpad"
-    #     swaymsg "[title=\"$APP_NAME\"] scratchpad show"
-    # fi    
+#         $entry &
+#         sleep 0.2
+#         swaymsg "[title=\"$APP_NAME\"] move scratchpad"
+#         swaymsg "[title=\"$APP_NAME\"] scratchpad show"
+#     fi    
 

@@ -5,6 +5,12 @@
   programs.sway = {
     enable = true;
     package = unstable.sway;
+    wrapperFeatures.gtk = true; # Needed for GTK apps to work.
+    extraSessionCommands = ''
+    export SDL_VIDEODRIVER = wayland
+    export QT_QPA_PLATFORM = wayland
+    export XDG_SESSION_TYPE = wayland 
+    '';
   };  
 
 #{
@@ -20,7 +26,7 @@
     wlsunset
 #    wofi
     wf-recorder
-    swww
+    awww
     swaybg
 #    xdg-desktop-portal-wlr
     jq

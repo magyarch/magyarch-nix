@@ -22,8 +22,8 @@ super + shift + i
     switch_audio.sh
 
 # Default web browser brave and firefox
-super + {_,shift + } w
-    {$BROWSER, firefox}
+#super + {_,shift + } w
+#   {$BROWSER, firefox}
 
 # Chat client, gui filemanager
 super + {_,shift + } p

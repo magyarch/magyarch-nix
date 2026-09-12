@@ -15,7 +15,7 @@ case $selected in
         systemctl poweroff
         ;;
     "Log Out")
-        fancy-quit || bspc quit
+        fancy-quit || herbstclient quit
         ;;
     *)
         echo "No valid option selected."

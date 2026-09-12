@@ -3,17 +3,14 @@
 # Gaps ####################################################################################
 
 gaps outer 6
-gaps inner 8
+gaps inner 6
 
 set $mod Mod4
 set $altmod Mod1
 
 # Basic definition #######################################################################
-
-for_window [class="^.*"] border pixel 3
-#for_window [class="^"] split toggle
-
-
+default_border pixel 3
+default_floating_border pixel 3
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -28,7 +25,7 @@ font pango:JetBrains Mono Nerd Font 9
 
 # Autostart  ######################################################
 # exec --no-startup-id xrandr --dpi 192
- exec_always --no-startup-id /nix/store/$(ls -la /nix/store | grep 'mate-polkit' | grep '4096' | awk '{print $9}' | sed -n '$p')/libexec/polkit-mate-authentication-agent-1 &
+# exec_always --no-startup-id /nix/store/$(ls -la /nix/store | grep 'mate-polkit' | grep '4096' | awk '{print $9}' | sed -n '$p')/libexec/polkit-mate-authentication-agent-1 &
  exec --no-startup-id picom --config $HOME/.config/picom.conf
  exec --no-startup-id sxhkd -c $HOME/.config/i3/sxhkdrc
  # Autotiling
@@ -42,14 +39,31 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh &
 # exec --no-startup-id mpd
 # exec --no-startup-id xsetroot
  exec --no-startup-id unclutter
-# exec --no-startup-id xset
+ exec --no-startup-id setxkbmap hu
  exec --no-startup-id xset r rate 300 50
  exec --no-startup-id xsetroot -cursor_name left_ptr
 # exec --no-startup-id xrandr --output HDMI-0 --scale 2x2 --mode 1920x1080 --rotate left --output $monitor1 --primary --mode 3840x2160 --left-of HDMI-0
 
 
 #default_orientation vertical
-
+bindsym $mod+q kill
+bindsym $mod+Tab focus mode_toggle
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+bindsym $mod+f fullscreen toggle
+bindsym $mod+space floating toggle
+bindsym $mod+Shift+space focus mode_toggle
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
 
 # Workspaces ######################################################
 
@@ -206,7 +220,7 @@ for_window [window_role="task_dialog"] floating enable
 
 # Assign application to workspace ####################################################
 
-for_window [class="$BROWSER|Brave-browser|Microsoft-edge|firefox"] move to workspace $ws1 focus
+for_window [class="Microsoft-edge|firefox"] move to workspace $ws1 focus
 for_window [class="urxvt|st|qBittorrent"] move to workspace $ws7 focus
 for_window [class="subl|Subl|Subl3|subl3"] move to workspace $ws3 focus
 for_window [class="discord|Discord"] move to workspace $ws2 focus
@@ -216,7 +230,6 @@ for_window [class="mpv|Mpv"] move to workspace $ws6 focus
 for_window [class="virtualbox|VirtualBox"] move to workspace $ws9 focus
 for_window [class="thunar|Thunar|pcmanfm"] move to workspace $ws8 focus
 for_window [class="spotify|Spotify"] move to workspace $ws9 focus
-
 # Colors ############################################################################
 
 # class                 border  bground text    indicator child_border

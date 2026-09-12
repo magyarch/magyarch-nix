@@ -15,7 +15,7 @@ openvid() {
   done
 
   # wofi dmenu mód
-  selected="$(printf '%s\n' "${filenames[@]}" | wofi --dmenu --prompt "Select video:")" || exit 0
+  selected="$(printf '%s\n' "${filenames[@]}" | rofi -dmenu --prompt "Select video:")" || exit 0
 
   # A kiválasztott fájl teljes elérési útját megkeressük
   for f in "${files[@]}"; do

@@ -28,6 +28,7 @@
 
   environment.sessionVariables = {
 #  XCURSOR_SIZE = "24";
+  STEAM_NO_SANDBOX = "1";
   QT_QPA_PLATFORM = "wayland";
   QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
 #  QT_AUTO_SCREEN_SCALE_FACTOR = "1";
@@ -40,7 +41,7 @@
 
   WLR_RENDERER = "vulkan";
   WLR_RENDERER_ALLOW_SOFTWARE = "0";
-
+  WLR_DRM_NO_ATOMIC= "1"; 
   MOZ_ENABLE_WAYLAND = "1";
 };
 

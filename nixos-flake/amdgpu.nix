@@ -3,7 +3,17 @@
 {
 
 # Load AMD driver for Xorg and Wayland
- services.xserver.videoDrivers = ["modesetting"];
+ services.xserver = {
+      videoDrivers = ["modesetting"];
+      extraConfig = ''
+    Section "Device"
+      Identifier  "GPU"
+      Driver      "amdgpu"
+      Option      "TearFree"  "true"
+    EndSection
+  '';
+};
+
   hardware.cpu.amd.sev.enable = true;
 #  powerManagement.cpuFreqGovernor = "performance"; # vagy "performance", "powersave"
 
@@ -17,7 +27,7 @@
         unstable.libvdpau-va-gl
         unstable.libva
         unstable.vulkan-loader
-        unstable.vulkan-validation-layers
+#        unstable.vulkan-validation-layers
         rocmPackages.clr.icd
 #        rocm-opencl-icd
       ];

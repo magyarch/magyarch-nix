@@ -42,15 +42,21 @@ exec_always --no-startup-id /nix/store/$(ls -la /nix/store | grep 'mate-polkit' 
 #exec --no-startup-id exec wlsunset -l 16.6 -L 47.6
 exec_always autotiling
 #exec --no-startup-id dms run
-exec_always --no-startup-id noctalia-shell 
+exec_always --no-startup-id noctalia
 #exec_always --no-startup-id wlr-randr --output DP-2 --mode 2560x1440@144 --scale 1.25 >/dev/null 2>&1 &
 
 # sway does not set DISPLAY/WAYLAND_DISPLAY in the systemd user environment
 # See FS#63021
 # Adapted from xorg's 50-systemd-user.sh, which achieves a similar goal.
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+#exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+#exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK 
+
+# Import environment variables for user systemd service manager
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+
+# Update dbus environments with display variables
 exec hash dbus-update-activation-environment 2>/dev/null && \
-dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+    dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
 
 # Workspaces ######################################################
 set $ws1 "1: WWW.. ☢️"
@@ -208,7 +214,13 @@ for_window [app_id="qimgv"] floating enable, resize set 1280 720
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="dialog"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
 for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [window_role="About"] floating enable
+for_window [title="File Operation Progress"] floating enable, border pixel 1, sticky enable, resize set width 40 ppt height 30 ppt
+
 
 # for_window [app_id="Pinentry"] sticky enable
  for_window [app_id="sent"] border pixel 0px
@@ -261,7 +273,7 @@ client.unfocused        #333333 #222222 #888888 #292D2E   #222222
 client.urgent           #2F343A #900000 #FFFFFF #900000   #900000
 client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
-client.background       #2e3440
+client.background       #282a36
 
 #bar {
 #     output $monitor1
@@ -289,3 +301,6 @@ client.background       #2e3440
 
  include /home/xeoncpu/.config/sway/config.d/*
 }
+
+
+

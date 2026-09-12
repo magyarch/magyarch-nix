@@ -21,10 +21,12 @@
 	   };
 	   openssh.enable = true;       
 	   gvfs.enable = true;
+       udev.packages = [ pkgs.libmtp ];
 	   tumbler.enable = true;
+
      pipewire = {
            enable = true;
-#	   alsa.enable = true;
+	   #alsa.enable = true;
            alsa.support32Bit = true;
            pulse.enable = true;
        };
@@ -34,13 +36,7 @@
     mpd = {
     enable = true;
     user = "xeoncpu";
-    musicDirectory = "/mnt/Zenék";
-    extraConfig = ''
-      audio_output {
-        type "pipewire"
-        name "My PipeWire Output"
-      }
-    '';
+    settings.music_directory = "/mnt/Zenék";
     startWhenNeeded =
       true; # systemd feature: only start MPD service upon connection to its socket
   };
@@ -50,6 +46,7 @@
     XDG_RUNTIME_DIR =
       "/run/user/1000"; # User-id 1000 must match above user. MPD will look inside this directory for the PipeWire socket.
   };
+
 
   services.power-profiles-daemon.enable = true;
 # #= IRQBalance

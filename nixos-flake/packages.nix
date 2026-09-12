@@ -1,182 +1,193 @@
  {config, pkgs, unstable, ... }:
 
-
 {
-  # List packages installed in system profile
-  environment = {
+
+environment = {
     systemPackages = with pkgs; [
-# Terminals
-      alacritty
-      kitty
-# -------------------------
-# Utilities
-      ayu-theme-gtk
-      arc-theme
-#      kvantum
-      acpi
-      rocmPackages.clr.icd
-      bat
-      bc
-      unstable.mesa
-      curl
-      curlftpfs
-      corectrl
-      fd
-#      dmenu
-#      gnome-disk-utility
-#      isoimagewriter
-#      unstable.dino
-      lftp
-#      ghc
-      eza
-      eog
-      nwg-displays
-      nwg-drawer
-      ytmdl
-      btop
-      lm_sensors
-      util-linux
-#      fastfetch
- #     unstable.goverlay
-      fzf
-      ntfs3g
-      ripgrep
-#      syncthing
-      exfat
-      exfatprogs
-      xfce.exo
-      xclip
- #     st
-      unstable.signal-desktop
-      mkvtoolnix
-#      xwayland-satellite
-      autotiling
-# --------------------------
-# X11/xorg pkg
-#        xorg.libxcb
-#       xmonadctl
-#        xdotool
-     #  xorg.xmodmap
-      killall
-      binutils
-     # rlwrap
-     # ratpoison.contrib
-      # dzen2
- #     eww
-    #  feh
-      ffmpeg-full
-      ffmpegthumbnailer
-      git
-      #jamesdsp
-      imagemagick
-      libnotify
-#      vaapiVdpau
- #     vkbasalt
-#      protontricks
-#      i3blocks
-      mate.mate-polkit
-# -------------------------------
-      neovim
-      networkmanagerapplet
-      nix-search-cli
-      nwg-look
- #     microsoft-edge
-      firefox
-      ueberzug
-      arj
-      bzip2
-      cpio
-      gnutar
-      gzip
-      lha
-      libarchive
-      lrzip
-      lz4
-      lzop
-      p7zip
-      pbzip2
-      pigz
-      pixz
-      unrar
-      unzip
-      xz
-      zstd
-      polybar
-#      system-config-printer
-      ventoy-full
-      # onlyoffice-desktopeditors
-      wineWowPackages.full
-      wineWowPackages.waylandFull
-#      wmctrl
-      vifm
-       unstable.faugus-launcher
-       usbimager
-       qimgv
-       filezilla
-       file-roller
-       fastfetch
-       inxi
-       handbrake
-       geany
-       jq
-       mangohud
-#       maim
-#       scrot
-       mpc
-       mpv
-       ncmpcpp
-       rmpc
-       rofi
-       pavucontrol
-       pulsemixer
-       protonplus
-       protontricks
-#       sublime3
-       sxhkd
-#       stremio
-       slstatus
-       swww
-       unstable.nsxiv
-       unstable.heroic
-#       vesktop
-#       discord
- #      qutebrowser
-       qbittorrent
-       xwallpaper
-#       xwayland-satellite
-       lxappearance
-       unstable.picom-pijulius
-       wmctrl
-       unstable.cliphist
-#       wlr-randr
-#      wmenu
-      vulkan-tools
-#      vulkan-loader
-      yt-dlp
-      ytarchive
-      libxcb
-      xdotool
-      xorg.xdpyinfo
-      xorg.xwininfo
-      xorg.libX11
-      xorg.libXft
-#      xorg.xinit
-#      xorg.xrandr
-      xorg.libXinerama
-#      zig
-#      harfbuzz
-#      gnumake
-#      gcc
-  #    binutils
-      pkg-config
-      xdg-user-dirs
- #      xorg.xrdb
-#        winboat
-#        inputs.zen-browser.packages."${system}".default
+    # --- Terminals ---
+    alacritty
+    kitty
+    st
 
+    # --- Internet & Browsers ---
+    brave
+    filezilla
+    microsoft-edge
+    firefox
+    unstable.signal-desktop
+
+    # --- Audio, Video & Multimedia ---
+    calibre
+    eog
+    foliate
+    ffmpeg-full
+    ffmpegthumbnailer
+    file-roller
+    handbrake
+    kodi
+    mpc
+    mpv
+    ncmpcpp
+    pavucontrol
+    pulsemixer
+    qimgv
+    rmpc
+    unstable.nsxiv
+    mkvtoolnix
+    yt-dlp
+    ytarchive
+    ytmdl
+
+    # --- Gaming & Wine ---
+    rpcs3
+    mangohud
+    protonplus
+    unstable.heroic
+    unstable.xenia-canary
+    vulkan-tools
+    wineWow64Packages.full
+ #   wineWow64Packages.waylandFull
+
+    # --- System Utilities & CLI Tools ---
+    acpi
+    arandr
+    bat
+    bc
+    binutils
+    btop
+    corectrl
+    curl
+    curlftpfs
+    eza
+    fastfetch
+    fd
+    fzf
+    inxi
+    jq
+    lftp
+    libnotify
+    libmtp
+    jmtpfs
+    lm_sensors
+    maim
+    mate-polkit
+    networkmanagerapplet
+    nix-search-cli
+    ripgrep
+    rocmPackages.clr.icd
+    unstable.cliphist
+    unstable.mesa
+    usbimager
+    util-linux
+    ventoy-full
+    xdg-user-dirs
+
+    # --- File Systems ---
+    exfat
+    exfatprogs
+    ntfs3g
+
+    # --- Compression Utilities ---
+    arj
+    bzip2
+    cpio
+    gnutar
+    gzip
+    libarchive
+    lrzip
+    lz4
+    lzop
+    p7zip
+    pbzip2
+    pigz
+    pixz
+    unrar
+    unzip
+    xz
+    zstd
+
+    # --- Editors & IDEs ---
+    geany
+    neovim
+    ueberzug
+
+    # --- Themes & Look ---
+    arc-theme
+    ayu-theme-gtk
+    lxappearance
+    
+    # --- X11, Window Managers & Desktop Components ---
+    harfbuzz
+    imagemagick
+    killall
+    libX11
+    libXft
+    libXinerama
+    libxcb
+    libxcb-wm
+    picom
+    polybar
+    rofi
+    slstatus
+    sxhkd
+    vifm
+    wmctrl
+    xclip
+    xdotool
+    xdpyinfo
+    xfce4-exo
+    xinit
+    xrandr
+    xwallpaper
+    xwininfo
+    unstable.faugus-launcher
+
+    # --- Development & Build Tools ---
+    gcc
+    git
+
+    # =========================================================================
+    # DEACTIVATED / COMMENTED PACKAGES
+    # =========================================================================
+    # dmenu
+    # gnome-disk-utility
+    # isoimagewriter
+     usbutils
+    # ghc
+    # nwg-displays
+    # nwg-drawer
+    # xwayland-satellite
+     autotiling
+    # xmonadctl
+    # xmodmap
+    # rlwrap
+    # ratpoison.contrib
+    # dzen2
+     eww
+    # feh
+    # jamesdsp
+    # vaapiVdpau
+    # i3blocks
+#     nwg-look
+    # system-config-printer
+    # onlyoffice-desktopeditors
+    # scrot
+    # sublime3
+    # stremio
+    # awww
+ #    vesktop
+     discord
+    # qutebrowser
+ #    wlr-randr
+    # zig
+    # gnumake
+    # pkg-config
+    # xrdb
+    # winboat
+ #    inputs.helium.packages.${system}.default
     ];
-#      inputs.zen-browser.packages."${system}".default
+ 
+  };
 
+}   
 
-   };
-}

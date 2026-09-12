@@ -1,6 +1,6 @@
 
  # My config
-{ config, pkgs, inputs, unstable, ... }:
+{ config, pkgs, lib, inputs, unstable, ... }:
 
 {
   imports = [
@@ -14,31 +14,31 @@
      ./env.nix
     ./appimage.nix
     ./gamemode.nix
-  #   ./bspwm.nix
-#     ./i3.nix
+#     ./bspwm.nix
+     ./i3.nix
 #     ./dwm.nix
      ./xdg.nix
 #    ./plex.nix
     # ./ratpoison.nix
-#     ./spectrwm.nix
+#    ./spectrwm.nix
     # ./hyprland.nix
 #     ./herbst.nix
 #    ./wm.nix
     ./ssh.nix
  #   ./samba.nix
-#     ./bluetooth.nix
+     ./bluetooth.nix
 #     ./sway.nix
-    # ./jellyfin.nix
-    # ./qtile.nix
- #    ./sddm.nix
+#     ./helium.nix
+#     ./qtile.nix
+#     ./sddm.nix
  #    ./stump.nix
-     ./mango.nix
+#     ./mango.nix
 #     ./xmonad.nix
 #     ./niri.nix
-     ./noctalia.nix
+#     ./noctalia.nix
 #      ./oxwm.nix
 #       ./dms.nix
-    inputs.dms.nixosModules.dank-material-shell
+#    inputs.dms.nixosModules.dank-material-shell
 #    inputs.noctalia.nixosModules.noctalia
   ];
 
@@ -182,17 +182,20 @@ nixpkgs.config = {
       }];
    }];
 
+#  nixpkgs.overlays = [
+#  (final: prev: {
+#    herbstluftwm = prev.herbstluftwm.overrideAttrs (old: {
+#      doCheck = false;
+#      doInstallCheck = false;
+#    });
+#  });
+
   programs = {
      dconf.enable = true;
    #  nix-ld.enable = true;
-     dank-material-shell = {
-     enable = true;
-      enableSystemMonitoring = true;
-  dgop.package = inputs.dgop.packages.${pkgs.system}.default;
-	   };
        thunar = {
 	   enable = true;
-	   plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman thunar-media-tags-plugin ];
+	   plugins = with pkgs; [ thunar-archive-plugin thunar-volman thunar-media-tags-plugin ];
            };
 	   tmux = {
            enable = true;
@@ -317,10 +320,10 @@ nixpkgs.config = {
     };
   };
 
-  system.stateVersion = "25.11"; # Did you read the comment?
+  system.stateVersion = "26.05"; # Did you read the comment?
 
   nixpkgs.config.permittedInsecurePackages = [
-                "openssl-1.1.1w" "ventoy-1.1.10" "mbedtls-2.28.10" "qtwebengine-5.15.19" 
+                "openssl-1.1.1w" "ventoy-1.1.12" "mbedtls-2.28.10" "qtwebengine-5.15.19" 
               ];
   
 

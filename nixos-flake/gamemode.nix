@@ -29,7 +29,8 @@
     steam = {
       enable = true;
       dedicatedServer.openFirewall = true;
-      gamescopeSession.enable = true;
+      remotePlay.openFirewall = true;
+    #  gamescopeSession.enable = true;
     };
   };
 }

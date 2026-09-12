@@ -4,17 +4,13 @@
   
   home.username = "xeoncpu";
   home.homeDirectory = "/home/xeoncpu";
-  home.stateVersion = "25.11";
+  home.stateVersion = "26.05";
   
   home.packages = with pkgs; [
         unstable.goverlay
         unstable.protontricks
-        vkbasalt
-        arandr
-           vlc
-           wlr-randr
-        unstable.cider-2   
-#       wpsoffice
+        unstable.vkbasalt
+        unstable.vlc
        (pkgs.st.overrideAttrs (_: {
       src = ./local-packages/st;
       patches = [ ];
