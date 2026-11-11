@@ -1,5 +1,5 @@
 {
-  description = "My custom NixOS with Home Manager and Wayland stuff";
+  description = "My custom NixOS with Home Manager";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
@@ -10,18 +10,38 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
-#    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    # Xlibre
-    #xlibre-overlay.url = "git+https://codeberg.org/takagemacoed/xlibre-overlay";
-    xlibre-overlay = {
-      url = "git+https://codeberg.org/takagemacoed/xlibre-overlay?ref=dev-for-26.05";
+#    xlibre-overlay = {
+#      url = "git+https://codeberg.org/takagemacoed/xlibre-overlay?ref=dev-for-26.05";
+#      inputs.nixpkgs.follows = "nixpkgs";
+#    };
+     mango = {
+      url = "github:mangowm/mango";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flake-parts.url = "github:hercules-ci/flake-parts";
+     blip = {
+      url = "github:blip-net/nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+   };
+
+    scenefx = {
+      url = "github:wlrfx/scenefx";
+      flake = false;
+    };
+
+     noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+     
+     umbriel = {
+      url = "github:noctalia-dev/umbriel/cachix";
+     };
+
+#    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, noctalia, umbriel, ... }@inputs:
     let
       system = "x86_64-linux";
       
@@ -40,11 +60,12 @@
         modules = [
           ./configuration.nix
           ./hardware-configuration.nix
-         inputs.xlibre-overlay.nixosModules.overlay-xlibre-xserver
-         inputs.xlibre-overlay.nixosModules.overlay-xlibre-xf86-input-evdev
-           inputs.xlibre-overlay.nixosModules.overlay-xlibre-xf86-input-libinput
-           inputs.xlibre-overlay.nixosModules.overlay-xlibre-xf86-video-amdgpu
-
+ #        inputs.xlibre-overlay.nixosModules.overlay-xlibre-xserver
+ #        inputs.xlibre-overlay.nixosModules.overlay-xlibre-xf86-input-evdev
+ #          inputs.xlibre-overlay.nixosModules.overlay-xlibre-xf86-input-libinput
+ #          inputs.xlibre-overlay.nixosModules.overlay-xlibre-xf86-video-amdgpu
+ #           mango.nixosModules.mango
+#            umbriel.nixosModules.default
           home-manager.nixosModules.home-manager
 
           {

@@ -2,16 +2,16 @@
 
 {
 
-services.xserver = {  
-	enable = true;  
+services.xserver.enable = true;
+
 #	libinput.enable = true;  
-	displayManager.lightdm.enable = true;  
+services = {	
+    displayManager.lightdm.enable = true;  
 	desktopManager = {  
 		cinnamon.enable = true;  
 	};  
-	displayManager.defaultSession = "cinnamon";  
 };
    
-   hardware.pulseaudio.enable = false;
+   services.pulseaudio.enable = false;
 
 }

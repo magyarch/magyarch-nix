@@ -6,7 +6,7 @@
   imports = [
     # Include the results of the hardware scan.
 #    ./hardware-configuration.nix
-    ./kernel.nix
+ #   ./kernel.nix
     ./packages.nix
     ./services.nix
     ./amdgpu.nix
@@ -15,7 +15,7 @@
     ./appimage.nix
     ./gamemode.nix
 #     ./bspwm.nix
-     ./i3.nix
+#     ./i3.nix
 #     ./dwm.nix
      ./xdg.nix
 #    ./plex.nix
@@ -26,28 +26,27 @@
 #    ./wm.nix
     ./ssh.nix
  #   ./samba.nix
-     ./bluetooth.nix
+#     ./bluetooth.nix
 #     ./sway.nix
-#     ./helium.nix
-#     ./qtile.nix
-#     ./sddm.nix
+#    ./sxwm.nix
+#   ./cinnamon.nix
  #    ./stump.nix
 #     ./mango.nix
 #     ./xmonad.nix
 #     ./niri.nix
-#     ./noctalia.nix
+     ./noctalia.nix
 #      ./oxwm.nix
-#       ./dms.nix
-#    inputs.dms.nixosModules.dank-material-shell
+       ./umbriel.nix
+    inputs.blip.nixosModules.default
 #    inputs.noctalia.nixosModules.noctalia
   ];
 
-   custom.kernel.enable = true;
+#   custom.kernel.enable = false;
 
    boot = {
       bootspec.enable = true;
 
-      kernelPackages = pkgs.linuxPackages_latest;
+      kernelPackages = pkgs.linuxPackages_zen;
 
       initrd.kernelModules = [ "amdgpu" ];
 
@@ -61,14 +60,14 @@
 
       kernelParams = [
 #        "amd_pstate=active"
-        "nosplit_lock_mitigate"
+ #       "nosplit_lock_mitigate"
         "clearcpuid=514"
-        "elevator=bfq"
+  #      "elevator=bfq"
         "amdgpu.ppfeaturemask=0xffffffff"
       ];
 
       kernel.sysctl = {
- #       "kernel.split_lock_mitigate" = 0;
+        "kernel.split_lock_mitigate" = 0;
         "vm.swappiness" = 10;
         "vm.vfs_cache_pressure" = 50;
         "vm.dirty_bytes" = 268435456;
@@ -76,7 +75,7 @@
         "vm.dirty_background_bytes" = 67108864;
         "vm.dirty_writeback_centisecs" = 1500;
         "kernel.nmi_watchdog" = 0;
-        "kernel.unprivileged_userns_clone" = 1;
+   #     "kernel.unprivileged_userns_clone" = 1;
         "kernel.printk" = "3 3 3 3";
         "kernel.kptr_restrict" = 2;
         "kernel.kexec_load_disabled" = 1;
@@ -86,13 +85,13 @@
       initrd.verbose = false;
       tmp.cleanOnBoot = true;
  
-  kernelPatches = [{
-  name = "disable-qcom-pmic-glink";
-  patch = null;
-  extraConfig = ''
-    QCOM_PMIC_GLINK n
-  '';
-}];
+#  kernelPatches = [{
+ # name = "disable-qcom-pmic-glink";
+#  patch = null;
+#  extraConfig = ''
+#    QCOM_PMIC_GLINK n
+#  '';
+#}];
 
     };
 
@@ -125,7 +124,7 @@ networking.hostName="nixos";
   };
 
  fileSystems."/mnt" =
-{ device = "/dev/disk/by-uuid/655a6ae3-944b-47ed-b579-15f3b0e5d2d4";
+{ device = "/dev/disk/by-uuid/e563a31f-28a8-4cfb-91bb-08e4d6318f23";
 fsType = "ext4";
 options = [ "defaults" "nofail" ];
 
@@ -168,7 +167,7 @@ nixpkgs.config = {
   users.users.xeoncpu = {
     isNormalUser = true;
     description = "xeoncpu";
-   extraGroups = [ "users" "audio" "video" "networkmanager" "wheel" "input" "disk" "samba" "kwm" "gamemode" "docker" ];
+   extraGroups = [ "users" "audio" "video" "networkmanager" "wheel" "input" "gamemode" ];
    # packages = with pkgs; [
     #  firefox
     #  thunderbird
@@ -192,7 +191,7 @@ nixpkgs.config = {
 
   programs = {
      dconf.enable = true;
-   #  nix-ld.enable = true;
+     blip.enable = true;
        thunar = {
 	   enable = true;
 	   plugins = with pkgs; [ thunar-archive-plugin thunar-volman thunar-media-tags-plugin ];
@@ -246,16 +245,16 @@ nixpkgs.config = {
       syntaxHighlighting.enable = true;
       autosuggestions.enable = true;
       shellAliases = {
-         nrs="cd ~/nixos-flake && nix flake update && sudo nixos-rebuild switch --flake .#nixos";
+         nrs="cd ~/nixos-flake; nix flake update; sudo nixos-rebuild switch --flake .#nixos; cd -";
          cdn="cd ~/nixos-flake";
-         addunstable="sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos";
-         addstable="sudo nix-channel --add https://nixos.org/channels/nixos-25.05 nixos";
-         nixos-upgrade="cd ~/nixos-flake && nix flake update && sudo nixos-rebuild switch --flake .#nixos";
-         rmoldgen="sudo nix-collect-garbage -d";
+#         addunstable="sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos";
+#         addstable="sudo nix-channel --add https://nixos.org/channels/nixos-25.05 nixos";
+  #       nixos-upgrade="cd ~/nixos-flake && nix flake update && sudo nixos-rebuild switch --flake .#nixos";
+ #        rmoldgen="sudo nix-collect-garbage -d";
          rebuildboot="sudo /run/current-system/bin/switch-to-configuration boot";
         # runheroic="~/Letöltések && appimage-run Heroic-2.9.1.AppImage";
          listgens="sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
-         fixnonixsearchpath="sudo nixos-rebuild boot -I nixos-config=/etc/nixos/configuration.nix --upgrade";
+#         fixnonixsearchpath="sudo nixos-rebuild boot -I nixos-config=/etc/nixos/configuration.nix --upgrade";
          listallinstalled="sudo nix-store --query --requisites /run/current-system | cut -d- -f2- | sort | uniq";
         # gscope="gamescope -w 1920 -h 1080 -W 2560 -H 1440 -f -F fsr -e  -- steam -tenfoot";
          fman="compgen -c | fzf | xargs man";
@@ -310,21 +309,33 @@ nixpkgs.config = {
 
    # Nix Package Management
   nix = {
-    settings.auto-optimise-store = true;
-    settings.download-buffer-size = 524288000;
-    settings.experimental-features = [ "nix-command" "flakes" ];
-    gc = {
-      automatic = true;
-      dates = "daily";
-      options = "--delete-older-than 1d";
-    };
+  settings = {
+    auto-optimise-store = true;
+    download-buffer-size = 524288000;
+    experimental-features = [ "nix-command" "flakes" ];
+    extra-substituters = [
+      "https://noctalia.cachix.org"
+      "https://umbriel.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+      "umbriel.cachix.org-1:JfNq/2yg2S6D6z4Z2dVSZrZlDPQTKtexB6GAVLD98nw="
+    ];
   };
+  gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
+};
 
   system.stateVersion = "26.05"; # Did you read the comment?
 
-  nixpkgs.config.permittedInsecurePackages = [
-                "openssl-1.1.1w" "ventoy-1.1.12" "mbedtls-2.28.10" "qtwebengine-5.15.19" 
-              ];
-  
+#  nixpkgs.config.permittedInsecurePackages = [
+ #               "openssl-1.1.1w" "ventoy-1.1.12" "mbedtls-2.28.10" "qtwebengine-5.15.19" 
+  #            ];
+  # a) verziófüggetlen, névre szűrő
+nixpkgs.config.allowInsecurePredicate = pkg:
+  builtins.elem (lib.getName pkg) [ "openssl" "ventoy" "mbedtls" "qtwebengine" ];
 
 }

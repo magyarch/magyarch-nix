@@ -1,0 +1,236 @@
+# Umbriel starting configuration
+
+[include]
+files = []
+
+[include.optional]
+files = ["noctalia.toml"]
+
+# ==============================================================================
+[general]
+autostart = ["noctalia"]
+xwayland_native_resolution = true
+xwayland_primary_output = "DP-1"
+show_cheatsheet = true
+attach_modal_dialogs = false
+
+# ==============================================================================
+[output.DP-1]
+mode = "2560x1440@144"
+position = [0, 0]
+scale = 1.25
+workspaces = "dynamic"
+min_workspaces = 9
+
+# ==============================================================================
+[input.keyboard]
+layout = "hu"           # empty uses the system keymap
+variant = ""
+options = ""
+model = ""
+repeat_rate = 25
+repeat_delay = 600
+numlock_toggle = true
+track_layout = "global"
+
+# ==============================================================================
+[keybinds]
+"Mod+Return" = { action = "spawn alacritty", repeat = false }
+"Mod+D" = { action = "spawn rofi -show drun", repeat = false }
+"Mod+Q" = { action = "window-close", repeat = false }
+"Mod+Escape" = "session-quit"
+"Mod+Shift+Escape" = { action = "shortcuts-inhibit-toggle", allow_when_inhibited = true, repeat = false }
+"Mod+R" = { action = "spawn alacritty -e vifm", repeat = false }
+"Mod+W" = { action = "spawn firefox", repeat = false }
+"Mod+Shift+P" = { action = "spawn thunar", repeat = false }
+"Mod+M" = "scratchpad-toggle music"
+
+"XF86AudioLowerVolume" = { action = "spawn noctalia msg volume-down", allow_when_locked = true }
+"XF86AudioMute" = { action = "spawn noctalia msg volume-mute", allow_when_locked = true, repeat = false }
+"XF86AudioPlay" = { action = "spawn noctalia msg media toggle", allow_when_locked = true, repeat = false }
+"XF86AudioNext" = { action = "spawn noctalia msg media next", allow_when_locked = true }
+"XF86AudioPrev" = { action = "spawn noctalia msg media previous", allow_when_locked = true }
+"XF86MonBrightnessUp" = { action = "spawn noctalia msg brightness-up", allow_when_locked = true }
+"XF86MonBrightnessDown" = { action = "spawn noctalia msg brightness-down", allow_when_locked = true }
+
+# Focus and movement
+"Mod+Left" = "window-focus-left"
+"Mod+Down" = "window-focus-down"
+"Mod+Up" = "window-focus-up"
+"Mod+Right" = "window-focus-right"
+
+"Mod+Shift+Left" = "column-move-left"
+"Mod+Shift+Down" = "window-move-down"
+"Mod+Shift+Up" = "window-move-up"
+"Mod+Shift+Right" = "column-move-right"
+
+# ---------------Monitor Focus & Movement------------------------------------
+"Mod+Shift+H"     = "output-focus-left"
+"Mod+Shift+L"     = "output-focus-right"
+"Mod+Shift+K"     = "output-focus-up"
+"Mod+Shift+J"     = "output-focus-down"
+
+"Mod+Shift+Ctrl+Left"  = "column-move-to-output-left"
+"Mod+Shift+Ctrl+Right" = "column-move-to-output-right"
+"Mod+Shift+Ctrl+Up"    = "column-move-to-output-up"
+"Mod+Shift+Ctrl+Down"  = "column-move-to-output-down"
+"Mod+Shift+Ctrl+H"     = "column-move-to-output-left"
+"Mod+Shift+Ctrl+L"     = "column-move-to-output-right"
+"Mod+Shift+Ctrl+K"     = "column-move-to-output-up"
+"Mod+Shift+Ctrl+J"     = "column-move-to-output-down"
+
+
+# Window state and layout
+"Mod+T" = { action = "window-toggle-floating", repeat = false }
+"Mod+Shift+T" = { action = "window-focus-switch-floating", repeat = false }
+"Mod+P" = { action = "window-toggle-pinned", repeat = false }
+"Mod+E" = { action = "window-toggle-maximize-to-edges", repeat = false }
+"Mod+F" = { action = "window-toggle-fullscreen", repeat = false }
+"Mod+Ctrl+F" = { action = "window-toggle-maximize", repeat = false }
+
+"Mod+Comma" = "window-consume-left"
+"Mod+Period" = "window-consume-right"
+"Mod+Ctrl+Comma" = "window-consume-from-left"
+"Mod+Ctrl+Period" = "window-consume-from-right"
+"Mod+Shift+W" = { action = "column-toggle-tabbed", repeat = false }
+"Mod+Alt+Right" = "column-focus-tab-next"
+"Mod+Alt+Left" = "column-focus-tab-previous"
+"Mod+O" = { action = "overview-toggle", repeat = false }
+"Mod+Shift+O" = "cheatsheet-toggle"
+
+"Mod+1" = "workspace-switch 1"
+"Mod+2" = "workspace-switch 2"
+"Mod+3" = "workspace-switch 3"
+"Mod+4" = "workspace-switch 4"
+"Mod+5" = "workspace-switch 5"
+"Mod+6" = "workspace-switch 6"
+"Mod+7" = "workspace-switch 7"
+"Mod+8" = "workspace-switch 8"
+"Mod+9" = "workspace-switch 9"
+"Mod+Shift+1" = "window-move-to-workspace 1"
+"Mod+Shift+2" = "window-move-to-workspace 2"
+"Mod+Shift+3" = "window-move-to-workspace 3"
+"Mod+Shift+4" = "window-move-to-workspace 4"
+"Mod+Shift+5" = "window-move-to-workspace 5"
+"Mod+Shift+6" = "window-move-to-workspace 6"
+"Mod+Shift+7" = "window-move-to-workspace 7"
+"Mod+Shift+8" = "window-move-to-workspace 8"
+"Mod+Shift+9" = "window-move-to-workspace 9"
+
+# ------------- Screenshots & Screen Recording --------------
+"Print"           = { action = "spawn noctalia msg screenshot-fullscreen", repeat = false }
+"Ctrl+Print"      = { action = "spawn noctalia msg screenshot-region", repeat = false }
+"Alt+Print"       = { action = "spawn noctalia msg screenshot-window", repeat = false }
+"Mod+Print" = { action = "spawn sh -c 'mkdir -p ~/Videók && notify-send \"Recording Started\" && gpu-screen-recorder -w DP-1 -f 60 -k hevc_vulkan -c mp4 -bm qp -q very_high -a default_output -o ~/Videók/Recording_$(date +%s).mp4'", repeat = false }
+"Mod+Shift+Print" = { action = "spawn sh -c 'pkill -INT -f \"^gpu-screen-recorder\"; sleep 1; notify-send \"Recording Stopped\"'", repeat = false }
+
+# ------- Layout Mode Switching (Umbriel Feature) -----------
+"Mod+F1" = "workspace-set-layout scrolling"
+"Mod+F2" = "workspace-set-layout dwindle"
+"Mod+F3" = "workspace-set-layout master"
+"Mod+F4" = "workspace-set-layout stacking"
+
+# =======================Layout=======================================================
+[layout]
+ mode = "master"
+
+[layout.master]
+position = "left"
+default_width_fraction = 0.5
+new_on_top = true
+new_becomes_master = false
+[layout.tabs]
+default_display = "normal"
+scroll_switches_tabs = true
+middle_click_closes = true
+
+[appearance]
+prefer_no_csd = true
+border_width = 3
+outer_border_width = 0
+corner_radius = 12
+opaque_fullscreen = true
+drag_opacity = 1.0
+
+[appearance.shadow]
+enabled = true
+softness = 50
+offset_x = 0
+offset_y = 8
+
+# ==========================Window Rules====================================================
+[[window_rule]]
+blur = true
+
+[[window_rule]]
+match.app_id = "^dev.noctalia.Noctalia$"
+default_floating = true
+default_floating_size_px = { width = 1020, height = 900 }
+
+[[window_rule]]
+match.app_id = "^dev.noctalia.UmbrielSharePicker$"
+default_floating = true
+default_floating_size_px = { width = 800, height = 600 }
+
+[[window_rule]]
+match.title = "^(Picture-in-Picture|Picture in picture)$"
+default_floating = true
+default_maximize = false
+default_position = { x = 20, y = 20, anchor = "bottom_right" }
+
+[[window_rule]]
+match.title = "^notificationtoasts_.+_desktop"
+default_position = { x = 0, y = 0, anchor = "bottom_right" }
+default_focused = false
+default_pinned = true
+
+# Firefox
+[[window_rule]]
+match.app_id = "firefox"
+default_workspace = 1
+
+# Signal
+[[window_rule]]
+match.app_id = "signal"
+default_workspace = 2
+
+
+# Thunar
+[[window_rule]]
+match.app_id = "thunar"
+default_workspace = 8
+
+[[window_rule]]
+match.app_id = "steam"
+confine_pointer = true
+default_workspace = 6
+
+[[layer_rule]]
+match.namespace = "^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd|desktop-widget-[^\"]*)$"
+blur = true
+blur_ignore_alpha = 0.5
+blur_popups = true
+
+[[layer_rule]]
+match.namespace = "^noctalia-(notification|dock|panel|attached-panel|osd)$"
+blur_optimized = false
+
+# ==============================================================================
+[hot_corners.top_left]
+enabled = true
+delay_ms = 500
+action = "overview-open"
+
+[overview]
+zoom = 0.5
+scroll_factor_horizontal = 1.0
+scroll_factor_vertical = 1.0
+background_blur = true
+#workspace_wallpaper = true
+shortcuts = true
+shortcut_keys = "1234567890"
+
+[[scratchpad]]
+name = "music"
+spawn_when_empty = "kitty -e rmpc"
+

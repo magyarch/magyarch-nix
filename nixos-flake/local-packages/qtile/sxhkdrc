@@ -1,0 +1,123 @@
+####################################################################
+              # Basic herbstluftwm keybinds #
+####################################################################
+
+# Main and float terminal
+super + {_,shift + } Return
+    {$TERMINAL, scratch scratchpad}
+
+# Dmenu2 and rofi(window switcher, application launcher)
+super + {_,shift +} d
+    {dmenu_run, rofi_run -r}
+
+# Tui filemanager and same command with sudo
+super + {_,shift + } r
+    {$TERMINAL -e $FILE, $TERMINAL -e sudo $FILE}
+
+#  Gui editors
+super + {_,shift + } e
+    {wmctrl -a Code || code, wmctrl -a Sublime || subl}
+
+# News, tui music player
+super + {_,shift + } n
+    {scratch News, scratch Music}
+
+# Htop,gtop system monitor
+super + {_,shift + } i
+    {$TERMINAL -e htop, switch_audio.sh}
+
+# S,R,lock script,calendar app
+super + {_,shift + } c
+    {rofi_run -l, eww open powermenu}
+
+# Default web browser brave and firefox
+super + {_,shift + } w
+    {wmctrl -a Microsoft-edge || $BROWSER, wmctrl -a microsoft-edge-stable || $BROWSER2}
+
+# Chat client, gui filemanager
+super + {_,shift + } p
+    {wmctrl -a Discord || discord, wmctrl -a Thunar || thunar}
+
+# Hide polybar/Reload polybar
+super + {_,shift + } b
+    {polybar-msg cmd toggle, $HOME/.config/polybar/launch.sh}
+
+# Volume control
+alt + {Up,Down}
+     {pactl set-sink-volume @DEFAULT_SINK@ +5%, pactl set-sink-volume @DEFAULT_SINK@ -5%}
+    #{$HOME/.local/bin/statusbar/volume_brightness.sh volume_up, volume_brightness.sh volume_down}
+# Screencast and Stream to twitch
+super + {_,shift + } KP_Home
+    {dmenurecord, live.sh}
+
+# Reload sxhkd
+super +  Escape
+    {pkill -USR1 -x sxhkd ;\notify-send "Sxhkd újratölt."}
+
+
+############################################################
+                    #Function binds#
+############################################################
+
+# Help doc
+super + F1
+    zathura ~/.local/share/Magyarch-hlwm.pdf
+
+# Edit important config files
+super + F2
+    edconf.sh
+
+# Select Display
+super + F3
+    scratch FM
+
+# Take a picture
+super + {F4,F5}
+    {maim ~/Képek/Képernyőképek/`date +%Y-%m-%d_%H:%M:%S`.png,maimpick}
+
+# Change background
+super + F8
+    wal
+
+# Mount and umount a USB drive or Android device
+super + {F9,F10}
+    {dmenumount,dmenuumount}
+
+# Search internet
+super + F11
+    ducksearch
+
+# Mpv floating
+super + F12
+    mpv --geometry=40%+30+30 --title="mpvfloat"
+
+F1
+  wmctrl -a Steam || steam
+
+
+###################################################################################
+                      # Some extra function #
+#################################################################################
+
+
+# # bind menu
+# alt + m
+#   sh ~/.config/herbstluftwm/hlwm-utils/hlwm-menu/hlwm-menu.sh
+
+
+# # layout bindings
+# alt + control + c
+#   sh ~/.config/herbstluftwm/hlwm-utils/layouts/centered-master
+
+# alt + control + d
+#   sh ~/.config/herbstluftwm/hlwm-utils/layouts/dwindle
+
+# alt + control + m
+#   sh ~/.config/herbstluftwm/hlwm-utils/layouts/master-stack
+
+# alt + control + v
+#   sh ~/.config/herbstluftwm/hlwm-utils/layouts/vertical
+
+# # Reset to default
+# alt + control + r
+#   sh ~/.config/herbstluftwm/hlwm-utils/layouts/reset

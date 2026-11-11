@@ -12,8 +12,7 @@
 }
 {
     "label" : "logout",
-    "action" : "hyprctl dispatch exit 0",
-    "action" : "swaymsg exit",
+    "action" : "mmsg dispatch quit",
     "text" : "Logout",
     "keybind" : "e"
 }

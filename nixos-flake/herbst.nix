@@ -12,10 +12,15 @@ services.xserver = {
 	xkb.variant = "";
 	dpi = 125;
 };
-services.xserver.windowManager.herbstluftwm.enable = true;
-#  xsession.windowManager.herbstluftwm.enable = true;
- # services.xserver.windowManager.herbstluftwm.configFile = /home/xeoncpu/.config/herbstluftwm/autostart;
-#  services.xserver.windowManager.herbstluftwm.package = /etc/nixos/pkgs.herbst.nix;
+
+services.xserver.windowManager.herbstluftwm = {
+  enable = true;
+  package = pkgs.herbstluftwm.overrideAttrs (old: {
+    doCheck = false;
+    doInstallCheck = false;
+    dontUsePytestCheck = true;
+  });
+};
 
 services.displayManager = {
          defaultSession = "none+herbstluftwm";

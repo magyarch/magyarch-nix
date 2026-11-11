@@ -1,8 +1,13 @@
-{ pkgs, inputs, ... }:
+{ inputs, ... }:
 {
-  # install package
-  environment.systemPackages = with pkgs; [
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
-    # ... maybe other stuff
+  imports = [
+    inputs.noctalia.nixosModules.default
   ];
+
+  programs.noctalia = {
+    enable = true;
+
+    # Enables NetworkManager, Bluetooth, UPower, and a power profile service.
+    recommendedServices.enable = true;
+  };
 }

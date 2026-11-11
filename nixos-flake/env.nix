@@ -1,12 +1,11 @@
-{ config, ...}:
+{ ...}:
 
  {
-      environment.variables = {
-                 AMD_VULKAN_ICD="RADV";
+      environment.sessionVariables = {
                  MESA_SHADER_CACHE_MAX_SIZE="12G";
- #                VDPAU_DRIVER="radeonsi";
-#                 LIBVA_DRIVER_NAME="radeonsi";
                  MESA_GLTHREAD="true"; 
+                 NIXOS_OZONE_WL = "1";
               };
+      environment.pathsToLink = [ "/libexec" ];        
 
  }

@@ -24,8 +24,8 @@ floating_modifier $mod
 font pango:JetBrains Mono Nerd Font 9
 
 # Autostart  ######################################################
-# exec --no-startup-id xrandr --dpi 192
-# exec_always --no-startup-id /nix/store/$(ls -la /nix/store | grep 'mate-polkit' | grep '4096' | awk '{print $9}' | sed -n '$p')/libexec/polkit-mate-authentication-agent-1 &
+ exec --no-startup-id $HOME/.screenlayout/monitor.sh
+ exec_always --no-startup-id /nix/store/$(ls -la /nix/store | grep 'mate-polkit' | grep '4096' | awk '{print $9}' | sed -n '$p')/libexec/polkit-mate-authentication-agent-1 >/dev/null 2>&1 &
  exec --no-startup-id picom --config $HOME/.config/picom.conf
  exec --no-startup-id sxhkd -c $HOME/.config/i3/sxhkdrc
  # Autotiling
@@ -37,10 +37,10 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh &
  exec --no-startup-id dunst
  exec --no-startup-id setbg
 # exec --no-startup-id mpd
-# exec --no-startup-id xsetroot
+ exec --no-startup-id xset s off -dpms >/dev/null 2>&1 &
  exec --no-startup-id unclutter
  exec --no-startup-id setxkbmap hu
- exec --no-startup-id xset r rate 300 50
+ exec --no-startup-id xset r rate 300 25
  exec --no-startup-id xsetroot -cursor_name left_ptr
 # exec --no-startup-id xrandr --output HDMI-0 --scale 2x2 --mode 1920x1080 --rotate left --output $monitor1 --primary --mode 3840x2160 --left-of HDMI-0
 

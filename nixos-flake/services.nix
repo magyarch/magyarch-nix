@@ -4,7 +4,7 @@
         
   services.displayManager.ly = {
        enable = true;   
-     };
+};
    
     services = {
            printing.enable = true;
@@ -13,13 +13,13 @@
 	   avahi.nssmdns4 = true;
 	   avahi.openFirewall = true;
           flatpak.enable = true;
-#	   lsfg-vk.enable = true;
      dbus.enable = true;
+     irqbalance.enable = true;
 	   fstrim = {
 	   enable = true;
 	   interval = "weekly";
 	   };
-	   openssh.enable = true;       
+#	   openssh.enable = true;       
 	   gvfs.enable = true;
        udev.packages = [ pkgs.libmtp ];
 	   tumbler.enable = true;
@@ -27,7 +27,7 @@
      pipewire = {
            enable = true;
 	   #alsa.enable = true;
-           alsa.support32Bit = true;
+#           alsa.support32Bit = true;
            pulse.enable = true;
        };
 
@@ -48,14 +48,10 @@
   };
 
 
-  services.power-profiles-daemon.enable = true;
-# #= IRQBalance
-       services.irqbalance.enable = true;
-
-   virtualisation.podman = {
-  enable = true;
-  dockerCompat = true;
- };
+#   virtualisation.podman = {
+#  enable = true;
+#  dockerCompat = true;
+# };
 
       
 }

@@ -8,45 +8,48 @@ environment = {
     alacritty
     kitty
     st
+ #   xauth
 
     # --- Internet & Browsers ---
-    brave
+#    brave
     filezilla
     microsoft-edge
     firefox
     unstable.signal-desktop
 
     # --- Audio, Video & Multimedia ---
+    avidemux
     calibre
-    eog
     foliate
     ffmpeg-full
     ffmpegthumbnailer
     file-roller
     handbrake
     kodi
+    jamesdsp
     mpc
     mpv
     ncmpcpp
     pavucontrol
     pulsemixer
-    qimgv
     rmpc
     unstable.nsxiv
     mkvtoolnix
     yt-dlp
-    ytarchive
-    ytmdl
+#    ytarchive
+#    ytmdl
 
     # --- Gaming & Wine ---
+    lsfg-vk
     rpcs3
     mangohud
-    protonplus
+ #   protonplus
+    protonup-ng
     unstable.heroic
-    unstable.xenia-canary
+ #   unstable.mesa
     vulkan-tools
     wineWow64Packages.full
- #   wineWow64Packages.waylandFull
+    wineWow64Packages.waylandFull
 
     # --- System Utilities & CLI Tools ---
     acpi
@@ -74,37 +77,22 @@ environment = {
     networkmanagerapplet
     nix-search-cli
     ripgrep
-    rocmPackages.clr.icd
-    unstable.cliphist
-    unstable.mesa
     usbimager
-    util-linux
     ventoy-full
     xdg-user-dirs
 
     # --- File Systems ---
-    exfat
     exfatprogs
     ntfs3g
 
     # --- Compression Utilities ---
-    arj
-    bzip2
-    cpio
-    gnutar
-    gzip
     libarchive
-    lrzip
     lz4
-    lzop
     p7zip
-    pbzip2
     pigz
     pixz
     unrar
     unzip
-    xz
-    zstd
 
     # --- Editors & IDEs ---
     geany
@@ -112,23 +100,16 @@ environment = {
     ueberzug
 
     # --- Themes & Look ---
-    arc-theme
-    ayu-theme-gtk
+ #   arc-theme
+ #   ayu-theme-gtk
     lxappearance
     
     # --- X11, Window Managers & Desktop Components ---
-    harfbuzz
     imagemagick
-    killall
-    libX11
-    libXft
-    libXinerama
-    libxcb
-    libxcb-wm
     picom
     polybar
     rofi
-    slstatus
+   # slstatus
     sxhkd
     vifm
     wmctrl
@@ -143,7 +124,6 @@ environment = {
     unstable.faugus-launcher
 
     # --- Development & Build Tools ---
-    gcc
     git
 
     # =========================================================================
@@ -154,7 +134,7 @@ environment = {
     # isoimagewriter
      usbutils
     # ghc
-    # nwg-displays
+     nwg-displays
     # nwg-drawer
     # xwayland-satellite
      autotiling
@@ -163,22 +143,22 @@ environment = {
     # rlwrap
     # ratpoison.contrib
     # dzen2
-     eww
-    # feh
+    # eww
+     feh
     # jamesdsp
     # vaapiVdpau
     # i3blocks
-#     nwg-look
+     nwg-look
     # system-config-printer
     # onlyoffice-desktopeditors
-    # scrot
+     scrot
     # sublime3
     # stremio
     # awww
  #    vesktop
-     discord
-    # qutebrowser
- #    wlr-randr
+ #    discord
+     qbittorrent
+     wlr-randr
     # zig
     # gnumake
     # pkg-config

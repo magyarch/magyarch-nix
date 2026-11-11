@@ -1,9 +1,9 @@
 # i3 config file by xeoncpu
 
-#output DP-1 res 2560x1440@144Hz scale 1.25
+output DP-1 res 2560x1440@144Hz scale 1.25
 #output DP-2 res 1920x1080@60Hz pos 0 1440 transform 270 scale 1.1
-output DP-1 res 2560x1440@144Hz scale 1.25 pos 982 261
-output DP-2 pos 0 0 res 1920x1080@60.0Hz transform 270 scale 1.1 
+#output DP-1 res 2560x1440@144Hz pos 982 261
+#output DP-2 pos 0 0 res 1920x1080@60.0Hz transform 270  
 
 # Input configuration
 input * {
@@ -36,7 +36,9 @@ floating_modifier $mod
 
 # Autostart  ######################################################
 # exec --no-startup-id xrandr --dpi 192
-exec_always --no-startup-id /nix/store/$(ls -la /nix/store | grep 'mate-polkit' | grep '4096' | awk '{print $9}' | sed -n '$p')/libexec/polkit-mate-authentication-agent-1 &
+exec_always --no-startup-id pidof -q polkit-mate-authentication-agent-1 || \
+  /run/current-system/sw/libexec/polkit-mate-authentication-agent-1 &
+
 #exec --no-startup-id swww-daemon >/dev/null 2>&1 &
 #exec --no-startup-id swww init && swww img ~/.local/bin/wallpapers/Future/xy.png
 #exec --no-startup-id exec wlsunset -l 16.6 -L 47.6

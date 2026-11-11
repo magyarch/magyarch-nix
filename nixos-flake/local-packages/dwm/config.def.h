@@ -38,7 +38,7 @@ static const Rule rules[] = {
 	{ "qBittorrent",    NULL,       NULL,       1 << 6,        0,           -1 },
 	{ "st-256color",    NULL,       NULL,       0,             1,           -1 },
 	{ "signal",        NULL,       NULL,       1 << 1,        0,          1 },
-	{ "Thunar",         NULL,       NULL,       1 << 7,        0,          -1 },
+	{ "thunar",         NULL,       NULL,       1 << 7,        0,          -1 },
 	{ "steam",          NULL,       NULL,       1 << 4,        0,          -1 },
     { "Pavucontrol",    NULL,       NULL,       0,             1,          -1 },
     { "kitty",        NULL,       NULL,       0,             1,          -1 },
